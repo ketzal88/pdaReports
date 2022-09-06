@@ -6,17 +6,20 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./background.component.scss']
 })
 export class BackgroundComponent implements OnInit {
-  @Input() reportStyle!: string;
-  @Input() index!: string;
+  @Input() section!: string;
+  @Input() report!: string;
+  @Input() theme!: string;
   imagePath: string = "";
-  
+  class: string = "background-container";
   constructor() {
   }
 
   ngOnInit(): void {
-    if (this.index === undefined || this.reportStyle === undefined) {
-      throw new Error("Missing index or reportStyle");
+    if (this.section === undefined || this.report === undefined || this.theme === undefined) {
+      throw new Error("Missing theme or report");
     }
-    this.imagePath = "/assets/img/reports/background-0" + this.index + "-" + this.reportStyle + ".svg";
+    let path = "background-" + this.section + "-" + this.report + "-" + this.theme;
+    this.class += " " + path;
+    this.imagePath = "/assets/img/reports/" + path + ".svg";
   }
 }
