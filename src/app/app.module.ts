@@ -4,15 +4,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReportsModule } from './reports/reports.module';
+import { RoutenavComponent } from './routenav/routenav.component';
+import { MatButtonModule } from '@angular/material/button'
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RoutenavComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReportsModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
