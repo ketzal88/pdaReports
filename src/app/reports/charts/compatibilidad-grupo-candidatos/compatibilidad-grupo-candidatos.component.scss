@@ -1,0 +1,15 @@
+.chart-container {
+    position: relative;
+}
+
+.chart-inside {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    // translate: -54% -33%;
+    transform: translate(-54%, -33%);
+    border-radius: 1000px;
+}
