@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { colorPrimary } from '../../themes/blue';
 
 @Component({
   selector: 'chart-compatibilidad-grupo-candidatos',
@@ -14,37 +15,92 @@ export class CompatibilidadGrupoCandidatosComponent implements OnInit {
 
   ngOnInit() {
     this.chart = anychart.polar();
+    this.chart.interactivity().selectionMode("none");
+    // let columnSeries = this.chart.column([
+    //   { x: "IS", value: Math.random() },
+    //   { x: "JS", value: Math.random() },
+    //   { x: "JG", value: Math.random() },
+    //   { x: "JC", value: Math.random() },
+    //   { x: "SH", value: Math.random() },
+    //   { x: "MA", value: Math.random() },
+    //   { x: "JBL", value: Math.random() },
+    //   { x: "FD", value: 0.5 },
+    //   { x: "JPR", value: Math.random() },
+    //   { x: "SC", value: Math.random() },
+    //   { x: "MHM", value: Math.random() },
+    //   { x: "HJ", value: Math.random() },
+    //   { x: "PLG", value: Math.random() },
+    //   { x: "DC", value: Math.random() },
+    //   { x: "FGG", value: Math.random() },
+    //   { x: "PA", value: Math.random() },
+    //   { x: "DK", value: Math.random() },
+    //   { x: "JU", value: Math.random() },
+    //   { x: "LO", value: Math.random() },
+    //   { x: "AC", value: 1 },
+    // ]);
     let columnSeries = this.chart.column([
-      { x: 'Rouge', value: 80540 },
-      { x: 'Foundation', value: 94190 },
-      { x: 'Mascara', value: 102610 },
-      { x: 'Lip gloss', value: 110430 },
-      { x: 'Lipstick', value: 128000 },
-      { x: 'Nail polish', value: 143760 },
-      { x: 'Eyebrow pencil', value: 170670 },
-      { x: 'Eyeliner', value: 213210 },
-      { x: 'Eyeshadows', value: 249980 }
-    ]);
-    // set series name
-    columnSeries.name('Nevada');
+      { x: "IS", value: 0.7 },
+      { x: "JS", value: 0.7 },
+      { x: "JG", value: 0 },
+      { x: "JC", value: 0.7 },
+      { x: "SH", value: 0.7 },
+      { x: "MA", value: 0.7 },
+      { x: "JBL", value: 0.7 },
+      { x: "FD", value: 0 },
+      { x: "JPR", value: 0.7 },
+      { x: "SC", value: 0.7 },
+      { x: "MHM", value: 0.7 },
+      { x: "HJ", value: 0.7 },
+      { x: "PLG", value: 0.7 },
+      { x: "DC", value: 0.7 },
+      { x: "FGG", value: 0.7 },
+      { x: "PA", value: 0.7 },
+      { x: "DK", value: 0.7 },
+      { x: "JU", value: 0.7 },
+      { x: "LO", value: 0.7 },
+      { x: "AC", value: 1 },
+    ]).tooltip(false);
+    columnSeries.color("#cccccc88");
+
+    this.chart.column([
+      { x: 'JG', value: 1, porc: 75 },
+    ]).tooltip(false).color(colorPrimary).labels().format("%{%porc");
+
+    this.chart.column([
+      { x: 'FD', value: 0.5 },
+    ]).tooltip(false).color("#ff4b7e").labels().format("%{%porc");
 
     // set title settings
     this.chart
       .title()
-      .enabled(true)
-      .text('Cosmetic Products by Revenue')
-      .padding({ bottom: 20 });
+      .enabled(false);
 
     // disable y-axis
     this.chart.yAxis(false);
+    this.chart.yGrid(false);
 
-    // set value prefix for tooltip
-    this.chart.tooltip().valuePrefix('$');
+    // set chart x-axis ticks settings
+    this.chart.xAxis().ticks().length(30);
+
+    this.chart.xAxis().labels().fontSize(12).fontOpacity(1).fontColor("black").fontWeight(600).hAlign("right");
+
+    this.chart.xGrid().stroke("grey", 1, "2 2");
 
     // set x-scale
     this.chart.xScale('ordinal');
-    this.chart.innerRadius(50);
+    this.chart.innerRadius(150);
     this.chart.background().fill("red", 0);
+    let chart = this.chart;
+    this.chart.listen('chartDraw', function () {
+      let count = chart.xAxis().labels().getLabelsCount();
+      for (let i = count / 4; i < count * 3 / 4; i++) {
+        let label = chart.xAxis().labels().getLabel(i);
+        if (label) {
+          label.hAlign("left");
+          label.draw();
+        }
+      }
+    });
   }
 
   ngAfterViewInit() {

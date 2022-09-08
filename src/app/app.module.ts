@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReportsModule } from './reports/reports.module';
 import { RoutenavComponent } from './routenav/routenav.component';
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
