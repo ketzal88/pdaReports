@@ -18,12 +18,13 @@ export class CompatibilidadPuestoComponent implements OnInit {
       {
         value: 73,
         stroke: {
+          angle: 45,
           lineJoin: "round",
           lineCap: "round",
           mode: true,
           opacity: 1,
           thickness: 40,
-          keys: [{ color: colorPrimaryDarker, offset: 0.4, opacity: 0.7 }, { color:"#40c4ff", offset: 0.9, opacity: 1 }],
+          keys: [{ color: colorPrimary, offset:0, opacity: 1 }, { color:"#40c4ff", offset: 0.8, opacity: 1 }],
         },
         normal: {
           zIndex: 4,
