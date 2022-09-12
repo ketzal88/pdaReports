@@ -9,6 +9,8 @@ import 'anychart/dist/js/anychart-ui.min.js';
 import 'anychart/dist/js/anychart-polar.min.js';
 import 'anychart/dist/js/anychart-table.min.js';
 import 'anychart/dist/js/anychart-circular-gauge.min.js';
+import 'anychart/dist/js/anychart-graph.min.js';
+
 
 if (environment.production) {
   enableProdMode();
