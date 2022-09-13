@@ -36,6 +36,7 @@ export class RepnaComponent implements OnInit {
     chart.interactivity(false);
 
     chart.nodes().labels().enabled(false);
+    chart.tooltip(false);
     chart.background().fill("black", 0);
 
     chart.layout().type('fixed');
