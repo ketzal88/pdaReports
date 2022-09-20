@@ -8,7 +8,12 @@ import { CompatibilidadGrupoCandidatosComponent } from './charts/compatibilidad-
 import { GraficoComportamentalComponent } from './charts/grafico-comportamental/grafico-comportamental.component';
 import { CompatibilidadPuestoComponent } from './charts/compatibilidad-puesto/compatibilidad-puesto.component';
 import { RepnaComponent } from './charts/repna/repna.component';
-import { SmallBarWithNotchComponent } from './charts/small-bar-with-notch/small-bar-with-notch.component'
+import { SmallBarWithNotchComponent } from './charts/small-bar-with-notch/small-bar-with-notch.component';
+import { CompetenciasComponent } from './charts/competencias/competencias.component';
+import { BalanceEdadGeneroComponent} from './charts/balance-edad-genero/balance-edad-genero.component';
+import { TendenciaComportamentalComponent } from './charts/tendencia-comportamental/tendencia-comportamental.component';
+import { CompatibilidadPuestosCandidatoComponent } from './charts/compatibilidad-puestos-candidato/compatibilidad-puestos-candidato.component';
+import { ConsistenciaComponent } from './charts/consistencia/consistencia.component'
 
 
 @NgModule({
@@ -20,6 +25,11 @@ import { SmallBarWithNotchComponent } from './charts/small-bar-with-notch/small-
     CompatibilidadPuestoComponent,
     RepnaComponent,
     SmallBarWithNotchComponent,
+    CompetenciasComponent,
+    BalanceEdadGeneroComponent,
+    TendenciaComportamentalComponent,
+    CompatibilidadPuestosCandidatoComponent,
+    ConsistenciaComponent,
   ],
   imports: [
     CommonModule,
