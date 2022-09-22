@@ -20,6 +20,7 @@ export class TendenciaComportamentalComponent implements OnInit {
     let color = this.color;
     // set the gauge type
     this.gauge = anychart.gauges.linear();
+    this.gauge.interactivity(false);
 
     // set the data for the gauge
     this.gauge.data(data);
@@ -63,6 +64,7 @@ export class TendenciaComportamentalComponent implements OnInit {
     // set the zIndex of the marker
     marker.zIndex(10);
     marker.offset('0%');
+
 
 
     // add a marker pointer

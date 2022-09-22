@@ -15,23 +15,7 @@ export class CompatibilidadPuestoComponent implements OnInit {
 
   ngOnInit(): void {
     let data = anychart.data.set([
-      {
-        value: 73,
-        stroke: {
-          angle: 45,
-          lineJoin: "round",
-          lineCap: "round",
-          mode: true,
-          opacity: 1,
-          thickness: 40,
-          keys: [{ color: colorPrimary, offset:0, opacity: 1 }, { color:"#40c4ff", offset: 0.8, opacity: 1 }],
-        },
-        normal: {
-          zIndex: 4,
-        },
-        zIndex: 5,
-      },
-      { value: 2.5, stroke: { thickness: 0 } },
+      // { value: 2.5, stroke: { thickness: 0 } },
       {
         value: 27,
         stroke: {
@@ -44,12 +28,26 @@ export class CompatibilidadPuestoComponent implements OnInit {
           zIndex: -8
         },
       },
-      { value: 2.5, stroke: { thickness: 0 } },
+      // { value: 2.5, stroke: { thickness: 0 } },
+      {
+        value: 73,
+        stroke: {
+          angle: 45,
+          lineJoin: "round",
+          lineCap: "round",
+          mode: true,
+          opacity: 1,
+          thickness: 40,
+          keys: [{ color: colorPrimary, offset: 0, opacity: 1 }, { color: "#40c4ff", offset: 0.8, opacity: 1 }],
+        },
+        normal: {
+          zIndex: 4,
+        },
+        zIndex: 5,
+      },
     ]);
-
     // create pie chart with passed data
     let chart = anychart.pie(data);
-
     this.chart = chart;
 
     // set chart radius
@@ -98,6 +96,7 @@ export class CompatibilidadPuestoComponent implements OnInit {
     tab.cellBorder("black", 0);
     tab.getCell(0, 0).content(porc);
     tab.getCell(1, 0).content(label);
+    tab.cellFill("#00000000")
 
     // set label to center content of chart
     chart.center().content(tab);
@@ -106,6 +105,7 @@ export class CompatibilidadPuestoComponent implements OnInit {
   ngAfterViewInit() {
     this.chart.container(this.container.nativeElement);
     this.chart.draw();
+    console.log(this.chart.toHtmlTable());
   }
 
 }

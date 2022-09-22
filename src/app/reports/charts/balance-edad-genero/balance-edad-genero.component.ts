@@ -37,6 +37,7 @@ export class BalanceEdadGeneroComponent implements OnInit {
 
     // turn on chart animation
     this.chart.animation(true);
+    this.chart.interactivity().selectionMode("none");
 
     // force chart to stack values by Y scale.
     this.chart.yScale().stackMode('percent');

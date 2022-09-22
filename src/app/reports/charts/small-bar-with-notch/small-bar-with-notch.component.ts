@@ -19,6 +19,7 @@ export class SmallBarWithNotchComponent implements OnInit {
     let color = "#007EFD"
     // set the gauge type
     this.gauge = anychart.gauges.linear();
+    this.gauge.interactivity(false);
 
     // set the data for the gauge
     this.gauge.data(data);

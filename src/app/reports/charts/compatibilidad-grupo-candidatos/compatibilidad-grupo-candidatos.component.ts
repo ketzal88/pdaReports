@@ -15,7 +15,6 @@ export class CompatibilidadGrupoCandidatosComponent implements OnInit {
 
   ngOnInit() {
     this.chart = anychart.polar();
-    this.chart.interactivity().selectionMode("none");
     // let columnSeries = this.chart.column([
     //   { x: "IS", value: Math.random() },
     //   { x: "JS", value: Math.random() },
@@ -39,36 +38,34 @@ export class CompatibilidadGrupoCandidatosComponent implements OnInit {
     //   { x: "AC", value: 1 },
     // ]);
     let columnSeries = this.chart.column([
-      { x: "IS", value: 0.7 },
-      { x: "JS", value: 0.7 },
+      { x: "IS", value: 70 },
+      { x: "JS", value: 70 },
       { x: "JG", value: 0 },
-      { x: "JC", value: 0.7 },
-      { x: "SH", value: 0.7 },
-      { x: "MA", value: 0.7 },
-      { x: "JBL", value: 0.7 },
-      { x: "FD", value: 0 },
-      { x: "JPR", value: 0.7 },
-      { x: "SC", value: 0.7 },
-      { x: "MHM", value: 0.7 },
-      { x: "HJ", value: 0.7 },
-      { x: "PLG", value: 0.7 },
-      { x: "DC", value: 0.7 },
-      { x: "FGG", value: 0.7 },
-      { x: "PA", value: 0.7 },
-      { x: "DK", value: 0.7 },
-      { x: "JU", value: 0.7 },
-      { x: "LO", value: 0.7 },
-      { x: "AC", value: 1 },
+      { x: "JC", value: 70 },
+      { x: "SH", value: 70 },
+      { x: "MA", value: 70 },
+      { x: "JBL", value: 70 },
+      { x: "FD", value: 50 },
+      { x: "JPR", value: 70 },
+      { x: "SC", value: 70 },
+      { x: "MHM", value: 70 },
+      { x: "HJ", value: 70 },
+      { x: "PLG", value: 70 },
+      { x: "DC", value: 70 },
+      { x: "FGG", value: 70 },
+      { x: "PA", value: 70 },
+      { x: "DK", value: 70 },
+      { x: "JU", value: 70 },
+      { x: "LO", value: 70 },
+      { x: "AC", value: 100 },
     ]).tooltip(false);
-    columnSeries.color("#cccccc88");
+    columnSeries.color("#cccccc88").labels().format("{%value}%").enabled(false).fontColor("#ddddd").fontSize("100%").offsetX(-50).offsetY(-50);
+    columnSeries.selected().fill("#ff4b7e").selected().labels().enabled(true);
 
     this.chart.column([
-      { x: 'JG', value: 1, porc: 75 },
-    ]).tooltip(false).color(colorPrimary).labels().format("%{%porc");
+      { x: 'JG', value: 100, porc: 75 },
+    ]).selectionMode("none").tooltip(false).color(colorPrimary).labels().format("{%value}%").enabled(true).fontColor("#ffffff").fontSize("100%")
 
-    this.chart.column([
-      { x: 'FD', value: 0.5 },
-    ]).tooltip(false).color("#ff4b7e").labels().format("%{%porc");
 
     // set title settings
     this.chart
