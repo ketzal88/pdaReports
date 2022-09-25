@@ -1,0 +1,123 @@
+{
+    "TITLE_PDA_CONFIGURATION": "Configuration",
+    "VERSION": "Version",
+    "REPORTING_CENTER": {
+        "TITLE":"Reporting center",
+        "DEFAULTS": {
+            "TITLE":"Defaults"
+        },
+        "MY_REPORTS": {
+            "TITLE": "My reports"
+        }
+    },
+    "REDIRECT_PDA_PLATFORM": "PDA Platform",
+    "CHANGE_LANGUAGE": "Change language",
+    "LANGUAGE": "English",
+    "REPORT_CONFIGURATION": "Report configuration",
+    "HIRING": "Hiring",
+    "DEVELOPMENT": "Development",
+    "SALES": "Sales",
+    "hiring": "Hiring",
+    "development": "Development",
+    "sales": "Sales",
+    "survey": "Survey",
+    "report": "Report",
+    "candidate_review": "Candidate Review",
+    "Consistent" : "Consistent",
+    "NotVeryConsistent" : "Not Very Consistent",
+    "Invalid" : "Invalid",
+    "NotAvalaible" : "Not Avalaible",
+    "Gender" : "Gender",
+    "FirstName": "First Name",
+    "LastName": "Last Name",
+    "Email": "Email",
+    "PDAStatus": "PDA Status",
+    "Date": "Date",
+    "Natural" : "Natural",
+    "Role" : "Role",
+    "BehavioralProfile" : "Behavioral Profile",
+    "PAGINATOR": {
+        "ITEMS_PER_PAGE": "Records per page",
+        "NEXT_PAGE": "Next",
+        "PREVIOUS_PAGE": "Previous",
+        "LAST_PAGE": "Last page",
+        "INIT_LABEL": "Showing",
+        "OF_LABEL": "of",
+        "LAST_LABEL": "entries"
+    },
+    "TYPE_PROFILE": "Profile",
+    "UPLOADER":{
+        "UPLOADING_STATUS": "Uploading",
+        "FAILED_STATUS": "Failed",
+        "SUCCESSFUL_STATUS": "Successful",
+        "FAILED_MESSAGE": "There was an error uploading the file",
+        "FAILED_UPDATING_MESSAGE":"An error occurred while loading logo from file",
+        "SUCCESSFUL_MESSAGE": "File has been uploaded successfuly",
+        "ONLY_ONE_FILE_MESSAGE": "You can upload only one file",
+        "INVALID_FORMAT_TYPE_MESSAGE" : "{FORMAT_TYPE} is not a valid file type",
+        "INVALID_MAX_SIZE_MESSAGE" : "{MAX_SIZE} Mb is the max file size",
+        "INVALID_IMAGE_MIN_RESOLUTION_MESSAGE" : "The minimum size is not met ( {MIN_RESOLUTION} )",
+        "INVALID_IMAGE_FORMAT_MESSAGE" : "Image format is not maintained"
+    },
+    "SEND_REPORT": {
+        "TITLE": "Send report",
+        "SUBTITLE": "From here you can share the link of the Behavioral Profile Reports directly by email to Whatsapp",
+        "LABEL_EMAIL": "Enter your email",
+        "LABEL_NUMBER": "Enter your number",
+        "SEND": "Send"
+    },
+    "GROUPING_COMPONENT": {
+        "EDIT":"Edit",
+        "DUPLICATE":"Duplicate",
+        "BTN_CREATE" : "Generate {TYPE}",
+        "BTN_SAVE": "Save",
+        "BTN": "Select",        
+        "GROUP":{
+            "NEW": "New group",
+            "TYPE":"Group",
+            "SUBTITLE": "Existent Group",
+            "INPUT_PLACEHOLDER":"Ingrese nombre de nuevo grupo"
+        },
+        "AREA":{
+            "NEW": "New area",
+            "TYPE":"Area",
+            "SUBTITLE": "Existent Area",
+            "INPUT_PLACEHOLDER":"Ingrese nombre de nueva area"
+        }
+    },
+    "CONFIRM_DIALOG": {
+        "DELETE": {
+            "TITLE": "Eliminar {{TYPE}}",
+            "MESSAGE": "¿Estas seguro de eliminar el {{TYPE}} {{ENTITY_NAME}}?"
+        }
+    },
+    "MY_REPORTS": {
+        "REPORT_TYPE_FILTER": "Tipo de reporte",
+        "HIRING_REPORT_FILTER": "Hiring/Informe",
+        "DEVELOP_REPORT_FILTER": "Desarrollo/Informe",
+        "HIRING_REVIEW_FILTER": "Hiring/Reseña",
+        "HIRING_SURVEY_FILTER": "Hiring/Relevamiento"
+    },
+    "CLIENT_FILTER": {
+        "BASE": "Base",
+        "SUBBASE": "Subbase"
+    },
+    "SELECT_GROUP":{
+        "NAME": "Grupo"
+    },
+    "LOGIN": {
+        "NAME": "Login",
+        "AUTOMATIC_NAME": "Login automático",
+        "USERNAME_PLACEHOLDER": "Nombre de usuario",
+        "PASSWORD_PLACEHOLDER": "Password",
+        "ACCEPT_BTN": "Aceptar"
+    },
+    "CONFIGURATION":{
+        "SAVE": "Generar reporte",
+        "ERROR": {
+            "ERROR_REPORT": "No hemos podido generar el reporte",
+            "ERROR_COMPETENCY_REPORT": "No hemos podido generar las competencias del reporte",
+            "ERROR_JOB_REPORT": "No hemos podido generar el puesto del reporte"
+        }
+    }
+}

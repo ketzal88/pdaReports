@@ -1,0 +1,46 @@
+<div style="display: flex">
+  <ng-container *ngIf="title" stlye="    width: fit-content;">
+    <div>
+      <h1>{{ title }}</h1>
+      <ng-container *ngIf="description">
+        <h3>{{ description }}</h3>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <div [ngStyle]="{ display: dragAndDrop ? 'none' : '' }">
+    <label class="image-upload-container btn btn-bwm">
+      <span class="center">Cargar imagen</span>
+      <input
+        #imageInput
+        type="file"
+        accept="image/*"
+        (change)="processFile(imageInput)" />
+    </label>
+  </div>
+
+  <ng-container *ngIf="dragAndDrop">
+    <label
+      class="image-upload-container btn btn-bwm center"
+      style="width: 50%; height: 150px; display: flex; align-items: center"
+      appImageDrag
+      (files)="processDragAndDropFile($event)"
+      (click)="dragAndDropClick()">
+      <span style="font-size: 25px">Arrastre y suelte aquí</span>
+    </label>
+  </ng-container>
+</div>
+
+<div *ngIf="selectedFile" class="img-preview-container">
+  <div
+    class="img-preview{{ selectedFile.status === 'fail' ? '-error' : '' }}"
+    [ngStyle]="{
+      'background-image': 'url(' + selectedFile.url + ')'
+    }"></div>
+  <div *ngIf="selectedFile.pending">
+    {{ selectedFile.status | translate }}
+    <div class="img-loading-overlay">
+      <div class="img-spinning-circle"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+{
+    "competency-categories": [
+        {
+            "competencyCategoryId": "07f08a8c-89dd-45cd-a07c-2b5b35462cd4",
+            "name": "Competencias Predefinidas",
+            "description": "Reporte de Competencias (Predefinidas)",
+            "order": 1,
+            "competencyCategoryType": "Generic"
+        },
+        {
+            "competencyCategoryId": "7e050410-b3e7-4119-9a2b-51cc9c075e3e",
+            "name": "Competencias a medida",
+            "description": "Reporte de Competencias (Personalizadas)",
+            "order": 6,
+            "competencyCategoryType": "Predefined"
+        },
+        {
+            "competencyCategoryId": "4fd1dfc6-2268-40a7-b347-8d14b65ad4f2",
+            "name": "PDA",
+            "description": "PDA",
+            "order": null,
+            "competencyCategoryType": "PDA"
+        },
+        {
+            "competencyCategoryId": "cf2c41b4-4a17-4aea-927c-34f4ef64bc98",
+            "name": "Comportamentales",
+            "description": "Comportamentales",
+            "order": null,
+            "competencyCategoryType": "Behavioral"
+        },
+        {
+            "competencyCategoryId": "4e4e7872-1d79-4b1b-9f6c-1986ad648e70",
+            "name": "Competencias 360",
+            "description": "Competencias 360",
+            "order": null,
+            "competencyCategoryType": "Competency360"
+        },
+        {
+            "competencyCategoryId": "9b96424e-ae06-4621-9de6-23a2b19d0614",
+            "name": "Digital",
+            "description": "Reporte de Competencias (Predefinidas)",
+            "order": 4,
+            "competencyCategoryType": "Digital"
+        },
+        {
+            "competencyCategoryId": "aaf9c10a-d5a3-40cd-8b1c-2ebade2ee0e2",
+            "name": "Agile",
+            "description": "Reporte de Competencias (Predefinidas)",
+            "order": 2,
+            "competencyCategoryType": "Agile"
+        },
+        {
+            "competencyCategoryId": "69f10601-6c2a-4b08-95f8-725d1faa04ce",
+            "name": "Entrepreneurship",
+            "description": "Reporte de Competencias (Predefinidas)",
+            "order": 3,
+            "competencyCategoryType": "Entrepreneurship"
+        },
+        {
+            "competencyCategoryId": "5b26012a-2a87-470d-bc3b-ba97ac11a8ff",
+            "name": "Gestión positiva del cambio en tiempos VICA",
+            "description": "",
+            "order": 5,
+            "competencyCategoryType": "VUCA"
+        }
+    ]
+}

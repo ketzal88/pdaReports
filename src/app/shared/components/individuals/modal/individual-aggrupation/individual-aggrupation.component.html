@@ -1,0 +1,89 @@
+<ng-container *ngIf="data.action === 'VIEW'">
+  <div
+    class="d-flex"
+    style="justify-content: flex-end; cursor: pointer"
+    (click)="closePopUp()">
+    <app-icon-close></app-icon-close>
+  </div>
+</ng-container>
+
+<div class="d-flex" [ngStyle]="{ 'justify-content': 'space-between' }">
+  <div class="d-flex">
+    <ng-container *ngIf="data.action === 'EDIT'">
+      <app-icon-edit> </app-icon-edit>
+    </ng-container>
+    <ng-container *ngIf="data.action === 'DUPLICATE'">
+      <app-icon-copy></app-icon-copy>
+    </ng-container>
+    <div>
+      <h1 mat-dialog-title>
+        {{ title }}
+      </h1>
+    </div>
+  </div>
+  <ng-container *ngIf="data.action === 'VIEW'">
+    <div>
+      <button class="action-grouping" (click)="changeEdit()">
+        <app-icon-edit> </app-icon-edit>
+      </button>
+      <button class="action-grouping" (click)="changeDuplicate()">
+        <app-icon-copy></app-icon-copy>
+      </button>
+      <button class="action-grouping" (click)="changeDelete()">
+        <app-icon-delete></app-icon-delete>
+      </button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="data.action !== 'VIEW'">
+    <div (click)="closePopUp()" style="cursor: pointer">
+      <app-icon-close></app-icon-close>
+    </div>
+  </ng-container>
+</div>
+<p>
+  {{ subtitle }}
+</p>
+
+<ng-container
+  *ngIf="
+    data.action === 'NEW' ||
+    data.action === 'EDIT' ||
+    data.action === 'DUPLICATE'
+  ">
+  <div class="form-group">
+    <mat-form-field
+      class="example-form-field"
+      appearance="outline"
+      style="margin: 15px; width: 60%">
+      <mat-label>{{ placeholder }}</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="inputGrouping"
+        autofocus="off"
+        appearance="outline" />
+    </mat-form-field>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="lockedSelectId">
+  <app-individuals-selection
+    [lockedSelectId]="lockedSelectId"
+    [selectedClientId]="selectedClientId"
+    [multipleSelection]="true"
+    [selectedGroupingId]="selectedGroupingId"
+    [selectedAreaId]="selectedAreaId"
+    [pageSize]="pageSize"
+    [hasSelect]="hasSelect"
+    [groupingAction]="data.action"
+    [typeFilterList]="typeFilterList"
+    (selectedIndividualsEvent)="
+      onSelectedIndividuals($event)
+    "></app-individuals-selection>
+</ng-container>
+
+<div class="form-group" style="text-align: end; margin-top: 15px">
+  <button class="btn-pda-primary" (click)="triggerEvent()">
+    {{ btn }}
+  </button>
+</div>

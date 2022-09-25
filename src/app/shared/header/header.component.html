@@ -1,0 +1,25 @@
+<header class="header">
+  <h2 class="u-name">
+    PDA <b>{{ 'TITLE_PDA_CONFIGURATION' | translate }}</b>
+  </h2>
+  <p>{{ 'VERSION' | translate }}: v{{ version }}</p>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'CHANGE_LANGUAGE' | translate }}</mat-label>
+    <mat-select
+      [(ngModel)]="selectedValue"
+      (selectionChange)="changeLanguage($event)"
+      name="language">
+      <mat-option *ngFor="let language of foods" [value]="language.value">
+        {{ language.language | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-button [matMenuTriggerFor]="menu">
+    <i class="fa fa-user" aria-hidden="true"> </i>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
+</header>

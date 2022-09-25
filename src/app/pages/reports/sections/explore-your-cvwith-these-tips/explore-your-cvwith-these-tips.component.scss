@@ -1,0 +1,14 @@
+.card-tip:hover{
+    box-shadow: 8px 8px 8px #c3c3cf;
+    transform:scale(1.2);
+}
+
+.card-tip{
+    height: 200px;
+    width: 200px;
+    border: none;
+    transition: 0.3s;
+    margin: 10px;
+    box-shadow: 8px 8px 8px #c3c3cf;
+    border-radius: 10px;
+}

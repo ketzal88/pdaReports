@@ -1,0 +1,70 @@
+{
+    "job-categories": [
+        {
+            "jobCategoryId": "f8b10aa0-29b5-4386-9419-1f17cfc40b30",
+            "name": "Administrativo",
+            "isCustomized": false,
+            "order": 1
+        },
+        {
+            "jobCategoryId": "fbbe8e96-36cc-4724-81c1-0c9006b7881c",
+            "name": "Comercial",
+            "isCustomized": false,
+            "order": 2
+        },
+        {
+            "jobCategoryId": "8eaab97d-30b4-4cc2-aaf6-049a089f6585",
+            "name": "Gerencial",
+            "isCustomized": false,
+            "order": 3
+        },
+        {
+            "jobCategoryId": "db5f18ed-fe49-41fc-b231-a779ff80d163",
+            "name": "Call Center",
+            "isCustomized": false,
+            "order": 4
+        },
+        {
+            "jobCategoryId": "4d957176-2c3e-4a8e-b879-248ed33b8ca0",
+            "name": "Ingeniería",
+            "isCustomized": false,
+            "order": 5
+        },
+        {
+            "jobCategoryId": "2c7073a0-f36b-45ab-b93e-7cddd36f2fcd",
+            "name": "RRHH",
+            "isCustomized": false,
+            "order": 6
+        },
+        {
+            "jobCategoryId": "52147b48-d6f1-4c94-946d-161eb4ce21ca",
+            "name": "IT",
+            "isCustomized": false,
+            "order": 7
+        },
+        {
+            "jobCategoryId": "3d36635d-d28f-4af3-9de3-295f82194e31",
+            "name": "Medicina",
+            "isCustomized": false,
+            "order": 8
+        },
+        {
+            "jobCategoryId": "74f7229f-cd82-4a4b-88cc-57321829a3a4",
+            "name": "Minería",
+            "isCustomized": false,
+            "order": 9
+        },
+        {
+            "jobCategoryId": "7bddea18-1278-401b-b63e-17d06227e6b4",
+            "name": "Agile",
+            "isCustomized": false,
+            "order": 10
+        },
+        {
+            "jobCategoryId": "88890579-936e-471f-b3c2-56f176deed8e",
+            "name": "A Medida",
+            "isCustomized": true,
+            "order": 15
+        }
+    ]
+}

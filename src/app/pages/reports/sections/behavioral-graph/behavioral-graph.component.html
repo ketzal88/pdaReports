@@ -1,0 +1,55 @@
+<p class="subtitle center">{{ behavioralRadarChart.title }}</p>
+<p class="descripcion">
+  {{ behavioralRadarChart.introduction }}
+</p>
+
+<div class="section-grafic-comportamental">
+  <div
+    class="tipos-grafico-comportamental"
+    *ngIf="
+      jobCompatibility?.jobCompatibilityDetailed
+        ?.correlationJobBehavioralCompetencies &&
+      jobCompatibility?.jobCompatibilityDetailed
+        ?.correlationJobBehavioralCompetencies.length > 0
+    ">
+    <mat-tab-group animationDuration="0ms" [selectedIndex]="selectedTab">
+      <mat-tab label="Persona" disabled></mat-tab>
+      <mat-tab label="Puesto">
+        <div class="puestos-compatibles">
+          <select
+            class="selector"
+            name="select"
+            [ngModel]="jobSelected"
+            (ngModelChange)="onChangeJob($event)">
+            <option *ngFor="let job of jobs" [ngValue]="job">
+              {{ job.name }}
+            </option>
+          </select>
+        </div>
+      </mat-tab>
+      <mat-tab label="Líder" disabled>Líder</mat-tab>
+      <mat-tab label="Equipo" disabled>Equipo</mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div class="grafic-comportamental">
+    <app-stacked-polygon-polar
+      *ngIf="
+        behavioralRadarChart?.behavioralAxiCompetencies ||
+        (jobCompatibility?.jobCompatibilityDetailed
+          ?.correlationJobBehavioralCompetencies &&
+          naturalSelected !== undefined)
+      "
+      [behavioralRadarChart]="behavioralRadarChart.behavioralAxiCompetencies"
+      [correlationJobBehavioralCompetencies]="
+        jobCompatibility?.jobCompatibilityDetailed
+          ?.correlationJobBehavioralCompetencies
+      "
+      [naturalSelected]="naturalSelected"></app-stacked-polygon-polar>
+  </div>
+
+  <div class="buttons">
+    <a class="button" (click)="selectType(true)">Natural</a>
+    <a class="button" (click)="selectType(false)">Adaptado</a>
+  </div>
+</div>

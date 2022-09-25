@@ -1,0 +1,41 @@
+<app-card>
+  <card-content>
+    <div>
+      <app-icon-error
+        *ngIf="data?.type === reportResponseType.ERROR"></app-icon-error>
+      <app-icon-success
+        *ngIf="data?.type === reportResponseType.SUCCESS"></app-icon-success>
+      <app-icon-warning
+        *ngIf="data?.type === reportResponseType.WARNING"></app-icon-warning>
+    </div>
+
+    <div
+      *ngIf="
+        data?.type === reportResponseType.ERROR ||
+        data?.type === reportResponseType.SUCCESS
+      ">
+      {{ data.message[0] | translate }}
+    </div>
+    <div *ngIf="data?.type === reportResponseType.WARNING">
+      <div *ngFor="let message of data.message">
+        {{ message | translate }}
+      </div>
+    </div>
+  </card-content>
+  <card-actions>
+    <div class="center">
+      <button
+        class="btn-response"
+        [ngClass]="
+          data?.type === reportResponseType.ERROR
+            ? 'btn-error'
+            : data?.type === reportResponseType.WARNING
+            ? 'btn-warning'
+            : 'btn-success'
+        "
+        (click)="confirm()">
+        Aceptar
+      </button>
+    </div>
+  </card-actions>
+</app-card>

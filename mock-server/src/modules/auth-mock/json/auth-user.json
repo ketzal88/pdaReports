@@ -1,0 +1,20 @@
+{
+    "auth-user": {
+        "fullName": "mGallardo",
+        "UserId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+        "UserAllowAdministration": "1",
+        "RoleAllowAdministration": "1",
+        "CreditsAllowAdd": "1",
+        "http://cluna.com/role": [
+            "UserAdmin",
+            "Cambio de Nombre",
+            "MultiRegion"
+        ],
+        "ClientAllowCreate": "1",
+        "ClientEditCreate": "1",
+        "asdasd": "1",
+        "exp": 1662402053,
+        "iss": "https://cluna.com",
+        "aud": "https://cluna.com"
+    }
+}

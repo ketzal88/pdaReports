@@ -1,0 +1,81 @@
+{
+    "report-types": [
+        {
+            "id": "6fa85f64-1117-1262-b3fc-2c963f66afa6",
+            "internallName": "HIRING_CANDIDATE_REVIEW",
+            "name": "Candidate Review",
+            "reportGroupId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "reportGroup": {
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "internalName": "HIRING",
+                "name": "Hiring"
+            }
+        },
+        {
+            "id": "5fa85f64-5717-1262-b3fc-2c963f66afa6",
+            "internallName": "HIRING_REPORT",
+            "name": "Report",
+            "reportGroupId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "reportGroup": {
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "internalName": "HIRING",
+                "name": "Hiring"
+            }
+        },
+        {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "internallName": "DEVELOPMENT_CANDIDATE_REVIEW",
+            "name": "Candidate Review",
+            "reportGroupId": "3fa22f64-5717-4562-b3fc-2c963f66afa6",
+            "reportGroup": {
+                "id": "3fa22f64-5717-4562-b3fc-2c963f66afa6",
+                "internalName": "DEVELOPMENT",
+                "name": "Development"
+            }
+        },
+        {
+            "id": "5fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "internallName": "HIRING_SURVEY",
+            "name": "Survey",
+            "reportGroupId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "reportGroup": {
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "internalName": "HIRING",
+                "name": "Hiring"
+            }
+        },
+        {
+            "id": "af352118-c13e-4d70-9f9c-40c916ed010c",
+            "internallName": "DEVELOPMENT_SURVEY",
+            "name": "Survey",
+            "reportGroupId": "3fa22f64-5717-4562-b3fc-2c963f66afa6",
+            "reportGroup": {
+                "id": "3fa22f64-5717-4562-b3fc-2c963f66afa6",
+                "internalName": "DEVELOPMENT",
+                "name": "Development"
+            }
+        },
+        {
+            "id": "4487912b-7ac5-45ce-a9e2-b094c7045dc7",
+            "internallName": "DEVELOPMENT_REPORT",
+            "name": "Report",
+            "reportGroupId": "3fa22f64-5717-4562-b3fc-2c963f66afa6",
+            "reportGroup": {
+                "id": "3fa22f64-5717-4562-b3fc-2c963f66afa6",
+                "internalName": "DEVELOPMENT",
+                "name": "Development"
+            }
+        },
+        {
+            "id": "84a6e6de-9092-4cd8-bfbd-ddaf37945464",
+            "internallName": "SALES_SURVEY",
+            "name": "Survey",
+            "reportGroupId": "4fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "reportGroup": {
+                "id": "4fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "internalName": "SALES",
+                "name": "Sales"
+            }
+        }
+    ]
+}

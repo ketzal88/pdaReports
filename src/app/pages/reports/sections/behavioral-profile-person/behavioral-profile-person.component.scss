@@ -1,0 +1,64 @@
+/* formateo parrafos */
+.white {
+    color: #ffffff;
+}
+
+/*INFO PERFIL*/
+
+.perfil {
+    font-size: 28px;
+    font-weight: bold;
+    color: #007efd;
+}
+
+.left {
+    text-align: left;
+    padding: 0px;
+}
+
+.descripcion {
+    text-align: center;
+    margin-top: 20px;
+    padding: 0 10%;
+    color: #6D7783;
+}
+
+/* SECCION NOMBRE DEL TIPO DE PERFIL*/
+.texto-perfil {
+    width: 40%;
+}
+
+.tpoperfil {
+    margin-top: 30px;
+    display: inline-block;
+    width: 500px;
+    font-size: 180px;
+    line-height: 160px;
+    font-weight: bold;
+    text-align: left;
+    word-wrap:break-word;
+    overflow-wrap: break-word;
+    letter-spacing: 1px;
+}
+
+.nperfil {
+    font-size: 70px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/*SECCIONES INTERNAS*/
+@media (max-width: 600px) {
+
+    .block-section {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .section-internal {
+        width: 100%;
+        padding: 5px 30px;
+    }
+
+}

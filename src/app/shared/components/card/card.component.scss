@@ -1,0 +1,7 @@
+.card-content {
+    text-align: center;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none
+}

@@ -1,0 +1,47 @@
+
+//Custom material
+.mat-list-base {
+    padding-top: 0px;
+}
+
+.mat-header-cell {
+    color: #6D7783;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.mat-cell.locked{
+    color: #004291;
+    font-weight: 900;
+}
+
+table {
+    width: 100%;
+}
+
+.table-actionbar {
+    padding: 2px;
+    display: flex;
+}
+
+.table-actionbar .search-box {
+    flex: 1;
+}
+
+.table-actionbar .action-box {
+    text-align: right;
+    padding-top: 25px;
+}
+
+.table-actionbar .action-box button {
+    margin-right: 10px;
+
+}
+
+.content-filter {
+    margin-bottom: 10px;
+    position: absolute;
+    right: 40px;
+    background: white;
+    z-index: 1;
+}

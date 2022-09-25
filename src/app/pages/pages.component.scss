@@ -1,0 +1,51 @@
+// .container{
+//     padding: 10px 10px;
+// }
+
+/*TODO: Borrar estilo cuando tengamos la estructura desde el area de maquetacion*/
+.container {
+	display: flex;
+}
+.container-content {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.container-content h1 {
+	color: #fff;
+	font-size: 60px;
+}
+.container-content p {
+	color: #127b8e;
+	font-size: 20px;
+	background: #fff;
+	padding: 7px;
+	border-radius: 5px;
+}
+
+#navbtn {
+	display: inline-block;
+	margin-left: 70px;
+	font-size: 20px;
+	transition: 500ms color;
+}
+#checkbox {
+	display: none;
+}
+#checkbox:checked ~ .container .side-bar {
+	width: 60px;
+}
+#checkbox:checked ~ .container .side-bar .user-p{
+	visibility: hidden;
+}
+#checkbox:checked ~ .container .side-bar a span{
+	display: none;
+}
+/************************************************************/
+
+.container{
+    padding: 0px 0px;
+}
+.container-content{
+  width: 100%;
+}

@@ -1,0 +1,66 @@
+<mat-grid-list cols="2" rowHeight="1:1" style="height: 100%">
+  <mat-grid-tile style="height: 100%">
+    <mat-card>
+      <img src="../../../assets/img/login-image.jpg" />
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile style="height: 100%">
+    <mat-card style="height: 90%; width: 80%">
+      <div
+        class="center"
+        style="width: 100%; position: absolute; top: 0; left: 0">
+        <button
+          mat-raised-button
+          style="width: 60%; height: 50px; background-color: rgb(230, 194, 194)"
+          (click)="loginAutomatico()">
+          {{ 'LOGIN.AUTOMATIC_NAME' | translate }}
+        </button>
+      </div>
+
+      <div class="center" style="margin-top: 20%">
+        <img src="../../../assets/icons/brand.svg" width="40%" alt="PDA" />
+      </div>
+
+      <div style="margin-top: 40px; text-align: left; margin-left: 20%">
+        <h2>{{ 'LOGIN.NAME' | translate }}</h2>
+      </div>
+      <div class="center" style="margin-top: 15px">
+        <mat-form-field style="width: 50%">
+          <input
+            matInput
+            type="text"
+            placeholder="{{ 'LOGIN.USERNAME_PLACEHOLDER' | translate }}"
+            #userNameInput />
+        </mat-form-field>
+      </div>
+      <div class="center" style="margin-top: 15px">
+        <mat-form-field style="width: 50%">
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            placeholder="{{ 'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
+            #passwordInput />
+          <mat-icon matSuffix (click)="hide = !hide">{{
+            hide ? 'visibility_off' : 'visibility'
+          }}</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="center">
+        <button
+          mat-raised-button
+          color="Secondary"
+          style="margin-top: 50px; width: 40%"
+          (click)="login()">
+          {{ 'LOGIN.ACCEPT_BTN' | translate }}
+        </button>
+      </div>
+      <div class="center" style="margin-top: 5%">
+        <img
+          src="../../../assets/icons/poweredbypda.png"
+          width="25%"
+          alt="Powered by PDA" />
+      </div>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

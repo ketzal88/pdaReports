@@ -1,0 +1,25 @@
+<!-- Section reports central-->
+<div class="report-central-container">
+  <h2>{{ 'REPORTING_CENTER.TITLE' | translate }}</h2>
+  <div class="analytical-graph">
+    <h2>Grafica analitica</h2>
+  </div>
+
+  <div class="container-tab-group">
+    <mat-tab-group
+      [(selectedIndex)]="selectedTabIndex"
+      (selectedTabChange)="onTabChanged($event)">
+      <mat-tab label="{{ 'REPORTING_CENTER.DEFAULTS.TITLE' | translate }}">
+        <ng-container *ngIf="selectedTabIndex === 0">
+          <app-defaults></app-defaults>
+        </ng-container>
+      </mat-tab>
+      <!--TODO: Sin funcionalidad-->
+      <mat-tab label="{{ 'REPORTING_CENTER.MY_REPORTS.TITLE' | translate }}">
+        <ng-container *ngIf="selectedTabIndex === 1">
+          <app-my-reports></app-my-reports>
+        </ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<app-client-filter
+  [selectedClientId]="selectedClientId"
+  [selectedSubbaseId]="selectedSubbaseId"
+  (selectedClientEvent)="changeClient($event)"
+  (selectedSubbaseEvent)="changeSubbase($event)"></app-client-filter>
+<app-image-uploader
+  *ngIf="!logoLoader.isLoading() && selectedClientId"
+  style="height: 550px"
+  [dragAndDrop]="true"
+  [validImageTypes]="validImageTypes"
+  [imageSizingParameters]="imageSizingParameters"
+  title="Logo"
+  description="Cargue la imagen de su logo, para que sea utilizado en los reportes,
+  Deberá ser en formato JPG o PNG de al menos  280px x 60px"
+  (uploadedImage)="uploadedImage($event)"
+  [uploadFileName]="logoFileName"
+  [selectedItemUrl]="selectedItemUrl"
+  [selectedClientId]="selectedClientId">
+</app-image-uploader>
+
+<div style="display: flex">
+  <ng-container *ngFor="let style of availableStyles">
+    <mat-card>
+      <mat-card-header>
+        <h3>
+          <b>{{ style.name }}</b>
+        </h3>
+      </mat-card-header>
+      <mat-card-content style="text-align: center">
+        <div>
+          <img
+            [src]="style.imageUrl"
+            [alt]="style.name"
+            style="width: 90%"
+            (click)="showPopUp(style)" />
+        </div>
+        <p>
+          Es el mas parecido a nuestro branding, cuenta con detalles en blanco y
+          azul vibrante.
+        </p>
+        <div>
+          <button
+            mat-raised-button
+            color="primary"
+            style="margin-right: 15px"
+            (click)="showPopUp(style)">
+            Ver
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="style.selected"
+            (click)="selectStyle(style)">
+            Seleccionar
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>

@@ -1,0 +1,25 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 30px;
+	background: #ffffff;
+	color: #fff;
+    height: 8vh;
+}
+
+.header i {
+	font-size: 30px;
+	cursor: pointer;
+	color: #000000;
+}
+.header i:hover {
+	color: #4c4c4c;
+}
+
+.u-name {
+	font-size: 20px;
+	padding-left: 17px;
+    color: #056CF2;
+
+}

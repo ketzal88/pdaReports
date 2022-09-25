@@ -1,0 +1,26 @@
+<div class="perfil-type" style="position: relative">
+  <div class="label-image-title">
+    {{ 'TYPE_PROFILE' | translate }}
+  </div>
+  <div class="content-image-title">
+    <h1 style="margin-bottom: 0px">
+      {{ coverIndividual.profile }}
+    </h1>
+  </div>
+
+  <div class="image-profile">
+    <!-- TODO: Reemplazar por iconos svg cuando disenio los disponibilice -->
+    <app-happy></app-happy>
+  </div>
+  <ng-container
+    *ngFor="
+      let description of behavioralDescriptors.firstColumnWords;
+      let idx = index
+    ">
+    <div
+      class="content-image-description"
+      [ngStyle]="{ bottom: 26 + idx * 6 + '%' }">
+      <h2 style="margin-bottom: 0px">{{ description }}</h2>
+    </div>
+  </ng-container>
+</div>

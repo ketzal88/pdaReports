@@ -1,0 +1,18 @@
+<ng-container *ngIf="isReport$ | async as isReport">
+  <ng-container *ngIf="isReport === stateReportEvent.NOT_REPORT">
+    <app-header></app-header>
+  </ng-container>
+
+  <div class="container">
+    <ng-container *ngIf="isReport === stateReportEvent.NOT_REPORT">
+      <app-side-bar></app-side-bar>
+    </ng-container>
+    <div class="container-content">
+      <div class="container-page">
+        <router-outlet></router-outlet>
+      </div>
+      <!-- Footer de aplicacion -->
+      <footer class="footer"></footer>
+    </div>
+  </div>
+</ng-container>

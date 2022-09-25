@@ -1,0 +1,130 @@
+<div class="table-actionbar">
+  <div class="search-box">
+    <div class="form-group">
+      <app-input
+        (Enter)="onFilterInput($event)"
+        (Debounce)="onFilterInput($event)"
+        placeholder="Search...">
+        ></app-input
+      >
+    </div>
+    <ng-container *ngIf="chipItems.length > 0">
+      <div style="margin-bottom: 15px">
+        <mat-chip-list #chipList>
+          <mat-chip
+            *ngFor="let chipItem of chipItems; let idx = index"
+            [selectable]="'true'"
+            [removable]="'true'"
+            (removed)="removeChip(chipItem, idx)">
+            {{ chipItem.name | translate }}
+            <mat-icon matChipRemove *ngIf="'true'">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </ng-container>
+  </div>
+  <div class="action-box">
+    <button
+      (click)="showFilterView()"
+      mat-icon-button
+      aria-label="Example icon button with a vertical three dot icon">
+      <img src="/assets/icons/filter.svg" alt="" />
+    </button>
+    <ng-container *ngIf="showFilter">
+      <div class="content-filter">
+        <div
+          *ngFor="let typeFilterItem of typeFilterList"
+          style="margin-bottom: 10px">
+          <mat-label class="left"
+            ><h2 style="margin-bottom: 0px">
+              {{ typeFilterItem.name }}
+            </h2></mat-label
+          >
+          <mat-selection-list>
+            <mat-list-option
+              *ngFor="let item of typeFilterItem.data"
+              [value]="item"
+              [selected]="isFilterChipChecked(item)"
+              (click)="selectItem(typeFilterItem.key, item)">
+              {{ item.name | translate }}
+            </mat-list-option>
+          </mat-selection-list>
+        </div>
+        <button mat-stroked-button color="primary" (click)="reset()">
+          Reset
+        </button>
+        <button mat-raised-button color="primary" (click)="onFilter()">
+          Filtrar
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <!-- checkbox header -->
+  <ng-container matColumnDef="select">
+    <mat-header-cell *matHeaderCellDef>
+      <!-- TODO: Borrar codigo comentado de checkbox cuando no se requiere aplicar
+        alguna funcionalidad -->
+      <!-- <mat-checkbox color="primary" #matCheckBoxw> </mat-checkbox> -->
+    </mat-header-cell>
+    <mat-cell *cdkCellDef="let row; let idx = index">
+      <mat-checkbox
+        class="custom"
+        color="primary"
+        #matCheckBox
+        (click)="$event.stopPropagation()"
+        (change)="selectIndividual(matCheckBox.checked, idx, row)"
+        [disabled]="isDisabled(row)"
+        [checked]="checkStatus(row)">
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <!-- table dynamic columns -->
+  <ng-container
+    *ngFor="let column of columns"
+    [matColumnDef]="column.columnDef">
+    <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{
+      column.header | translate
+    }}</mat-header-cell>
+    <mat-cell
+      *cdkCellDef="let row"
+      [ngStyle]="{
+        color:
+          row[column.columnDef] | statusColorType: [column.columnDef, this.row]
+      }"
+      [ngClass]="lockedSelectId === row.individualId ? 'locked' : ''">
+      {{
+        row[column.columnDef]
+          | validateColumnType: column.columnType
+          | translate
+      }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- table action column -->
+  <ng-container matColumnDef="leader">
+    <mat-header-cell *matHeaderCellDef>Lider</mat-header-cell>
+    <mat-cell *matCellDef="let element; let idx = index">
+      <mat-slide-toggle
+        #matToggleLead
+        class="example-margin"
+        [color]="'primary'"
+        [checked]="selectedLeaderId === element.individualId"
+        [disabled]="isDisabledLeader(element)"
+        (change)="selectLeader(element, matToggleLead.checked)">
+      </mat-slide-toggle>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+<!-- table pagination -->
+<mat-paginator
+  *ngIf="dataSource"
+  [pageSizeOptions]="pageSizeOptions"
+  [length]="totalSize"
+  [pageSize]="pageSize"
+  (page)="onPaginateChange($event)"
+  showFirstLastButtons
+  aria-label="Select page"></mat-paginator>

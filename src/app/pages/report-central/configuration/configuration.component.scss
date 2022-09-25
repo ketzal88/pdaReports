@@ -1,0 +1,40 @@
+.configuration-page-container {
+    display: flex;
+    // flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.step-page-container {
+    flex: 1;
+    margin: auto 0;
+    margin-right: 25px;}
+
+.configuration-continue-btn {
+    background: #3f51b5;
+    margin: 32px;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.configuration-title{
+    padding: 30px 20px 0px 20px;
+}
+
+.configuration-title h1, .configuration-title h3{
+    color: #667080;
+    margin-bottom: 0px;
+}
+
+.step-btn {
+    color: #ffffff;
+    background: #3f51b5;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+}

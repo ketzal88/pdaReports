@@ -1,0 +1,317 @@
+{
+    "user": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Im1TaW5jb3ZpY2giLCJVc2VySWQiOiIyYzU5MjZjNC1iZGEyLTRlZGUtOWJmOC04Yjk2MjliMGRjOGIiLCJVc2VyQWxsb3dBZG1pbmlzdHJhdGlvbiI6IjEiLCJSb2xlQWxsb3dBZG1pbmlzdHJhdGlvbiI6IjEiLCJDcmVkaXRzQWxsb3dBZGQiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbIlVzZXJBZG1pbiIsIkNhbWJpbyBkZSBOb21icmUiLCJNdWx0aVJlZ2lvbiJdLCJDbGllbnRBbGxvd0NyZWF0ZSI6IjEiLCJDbGllbnRFZGl0Q3JlYXRlIjoiMSIsImFzZGFzZCI6IjEiLCJleHAiOjE2NjI0MDIwNTMsImlzcyI6Imh0dHBzOi8vYXV0aG1vZHVsZS50ZXN0cGRhLmNvbSIsImF1ZCI6Imh0dHBzOi8vYXV0aG1vZHVsZS50ZXN0cGRhLmNvbSJ9.Cuj1FRKHz2oFjjHKobGn7FeRLIXQQowtRgT_q9yQy8A",
+        "userDetails": {
+            "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+            "userName": "mGallardo",
+            "userRoles": [
+                {
+                    "userRole": {
+                        "roleId": "3b364fc1-1c4b-4482-8d7f-f4a0b0fdd1c1",
+                        "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                        "roleName": "UserAdmin"
+                    },
+                    "roleClaims": [
+                        {
+                            "id": 18,
+                            "roleId": "3b364fc1-1c4b-4482-8d7f-f4a0b0fdd1c1",
+                            "claimType": "ClientAllowCreate",
+                            "claimValue": "1"
+                        },
+                        {
+                            "id": 19,
+                            "roleId": "3b364fc1-1c4b-4482-8d7f-f4a0b0fdd1c1",
+                            "claimType": "ClientEditCreate",
+                            "claimValue": "1"
+                        }
+                    ]
+                },
+                {
+                    "userRole": {
+                        "roleId": "a26f8d20-ce6e-4807-99cf-9f0e61a54829",
+                        "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                        "roleName": "Cambio de Nombre"
+                    },
+                    "roleClaims": [
+                        {
+                            "id": 81,
+                            "roleId": "a26f8d20-ce6e-4807-99cf-9f0e61a54829",
+                            "claimType": "UserAllowAdministration",
+                            "claimValue": "1"
+                        },
+                        {
+                            "id": 82,
+                            "roleId": "a26f8d20-ce6e-4807-99cf-9f0e61a54829",
+                            "claimType": "ClientAllowCreate",
+                            "claimValue": "1"
+                        }
+                    ]
+                },
+                {
+                    "userRole": {
+                        "roleId": "4656c04b-af97-4666-9f4a-4c20fa478e7a",
+                        "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                        "roleName": "MultiRegion"
+                    },
+                    "roleClaims": [
+                        {
+                            "id": 2,
+                            "roleId": "4656c04b-af97-4666-9f4a-4c20fa478e7a",
+                            "claimType": "ClientAllowCreate",
+                            "claimValue": "1"
+                        },
+                        {
+                            "id": 20,
+                            "roleId": "4656c04b-af97-4666-9f4a-4c20fa478e7a",
+                            "claimType": "asdasd",
+                            "claimValue": "1"
+                        }
+                    ]
+                }
+            ],
+            "userClaims": [
+                {
+                    "id": 252,
+                    "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                    "claimType": "UserAllowAdministration",
+                    "claimValue": "1"
+                },
+                {
+                    "id": 253,
+                    "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                    "claimType": "RoleAllowAdministration",
+                    "claimValue": "1"
+                },
+                {
+                    "id": 254,
+                    "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                    "claimType": "CreditsAllowAdd",
+                    "claimValue": "1"
+                }
+            ],
+            "usersAccounts": [
+                {
+                    "userAccountId": "8b81bf29-f216-4eef-9001-342e3ad9463f",
+                    "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                    "accountId": "541fcc8e-1970-4ba3-87ae-eddfc6d9c149",
+                    "active": true,
+                    "lastActivityDate": "2022-07-13T15:35:49.813",
+                    "account": {
+                        "id": "541fcc8e-1970-4ba3-87ae-eddfc6d9c149",
+                        "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+                        "sendMailPDAComplete": false,
+                        "sendMailPDACompleteEmail": "jbatista@pdainternational.net",
+                        "active": true,
+                        "creationDate": "2010-10-22T18:25:08.957",
+                        "modificationDate": "2010-10-22T18:25:08.957",
+                        "deletionDate": null,
+                        "languageId": "d6d383f1-1012-4cd1-9eda-fb3876078268",
+                        "allowEditionJob": false,
+                        "passwordReset": false,
+                        "skin": null,
+                        "email": "qqqq@qqq.com",
+                        "multicliente": false,
+                        "multiregion": false
+                    },
+                    "user": {
+                        "id": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                        "firstName": "Maxi",
+                        "lastName": "Sincovich",
+                        "lastLoginDate": "2022-09-05T14:45:53.903",
+                        "userName": "mSincovich",
+                        "normalizedUserName": "msincovich",
+                        "email": "msincovich@pdainternational.net",
+                        "normalizedEmail": "msincovich@pdainternational.net",
+                        "emailConfirmed": false,
+                        "passwordHash": "AQAAAAEAACcQAAAAECMTll8Rs5FY5Jr8NhSeGdin3UqDYvFDdUkhvm6CywFrYPrdYXRt5nZDoNL6Dl41iA==",
+                        "securityStamp": null,
+                        "concurrencyStamp": "8ec426d1-9717-4e2c-a2e1-a1fe87fe79e2",
+                        "phoneNumber": null,
+                        "phoneNumberConfirmed": false,
+                        "twoFactorEnabled": false,
+                        "lockoutEnd": null,
+                        "lockoutEnabled": false,
+                        "accessFailedCount": 0
+                    },
+                    "base": {
+                        "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+                        "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+                        "subBaseName": "CCSS",
+                        "link": "ccss.clienteprueba",
+                        "userAccountId": "8b81bf29-f216-4eef-9001-342e3ad9463f",
+                        "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                        "accountId": "541fcc8e-1970-4ba3-87ae-eddfc6d9c149",
+                        "active": true,
+                        "lastActivityDate": "2021-04-06T17:35:55.663"
+                    }
+                },
+                {
+                    "userAccountId": "e787ca47-679c-4000-9b40-0cace5943e7a",
+                    "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                    "accountId": "9f007c1c-6540-4bf0-9ec0-70db24e54f80",
+                    "active": true,
+                    "lastActivityDate": "2022-06-02T19:41:43.39",
+                    "account": {
+                        "id": "9f007c1c-6540-4bf0-9ec0-70db24e54f80",
+                        "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+                        "sendMailPDAComplete": true,
+                        "sendMailPDACompleteEmail": "gmantilla@pdainternational.net",
+                        "active": true,
+                        "creationDate": "2010-07-15T13:07:47.997",
+                        "modificationDate": "2022-06-08T15:49:37.407",
+                        "deletionDate": null,
+                        "languageId": "d2a4ad46-daf5-4763-a2da-756643428e2c",
+                        "allowEditionJob": null,
+                        "passwordReset": false,
+                        "skin": "light",
+                        "email": "modificar2@prueba.com",
+                        "multicliente": false,
+                        "multiregion": true
+                    },
+                    "user": {
+                        "id": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                        "firstName": "Maxi",
+                        "lastName": "Sincovich",
+                        "lastLoginDate": "2022-09-05T14:45:53.903",
+                        "userName": "mSincovich",
+                        "normalizedUserName": "msincovich",
+                        "email": "msincovich@pdainternational.net",
+                        "normalizedEmail": "msincovich@pdainternational.net",
+                        "emailConfirmed": false,
+                        "passwordHash": "AQAAAAEAACcQAAAAECMTll8Rs5FY5Jr8NhSeGdin3UqDYvFDdUkhvm6CywFrYPrdYXRt5nZDoNL6Dl41iA==",
+                        "securityStamp": null,
+                        "concurrencyStamp": "8ec426d1-9717-4e2c-a2e1-a1fe87fe79e2",
+                        "phoneNumber": null,
+                        "phoneNumberConfirmed": false,
+                        "twoFactorEnabled": false,
+                        "lockoutEnd": null,
+                        "lockoutEnabled": false,
+                        "accessFailedCount": 0
+                    },
+                    "base": {
+                        "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+                        "subBaseId": "75548fa3-786f-4f26-a65d-f57acd87c088",
+                        "subBaseName": "Predeterminada",
+                        "link": "clienteprueba",
+                        "userAccountId": "e787ca47-679c-4000-9b40-0cace5943e7a",
+                        "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                        "accountId": "9f007c1c-6540-4bf0-9ec0-70db24e54f80",
+                        "active": true,
+                        "lastActivityDate": "2022-06-01T12:37:36.89"
+                    }
+                },
+                {
+                    "userAccountId": "0de48708-70e7-4d54-b358-5a8edcab1e0a",
+                    "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                    "accountId": "336988f2-b3b1-41fb-98a3-62ec3add3f55",
+                    "active": true,
+                    "lastActivityDate": "2022-06-02T19:41:43.39",
+                    "account": {
+                        "id": "336988f2-b3b1-41fb-98a3-62ec3add3f55",
+                        "baseId": "901c3f8b-eb46-45c4-9f1f-513481717fd2",
+                        "sendMailPDAComplete": false,
+                        "sendMailPDACompleteEmail": null,
+                        "active": true,
+                        "creationDate": "2012-03-19T11:02:22.61",
+                        "modificationDate": "2012-03-19T11:02:22.61",
+                        "deletionDate": null,
+                        "languageId": "d6d383f1-1012-4cd1-9eda-fb3876078268",
+                        "allowEditionJob": null,
+                        "passwordReset": false,
+                        "skin": null,
+                        "email": "administradorpda@occ.com.mx",
+                        "multicliente": false,
+                        "multiregion": true
+                    },
+                    "user": {
+                        "id": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                        "firstName": "Maxi",
+                        "lastName": "Sincovich",
+                        "lastLoginDate": "2022-09-05T14:45:53.903",
+                        "userName": "mSincovich",
+                        "normalizedUserName": "msincovich",
+                        "email": "msincovich@pdainternational.net",
+                        "normalizedEmail": "msincovich@pdainternational.net",
+                        "emailConfirmed": false,
+                        "passwordHash": "AQAAAAEAACcQAAAAECMTll8Rs5FY5Jr8NhSeGdin3UqDYvFDdUkhvm6CywFrYPrdYXRt5nZDoNL6Dl41iA==",
+                        "securityStamp": null,
+                        "concurrencyStamp": "8ec426d1-9717-4e2c-a2e1-a1fe87fe79e2",
+                        "phoneNumber": null,
+                        "phoneNumberConfirmed": false,
+                        "twoFactorEnabled": false,
+                        "lockoutEnd": null,
+                        "lockoutEnabled": false,
+                        "accessFailedCount": 0
+                    },
+                    "base": {
+                        "baseId": "901c3f8b-eb46-45c4-9f1f-513481717fd2",
+                        "subBaseId": "42b054b3-d7e2-4778-8f23-c73a05352533",
+                        "subBaseName": "Predeterminada",
+                        "link": "occmundial",
+                        "userAccountId": "0de48708-70e7-4d54-b358-5a8edcab1e0a",
+                        "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                        "accountId": "336988f2-b3b1-41fb-98a3-62ec3add3f55",
+                        "active": true,
+                        "lastActivityDate": "2016-03-04T12:35:55.807"
+                    }
+                },
+                {
+                    "userAccountId": "de0a37e8-9220-4e4f-88ed-0a6116bb17b8",
+                    "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                    "accountId": "8b83133d-d50e-45bd-a51e-e0a9d13de76b",
+                    "active": true,
+                    "lastActivityDate": "2022-06-02T19:41:43.39",
+                    "account": {
+                        "id": "8b83133d-d50e-45bd-a51e-e0a9d13de76b",
+                        "baseId": "3f49a58a-483b-477f-b651-1bbe9c0a89e1",
+                        "sendMailPDAComplete": false,
+                        "sendMailPDACompleteEmail": null,
+                        "active": true,
+                        "creationDate": "2019-12-03T09:06:39.537",
+                        "modificationDate": "2019-12-03T09:07:29.703",
+                        "deletionDate": null,
+                        "languageId": "d2a4ad46-daf5-4763-a2da-756643428e2c",
+                        "allowEditionJob": null,
+                        "passwordReset": false,
+                        "skin": "dark",
+                        "email": "maxi.leveroni@gmail.com",
+                        "multicliente": false,
+                        "multiregion": true
+                    },
+                    "user": {
+                        "id": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                        "firstName": "Maxi",
+                        "lastName": "Sincovich",
+                        "lastLoginDate": "2022-09-05T14:45:53.903",
+                        "userName": "mSincovich",
+                        "normalizedUserName": "msincovich",
+                        "email": "msincovich@pdainternational.net",
+                        "normalizedEmail": "msincovich@pdainternational.net",
+                        "emailConfirmed": false,
+                        "passwordHash": "AQAAAAEAACcQAAAAECMTll8Rs5FY5Jr8NhSeGdin3UqDYvFDdUkhvm6CywFrYPrdYXRt5nZDoNL6Dl41iA==",
+                        "securityStamp": null,
+                        "concurrencyStamp": "8ec426d1-9717-4e2c-a2e1-a1fe87fe79e2",
+                        "phoneNumber": null,
+                        "phoneNumberConfirmed": false,
+                        "twoFactorEnabled": false,
+                        "lockoutEnd": null,
+                        "lockoutEnabled": false,
+                        "accessFailedCount": 0
+                    },
+                    "base": {
+                        "baseId": "3f49a58a-483b-477f-b651-1bbe9c0a89e1",
+                        "subBaseId": "defd262f-76be-43d5-ac54-52f4fde04cdb",
+                        "subBaseName": "Predeterminada",
+                        "link": "clienteprueba2",
+                        "userAccountId": "de0a37e8-9220-4e4f-88ed-0a6116bb17b8",
+                        "userId": "2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b",
+                        "accountId": "8b83133d-d50e-45bd-a51e-e0a9d13de76b",
+                        "active": true,
+                        "lastActivityDate": "2021-10-12T14:58:19.44"
+                    }
+                }
+            ]
+        },
+        "expirationMinutes": "35"
+    }
+}

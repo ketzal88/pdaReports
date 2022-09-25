@@ -1,0 +1,38 @@
+<div class="mat-elevation-z8">
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'SELECT_GROUP.NAME' | translate }}</mat-label>
+    <mat-select
+      #groupSelect="matSelect"
+      (openedChange)="onGroupChange($event)"
+      [(value)]="selectedGroup">
+      <mat-option *ngFor="let group of groups" [value]="group.groupingId">
+        {{ group.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<ng-container *ngIf="groups?.length === 1">
+  <div class="mat-elevation-z8" style="padding: 5px">
+    <div style="margin-top: 30px; display: flex; vertical-align: middle">
+      <span style="margin-right: 10px" class="material-icons"
+        >arrow_upward</span
+      >
+      <p>Agregue un grupo de trabajo utilizando el boton de arriba.</p>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="lockedSelectId && selectedGroup && !loading">
+  <!-- TODO: Cuando este disponible el servicio de creacion, quitar [selectedIndividualIds] -->
+  <app-individuals-selection
+    [lockedSelectId]="lockedSelectId"
+    [multipleSelection]="true"
+    [selectedClientId]="selectedClientId"
+    [selectedGroupingId]="selectedGroup"
+    [selectedIndividualIds]="selectedIndividualIds"
+    [typeFilterList]="typeFilterList"
+    (selectedIndividualsEvent)="
+      onIndividualsSelection($event)
+    "></app-individuals-selection>
+</ng-container>

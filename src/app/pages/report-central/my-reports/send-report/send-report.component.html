@@ -1,0 +1,73 @@
+<div class="d-flex" style="justify-content: space-between">
+  <h1 mat-dialog-title>{{ 'SEND_REPORT.TITLE' | translate }}</h1>
+  <button mat-icon-button (click)="cancel()">
+    <app-icon-close></app-icon-close>
+  </button>
+</div>
+
+<p>
+  {{ 'SEND_REPORT.SUBTITLE' | translate }}
+</p>
+<div mat-dialog-content>
+  <div>
+    <mat-checkbox
+      class="checkbox-margin"
+      name="checkboxWhatsapp"
+      color="primary"
+      (change)="changeCurrentWhatsapp($event)"
+      #checkboxWhatsapp
+      [disabled]="true">
+      <app-whatsapp></app-whatsapp>
+    </mat-checkbox>
+
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'SEND_REPORT.LABEL_NUMBER' | translate }}</mat-label>
+
+      <input
+        [disabled]="!checkboxWhatsapp.checked"
+        name="inputWhatsapp"
+        matInput
+        [(ngModel)]="inputWhatsapp" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-checkbox
+      class="checkbox-margin"
+      name="checkboxEmail"
+      color="primary"
+      (change)="changeCurrentWhatsapp($event)"
+      #checkboxEmail>
+      <app-email></app-email>
+    </mat-checkbox>
+
+    <mat-form-field appearance="fill" style="margin-left: 20px">
+      <mat-label>{{ 'SEND_REPORT.LABEL_EMAIL' | translate }}</mat-label>
+      <input
+        [disabled]="!checkboxEmail.checked"
+        name="inputEmail"
+        matInput
+        type="email"
+        [(ngModel)]="inputEmails"
+        #inputEmail="ngModel"
+        email />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin-left: 20px">
+      <mat-label>Cc</mat-label>
+      <input
+        [disabled]="!checkboxEmail.checked"
+        name="inputEmailCc"
+        matInput
+        [(ngModel)]="inputEmailsCc" />
+    </mat-form-field>
+  </div>
+
+  <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-button
+    (click)="sendReport()"
+    [disabled]="inputEmail.errors || inputEmails === '' || htmlContent === ''">
+    {{ 'SEND_REPORT.SEND' | translate }}
+  </button>
+</div>

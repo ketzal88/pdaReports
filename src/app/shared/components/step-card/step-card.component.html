@@ -1,0 +1,20 @@
+<div class="card-steps-container">
+  <ng-container *ngFor="let step of steps | async; let i = index">
+    <mat-card
+      class="example-card"
+      [ngClass]="{
+        'step-complete': step.isComplete,
+        'step-incomplete': !step.isComplete,
+        'step-current': (currentStep | async)?.stepIndex === step.stepIndex
+      }">
+      <mat-card-title>
+        <h2 class="title">
+          {{ configurationSteps[i]?.label.title }}
+        </h2>
+      </mat-card-title>
+      <mat-card-subtitle class="subtitle">{{
+        configurationSteps[i]?.label.subtitle
+      }}</mat-card-subtitle>
+    </mat-card>
+  </ng-container>
+</div>

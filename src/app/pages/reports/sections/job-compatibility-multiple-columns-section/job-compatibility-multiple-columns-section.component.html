@@ -1,0 +1,43 @@
+<p class="subtitle center">Compatibilidad de Puesto</p>
+<p class="subtitle blue">Por grupo</p>
+<p class="descripcion">
+  En este gráfico se muestra la correlación del perfil de la persona con los
+  demás perfiles evaluados.
+</p>
+<div class="section-polar-grafic">
+  <div class="puestos-compatibles">
+    <select class="selector" name="select">
+      <option value="desarrollador" selected>
+        {{ jobCompatibility.jobCompatibilityDetailed?.jobTitle }}
+      </option>
+      <option value="programador">Programador</option>
+      <option value="project-manager">Project Manager</option>
+      <option value="soporte-tecnico">Soporte Técnico</option>
+      <option value="project-manager">Project Manager</option>
+    </select>
+  </div>
+  <div class="polar-grafic">
+      <app-column-polar
+    [data]="jobCompatibility?.multipleJobCompatibility"></app-column-polar>
+  </div>
+
+</div>
+
+<!-- <app-card>
+  <card-content>
+    <div style="padding-left: 120px; padding-right: 120px; margin-top: 35px">
+      <h2>Compatibilidad de Puestos</h2>
+      <h2>Por grupo</h2>
+
+      <p>
+        En este gráfico se muestra la correlación del perfil de la persona con
+        los demás perfiles evaluados.
+      </p>
+    </div>
+
+    <div class="chart-container">
+      <app-column-polar [data]="jobCompatibility?.multipleJobCompatibility">
+      </app-column-polar>
+    </div>
+  </card-content>
+</app-card> -->

@@ -1,0 +1,964 @@
+{
+  "individual-sections": {
+    "coverIndividual": {
+      "firstName": "Juan Manuel",
+      "lastName": "Guzman Oropeza",
+      "gender": "Male",
+      "email": "mail@gmail.com",
+      "assessmentDate": "2016-11-01T20:26:32.03",
+      "birthdayDate": null,
+      "profile": "Negociador"
+    },
+    "introduction": {
+      "description": "PDA Assessment es un instrumento confiable, científicamente validado, que ha sido desarrollado para entender y describir el comportamiento de las personas.\n\nPartiendo de la base de que completaste el formulario siguiendo y respetando  las  instrucciones y las  consignas,  en  el  presente  reporte  encontrarás  una  descripción  de  cómo   generalmente  respondes  a  diferentes  situaciones, desafíos y compromisos  que  se  te  presentan en el día a día.\n\nAsí es que esta evaluación proporciona un análisis completo sobre tu perfil comportamental  y el porqué de tus decisiones. Hay que tener en cuenta que, en ocasiones, podemos adaptarnos y modificar nuestros  comportamientos, potenciando o inhibiendo nuestras tendencias naturales.\n\nEn este reporte encontrarás información sobre aquellos comportamientos más propios y característicos de tu estilo comportamental y tus principales motivadores.\n\nDesde PDA International te invitamos a que dediques  tiempo  a leer este  reporte,  esforzándote  por  identificar cuáles son aquellos rasgos de tu estilo conductual que han tenido una incidencia positiva y  han sido favorables, como así también las características que, en diferentes ocasiones, han complicado y afectado negativamente tu camino al éxito.",
+      "title": "Introducción"
+    },
+    "consistencyIndicator": {
+      "title": "Indicador de Consistencia",
+      "description": "La información del reporte es \"coherente y consistente\", por lo cual es válida para interpretar y de base sólida para tomar decisiones.",
+      "footer": "Es importante comprender que no todas las características descritas en este reporte serán puestas de manifiesto simultáneamente y en la misma intensidad. Es más probable que la persona  vea sólo algunas de estas características. Cuanto más extremo puntúe cada eje, más manifiesta será la conducta y más característica será en el perfil profesional de la persona.",
+      "image": null,
+      "consistencyValue": 0,
+      "consistencyValueGraphicPercentage": 100
+    },
+    "pdaCharts": [
+      {
+        "title": "Eje del Riesgo",
+        "description": "Es una persona generalmente asertiva. En ocasiones,   y  según  la  situación,  tomará  la iniciativa y asumirá compromisos que impliquen  riesgos. Le pueden  llegar  a considerar algo proactiva y capaz de ejercer un grado de dominio moderado. Suele asumir riesgos en ciertas situaciones.",
+        "image": null,
+        "leftSideDescriptionWord": "Cauteloso",
+        "rightSideDescriptionWord": "Arriesgado",
+        "axisValue": 60,
+        "isIntense": false,
+        "axis": "R"
+      },
+      {
+        "title": "Eje de la Extroversión",
+        "description": "Es una persona sociable, extrovertida y con alta capacidad relacional tanto a nivel personal como profesional. Se  esfuerza  por transmitir una buena impresión y por lograr que los demás se  sientan a gusto.  Es socialmente atractiva, persuasiva y convincente.",
+        "image": null,
+        "leftSideDescriptionWord": "Introvertido",
+        "rightSideDescriptionWord": "Extrovertido",
+        "axisValue": 100,
+        "isIntense": false,
+        "axis": "E"
+      },
+      {
+        "title": "Eje de la Paciencia",
+        "description": "Es una persona que generalmente está alerta. Puede responder positivamente a los cambios así como también tolerar cierta rutina. Si bien le gusta  la variedad y el cambio estos deberán ser, preferentemente, planificados.",
+        "image": null,
+        "leftSideDescriptionWord": "Inquieto/Impaciente",
+        "rightSideDescriptionWord": "Calmo/Paciente",
+        "axisValue": 36,
+        "isIntense": false,
+        "axis": "P"
+      },
+      {
+        "title": "Eje de las Normas",
+        "description": "Es una persona más bien independiente, positiva y segura, que confía  en sus propias ideas y en su manera de hacer las cosas. Prefiere actuar bajo su propio criterio antes que seguir normas y procedimientos estrictos.",
+        "image": null,
+        "leftSideDescriptionWord": "Independiente",
+        "rightSideDescriptionWord": "Sujeto a normas",
+        "axisValue": 4,
+        "isIntense": false,
+        "axis": "N"
+      },
+      {
+        "title": "Eje del Autocontrol",
+        "description": "Es una  persona emotiva y  emocional. Generalmente se guiará por sus sentimientos y emociones a la hora de tomar decisiones. Demuestra, expone y comparte sus sentimientos también al gestionar equipos.",
+        "image": null,
+        "leftSideDescriptionWord": "Emocional",
+        "rightSideDescriptionWord": "Racional",
+        "axisValue": 4,
+        "isIntense": false,
+        "axis": "A"
+      }
+    ],
+    "behavioralDescriptors": {
+      "title": "Palabras Descriptivas",
+      "introduction": "Basado en las respuestas, este informe ha identificado  aquellas  palabras  que  describen las tendencias conductuales que más se manifiestan en el perfil comportamental. A continuación, se facilita un listado de las palabras que particularmente podrían ser utilizadas para describir a la persona analizada. Su estilo natural de comportamiento se describe como:",
+      "firstColumnWords": [
+        "Extrovertido",
+        "Carismático ",
+        "Independiente ",
+        "Cálido ",
+        "Pregunta quién y por qué"
+      ],
+      "secondColumnWords": [
+        "Amistoso ",
+        "Gentil ",
+        "Persuasivo ",
+        "Convincente ",
+        "Influyente ",
+        ""
+      ],
+      "thirdColumnWords": [
+        "Organizado ",
+        "Persistente ",
+        "Desafiante ",
+        "Seguro"
+      ]
+    },
+    "behavioralProfileDescription": {
+      "title": "Descripción del Perfil Natural",
+      "introduction": "Esta sección permite tener una amplia visión y comprensión sobre el estilo  natural  de  comportamiento de esta persona. A partir de esta  descripción,  se podrá tener  una  comprensión  más profunda sobre cómo  esta  persona  responde  ante  la  necesidad  de  resolver  problemas, afrontar nuevos desafíos, ejercer su influencia, adaptarse al cambio, responder  a  las reglas y procedimientos impuestos por otros, así como su capacidad  de regular  sus  impulsos y emociones.",
+      "description": " es una persona cercana, sociable y carismática. Causa buena impresión en la mayoría de las personas por su cordialidad, su comprensión y su compasión.  En su afán por conseguir los resultados, trabaja con y a través de las personas. Trabaja con seguridad y confía en sus habilidades. En ocasiones, su tendencia hacia la autonomía y su pensamiento crítico (independencia en desarrollar y expresar pensamientos y opiniones propias) podrían interpretarse como algo libertarios.\r\n\r\nDe forma natural utiliza la inteligencia relacional para influir e impactar en su entorno. Sin mostrar rasgos autoritarios, con un enfoque tenaz y no agresivo, le resulta relativamente fácil conseguir sus objetivos. Se siente a gusto gestionando relaciones a nivel personal y profesional y disfruta comunicando en frente de diferentes interlocutores, independientemente del nivel organizacional. \r\n\r\nPuede usar su facilidad verbal, autoconfianza y habilidades persuasivas para mediar entre las personas o partes en conflicto. \r\n\r\nSe le percibirá como una persona de fiar, razón por la cual podrá ser muy eficiente al proporcionar consejos o asesoramiento a otras personas.\r\n\r\nEs muy independiente en pensamiento y en acción.  Debido a su independencia y fuerte orientación a las personas, priorizará la justicia a las reglas, por lo que, en algunas ocasiones, podría esquivarlas u omitirlas. \r\n\r\n sabe escuchar, lo que le confiere un gran poder a la hora de identificar información o datos que podrían serle útiles. Su escucha activa conjuntamente con su experiencia, hacen que puede ejercer excelentes mentorías.\r\n\r\nEn ocasiones, puede tener un estilo demasiado tolerante y comprensivo con los demás, llegando a ser paternalista con su equipo o en general con su entorno más próximo. \r\n\r\nTiende a elaborar sus propios planes y estrategias para cumplir con sus responsabilidades y conseguir que las cosas se hagan. Le motiva trabajar con independencia, lejos del control y con total autonomía para tomar decisiones, sin embargo, disfrutará también colaborando y compartiendo su conocimiento con el equipo. \r\n\r\nDebido a su fuerte orientación a las personas y su búsqueda por conquistarlas, puede desmotivarse y sentir que le hieren frente al rechazo y desaprobación de los demás o ante la exclusión de un grupo o proyecto. Si esta situación se presenta en momentos de mayor sensibilidad o se manifiesta de manera muy intensa,  podría actuar de forma impulsiva."
+    },
+    "managementStyle": {
+      "title": "Estilo de Liderazgo",
+      "subtitle": null,
+      "introduction": "Independientemente de la posición o rol que se desempeñe, todas las personas manifiestan un estilo individual de Liderazgo. Éste describe la forma  en la que se  desenvuelve  ante  la  necesidad  o  responsabilidad  de tener que dirigir a otros. Los capítulos de Comunicación e Influencia, Toma de Decisiones y Estilo de Dirección de equipos, describen y permiten tener una amplia visión y comprensión del estilo de liderazgo de esta persona.",
+      "leadershipTitle": "Influencia y comunicación",
+      "decisionMakingTitle": "Toma de Decisiones",
+      "communicationTitle": "Estilo de liderazgo de equipos",
+      "decisionMakingDescriptions": [
+        "Juan Manuel toma decisiones de una forma proactiva y asumiendo un cierto riesgo.",
+        "Para tomar decisiones no requiere disponer de todos los datos, más bien se basará en su experiencia, aprendizajes previos y, probablemente, en la intuición.",
+        "Tiene una tolerancia alta a la ambigüedad e incertidumbre.",
+        "Antes de tomar una decisión, buscará identificar posibles patrones y reducir la complejidad.",
+        "Puede tomar decisiones de forma totalmente autónoma, sin embargo, en ocasiones y sobre todo cuando las decisiones tienen que ver con el equipo, le gusta compartir y evaluar posibles alternativas involucrando a miembros del equipo."
+      ],
+      "leadershipDescriptions": [
+        "Destaca por sus habilidades comunicativas, persistencia y un pensamiento liberal, auténtico y no estricto y necesariamente acorde a los cánones sociales y normas establecidas. Sin embargo, sabe afrontar diferentes situaciones y adaptar su estilo de comunicación a las necesidades del auditorio.",
+        "Por su orientación hacia las personas, su habilidad para escuchar y su forma de pensar, le resulta fácil crear espacios de conversación donde todos puedan expresar sus opiniones, compartir experiencias o buscar un consenso.",
+        "Tiene una gran habilidad para influir e impactar en su entorno, comunicando carismática y cordialmente.",
+        "Utiliza su empatía y carisma para lograr llevar a su equipo a la consecución de objetivos.",
+        "Es hábil negociando y, debido a su estilo extrovertido, seguro y no amenazante, sabe cerrar los acuerdos y vencer posibles objeciones."
+      ],
+      "communicationDescriptions": [
+        "Se siente a gusto gestionando equipos.",
+        "Es de naturaleza carismática y desafiante.",
+        "Dedica tiempo y recursos para conseguir que el equipo crezca.",
+        "Aceptará el error siempre y cuando haya un aprendizaje para el futuro.",
+        "Es persistente y seguirá de cerca el trabajo del equipo sin intervenir en exceso.",
+        "Al ser independiente, valorará que sus equipos también lo sean.",
+        "No tendrá inconvenientes en delegar las responsabilidades a las personas en las que confía.",
+        "Le resultará difícil tomar decisiones impopulares que afecten al equipo.",
+        "En ocasiones, lo involucrará en la toma de decisiones y propuesta de alternativas"
+      ]
+    },
+    "salesStyle": {
+      "title": "Estilo Ventas",
+      "introduction": "Esta sección permitirá tener una amplia visión  y  comprensión  sobre  el  estilo de esta persona a la hora de identificar, crear y desarrollar las oportunidades de negocio, dividido en 3 capítulos: Apertura,  Estilo de negociación y cierre y Estilo relacional.",
+      "openingTitle": "Apertura",
+      "closingTitle": "Estilo de negociación y cierre",
+      "customerServiceTitle": "Estilo relacional",
+      "openingDescriptions": [
+        "Su estilo relajado, positivo y sin insistencia, le permitirá ganar el interés de sus clientes. Sin embargo, podría carecer de ritmo, especialmente con interlocutores más acelerados y ansiosos. Su capacidad relacional, le permite crear relaciones y fidelizar a los clientes a largo plazo."
+      ],
+      "closingDescriptions": [
+        "Tiende a evitar el cierre directo e insistente, ya que prefiere persuadir al cliente para alcanzar el acuerdo, una vez que haya identificado una necesidad concreta.",
+        "Para evitar situaciones de confrontación, es probable que ceda en su posición frente a objeciones de clientes con un estilo más agresivo. Su tenacidad y perseverancia serán su principal fortaleza en el cierre."
+      ],
+      "customerServiceDescriptions": [
+        "Tiene habilidades naturales para el servicio y asesoramiento a los clientes.",
+        "Tomará la iniciativa para realizar visitas y presentar nuevas propuestas.",
+        "Evitará a los clientes agresivos y con actitudes negativas.",
+        "Una vez que gana la confianza y lealtad de los clientes, los fidelizará durante mucho tiempo. Tendrá un servicio de postventa muy efectivo."
+      ]
+    },
+    "effectiveLeadership": {
+      "title": "Como permitir a Juan desplegar todo su potencial",
+      "introduction": "En esta sección se describen aspectos de importancia a tener en cuenta para permitirle a Juan desplegar todo su potencial. Los puntos descriptos a continuación se apoyan sobre su estilo natural de comportamiento y son fundamentales para ser tenidos en cuenta por toda persona que espera liderarle para conseguir el máximo de su potencial, mantener su motivación y brindarle un coaching efectivo, así como también para quienes trabajan junto a esta persona como parte de un equipo.",
+      "description": [
+        "Juan Manuel se sentirá motivado trabajando en proyectos orientados a las personas en una posición de responsabilidad donde una persona con un estilo no amenazante sea esencial para lograr las metas deseadas. Apreciará poder brindar apoyo y colaboración en un ambiente armonioso donde se le reconozca.",
+        "Al ser de carácter sociable y extrovertido buscará generar vínculos con el equipo. Necesitará espacios donde pueda compartir sus opiniones y puntos de vista, de esta forma, logrará sentirse parte del grupo y afianzar su compromiso con el trabajo.",
+        "Es importante brindarle la posibilidad de desplegar esas habilidades interpersonales reconociendo su habilidad para hablar frente a grupos con aplomo y confianza, o frente a personas clave, para convencer y persuadir a otros a alcanzar las metas.",
+        "Apreciará tener la oportunidad de presentar nuevas ideas y asumir otras responsabilidades, pudiendo también generar planes y hacer la implementación y el seguimiento para asegurar el éxito de los proyectos.",
+        "Es importante proporcionarle independencia y libertad para actuar ya que preferirá seguir sus propias normas y no se detendrá en los detalles. Se sentirá más a gusto en organizaciones cuya orientación cultural sea más hacia los resultados que hacia los procesos.",
+        "Debido a su naturaleza sociable, no se sentirá a gusto tomando decisiones impopulares. Oportunamente requerirá que su líder intervenga en situaciones que puedan   generar   conflicto y confrontación.",
+        "Apreciará y requerirá una retroalimentación continua de su líder y del resto del equipo, y que se reconozca públicamente sus esfuerzos y logros.",
+        "Optará por la comunicación verbal y preferirá comunicarse de una forma abierta y distendida."
+      ]
+    },
+    "strengthsOverused": {
+      "title": "Puntos fuertes que podrían convertirse en limitaciones",
+      "introduction": "En esta sección se describen algunas tendencias propias del estilo de comportamiento que eventualmente podrían convertirse en debilidades. Son aspectos claramente positivos del estilo de comportamiento de esta persona pero que, en ocasiones, podrían ser contraproducentes si no se moderan o atienden.",
+      "description": [
+        "Siendo tan optimista, puede que no vea todos los potenciales obstáculos y problemas de un proyecto o programa.",
+        "En su deseo de agradar, puede prometer demasiado o exagerar los beneficios de un plan o propuesta.",
+        "En su esfuerzo por controlar las conversaciones, puede interrumpir a los otros y no escuchar sus mensajes completamente.",
+        "Al centrarse en la visión global, puede dar respuestas incompletas a las preguntas detalladas",
+        "Su estilo, basado más en sus intuiciones y en la visión global, puede conducir a la mínima utilización de abordajes analíticos y de investigación para la resolución de problemas.",
+        "En ocasiones, podría abusar de su estilo tan persuasivo y carismático frente a clientes que necesitan una aproximación algo más lógica y controlada.",
+        "Puede extralimitarse al hablar y usar sus habilidades sociales en un esfuerzo por ser el centro de atención."
+      ]
+    },
+    "currentSituation": {
+      "title": "Situación Actual",
+      "introduction": "Esta sección permitirá tener  una  clara  perspectiva  de  los  cambios  que  se  están  dando  en  el  estilo de comportamiento de esta persona. Describe qué  aspectos  de  su  estilo  natural  están  siendo modificados en su esfuerzo por adaptarse a su percepción sobre los requerimientos de su situación actual.",
+      "description": " siente que debe volverse algo más paciente y bajar un poco el ritmo, adoptando un estilo un poco más metódico y consistente, escuchando un poco más y tomándose más tiempo para hacer las cosas.\n siente que debe volverse más afable y adoptar un estilo menos confrontativo. Esto significa que puede estar comportándose de manera menos asertiva y directa.",
+      "footer": "Este reporte está relacionado únicamente con características del comportamiento. El éxito en cualquier rol, puesto o situación específica dependerá de múltiples factores, como sus habilidades, experiencia y  circunstancias personales, además de que se le brinden las circunstancias ideales de desarrollo como la integración, motivación, coaching, etc.",
+      "currentSituationDetails": [
+        {
+          "title": "Toma de Decisiones",
+          "description": "Este análisis indica que en su estilo natural  tiende a tomar decisiones asumiendo cierto riesgo. Naturalmente no tendrá mayores inconvenientes en decidir a pesar de no tener toda la información disponible, simplemente tomando como base para sus decisiones los hechos a su alcance. A pesar de esto, percibe que para tener éxito en su situación actual debe tener un comportamiento más cuidadoso y más exacto, por lo que actualmente está cambiando su estilo de Toma de Decisiones y actuando con mayor cautela. Esta situación le lleva a dudar entre arriesgarse o tener cautela, entre querer tomar la decisión y al mismo tiempo asegurarse de no equivocarse. "
+        },
+        {
+          "title": "Equilibrio de Energía",
+          "description": "No se perciben cambios en su energía, por lo que este análisis sugiere que  percibe que su nivel de energía es compatible con el que su situación actual le requiere."
+        },
+        {
+          "title": "Modificación del Perfil",
+          "description": "Este análisis sugiere que  está modificando su comportamiento, por lo tanto evidencia que es una persona flexible, ciertamente adaptable y que no tendría mayores inconvenientes en modificar su estilo natural de comportamiento en pos de adaptarse a los requerimientos de su rol o situación. "
+        }
+      ]
+    },
+    "behavioralProfileChart": {
+      "naturalChartImage": null,
+      "roleChartImage": null,
+      "title": "Gráfico Perfil Conductual",
+      "naturalPBehaviorTitle": "NATURAL",
+      "roleBehaviorTitle": "ADAPTADO",
+      "naturalDecisionMakingChartImage": null,
+      "roleDecisionMakingChartImage": null,
+      "naturalProfileIntensityChartImage": null,
+      "roleProfileIntensityChartImage": null,
+      "naturalEnergyChartImage": null,
+      "roleEnergyChartImage": null,
+      "energyBalanceChartImage": null,
+      "profileModificationChartImage": null,
+      "formTimeChartImage": null,
+      "behavioralProfileChartInformation": {
+        "naturalAverage": 89.5,
+        "roleAverage": 88.5,
+        "naturalEnergyChartValue": 86,
+        "naturalRiskChartValue": 92,
+        "naturalExtroversionChartValue": 102,
+        "naturalPatienceChartValue": 86,
+        "naturalConformityNormsChartValue": 78,
+        "naturalSelfControlChartValue": 78,
+        "roleEnergyChartValue": 82,
+        "roleRiskChartValue": 80,
+        "roleExtroversionChartValue": 96,
+        "rolePatienceChartValue": 96,
+        "roleConformityNormsChartValue": 82,
+        "roleSelfControlChartValue": 70,
+        "naturalEnergyIsIntense": false,
+        "naturalRiskIsIntense": false,
+        "naturalExtroversionIsIntense": false,
+        "naturalPatienceIsIntense": false,
+        "naturalConformityNormsIsIntense": false,
+        "naturalSelfControlIsIntense": false,
+        "roleEnergyIsIntense": false,
+        "roleRiskIsIntense": false,
+        "roleExtroversionIsIntense": false,
+        "rolePatienceIsIntense": false,
+        "roleConformityNormsIsIntense": false,
+        "roleSelfControlIsIntense": true,
+        "naturalRiskAxisValue": 60,
+        "naturalExtroversionAxisValue": 100,
+        "naturalPatienceAxisValue": 36,
+        "naturalConformityNormsAxisValue": 4,
+        "naturalSelfControlAxisValue": 4,
+        "roleRiskAxisValue": 0,
+        "roleExtroversionAxisValue": 94,
+        "rolePatienceAxisValue": 94,
+        "roleConformityNormsAxisValue": 12,
+        "roleSelfControlAxisValue": 0,
+        "naturalRiskWordsNumber": 6,
+        "naturalExtroversionWordsNumber": 8,
+        "naturalPatienceWordsNumber": 7,
+        "naturalConformityNormsWordsNumber": 0,
+        "naturalSelfControlWordsNumber": 5,
+        "roleRiskWordsNumber": 3,
+        "roleExtroversionWordsNumber": 6,
+        "rolePatienceWordsNumber": 9,
+        "roleConformityNormsWordsNumber": 1,
+        "roleSelfControlWordsNumber": 3,
+        "naturalRiskAxisIntensity": 0.53,
+        "naturalExtroversionAxisIntensity": 0.68,
+        "naturalPatienceAxisIntensity": 0.46,
+        "naturalConformityNormsAxisIntensity": 0.34,
+        "naturalSelfControlAxisIntensity": 0.34,
+        "roleRiskAxisIntensity": 0.4,
+        "roleExtroversionAxisIntensity": 0.58,
+        "rolePatienceAxisIntensity": 0.58,
+        "roleConformityNormsAxisIntensity": 0.43,
+        "roleSelfControlAxisIntensity": 0.19,
+        "naturalEnergy": 0.37,
+        "naturalDecisionMaking": 0.83,
+        "naturalProfileIntensity": 0.41,
+        "roleEnergy": 0.33,
+        "roleDecisionMaking": 0.44,
+        "roleProfileIntensity": 0.3,
+        "energyBalance": 0.4,
+        "profileModification": 0.56,
+        "duration": 15
+      }
+    },
+    "selfDescription": {
+      "title": "Autodescripción",
+      "description": "Soy una persona muy responsable, me gusta lograr lo que me propongo y siento que cuento con cierta habilidad de pensamiento para cumplir los objetivos, me considero una persona algre y agradable, tambien cuento con muchos amigos y gente que me estima por lo que pienso que debo der agradable, tambien me considero una persona inteligente que entiende las cosas rapido ademas tambien creo que aunque soy agradable tambien me considero un buen lider. La gente tiende a seguirme.\r\nme defino tambien como una persona que le gusta vestir bien y distinguirme.\r\nA veces cuando algo no me sale me desespero un poco pero normalmente se salir de las presiones, pues siento que tengo un gran sentido de urgencia. Soy empatico con las personas. "
+    },
+    "radarChart": {
+      "naturalRadarChartImage": null,
+      "roleRadarChartImage": null,
+      "radarTitle": "Gráfico Radar PDA",
+      "radarChartIndividualLegend": "Juan Manuel Guzman Oropeza",
+      "radarChartJobLegend": "PROACTIVO: Competitivo - Proactivo",
+      "content": [
+        {
+          "id": 1,
+          "title": "Proactivo",
+          "jobValue": -1,
+          "naturalValue": -1,
+          "roleValue": -1
+        },
+        {
+          "id": 2,
+          "title": "E",
+          "jobValue": 80,
+          "naturalValue": 100,
+          "roleValue": 94
+        },
+        {
+          "id": 3,
+          "title": "Personas",
+          "jobValue": -1,
+          "naturalValue": -1,
+          "roleValue": -1
+        },
+        {
+          "id": 4,
+          "title": "P",
+          "jobValue": 0,
+          "naturalValue": 36,
+          "roleValue": 94
+        },
+        {
+          "id": 5,
+          "title": "Reactivo",
+          "jobValue": -1,
+          "naturalValue": -1,
+          "roleValue": -1
+        },
+        {
+          "id": 6,
+          "title": "N",
+          "jobValue": 20,
+          "naturalValue": 4,
+          "roleValue": 12
+        },
+        {
+          "id": 7,
+          "title": "Tareas",
+          "jobValue": -1,
+          "naturalValue": -1,
+          "roleValue": -1
+        },
+        {
+          "id": 8,
+          "title": "R",
+          "jobValue": 100,
+          "naturalValue": 60,
+          "roleValue": 0
+        }
+      ]
+    },
+    "wheelChart": {
+      "title": "Gráfico Rueda PDA",
+      "graphImage": null,
+      "content": [
+        {
+          "id": 1,
+          "title": "Proactivo",
+          "jobValue": -1,
+          "naturalValue": -1,
+          "roleValue": -1
+        },
+        {
+          "id": 2,
+          "title": "E",
+          "jobValue": 80,
+          "naturalValue": 100,
+          "roleValue": 94
+        },
+        {
+          "id": 3,
+          "title": "Personas",
+          "jobValue": -1,
+          "naturalValue": -1,
+          "roleValue": -1
+        },
+        {
+          "id": 4,
+          "title": "P",
+          "jobValue": 0,
+          "naturalValue": 36,
+          "roleValue": 94
+        },
+        {
+          "id": 5,
+          "title": "Reactivo",
+          "jobValue": -1,
+          "naturalValue": -1,
+          "roleValue": -1
+        },
+        {
+          "id": 6,
+          "title": "N",
+          "jobValue": 20,
+          "naturalValue": 4,
+          "roleValue": 12
+        },
+        {
+          "id": 7,
+          "title": "Tareas",
+          "jobValue": -1,
+          "naturalValue": -1,
+          "roleValue": -1
+        },
+        {
+          "id": 8,
+          "title": "R",
+          "jobValue": 100,
+          "naturalValue": 60,
+          "roleValue": 0
+        }
+      ]
+    },
+    "behavioralRadarChart": {
+      "title": "Gráfico Radar Comportamental",
+      "image": null,
+      "withoutLegendsImage": null,
+      "introduction": "BehavioralRadarChart Texto de Introduccion...",
+      "behavioralAxiCompetencies": [
+        {
+          "axi": 0,
+          "competencyId": "10d60136-dfdb-4011-bef7-b458ff654788",
+          "competencyName": "Expeditividad",
+          "description": "Tendencia natural a anticiparse y proponer acciones novedosas. Es la actitud permanente de actuar cuando se presenta la ocasión, sin esperar órdenes o instrucciones, buscando y creando oportunidades, resolviendo situaciones y problemas. Se anticipa y actua activando vínculos y relaciones, ganandose el respeto y la confianza de diversos tipos de personas en las que impacta e influye para alcanzar los resultados.  ",
+          "natural": 61,
+          "role": 22
+        },
+        {
+          "axi": 1,
+          "competencyId": "8e3c0b50-ce41-4eee-8ec6-82feeb329d8a",
+          "competencyName": "Iniciativa",
+          "description": "Tendencia natural para comunicarse y relacionarse eficientemente con otros gestionando la diversidad social, haciendo de estas relaciones un cauce para el logro y alineamiento estratégico de los objetivos de la organización. Manifiesta una natural inclinacion a generar, establecer, mantener y potenciar relaciones de valor mediante un flujo de comunicación adecuado entre los miembros del grupo o de la organización, utilizando los distintos códigos y canales que en cada caso se requieran. ",
+          "natural": 86,
+          "role": 50
+        },
+        {
+          "axi": 2,
+          "competencyId": "946604ce-f2f5-46e3-9236-35ac82ee5880",
+          "competencyName": "Desarrollo de Personas",
+          "description": "Tendecia natural para influir e impactar en los demas creando compromiso y construyendo consenso. Describe una mirada optimista que se orienta a los resultados trabajando con y a traves de las personas, mostrandose de manera sociable, amistosa e influyente. ",
+          "natural": 89,
+          "role": 79
+        },
+        {
+          "axi": 3,
+          "competencyId": "80c43259-51de-489f-8066-88b3545dd3f5",
+          "competencyName": "Influencia",
+          "description": "Tendencia natural a orientarse a los resultados de forma segura, independiente y con autoconfianza, identificando las oportunidades en diferentes situaciones. Aprovecha los recursos disponibles (tiempo, personas, recursos económicos), proporciona soluciones y emprende asumiendo en todo momento la responsabilidad y las consecuencias de sus actos. ",
+          "natural": 84,
+          "role": 76
+        },
+        {
+          "axi": 4,
+          "competencyId": "4393dfd5-ca1c-4bdd-a2af-f9a301c1c2a7",
+          "competencyName": "Autonomía",
+          "description": "Tendencia natural a ayudar a otros, apoyar a las personas y a los equipos de trabajo en su desarrollo y superación a diario. Pone el foco en las personas, impulsando la colaboración, motivando y desafiando para un continuo aprendizaje y desarrollo. Promueve un ambiente armonioso, de entendimiento mutuo, cordial y complementario, fomentando soluciones inclusivas y cultivando la responsabilidad compartida.",
+          "natural": 82,
+          "role": 73
+        },
+        {
+          "axi": 5,
+          "competencyId": "eb49f9fe-58d1-43a7-8e85-35d4f8cc76db",
+          "competencyName": "Asesoramiento",
+          "description": "Tendencia natural a identificar, entender y gestionar  las necesidades de todos los stakeholders: equipos, clientes, proveedores, etc. con la voluntad de ofrecer soluciones con excelencia en el trato y generando experiencias positivas. Tiende a resolver las diferentes situaciones garantizando la solucion con un estilo servicial, paciente, calmado y equilibrado, incluso en situaciones de presión. ",
+          "natural": 73,
+          "role": 93
+        },
+        {
+          "axi": 6,
+          "competencyId": "a763f918-3b94-4d93-bab7-ef00b6faabb6",
+          "competencyName": "Servicio y soporte",
+          "description": "Tendencia natural a mostrarse amable y gentil, así como percibir, compartir o inferir en los sentimientos, pensamientos y emociones de los demás, entendiendo los diferentes puntos de vista. Tiende a ser una persona diplomática en su aproximación a los demás, orientándose a los resultados de forma paciente, amable y cordial, evitando la confrontación. ",
+          "natural": 42,
+          "role": 76
+        },
+        {
+          "axi": 7,
+          "competencyId": "d5fe7dc4-4d83-4ce5-8985-56adea6c0896",
+          "competencyName": "Diplomacia",
+          "description": "Tendencia natural a dedicar tiempo a los demás. Manifesta apertura y disposición al otro, con una alta capacidad de escucha y logrando un satisfactorio grado de empatía con otras personas. Tiene un estilo paciente y considerado, mostrandose como una persona generosa y compasiva, orientandose a los resultados de forma consistente y tomándose el tiempo necesario.",
+          "natural": 43,
+          "role": 79
+        },
+        {
+          "axi": 8,
+          "competencyId": "9d913731-09c1-4498-bbe5-b76bfce3900a",
+          "competencyName": "Paciencia",
+          "description": "Tendencia natural a la aproximación analítica, cautelosa, sistemática y detallada de los problemas y las decisiones, con un método preciso y cuidadoso. Manifiesta comodidad y eficacia en situaciones y ambientes estructurados y bien definidos. ",
+          "natural": 43,
+          "role": 82
+        },
+        {
+          "axi": 9,
+          "competencyId": "9d24ae6b-d049-4d8d-afe2-76b1fb3b12ef",
+          "competencyName": "Precisión",
+          "description": "Tendencia natural hacia la atencion focalizada, independientemente del contexto, con el fin de obtener y gestionar información relevante de manera eficiente. Tiene preferencia por seguir procedimientos de manera precisa y ordenada, concentrándose en los detalles y esmerándose por evitar errores en su aproximación al resultado.  ",
+          "natural": 20,
+          "role": 56
+        },
+        {
+          "axi": 10,
+          "competencyId": "49db1a1e-2d92-4967-a67d-b27fea0d5f03",
+          "competencyName": "Concentración",
+          "description": "Tendencia natural a avanzar en la resolución de problemas aplicando un diagnóstico\u00A0diferencial, evaluando sus posibles causas y buscando diferentes comportamientos entre las causas, descomponiendo el problema complejo en partes mas simples, testeando y descartando hipótesis. Mide si la persona es confiable en su aproximación, disciplinada, precisa y si se orienta a los resultados analizando, relevando información y los hechos para avanzar de forma lógica, sistemática y ordenada. ",
+          "natural": 15,
+          "role": 26
+        },
+        {
+          "axi": 11,
+          "competencyId": "94805fec-ff33-4c42-8e3f-a97a961fb21c",
+          "competencyName": "Análisis",
+          "description": "Tendencia natural a orientarse a los resultados de forma consistente y segura, analizando la información disponible, siguiendo los procedimientos y buscando armonía y excelencia, con el fin de lograr soluciones alineadas con el desarrollo organizacional. Manifiesta un abordaje crítco y exigente de las diferentes situaciones, interesándose por el cumplimiento de métodos y procedimientos que aseguren la calidad y eviten el error.",
+          "natural": 17,
+          "role": 27
+        },
+        {
+          "axi": 12,
+          "competencyId": "a36a90f5-2610-4150-9046-7b3313f52f5f",
+          "competencyName": "Excelencia Tecnica",
+          "description": "Tendencia natural a llevar un pensamiento preliminar a la concreción y a ejecutar o poner en práctica un plan, método, idea, modelo o política para hacer algo o solucionar un problema. Implica una estrategia previa, un método y su ejecución, desplegando dinamismo y bajo un contexto de normas y procedimientos. Aborda los problemas de forma meticulosa y curiosa, estudiando, analizando y tomando decisiones basadas en la lógica.",
+          "natural": 21,
+          "role": 31
+        },
+        {
+          "axi": 13,
+          "competencyId": "2bae5da3-6314-4881-9094-776f63d89255",
+          "competencyName": "Implementación",
+          "description": "Tendencia natural a responder con sentido de urgencia y a hacer que las cosas sucedan. Tiende a ser una persona expeditiva y flexible, que responde positivamente ante la diversidad y el cambio, incluso cuando los tiempos apremian. ",
+          "natural": 33,
+          "role": 13
+        },
+        {
+          "axi": 14,
+          "competencyId": "45070c8c-64c2-429f-9470-a4dfd7706da5",
+          "competencyName": "Expertise",
+          "description": "Tendencia natural a mirar hacia adelante, con un estilo proactivo y resolutivo para conseguir sus metas. Implica valor, seguridad y coraje en sus decisiones. Manifiesta una tendencia a tomar riesgos para conseguir sus metas y una orientación a los resultados de forma determinada y firme, confrontando si es necesario, tomando la responsabilidad y asumiendo desafíos.",
+          "natural": 61,
+          "role": 28
+        },
+        {
+          "axi": 15,
+          "competencyId": "7e03c998-3c4d-4b8a-9faf-3b9858fa478c",
+          "competencyName": "Determinación",
+          "description": "Tendencia a ser motor del cambio, proponer transformaciones, generar un contexto donde se debatan y valoren nuevas ideas, alternativas y se cuestione el status quo. Capacidad de reaccionar de forma flexible ante las barreras y dificultades. Tiende a prestar atención al entorno, al contexto social y organizativo con el fin de proponer cambios y mejoras que tengan un impacto positivo.  ",
+          "natural": 58,
+          "role": 25
+        }
+      ]
+    },
+    "behavioralTrend": {
+      "title": "Tendencias de Comportamiento",
+      "introduction": "IMPORTANTE: Bajo óptimas condiciones del entorno la gran mayoría de las personas pueden tener la capacidad de desempeñarse adecuadamente en cualquiera de las siguientes competencias. Nos referimos a \"óptimas condiciones\" cuando en el entorno laboral se dan varias de las siguientes condiciones: buen liderazgo, motivación, reconocimiento, soporte y capacitación, entre muchas otras. Entendemos que no siempre las condiciones del entorno son las óptimas.",
+      "leftSideDescriptionWord": "Mayor\nesfuerzo",
+      "rightSideDescriptionWord": "Menor\nesfuerzo",
+      "footer": "Es muy importante identificar y conocer el Perfil Natural de comportamiento de las personas ya que es sumamente útil para poder predecir que tanto \"esfuerzo\" le pueden requerir y exigir estas competencias, es decir si la persona las podrá desplegar naturalmente, espontáneamente y \"sin esfuerzo\" o si requerirá para desplegar estas competencias un \"mayor esfuerzo\", por no ser ésta una competencia \"natural\" de esta persona. Por ejemplo: A una persona de \"naturaleza impaciente e inquieta\" le va a requerir un esfuerzo mayor la competencia \"Capacidad de Análisis\", mientras que la competencia \"Sentido de Urgencia\" va a ser una habilidad natural para él, por lo cual le requerirá \"menor esfuerzo\".",
+      "behavioralTrendsDetails": [
+        {
+          "name": "Asesoramiento, soporte y atención a clientes",
+          "description": "Esta competencia mide las habilidades de la persona en lo referente a la  \"Atención al Cliente\" y su Capacidad de prestar servicios a través de un estilo amable, atento y consistente",
+          "image": null,
+          "compatibilityPercentage": 73
+        },
+        {
+          "name": "Atención y escucha",
+          "description": "Esta competencia mide las habilidades de \"escucha y receptividad\" de la persona. Paciencia, tolerancia y tiempo para dedicarle a otros.",
+          "image": null,
+          "compatibilityPercentage": 45
+        },
+        {
+          "name": "Dinamismo y sentido de urgencia",
+          "description": "Esta competencia mide las habilidades de la persona a responder a desafíos que requieren diversidad, cambio y variedad, cuando los tiempos apremian y la urgencia es importante.",
+          "image": null,
+          "compatibilityPercentage": 64
+        },
+        {
+          "name": "Implementación",
+          "description": "Esta competencia mide la orientación a las tareas. Habilidad de la persona para administrar y gestionar tareas respondiendo acorde a las normas y procedimientos correctos.",
+          "image": null,
+          "compatibilityPercentage": 35
+        },
+        {
+          "name": "Orientación competitiva a resultados",
+          "description": "Esta competencia mide las habilidades de la persona a Orientarse a los Resultados a través de un estilo directo y competitivo, asumiendo ciertos riesgos y confrontando si fuera necesario.",
+          "image": null,
+          "compatibilityPercentage": 64
+        },
+        {
+          "name": "Orientación estratégica a resultados",
+          "description": "Esta competencia mide las habilidades de la persona a Orientarse a los Resultados a través de un estilo concreto y consistente, elaborando estrategias, minimizando los riesgos y evitando la confrontación.",
+          "image": null,
+          "compatibilityPercentage": 14
+        },
+        {
+          "name": "Persuasión y extroversión",
+          "description": "Esta competencia mide las habilidades de la persona en lo referente a \"relaciones Interpersonales\" y su Capacidad de Relacionamiento a través de un estilo extrovertido, sociable y persuasivo",
+          "image": null,
+          "compatibilityPercentage": 90
+        },
+        {
+          "name": "Precisión - Calidad",
+          "description": "Esta competencia mide las habilidades de la persona en lo referente a tareas que requieren de precisión, calidad y detalle. Dar seguimiento a los temas hasta su definición.",
+          "image": null,
+          "compatibilityPercentage": 20
+        },
+        {
+          "name": "Proactividad e independencia",
+          "description": "Esta competencia mide la \"proactividad\", tanto hacia tareas como hacia personas. Las habilidades de persuasión y capacidad de motivar a otros en pos de desafíos que requieren creatividad e independencia.",
+          "image": null,
+          "compatibilityPercentage": 86
+        },
+        {
+          "name": "Seguimiento de normas y políticas",
+          "description": "Esta competencia mide las habilidades de la persona en lo referente al seguimiento de políticas y control, respondiendo acorde a las normas y procedimientos correctos.",
+          "image": null,
+          "compatibilityPercentage": 15
+        }
+      ]
+    },
+    "emotionalIntelligence": {
+      "title": "hola mundo",
+      "detail": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu lobortis elementum nibh tellus molestie nunc non blandit. Accumsan sit amet nulla facilisi. Morbi non arcu risus quis varius quam quisque. Quis enim lobortis scelerisque fermentum dui faucibus in ornare. Ut etiam sit amet nisl purus in mollis. Tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus faucibus scelerisque eleifend donec pretium vulputate. Vestibulum morbi blandit cursus risus at ultrices mi tempus imperdiet. Consectetur purus ut faucibus pulvinar elementum integer. Netus et malesuada fames ac turpis egestas maecenas pharetra convallis. Nulla aliquet porttitor lacus luctus accumsan tortor posuere. Vel risus commodo viverra maecenas accumsan. Venenatis lectus magna fringilla urna. Ultricies tristique nulla aliquet enim tortor. Sit amet venenatis urna cursus eget. Ac odio tempor orci dapibus ultrices. Penatibus et magnis dis parturient. Nunc consequat interdum varius sit amet mattis vulputate."
+    },
+    "competencyCompatibility": {
+      "title": "Tendencias de Comportamiento",
+      "introduction": "IMPORTANTE: Bajo óptimas condiciones del entorno la gran mayoría de las personas pueden tener la capacidad de desempeñarse adecuadamente en cualquiera de las siguientes competencias. Nos referimos a \"óptimas condiciones\" cuando en el entorno laboral se dan varias de las siguientes condiciones: buen liderazgo, motivación, reconocimiento, soporte y capacitación, entre muchas otras. Entendemos que no siempre las condiciones del entorno son las óptimas.",
+      "leftSideDescriptionWord": "Mayor\nesfuerzo",
+      "rightSideDescriptionWord": "Menor\nesfuerzo",
+      "footer": "Es muy importante identificar y conocer el Perfil Natural de comportamiento de las personas ya que es sumamente útil para poder predecir que tanto \"esfuerzo\" le pueden requerir y exigir estas competencias, es decir si la persona las podrá desplegar naturalmente, espontáneamente y \"sin esfuerzo\" o si requerirá para desplegar estas competencias un \"mayor esfuerzo\", por no ser ésta una competencia \"natural\" de esta persona. Por ejemplo: A una persona de \"naturaleza impaciente e inquieta\" le va a requerir un esfuerzo mayor la competencia \"Capacidad de Análisis\", mientras que la competencia \"Sentido de Urgencia\" va a ser una habilidad natural para él, por lo cual le requerirá \"menor esfuerzo\".",
+      "average": null,
+      "competencyCompatibilityDetail": [
+        {
+          "competency": "Autonomía (Comportamentales)",
+          "individual": null,
+          "compatibilityPercentage": 82,
+          "image": null,
+          "description": "Tendencia natural a orientarse a los resultados de forma segura, independiente y con autoconfianza, identificando las oportunidades en diferentes situaciones. Aprovecha los recursos disponibles (tiempo, personas, recursos económicos), proporciona soluciones y emprende asumiendo en todo momento la responsabilidad y las consecuencias de sus actos. "
+        },
+        {
+          "competency": "Expeditividad (Comportamentales)",
+          "individual": null,
+          "compatibilityPercentage": 61,
+          "image": null,
+          "description": "Tendencia natural a responder con sentido de urgencia y a hacer que las cosas sucedan. Tiende a ser una persona expeditiva y flexible, que responde positivamente ante la diversidad y el cambio, incluso cuando los tiempos apremian. "
+        },
+        {
+          "competency": "Proactividad e independencia (PDA)",
+          "individual": null,
+          "compatibilityPercentage": 86,
+          "image": null,
+          "description": "Esta competencia mide la \"proactividad\", tanto hacia tareas como hacia personas. Las habilidades de persuasión y capacidad de motivar a otros en pos de desafíos que requieren creatividad e independencia."
+        },
+        {
+          "competency": "Seguimiento de normas y políticas (PDA)",
+          "individual": null,
+          "compatibilityPercentage": 15,
+          "image": null,
+          "description": "Esta competencia mide las habilidades de la persona en lo referente al seguimiento de políticas y control, respondiendo acorde a las normas y procedimientos correctos."
+        },
+        {
+          "competency": "Liderazgo (Competencias Predefinidas)",
+          "individual": null,
+          "compatibilityPercentage": 86,
+          "image": null,
+          "description": "Es la capacidad de dirigir grupos o equipos de trabajo hacia el logro de objetivos comunes. Implica la habilidad de guiar a los demás."
+        },
+        {
+          "competency": "Sensibilidad Interpersonal (Competencias Predefinidas)",
+          "individual": null,
+          "compatibilityPercentage": 85,
+          "image": null,
+          "description": "Es la capacidad de interpretar y entender los pensamientos, la conducta, los sentimientos y las preocupaciones de las personas (pares, colaboradores o superiores) expresados de manera verbal y no verbal. Implica tener empatía y habilidades de observación."
+        },
+        {
+          "competency": "Comunicación Impecable (Agile)",
+          "individual": null,
+          "compatibilityPercentage": 49,
+          "image": null,
+          "description": "Asegurar de forma proactiva la claridad y efectividad de las comunicaciones a través de conversaciones cara a cara. "
+        },
+        {
+          "competency": "Excelencia Técnica y de Sustentabilidad (Agile)",
+          "individual": null,
+          "compatibilityPercentage": 32,
+          "image": null,
+          "description": "Brindar atención continua a la excelencia técnica y a promover el desarrollo sostenido. "
+        },
+        {
+          "competency": "Prospectiva estratégica (Digital)",
+          "individual": null,
+          "compatibilityPercentage": 74,
+          "image": null,
+          "description": "Comprende el fenómeno digital desde una visión global y lo incorpora en diversos escenarios futuribles. \nUtiliza el rol de los medios y los usos de los recursos en red para planificar y proyectar estrategias de negocio. \nPromueve acciones concretas para promover la circulación de información. \nSe mantiene flexible para adaptar la concepción del futuro de acuerdo al  ritmo del cambio. "
+        },
+        {
+          "competency": "ENFOQUE EN EL CLIENTE (Competencias a medida)",
+          "individual": null,
+          "compatibilityPercentage": 20,
+          "image": null,
+          "description": "ORIENTACION AL CLIENTE : Habilidad para identificar, evaluar y satisfacer las necesidades del cliente interno y externo asegurando el cumplimiento de estándares de calidad y los compromisos contractuales, entregando servicios de excelencia a clientes, consumidores y usuarios.\r\n"
+        }
+      ]
+    },
+    "jobCompatibility": {
+      "jobCompatibilityDetailed": {
+        "jobTitle": "PROACTIVO: Competitivo - Proactivo",
+        "jobDescription": "",
+        "compatibility": 80,
+        "compatibilityDescription": "Cuando el indicador se encuentra en este rango la Correlación es “Muy buena” y hay buenas posibilidades de que la persona pueda responder de forma exitosa a los requerimientos comportamentales de la posición.",
+        "jobCompatibilityDetailedAxis": [
+          {
+            "axis": "R",
+            "jobValue": 100,
+            "individualValue": 60,
+            "description": "Esto indica que el puesto requiere una persona que natural y espontáneamente sea directa, decidida, confrontativa, alguien que sea motivado por competir y ganar, pero Juan es un tanto más amable, pacífico, menos confrontativo, aunque por momentos puede llegar a serlo, quizás actúa de manera más afable y moderada.",
+            "isIntense": false,
+            "individualName": "Juan Manuel Guzman Oropeza",
+            "jobName": "PROACTIVO: Competitivo - ..."
+          },
+          {
+            "axis": "E",
+            "jobValue": 80,
+            "individualValue": 100,
+            "description": "Esto indica que el puesto requiere una persona que natural y espontáneamente sea amigable, extrovertida, persuasiva y perspicaz, alguien que sea motivado por la interacción y exposición con la gente. Juan posee estas características como propias en su estilo Natural.",
+            "isIntense": false,
+            "individualName": "Juan Manuel Guzman Oropeza",
+            "jobName": "PROACTIVO: Competitivo - ..."
+          },
+          {
+            "axis": "P",
+            "jobValue": 0,
+            "individualValue": 36,
+            "description": "Esto indica que el puesto requiere una persona dinámica, inquieta y espontánea. Alguien que sea motivado por trabajar en varias temas y abriendo varios frentes simultáneamente. Juan es, en su estilo Natural, un tanto más calmado y paciente de lo que requiere el puesto.",
+            "isIntense": false,
+            "individualName": "Juan Manuel Guzman Oropeza",
+            "jobName": "PROACTIVO: Competitivo - ..."
+          },
+          {
+            "axis": "N",
+            "jobValue": 20,
+            "individualValue": 4,
+            "description": "Esto indica que el puesto requiere una persona independiente, segura de sí misma y con criterio propio. Alguien que sea motivado por la independencia de estructuras y libertad para actuar. Juan posee estas características como propias en su estilo Natural.",
+            "isIntense": false,
+            "individualName": "Juan Manuel Guzman Oropeza",
+            "jobName": "PROACTIVO: Competitivo - ..."
+          }
+        ],
+        "correlationJobBehavioralCompetencies": [
+          {
+            "axiNumber": 0,
+            "competencyId": "ac1c8993-f590-4d3c-ab56-15db8dff9cd8",
+            "competencyName": "Agente de cambio",
+            "description": "Tendencia a ser motor del cambio, proponer transformaciones, generar un contexto donde se debatan y valoren nuevas ideas, alternativas y se cuestione el status quo. Capacidad de reaccionar de forma flexible ante las barreras y dificultades. Tiende a prestar atención al entorno, al contexto social y organizativo con el fin de proponer cambios y mejoras que tengan un impacto positivo.  ",
+            "natural": 93,
+            "role": 93
+          },
+          {
+            "axiNumber": 1,
+            "competencyId": "19234e93-fc50-44f5-be12-aa0cd936c045",
+            "competencyName": "Iniciativa",
+            "description": "Tendencia natural a anticiparse y proponer acciones novedosas. Es la actitud permanente de actuar cuando se presenta la ocasión, sin esperar órdenes o instrucciones, buscando y creando oportunidades, resolviendo situaciones y problemas. Se anticipa y actúa activando vínculos y relaciones, ganándose el respeto y la confianza de diversos tipos de personas en las que impacta e influye para alcanzar los resultados.  ",
+            "natural": 98,
+            "role": 98
+          },
+          {
+            "axiNumber": 2,
+            "competencyId": "dae2f5e2-4098-43c0-8bf1-47da0a821d75",
+            "competencyName": "Inteligencia social/ relacional",
+            "description": "Tendencia natural para comunicarse y relacionarse eficientemente con otros gestionando la diversidad social, haciendo de estas relaciones un cauce para el logro y alineamiento estratégico de los objetivos de la organización. Manifiesta una natural inclinación a generar, establecer, mantener y potenciar relaciones de valor mediante un flujo de comunicación adecuado entre los miembros del grupo o de la organización, utilizando los distintos códigos y canales que en cada caso se requieran. ",
+            "natural": 64,
+            "role": 64
+          },
+          {
+            "axiNumber": 3,
+            "competencyId": "1ad0c6e1-62a6-4a58-9ae8-1c73a4938932",
+            "competencyName": "Influencia",
+            "description": "Tendencia natural para influir e impactar en los demás creando compromiso y construyendo consenso. Describe una mirada optimista que se orienta a los resultados trabajando con y a través de las personas, mostrándose de manera sociable, amistosa e influyente. ",
+            "natural": 72,
+            "role": 72
+          },
+          {
+            "axiNumber": 4,
+            "competencyId": "d4868435-de41-4888-a874-ee2fe65b1a89",
+            "competencyName": "Autonomía",
+            "description": "Tendencia natural a orientarse a los resultados de forma segura, independiente y con autoconfianza, identificando las oportunidades en diferentes situaciones. Aprovecha los recursos disponibles (tiempo, personas, recursos económicos), proporciona soluciones y emprende asumiendo en todo momento la responsabilidad y las consecuencias de sus actos. ",
+            "natural": 72,
+            "role": 72
+          },
+          {
+            "axiNumber": 5,
+            "competencyId": "03b5ac40-04ab-47df-a394-772406c0f1f9",
+            "competencyName": "Desarrollo de Personas",
+            "description": "Tendencia natural a ayudar a otros, apoyar a las personas y a los equipos de trabajo en su desarrollo y superación a diario. Pone el foco en las personas, impulsando la colaboración, motivando y desafiando para un continuo aprendizaje y desarrollo. Promueve un ambiente armonioso, de entendimiento mutuo, cordial y complementario, fomentando soluciones inclusivas y cultivando la responsabilidad compartida.",
+            "natural": 38,
+            "role": 38
+          },
+          {
+            "axiNumber": 6,
+            "competencyId": "23b0bd7d-8873-4a3b-8a41-4f8a72ca7adc",
+            "competencyName": "Orientación al servicio",
+            "description": "Tendencia natural a identificar, entender y gestionar  las necesidades de todos los stakeholders: equipos, clientes, proveedores, etc. con la voluntad de ofrecer soluciones con excelencia en el trato y generando experiencias positivas. Tiende a resolver las diferentes situaciones garantizando la solución con un estilo servicial, paciente, calmado y equilibrado, incluso en situaciones de presión. ",
+            "natural": 14,
+            "role": 14
+          },
+          {
+            "axiNumber": 7,
+            "competencyId": "2f8e04a7-517b-4f40-8d97-deb3668bcf4a",
+            "competencyName": "Diplomacia",
+            "description": "Tendencia natural a mostrarse amable y gentil, así como percibir, compartir o inferir en los sentimientos, pensamientos y emociones de los demás, entendiendo los diferentes puntos de vista. Tiende a ser una persona diplomática en su aproximación a los demás, orientándose a los resultados de forma paciente, amable y cordial, evitando la confrontación. ",
+            "natural": 12,
+            "role": 12
+          },
+          {
+            "axiNumber": 8,
+            "competencyId": "9adf633f-46bc-4d76-89de-6b34b9f23862",
+            "competencyName": "Disponibilidad",
+            "description": "Tendencia natural a dedicar tiempo a los demás. Manifiesta apertura y disposición al otro, con una alta capacidad de escucha y logrando un satisfactorio grado de empatía con otras personas. Tiene un estilo paciente y considerado, mostrándose como una persona generosa y compasiva, orientándose a los resultados de forma consistente y tomándose el tiempo necesario.",
+            "natural": 7,
+            "role": 7
+          },
+          {
+            "axiNumber": 9,
+            "competencyId": "a9cc47e5-9d01-48ac-901e-636e0331dad0",
+            "competencyName": "Precisión",
+            "description": "Tendencia natural a la aproximación analítica, cautelosa, sistemática y detallada de los problemas y las decisiones, con un método preciso y cuidadoso. Manifiesta comodidad y eficacia en situaciones y ambientes estructurados y bien definidos. ",
+            "natural": 2,
+            "role": 2
+          },
+          {
+            "axiNumber": 10,
+            "competencyId": "e389c50f-24f5-4568-874c-7d451622d5f9",
+            "competencyName": "Atención focalizada",
+            "description": "Tendencia natural hacia la atención focalizada, independientemente del contexto, con el fin de obtener y gestionar información relevante de manera eficiente. Tiene preferencia por seguir procedimientos de manera precisa y ordenada, concentrándose en los detalles y esmerándose por evitar errores en su aproximación al resultado.  ",
+            "natural": 24,
+            "role": 24
+          },
+          {
+            "axiNumber": 11,
+            "competencyId": "480eda79-09f6-4243-98cb-906837fb5596",
+            "competencyName": "Pensamiento analítico",
+            "description": "Tendencia natural a avanzar en la resolución de problemas aplicando un diagnóstico\u00A0diferencial, evaluando sus posibles causas y buscando diferentes comportamientos entre las causas, descomponiendo el problema complejo en partes mas simples, testeando y descartando hipótesis. Mide si la persona es confiable en su aproximación, disciplinada, precisa y si se orienta a los resultados analizando, relevando información y los hechos para avanzar de forma lógica, sistemática y ordenada. ",
+            "natural": 27,
+            "role": 27
+          },
+          {
+            "axiNumber": 12,
+            "competencyId": "83ac1419-f19b-4ee5-8e02-9cdb0487ee02",
+            "competencyName": "Excelencia Técnica",
+            "description": "Tendencia natural a orientarse a los resultados de forma consistente y segura, analizando la información disponible, siguiendo los procedimientos y buscando armonía y excelencia, con el fin de lograr soluciones alineadas con el desarrollo organizacional. Manifiesta un abordaje crítico y exigente de las diferentes situaciones, interesándose por el cumplimiento de métodos y procedimientos que aseguren la calidad y eviten el error.",
+            "natural": 28,
+            "role": 28
+          },
+          {
+            "axiNumber": 13,
+            "competencyId": "2f6d5682-2e2e-4431-afa7-b0f85c58dab9",
+            "competencyName": "Implementación",
+            "description": "Tendencia natural a llevar un pensamiento preliminar a la concreción y a ejecutar o poner en práctica un plan, método, idea, modelo o política para hacer algo o solucionar un problema. Implica una estrategia previa, un método y su ejecución, desplegando dinamismo y bajo un contexto de normas y procedimientos. Aborda los problemas de forma meticulosa y curiosa, estudiando, analizando y tomando decisiones basadas en la lógica.",
+            "natural": 62,
+            "role": 62
+          },
+          {
+            "axiNumber": 14,
+            "competencyId": "55c7ea5d-8a09-4209-a7ed-e8f9e6c63e0c",
+            "competencyName": "Expeditividad",
+            "description": "Tendencia natural a responder con sentido de urgencia y a hacer que las cosas sucedan. Tiende a ser una persona expeditiva y flexible, que responde positivamente ante la diversidad y el cambio, incluso cuando los tiempos apremian. ",
+            "natural": 86,
+            "role": 86
+          },
+          {
+            "axiNumber": 15,
+            "competencyId": "e0465138-43f6-4d06-9daf-51eddf60ebff",
+            "competencyName": "Determinación",
+            "description": "Tendencia natural a mirar hacia adelante, con un estilo proactivo y resolutivo para conseguir sus metas. Implica valor, seguridad y coraje en sus decisiones. Manifiesta una tendencia a tomar riesgos para conseguir sus metas y una orientación a los resultados de forma determinada y firme, confrontando si es necesario, tomando la responsabilidad y asumiendo desafíos.",
+            "natural": 86,
+            "role": 86
+          }
+        ]
+      },
+      "multipleJobCompatibility": [
+        {
+          "jobId": "29fe9fe8-34f3-4f1f-8be8-c5ac290ce09c",
+          "jobTitle": "IMPLEMENTADOR: Auditor -  Especialista / Planificación & Control (Administrativo)",
+          "compatibilityPercentage": 0.96,
+          "image": null,
+          "individualName": "rafa zira"
+        },
+        {
+          "jobId": "ee47fe2e-5220-4486-a62e-dbbce4e60d83",
+          "jobTitle": "EXIGENTE: Control / Calidad /Consistencia /Dinamismo y persuasión (Administrativo)",
+          "compatibilityPercentage": 0.91,
+          "image": null,
+          "individualName": "rafa zira"
+        },
+        {
+          "jobId": "53734444-911b-4b03-af9a-911e35c7155f",
+          "jobTitle": "AGENTE DE CAMBIO: Expeditivo – Sentido de Urgencia (Administrativo)",
+          "compatibilityPercentage": 0.82,
+          "image": null,
+          "individualName": "rafa zira"
+        },
+        {
+          "jobId": "39627318-7fb6-4828-9321-217b839948d8",
+          "jobTitle": "ESPECIALISTA TECNICO: Análisis - Control - Procedimientos (Administrativo)",
+          "compatibilityPercentage": 0.74,
+          "image": null,
+          "individualName": "rafa zira"
+        },
+        {
+          "jobId": "dc25ebee-d898-48ec-b62d-5518e675c584",
+          "jobTitle": "PROACTIVO: Competitivo - Proactivo (Administrativo)",
+          "compatibilityPercentage": 0.74,
+          "image": null,
+          "individualName": "rafa zira"
+        },
+        {
+          "jobId": "d4002628-6dc8-451c-a070-9f0b9a1012cf",
+          "jobTitle": "INVESTIGADOR / PLANEAMIENTO:  Competitivo  - Analítico (Administrativo)",
+          "compatibilityPercentage": 0.38,
+          "image": null,
+          "individualName": "rafa zira"
+        },
+        {
+          "jobId": "aec0d613-fb1a-4bb2-a6c0-58ae07bc67d9",
+          "jobTitle": "ADMINISTRATIVO: Asistencia / Análisis / Operativos (Administrativo)",
+          "compatibilityPercentage": 0.37,
+          "image": null,
+          "individualName": "rafa zira"
+        },
+        {
+          "jobId": "fef14de2-9663-479f-9002-02d3699c3be1",
+          "jobTitle": "ASISTENTE: Colaborador - Soporte - Seguimiento (Administrativo)",
+          "compatibilityPercentage": 0.08,
+          "image": null,
+          "individualName": "rafa zira"
+        }
+      ]
+    },
+    "behavioralProfileImage": null,
+    "behavioralProfileNaturalBrief": null,
+    "developmentTips": null,
+    "developmentPlan": {
+      "title": "DevelopmentPlan Title Text  ...",
+      "introduction": "DevelopmentPlan IntroductionText    ...",
+      "firstContent": "DevelopmentPlan Content example  ..."
+    },
+    "hrFeedback": {
+      "title": "HRFeedback Title Text  ..",
+      "introduction": "HRFeedback IntroductionText    ...",
+      "firstContent": "HRFeedbackSection Content example  ..."
+    },
+    "audiovisualContent": {
+      "title": "DevelopmentPlan Title Text  ...",
+      "introduction": "DevelopmentPlan IntroductionText    ...",
+      "resourceURL": "http://google.com.ar  ..."
+    },
+    "summaryReview": null,
+    "resumeTips": null
+  }
+}

@@ -1,0 +1,37 @@
+::ng-deep .response-error {
+    mat-dialog-container {
+        border-top: 9px solid #ED4C6C;
+    }
+}
+
+::ng-deep .response-warning {
+    mat-dialog-container {
+        border-top: 9px solid #F99D0F;
+    }
+}
+
+::ng-deep .response-success {
+    mat-dialog-container {
+        border-top: 9px solid #1EBF74;
+    }
+}
+
+.btn-response{
+    color: #ffffff;
+    width: 193px;
+    height: 33px;
+    border:none;
+    border-radius:6px
+}
+
+.btn-error{
+    background: #ED4C6C;
+}
+
+.btn-warning{
+    background: #F99D0F;
+}
+
+.btn-success{
+    background: #1EBF74;
+}

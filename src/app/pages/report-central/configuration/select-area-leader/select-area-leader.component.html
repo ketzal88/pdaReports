@@ -1,0 +1,38 @@
+<div class="mat-elevation-z8">
+  <mat-form-field appearance="fill">
+    <mat-label>Area</mat-label>
+    <mat-select
+      [(value)]="selectedAreaId"
+      #areaSelect
+      name="area"
+      (openedChange)="onAreaChange($event)">
+      <mat-option *ngFor="let area of areas" [value]="area.areaId">
+        {{ area.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<ng-container *ngIf="areas?.length === 1">
+  <div class="mat-elevation-z8" style="padding: 5px">
+    <div style="margin-top: 30px; display: flex; vertical-align: middle">
+      <span style="margin-right: 10px" class="material-icons"
+        >arrow_upward</span
+      >
+      <p>Agregue un areá de trabajo utilizando el boton de arriba.</p>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="lockedSelectId && selectedAreaId && !loading">
+  <app-individuals-selection
+    [selectedAreaId]="selectedAreaId"
+    (selectedIndividualsEvent)="onSelectedIndividuals($event)"
+    (selectedLeaderIdEvent)="onSelectedLeader($event)"
+    [selectedClientId]="selectedClientId"
+    [lockedSelectId]="lockedSelectId"
+    [multipleSelection]="true"
+    [hasSelectLeader]="true"
+    [maxMultipleSelection]="maxMultipleSelection"
+    [typeFilterList]="typeFilterList"></app-individuals-selection>
+</ng-container>

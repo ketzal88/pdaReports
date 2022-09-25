@@ -1,0 +1,123 @@
+{
+    "TITLE_PDA_CONFIGURATION": "Configuración",
+    "VERSION": "Versión",
+    "REPORTING_CENTER": {
+        "TITLE":"Central de reportes",
+        "DEFAULTS": {
+            "TITLE":"Predeterminados"
+        },
+        "MY_REPORTS": {
+            "TITLE": "Mis reportes"
+        }
+    },
+    "REDIRECT_PDA_PLATFORM": "Plataforma PDA",
+    "CHANGE_LANGUAGE": "Cambiar idioma",
+    "LANGUAGE": "Español",
+    "REPORT_CONFIGURATION": "Configuración de reportes",
+    "HIRING": "Hiring",
+    "DEVELOPMENT": "Desarrollo",
+    "SALES": "Ventas",
+    "hiring": "Hiring",
+    "development": "Desarrollo",
+    "sales": "Ventas",
+    "survey": "Relevamiento",
+    "report": "Informe",
+    "candidate_review": "Reseña de candidato",
+    "Consistent" : "Consistente",
+    "NotVeryConsistent" : "No muy consistente",
+    "Invalid" : "Invalido",
+    "NotAvalaible" : "No consistente",
+    "Gender" : "Genero",
+    "FirstName": "Nombre",
+    "LastName": "Apellido",
+    "Email": "Email",
+    "PDAStatus": "Estado PDA",
+    "Date": "Fecha",
+    "Natural" : "Natural",
+    "Role" : "Adaptado",
+    "BehavioralProfile" : "Perfil",
+    "PAGINATOR": {
+        "ITEMS_PER_PAGE": "Registros por página",
+        "NEXT_PAGE": "Siguiente",
+        "PREVIOUS_PAGE": "Anterior",
+        "LAST_PAGE": "Última página",
+        "INIT_LABEL": "Mostrando",
+        "OF_LABEL": "de",
+        "LAST_LABEL": "entradas"
+    },
+    "TYPE_PROFILE": "Perfil",
+    "UPLOADER":{
+        "UPLOADING_STATUS": "Cargando",
+        "FAILED_STATUS": "Error",
+        "SUCCESSFUL_STATUS": "Exito",
+        "FAILED_MESSAGE": "Se ha producido un error al cargar el archivo",
+        "FAILED_UPDATING_MESSAGE":"Se ha producido un error al cargar logo de archivo",
+        "SUCCESSFUL_MESSAGE": "El archivo fue cargado exitosamente",
+        "ONLY_ONE_FILE_MESSAGE": "Solo puede cargar un logo",
+        "INVALID_FORMAT_TYPE_MESSAGE" : "{FORMAT_TYPE} no es un formato valido",
+        "INVALID_MAX_SIZE_MESSAGE" : "{MAX_SIZE} Mb es el tamaño maximo permitido",
+        "INVALID_IMAGE_MIN_RESOLUTION_MESSAGE" : "No se cumple con el tamaño minimo ( {MIN_RESOLUTION} )",
+        "INVALID_IMAGE_FORMAT_MESSAGE" : "No se mantiene el formato de la imagen"
+    },
+    "SEND_REPORT": {
+        "TITLE": "Enviar reporte",
+        "SUBTITLE": "Desde aqui podrás compartir el link de los Reportes de Perfil Conductual directamente por correo electronico a Whatsapp",
+        "LABEL_EMAIL": "Ingrese email",
+        "LABEL_NUMBER": "Ingrese número",
+        "SEND": "Enviar"
+    },
+    "GROUPING_COMPONENT": {
+        "EDIT":"Edición",
+        "DUPLICATE":"Duplicación",
+        "BTN_CREATE" : "Generar {{TYPE}}",
+        "BTN_SAVE": "Guardar",
+        "BTN": "Selecionar",        
+        "GROUP":{
+            "NEW": "Nuevo grupo",
+            "TYPE":"Grupo",
+            "SUBTITLE": "Un grupo es una caracteristica importante en los reportes......",
+            "INPUT_PLACEHOLDER":"Ingrese el nombre del grupo"
+        },
+        "AREA":{
+            "NEW": "Nueva area",
+            "TYPE":"Area",
+            "SUBTITLE": "Un area es una caracteristica importante en los reportes......",
+            "INPUT_PLACEHOLDER":"Ingrese el nombre del area"
+        }
+    },
+    "CONFIRM_DIALOG": {
+        "DELETE": {
+            "TITLE": "Eliminar {{TYPE}}",
+            "MESSAGE": "¿Estas seguro de eliminar el {{TYPE}} {{ENTITY_NAME}}?"
+        }
+    },
+    "MY_REPORTS": {
+        "REPORT_TYPE_FILTER": "Tipo de reporte",
+        "HIRING_REPORT_FILTER": "Hiring/Informe",
+        "DEVELOP_REPORT_FILTER": "Desarrollo/Informe",
+        "HIRING_REVIEW_FILTER": "Hiring/Reseña",
+        "HIRING_SURVEY_FILTER": "Hiring/Relevamiento"
+    },
+    "CLIENT_FILTER": {
+        "BASE": "Base",
+        "SUBBASE": "Subbase"
+    },
+    "SELECT_GROUP":{
+        "NAME": "Grupo"
+    },
+    "LOGIN": {
+        "NAME": "Login",
+        "AUTOMATIC_NAME": "Login automático",
+        "USERNAME_PLACEHOLDER": "Nombre de usuario",
+        "PASSWORD_PLACEHOLDER": "Password",
+        "ACCEPT_BTN": "Aceptar"
+    },
+    "CONFIGURATION":{
+        "SAVE": "Generar reporte",
+        "ERROR": {
+            "ERROR_REPORT": "No hemos podido generar el reporte",
+            "ERROR_COMPETENCY_REPORT": "No hemos podido generar las competencias del reporte",
+            "ERROR_JOB_REPORT": "No hemos podido generar el puesto del reporte"
+        }
+    }
+}

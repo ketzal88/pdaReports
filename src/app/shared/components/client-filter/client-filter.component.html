@@ -1,0 +1,21 @@
+<mat-form-field appearance="fill" style="margin-right: 35px">
+  <mat-label>{{ 'CLIENT_FILTER.BASE' | translate }}</mat-label>
+  <mat-select
+    [(value)]="selectedClientId"
+    (selectionChange)="onBaseChange($event.value)">
+    <mat-option *ngFor="let client of availableClients" [value]="client.key">
+      {{ client.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>{{ 'CLIENT_FILTER.SUBBASE' | translate }}</mat-label>
+  <mat-select
+    [(value)]="selectedSubbaseId"
+    (selectionChange)="onSubbaseChange($event.value)">
+    <mat-option *ngFor="let subbase of availableSubbases" [value]="subbase.id">
+      {{ subbase.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

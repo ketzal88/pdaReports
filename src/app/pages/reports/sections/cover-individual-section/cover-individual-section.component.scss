@@ -1,0 +1,109 @@
+:host ::ng-deep {
+
+  .custom-acqua .mat-progress-bar-fill::after {
+    background-color: #01dbd8;
+  }
+
+  .custom-blue .mat-progress-bar-fill::after {
+    background-color: #007efd;
+  }
+
+  .mat-progress-bar-buffer {
+    background: #E4E8EB;
+
+  }
+
+  .mat-progress-bar {
+    border-radius: 2px;
+    height: 15px;
+    width: 350px;
+  }
+
+  .mat-progress-bar._mat-animation-noopable {
+    border-radius: 25px;
+  }
+
+  .mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+  }
+
+  /** BARRA DE OPCIONES  Grafico cop **/
+  .mat-chip-list-wrapper {
+    justify-content: center;
+    border-radius: 25px;
+    margin: 20px 0px;
+    box-shadow: 20px 5px 20px 2px rgb(0 0 0 / 10%);
+  }
+
+  .mat-chip.mat-standard-chip {
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+    background-color: #007EFD;
+  }
+
+  .mat-slide-toggle:not(.mat-checked) .mat-ripple-element {
+    background-color: white;
+  }
+
+  .mat-chip.mat-standard-chip::after {
+    background: #007EFD;
+  }
+
+}
+
+h1 {
+  font-size: 43px;
+  font-weight: bold;
+}
+
+/* formateo parrafos */
+.white {
+  color: #ffffff !important;
+}
+
+/*INFO PERFIL*/
+.tipo-deperfil {
+  padding: 20px 0px;
+}
+
+.perfil {
+  font-size: 28px;
+  font-weight: bold;
+  color: #007efd;
+}
+
+.list-icon {
+  display: flex;
+  align-items: center;
+  padding: 5px 0px;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+  padding-right: 10px;
+
+}
+
+.item {
+  font-size: 22px;
+  font-family: Poppins;
+}
+
+.example-h2 {
+  font-size: 15px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 0px;
+}
+
+.example-margin {
+  margin: 8px 0px;
+}

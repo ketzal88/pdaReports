@@ -1,0 +1,49 @@
+/**** REPNA****/
+.section-repna-content-table{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 0px 30px;
+    border-bottom: 1px solid #c4c4c4;
+}
+.section-repna-grafic {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 380px;
+}
+
+.config-grafic-repna {
+    width: 75%;
+    padding: 5px 25px;
+}
+.grafic-repna {
+    display: flex;
+    justify-content: center;
+}
+
+.energy {
+    width: 25%;
+
+}
+.regulator-bars{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 5px 25px;
+}
+.grafic-bars{
+    width: 60%;
+    border-right: 1px solid #c4c4c4;
+}
+.table-repna{
+    width: 40%;
+    margin: 0 auto;
+    padding: 0px 25px;
+}
+.bar{
+    width: 33%;
+}

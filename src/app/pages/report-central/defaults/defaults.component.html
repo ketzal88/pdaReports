@@ -1,0 +1,51 @@
+<div style="display: flex; justify-content: space-between; align-items: center">
+  <ng-container *ngFor="let reportGroup of typesReportsGroup; let idx = index">
+    <mat-card
+      style="height: 100%; cursor: pointer"
+      (click)="setGroupSelection(reportGroup)">
+      <h2>{{ reportGroup.name }}</h2>
+      <ng-container
+        [ngTemplateOutlet]="
+          reportGroup.internalName === 'HIRING'
+            ? hiring
+            : reportGroup.internalName === 'DEVELOPMENT'
+            ? development
+            : reportGroup.internalName === 'SALES'
+            ? sales
+            : null
+        "
+        [ngTemplateOutletContext]="{
+          data: ''
+        }"></ng-container>
+      <mat-selection-list
+        #reportTypes
+        [multiple]="false"
+        [ngClass]="
+          reportGroupSelected?.internalName === reportGroup?.internalName
+            ? 'content-block'
+            : 'content-none'
+        ">
+        <mat-list-option
+          *ngFor="let item of reportGroupSelected?.reportTypes"
+          [value]="item"
+          (click)="goToConfiguration(reportGroup, item.internalName)"
+          [disabled]="
+            reportGroup.internalName === 'SALES' &&
+            item.internalName === 'SALES_SURVEY'
+          ">
+          {{ item.name }}
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-card>
+  </ng-container>
+</div>
+<!-- ALL icons -->
+<ng-template #hiring let-data="data">
+  <app-hiring></app-hiring>
+</ng-template>
+<ng-template #development let-data="data">
+  <app-development></app-development>
+</ng-template>
+<ng-template #sales let-data="data">
+  <app-sales></app-sales>
+</ng-template>

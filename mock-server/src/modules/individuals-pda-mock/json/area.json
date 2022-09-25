@@ -1,0 +1,44 @@
+{
+    "area": [
+        {
+            "areaId": "f07fedb6-39ba-682f-7740-1827f4ca4cf8",
+            "name": "TestArea-26",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-11T14:54:57.88",
+            "deletionDate": null
+        },
+        {
+            "areaId": "3012ce4b-69aa-4126-ff31-8dca63c33262",
+            "name": "Area Prueba 1 - Copiav15",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-09T15:02:37.287",
+            "deletionDate": null
+        },
+        {
+            "areaId": "73fb0e0e-607a-6d06-3244-91bf7c81aa88",
+            "name": "TestArea-2627",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-11T15:45:36.78",
+            "deletionDate": null
+        },
+        {
+            "areaId": "9cf86a3a-00c0-ce76-0056-9803bae83a1a",
+            "name": "TestArea-2626",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-11T15:22:15.03",
+            "deletionDate": null
+        },
+        {
+            "areaId": "ffcb877d-23aa-84b2-1efb-9a8261105381",
+            "name": "Area Prueba 1 - Copiav13",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-10T14:15:20.127",
+            "deletionDate": null
+        }
+    ]
+}

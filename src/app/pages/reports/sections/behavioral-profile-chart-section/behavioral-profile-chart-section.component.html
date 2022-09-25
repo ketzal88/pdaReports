@@ -1,0 +1,112 @@
+<div class="section-repna">
+  <p class="subtitle center">{{ behavioralProfileInfo?.title }}</p>
+  <!-- TODO: Es texto generico o el texto deberia de obtenerse de back -->
+  <p class="descripcion center" style="padding: 0 20%">
+    En este gráfico se muestran las tendencias de comportamiento con base en los
+    ejes: Riesgo, Extroversión, Paciencia, Norma y Autocontrol.
+  </p>
+  <div class="section-grafico-conductual">
+    <div class="section-repna-content-table">
+      <div class="grafic-bars">
+        <div class="section-repna-grafic">
+          <div class="config-grafic-repna">
+            <div class="buttons">
+              <a
+                class="button"
+                [ngClass]="naturalSelected ? 'active' : ''"
+                (click)="setNaturalSelected(true)"
+                >{{ behavioralProfileInfo?.naturalPBehaviorTitle }}</a
+              >
+              <!-- TODO PEDIR A BACKEND CORRECCION CAMPO naturalPbehavioral-->
+              <a
+                class="button"
+                [ngClass]="naturalSelected ? '' : 'active'"
+                (click)="setNaturalSelected(false)"
+                >{{ behavioralProfileInfo?.roleBehaviorTitle }}</a
+              >
+            </div>
+            <div class="grafic-repna">
+              <app-bubble-chart
+                [naturalREPNA]="naturalREPNA"
+                [roleREPNA]="roleREPNA"
+                [naturalSelected]="naturalSelected"></app-bubble-chart>
+            </div>
+          </div>
+          <div class="energy">
+            <app-gauge-linear
+              [value]="energyChartValue"
+              [text]="'Energía2'"
+              [color]="'#007EFD'"
+              [layout]="'vertical'"></app-gauge-linear>
+          </div>
+        </div>
+        <div class="regulator-bars">
+          <div class="bar">
+            <app-gauge-linear
+              [value]="decisionMakingValue"
+              [text]="'Toma de decisiones'"
+              [color]="'#007EFD'"></app-gauge-linear>
+          </div>
+          <div class="bar">
+            <app-gauge-linear
+              [value]="profileIntensityValue"
+              [text]="'Intensidad del Perfil'"
+              [color]="'#007EFD'"></app-gauge-linear>
+          </div>
+          <div class="bar">
+            <app-gauge-linear
+              [value]="energyValue"
+              [text]="'Energia'"
+              [color]="'#007EFD'"></app-gauge-linear>
+          </div>
+        </div>
+      </div>
+      <div class="table-repna">
+        <div [ngClass]="naturalSelected ? 'blue' : 'inactive-opacity'">
+          <p [ngClass]="naturalSelected ? 'blue' : ' '">
+            {{ behavioralProfileInfo?.naturalPBehaviorTitle }}
+          </p>
+          <app-table
+            [arrayValue]="arrayTableN"
+            [idContainer]="'chartContainer1'"></app-table>
+        </div>
+        <div [ngClass]="naturalSelected ? 'inactive-opacity' : ' blue'">
+          <p [ngClass]="naturalSelected ? '' : ' blue'">
+            {{ behavioralProfileInfo?.roleBehaviorTitle }}
+          </p>
+          <app-table
+            [arrayValue]="arrayTableR"
+            [idContainer]="'chartContainer2'"></app-table>
+        </div>
+      </div>
+    </div>
+    <div class="regulator-bars">
+      <div class="bar">
+        <app-gauge-linear
+          [value]="
+            behavioralProfileInfo?.behavioralProfileChartInformation
+              .energyBalance * 100
+          "
+          [text]="'Equilibrio de Energia'"
+          [color]="'#007EFD'"></app-gauge-linear>
+      </div>
+      <div class="bar">
+        <app-gauge-linear
+          [value]="
+            behavioralProfileInfo?.behavioralProfileChartInformation
+              .profileModification * 100
+          "
+          [text]="'Modificacion del Perfil'"
+          [color]="'#007EFD'"></app-gauge-linear>
+      </div>
+      <div class="bar">
+        <app-gauge-linear
+          [value]="
+            behavioralProfileInfo?.behavioralProfileChartInformation.duration
+          "
+          [text]="'Tiempo del formulario'"
+          [color]="'#007EFD'"></app-gauge-linear>
+      </div>
+    </div>
+  </div>
+</div>

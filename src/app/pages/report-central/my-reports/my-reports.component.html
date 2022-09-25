@@ -1,0 +1,30 @@
+<app-client-filter
+  [selectedClientId]="selectedClientId"
+  [selectedSubbaseId]="selectedSubbaseId"
+  (selectedClientEvent)="onBaseChange($event)"
+  (selectedSubbaseEvent)="onSubbaseChange($event)"></app-client-filter>
+<div *ngIf="!data && !generatedReportsLoader.isLoading()">
+  <mat-card>
+    <mat-card-content style="text-align: center; margin: 20px">
+      <h3>
+        No se encontro resultado para: <i>{{ filterText }}</i>
+      </h3></mat-card-content
+    >
+  </mat-card>
+</div>
+
+<div *ngIf="selectedClientId">
+  <app-table-my-reports
+    #myReportsTable
+    [dataSource]="dataSource"
+    [columns]="columns"
+    [totalSize]="totalSize"
+    [typeFilterList]="typeFilterList"
+    [hasSelectActions]="true"
+    (paginateChange)="onPaginateChange($event)"
+    (selectedChange)="onSelectedChange($event)"
+    (filterInput)="onFilterInput($event)"
+    (filters)="onFilters($event)"
+    (sendReportEvent)="onSendReport()">
+  </app-table-my-reports>
+</div>

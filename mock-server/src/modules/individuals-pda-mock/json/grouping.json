@@ -1,0 +1,60 @@
+{
+    "grouping": [
+        {
+            "groupingId": "8b9dd67b-a164-dfdf-ca67-27bb9a1a0f67",
+            "name": "Test3 - Edicion17",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-02T12:21:19.59",
+            "deletionDate": null
+        },
+        {
+            "groupingId": "9220a350-626d-047d-02ea-2ee913c32960",
+            "name": "Grupo-Test3108",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-31T16:40:53.963",
+            "deletionDate": null
+        },
+        {
+            "groupingId": "5c500915-5c1e-1af9-c86f-31220a77f435",
+            "name": "TestGroup-4",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-11T11:13:18.247",
+            "deletionDate": null
+        },
+        {
+            "groupingId": "9aec472a-58a9-11ca-3eb6-4e063bd754bb",
+            "name": "Test20",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-05T09:51:53.137",
+            "deletionDate": null
+        },
+        {
+            "groupingId": "31a560fd-cd1a-2d09-613a-77952eeaa907",
+            "name": "Test56",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-02T15:49:52.82",
+            "deletionDate": null
+        },
+        {
+            "groupingId": "982ed035-534c-a652-ce36-8b903ce1ae5a",
+            "name": "Test3 - Edicion17444",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-12T14:26:36.237",
+            "deletionDate": null
+        },
+        {
+            "groupingId": "dad85e07-66ca-2d1d-6e5e-c7994fb8f453",
+            "name": "Test8",
+            "baseId": "d92c7492-be33-4adb-b8a1-051248d315dd",
+            "subBaseId": "13cd5f84-135b-47f4-929e-d538134f2d92",
+            "creationDate": "2022-08-03T23:07:42.997",
+            "deletionDate": null
+        }
+    ]
+}

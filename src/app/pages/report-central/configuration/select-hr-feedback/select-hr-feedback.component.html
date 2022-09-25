@@ -1,0 +1,17 @@
+<div style="display: flex; text-align: center">
+  <div>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur nisi ipsa
+    debitis perferendis fugiat sunt, at possimus magni cum odit consectetur ab
+    ratione quae quisquam aliquid aut nam blanditiis tempore!
+    <mat-form-field [style.fontSize]="18" appearance="fill" style="width: 90%">
+      <mat-label>Hr Feedback</mat-label>
+      <textarea
+        #hrFeedbackTextArea
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="10"
+        cdkAutosizeMaxRows="100"
+        (input)="changedText()"></textarea>
+    </mat-form-field>
+  </div>
+</div>

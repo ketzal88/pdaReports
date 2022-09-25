@@ -1,0 +1,21 @@
+<!-- Consistency -->
+<div class="tipo-deperfil">
+  <p class="subtitle">{{ consistencyIndicator.title }}</p>
+  <mat-card>
+    <mat-card-content>
+      <section class="example-section">
+        <div
+          [ngClass]="{
+            'custom-blue': true
+          }">
+          <mat-progress-bar
+            class="example-margin"
+            [mode]="mode"
+            [value]="value"
+            [bufferValue]="bufferValue">
+          </mat-progress-bar>
+        </div>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>
