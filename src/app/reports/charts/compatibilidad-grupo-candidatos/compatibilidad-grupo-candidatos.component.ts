@@ -59,7 +59,7 @@ export class CompatibilidadGrupoCandidatosComponent implements OnInit {
       { x: "LO", value: 70 },
       { x: "AC", value: 100 },
     ]).tooltip(false);
-    columnSeries.color("#cccccc88").labels().format("{%value}%").enabled(false).fontColor("#ddddd").fontSize("100%").offsetX(-50).offsetY(-50);
+    columnSeries.color("#cccccc88").labels().format("{%value}%").enabled(false).fontColor("#ddddd").fontSize("100%");
     columnSeries.selected().fill("#ff4b7e").selected().labels().enabled(true);
 
     this.chart.column([
