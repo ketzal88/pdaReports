@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { colorPrimary, colorPrimaryDarker, colorSecondary } from '../../themes/blue';
+import { ThemeColors } from '../../themes/blue';
+
 
 @Component({
   selector: 'chart-compatibilidad-puesto',
@@ -38,7 +39,7 @@ export class CompatibilidadPuestoComponent implements OnInit {
           mode: true,
           opacity: 1,
           thickness: 40,
-          keys: [{ color: colorPrimary, offset: 0, opacity: 1 }, { color: "#40c4ff", offset: 0.8, opacity: 1 }],
+          keys: [{ color: ThemeColors.colorPrimary, offset: 0, opacity: 1 }, { color: "#40c4ff", offset: 0.8, opacity: 1 }],
         },
         normal: {
           zIndex: 4,

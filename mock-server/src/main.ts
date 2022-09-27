@@ -13,9 +13,9 @@ async function bootstrap() {
   //   credentials: true,
   // });
   // agrega delay a las respuestas. en msecs.
-  app.use(function (req, res, next) {
-    setTimeout(next, 500);
-  });
+  // app.use(function (req, res, next) {
+  //   setTimeout(next, 500);
+  // });
 
   //Para emular imagenes
   app.useStaticAssets(join(__dirname, '..', 'public'), {

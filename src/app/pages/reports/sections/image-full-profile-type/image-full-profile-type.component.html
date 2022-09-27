@@ -1,20 +1,20 @@
 <div class="perfil-type row">
-  <div class="column">
-    <!-- Nombre usuario perfil -->
-    <h1>{{ coverIndividual.firstName }} {{ coverIndividual.lastName }}</h1>
-    <div class="label-image-title">
-      {{ 'TYPE_PROFILE' | translate }}
+    <div class="column">
+        <!-- Nombre usuario perfil -->
+        <h1>{{ coverIndividual.firstName }} {{ coverIndividual.lastName }}</h1>
+        <div class="label-image-title">
+            {{ 'TYPE_PROFILE' | translate }}
+        </div>
+        <div class="content-image-title">
+            <h1 style="margin-bottom: 0px">
+                {{ coverIndividual.profile }}
+            </h1>
+        </div>
     </div>
-    <div class="content-image-title">
-      <h1 style="margin-bottom: 0px">
-        {{ coverIndividual.profile }}
-      </h1>
+    <div class="column">
+        <div class="image-profile">
+            <!-- TODO: Reemplazar con icono svg dado por disenio -->
+            <app-happy></app-happy>
+        </div>
     </div>
-  </div>
-  <div class="column">
-    <div class="image-profile">
-      <!-- TODO: Reemplazar con icono svg dado por disenio -->
-      <app-happy></app-happy>
-    </div>
-  </div>
 </div>

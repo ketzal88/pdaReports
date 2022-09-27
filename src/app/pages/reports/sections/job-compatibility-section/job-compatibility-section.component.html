@@ -1,21 +1,16 @@
 <div class="grafico-compatibility">
-  <div class="grafico">
-    <app-solid-gauge
-      [value]="jobCompatibility.jobCompatibilityDetailed?.compatibility">
-    </app-solid-gauge>
-  </div>
+    <div class="grafico">
+        <app-solid-gauge [value]="jobCompatibility.jobCompatibilityDetailed?.compatibility">
+        </app-solid-gauge>
+    </div>
 </div>
 <div class="puestos-compatibles">
-  <select
-    class="selector"
-    name="select"
-    [ngModel]="jobSelected"
-    (ngModelChange)="onChangeJob($event)">
+    <select class="selector" name="select" [ngModel]="jobSelected" (ngModelChange)="onChangeJob($event)">
     <option *ngFor="let job of jobs" [ngValue]="job">
       {{ job.name }}
     </option>
   </select>
 </div>
 <p class="descripcion">
-  {{ jobCompatibility.jobCompatibilityDetailed?.compatibilityDescription }}
+    {{ jobCompatibility.jobCompatibilityDetailed?.compatibilityDescription }}
 </p>

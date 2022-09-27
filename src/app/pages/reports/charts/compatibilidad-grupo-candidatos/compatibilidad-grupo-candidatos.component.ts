@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { colorPrimary } from '../../themes/blue';
+import { ThemeColors } from '../../themes/blue';
+
 
 @Component({
   selector: 'chart-compatibilidad-grupo-candidatos',
@@ -64,7 +65,7 @@ export class CompatibilidadGrupoCandidatosComponent implements OnInit {
 
     this.chart.column([
       { x: 'JG', value: 100, porc: 75 },
-    ]).selectionMode("none").tooltip(false).color(colorPrimary).labels().format("{%value}%").enabled(true).fontColor("#ffffff").fontSize("100%")
+    ]).selectionMode("none").tooltip(false).color(ThemeColors.colorPrimary).labels().format("{%value}%").enabled(true).fontColor("#ffffff").fontSize("100%")
 
 
     // set title settings

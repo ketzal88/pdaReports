@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { colorPrimary } from '../../themes/blue';
 
 @Component({
   selector: 'chart-repna',

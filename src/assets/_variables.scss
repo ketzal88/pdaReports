@@ -1,5 +1,33 @@
 $backgroundColor: transparent;
 
-:root{
-  --backgroundColor: #{$backgroundColor};
+/*Colors*/
+
+$grayscale100: #FFFFFF;
+$grayscale200: #F2F3F3;
+$grayscale300: #D5D7D9;
+$grayscale400: #EAE9E9;
+$grayscale500: #CCCCCC;
+$grayscale600: #9A9A9A;
+$grayscale700: #6A6A6A;
+$grayscale800: #4D4D4D;
+$grayscale900: #000000;
+$primaryLight: #80BFFE;
+$primaryColor: #0075FF;
+$primaryDark: #0000FF;
+$secondaryColor: #FF4B7E;
+:root {
+    --backgroundColor: #{$backgroundColor};
+    --grayscale100: #{$grayscale100};
+    --grayscale200: #{$grayscale200};
+    --grayscale300: #{$grayscale300};
+    --grayscale400: #{$grayscale400};
+    --grayscale500: #{$grayscale500};
+    --grayscale600: #{$grayscale600};
+    --grayscale700: #{$grayscale700};
+    --grayscale800: #{$grayscale800};
+    --grayscale900: #{$grayscale900};
+    --primaryLight: #{$primaryLight};
+    --primaryColor: #{$primaryColor};
+    --primaryDark: #{$primaryDark};
+    --secondaryColor: #{$secondaryColor};
 }

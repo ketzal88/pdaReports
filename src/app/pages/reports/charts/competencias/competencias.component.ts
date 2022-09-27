@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { colorPrimary } from '../../themes/blue';
+import {ThemeColors} from '../../themes/blue';
 
 @Component({
   selector: 'chart-competencias',
@@ -16,7 +16,7 @@ export class CompetenciasComponent implements OnInit {
   ngOnInit(): void {
     let value = 50;
     let data = anychart.data.set([['AQI', value]]);
-    let color = colorPrimary
+    let color = ThemeColors.colorPrimary;
     // set the gauge type
     this.gauge = anychart.gauges.linear();
 

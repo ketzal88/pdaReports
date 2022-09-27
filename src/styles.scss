@@ -1,38 +1,27 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
-
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat.core();
-
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $pda-primary: mat.define-palette(mat.$indigo-palette);
 $pda-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
 // The warn palette is optional (defaults to red).
 $pda-warn: mat.define-palette(mat.$red-palette);
-
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$pda-theme: mat.define-light-theme((
-  color: (
-    primary: $pda-primary,
-    accent: $pda-accent,
-    warn: $pda-warn,
-  )
-));
+$pda-theme: mat.define-light-theme(( color: ( primary: $pda-primary, accent: $pda-accent, warn: $pda-warn, )));
 
 /**********************Configuration typografic*********************/
-$custom-typography: mat.define-typography-config(
-  $font-family: "Poppins"
-);
+
+$custom-typography: mat.define-typography-config( $font-family: "Poppins");
 @include mat.core($custom-typography);
+
 /*******************************************************************/
 
 // Include theme styles for core and each component used in your app.
@@ -40,331 +29,433 @@ $custom-typography: mat.define-typography-config(
 // that you are using.
 @include mat.all-component-themes($pda-theme);
 
+/*********************************************************************************/
+
+@import "./assets/variables";
+
 /* You can add global styles to this file, and also import other style files */
 
 * {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-}
-html, body { height: 100%; width:100%}
-
-body { margin: 0; }
-
-body > h1, h2, h3, p, a , span{
-  color:#111111;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
 }
 
-
-.white-background{
-  background: white;
+html,
+body {
+    height: 100%;
+    width: 100%
 }
 
-
-.inactive-opacity{
-  opacity: 0.5;
+body {
+    margin: 0;
 }
 
-div.cdk-global-overlay-wrapper > div.cdk-overlay-pane
-{
-  overflow: auto;
-  max-height: 86%;
+body>h1,
+h2,
+h3,
+p,
+a,
+span {
+    color: #111111;
 }
+
+.white-background {
+    background: white;
+}
+
+.inactive-opacity {
+    opacity: 0.5;
+}
+
+div.cdk-global-overlay-wrapper>div.cdk-overlay-pane {
+    overflow: auto;
+    max-height: 86%;
+}
+
 
 /***********Styles Reports*********************/
 
-.button-text { 
-  float: right;
-  margin: 5px 0;
-  border: 1px solid #007efd; 
-  padding: 10px 20px; 
-  background-color: #ffffff; 
-  color: #007efd; 
-  text-decoration: none; 
-  font-family: 'Poppins', sans-serif;
-  border-radius: 50px; 
-  font-weight: bold;
-  
-  }
-.buttons{
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.button { 
-  border: 1px solid #007efd; 
-  padding: 10px; 
-  background-color: #ffffff; 
-  color: #b9b9b9; 
-  text-decoration: none; 
-  text-transform: uppercase; 
-  font-family: 'Poppins', sans-serif;
-  border-radius: 50px; 
-  margin: 0 10px;
-  }
-  .buton active, .button:hover { 
-    border: 1px solid #007efd; 
-    padding: 10px; 
-    background-color: #007efd; 
-    color: #ffffff; 
-    text-decoration: none; 
-    text-transform: uppercase; 
+.button-text {
+    float: right;
+    margin: 5px 0;
+    border: 1px solid #007efd;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #007efd;
+    text-decoration: none;
     font-family: 'Poppins', sans-serif;
-    border-radius: 50px; 
-    margin: 0 10px;;
-    }
+    border-radius: 50px;
+    font-weight: bold;
+}
 
-.descripcion{
-  margin-top: 20px;
-  color:#6D7783;
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
-.subtitle{
-  font-size: 18px;
-  font-weight: bold;
-  color:#000;
+
+.button {
+    border: 1px solid #007efd;
+    padding: 10px;
+    background-color: #ffffff;
+    color: #b9b9b9;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 50px;
+    margin: 0 10px;
 }
+
+.buton active,
+.button:hover {
+    border: 1px solid #007efd;
+    padding: 10px;
+    background-color: #007efd;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 50px;
+    margin: 0 10px;
+    ;
+}
+
+.descripcion {
+    margin-top: 20px;
+    color: #6D7783;
+}
+
+.subtitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+}
+
 
 /*SECCIONES*/
+
 .block-section {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  margin: 80px 0px;
-  width: 1400px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 80px 0px;
+    width: 1400px;
 }
 
+
 /*SECCIONES INTERNAS*/
+
 .section-internal {
-  width: 48%;
-  padding: 5px 24px;
-  
+    width: 48%;
+    padding: 5px 24px;
 }
 
 .section-behavioral {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-image: url('/assets/img/background-job.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-image: url('/assets/img/background-job.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
 }
-.section-repna{
-  margin: 80px 0px;
-  width: 1168px;
 
+.section-repna {
+    margin: 80px 0px;
+    width: 1168px;
 }
+
 
 /* SECCION NOMBRE DEL TIPO DE PERFIL*/
-.tipo-de-perfil {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-image: url('/assets/img/background-perfil.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 800px;
-}
-.section-comportamental{
-  height: auto;
 
+.tipo-de-perfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-image: url('/assets/img/background-perfil.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 800px;
+}
+
+.section-comportamental {
+    height: auto;
 }
 
 .section-grafico-conductual {
-  margin-top: 30px;
-  width: 100%;
-  padding: 20px 0;
-  border: solid 1px #9999990a;
-  border-radius: 15px;
-  box-shadow: 2px 2px 20px 1px rgb(0 0 0 / 10%);
-  background-color: #ffffff;
+    margin-top: 30px;
+    width: 100%;
+    padding: 20px 0;
+    border: solid 1px #9999990a;
+    border-radius: 15px;
+    box-shadow: 2px 2px 20px 1px rgb(0 0 0 / 10%);
+    background-color: #ffffff;
 }
 
-
-
 .descriptivo {
-  padding: 30px;
-  box-shadow: 2px 2px 20px 1px rgb(0 0 0 / 20%);
-  margin-bottom: 50px;
-  margin-top: 30px;
-  border-radius: 10px;
-  overflow: hidden;
+    padding: 30px;
+    box-shadow: 2px 2px 20px 1px rgb(0 0 0 / 20%);
+    margin-bottom: 50px;
+    margin-top: 30px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 // Classes generics
-.vertical-scroll{    
-  height: 400px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  width: 100%;
-}
-.select-half{
-  margin:20px;
-  width: 50%;
+.vertical-scroll {
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 100%;
 }
 
-.text-left{
-  text-align: left;
+.select-half {
+    margin: 20px;
+    width: 50%;
 }
 
-.text-center{
-  text-align: center
+.text-left {
+    text-align: left;
 }
 
-.mt-10{
-  margin-top: 10px;
+.text-center {
+    text-align: center
 }
 
-.mb-20{
-  margin-bottom: 20px;
+.mt-10 {
+    margin-top: 10px;
 }
 
-.center{
-  text-align: center;
+.mb-20 {
+    margin-bottom: 20px;
 }
 
-.d-flex{
-  display: flex;
+.center {
+    text-align: center;
 }
 
-.fd-column{
-  flex-direction: column;
+.d-flex {
+    display: flex;
 }
 
-.w-100{
-  width: 100%;
+.fd-column {
+    flex-direction: column;
 }
 
-.white{
-  color:#ffffff;
+.w-100 {
+    width: 100%;
 }
 
-.blue{
-  color:#3B43F2;
-  text-align: center;
+.white {
+    color: #ffffff;
 }
 
-.left{
-  // TODO - Natalia: Revisar uso de important
-  text-align: left;
-  padding: 0px;
+.blue {
+    color: #3B43F2;
+    text-align: center;
 }
+
+.left {
+    // TODO - Natalia: Revisar uso de important
+    text-align: left;
+    padding: 0px;
+}
+
 .selector {
-  margin-top: 10px;
-  padding: 5px 20px;
-  border-radius: 10px;
-  border: 1px solid #BCBCBC;
-  font-size: 14px;
-  font-weight: bold;
-  color: #1F140F;
+    margin-top: 10px;
+    padding: 5px 20px;
+    border-radius: 10px;
+    border: 1px solid #BCBCBC;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1F140F;
 }
 
 .puestos-compatibles,
 .grafico-compatibility {
-  margin:10px 0;
-  display: flex;
-  flex-wrap: nowrap;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  word-break:break-all;
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    word-break: break-all;
 }
 
 //Solo para filas y columnas mediante flexbox
 .row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
 }
 
 .column {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
 }
 
-.btn-pda-primary{
-  color: #ffffff;
-  background: #007EFD;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  border: none;
+.btn-pda-primary {
+    color: #ffffff;
+    background: #007EFD;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
 }
 
-.btn-pda-outline{
-  color: #007EFD;
-  background: #ffffff;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  border: 1px solid #007EFD;
+.btn-pda-outline {
+    color: #007EFD;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border: 1px solid #007EFD;
 }
+
 
 /**** RESPONSIVE mobile-***/
 
+
 /*SECCIONES INTERNAS*/
+
 @media (max-width: 980px) {
-
-  .container-content{
-       flex-direction: column-reverse;
-      }
-
-
-
-  .block-section {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .section-internal {
-    width: 100%;
-    padding: 5px 25px;  
-  }
- 
-  .section-job, .tipo-de-perfil{
-    flex-wrap: wrap;
-    height: 100%;;
-  }
-
-  .section-grafico-conductual{
-    width: 100%;
-    padding: 2.5px;
-  }
-  .section-descriptivos, .section-descriptivos2{
-    width: 90%;
-    padding: 2.5px;
-  }
+    .container-content {
+        flex-direction: column-reverse;
+    }
+    .block-section {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .section-internal {
+        width: 100%;
+        padding: 5px 25px;
+    }
+    .section-job,
+    .tipo-de-perfil {
+        flex-wrap: wrap;
+        height: 100%;
+        ;
+    }
+    .section-grafico-conductual {
+        width: 100%;
+        padding: 2.5px;
+    }
+    .section-descriptivos,
+    .section-descriptivos2 {
+        width: 90%;
+        padding: 2.5px;
+    }
 }
+
 
 /*TODO: Borrar estilo cuando tengamos la estructura desde el area de maquetacion*/
 
-.development{
-  background: #3f51b5;
-  margin-left: 20px;
-  padding: 0px 10px 0px 10px;
-  border-radius: 10px;
+.development {
+    background: #3f51b5;
+    margin-left: 20px;
+    padding: 0px 10px 0px 10px;
+    border-radius: 10px;
 }
 
-.development h1{
-  color: #ffffff;
+.development h1 {
+    color: #ffffff;
 }
 
-.pda-dark-backdrop{
-  background: rgba(0, 0, 0, 0.6);
+.pda-dark-backdrop {
+    background: rgba(0, 0, 0, 0.6);
 }
+
+.h1 {
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 96px;
+    color: #000000;
+}
+
+.h2 {
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 72px;
+    color: #000000;
+}
+
+.h3 {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+    color: #000000;
+}
+
+.h4 {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: #000000;
+}
+
+.h5 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    color: #000000;
+}
+
+.h6 {
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 32px;
+    color: #000000;
+}
+
+.h7 {
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.body-1 {
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 24px;
+    color: #5E5E5E;
+}
+
+.body-2 {
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 24px;
+    color: #5E5E5E;
+}
+
+.body-3 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #5E5E5E;
+}
+
+.body-4 {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #5E5E5E;
+}
+
 
 /*********************************************************************************/
+
 @import "./assets/variables"
