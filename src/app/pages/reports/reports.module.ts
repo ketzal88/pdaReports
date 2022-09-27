@@ -9,10 +9,11 @@ import { SectionsModule } from './sections/sections.module';
 import { CardModule } from '../../shared/components/card/card.module';
 import { InputModule } from '../../shared/components/input/input.module';
 import { GlobalsServiceModule } from 'src/app/core/globals/globals-service/globals-service.module';
-import { ChartsModule } from './charts/charts.module';
 
 @NgModule({
-  declarations: [ReportsComponent],
+  declarations: [
+    ReportsComponent,
+  ],
   imports: [
     CommonModule,
     ReportsRoutingModule,
@@ -21,7 +22,6 @@ import { ChartsModule } from './charts/charts.module';
     FormsModule,
     InputModule,
     GlobalsServiceModule,
-    ChartsModule,
   ],
   exports: [],
   providers: [DataProviderService],

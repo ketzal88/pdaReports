@@ -1,14 +1,9 @@
-@use "../../themes/blue";
-$color-primary-darker: #0000FF;
-$color-primary: #0075FF;
-$color-secondary: #0094FF;
-$color-light: #EBEFF4;
 .chart-container {
     position: relative;
 }
 
 .chart-inside {
-    border: solid $color-primary 25px;
+    border: solid #0075FF 25px;
     width: 300px;
     height: 300px;
     position: absolute;

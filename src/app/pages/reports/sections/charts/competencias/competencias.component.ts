@@ -1,33 +1,32 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {ThemeColors} from '../../../themes/blue';
+
 @Component({
-  selector: 'chart-tendencia-comportamental',
-  templateUrl: './tendencia-comportamental.component.html',
-  styleUrls: ['./tendencia-comportamental.component.scss']
+  selector: 'chart-competencias',
+  templateUrl: './competencias.component.html',
+  styleUrls: ['./competencias.component.scss']
 })
-export class TendenciaComportamentalComponent implements OnInit {
+export class CompetenciasComponent implements OnInit {
 
   constructor() { }
   @ViewChild('chartContainer') container!: ElementRef;
 
-  @Input() markers: number[] = [];
-  @Input() color: string = "#ff6819";
-
   gauge!: anychart.charts.LinearGauge;
 
   ngOnInit(): void {
-    let value = 100;
+    let value = 50;
     let data = anychart.data.set([['AQI', value]]);
-    let color = this.color;
+    let color = ThemeColors.colorPrimary;
     // set the gauge type
     this.gauge = anychart.gauges.linear();
-    this.gauge.interactivity(false);
 
     // set the data for the gauge
     this.gauge.data(data);
 
     // set the layout
     this.gauge.layout("horizontal");
-    this.gauge.background("transparent");
+    this.gauge.background("transparent")
+
 
     // create a color scale
     let scaleBarColorScale = anychart.scales.ordinalColor().ranges([
@@ -37,7 +36,7 @@ export class TendenciaComportamentalComponent implements OnInit {
         color: [color],
       },
       {
-        from: value + 1,
+        from: value,
         to: 100,
         color: ['#F2F3F3'],
       },
@@ -51,7 +50,7 @@ export class TendenciaComportamentalComponent implements OnInit {
 
     // use the color scale (defined earlier) as the color scale of the Scale Bar
     scaleBar.colorScale(scaleBarColorScale);
-
+    
     // add a marker pointer
     let marker = this.gauge.marker(0);
 
@@ -65,8 +64,7 @@ export class TendenciaComportamentalComponent implements OnInit {
     marker.zIndex(10);
     marker.offset('0%');
 
-
-
+    
     // add a marker pointer
     marker = this.gauge.marker(0);
 
@@ -74,19 +72,19 @@ export class TendenciaComportamentalComponent implements OnInit {
     marker.type('circle');
     marker.color(color);
     marker.stroke('black', 0);
-    marker.width('7.5%');
+    marker.width('10%');
     marker.data([value]);
     // set the zIndex of the marker
     marker.zIndex(10);
-    marker.offset('0%');
-
+    marker.offset('-1.25%');
+    
     // add a marker pointer
     marker = this.gauge.marker(0);
 
     // set the marker type and color
     marker.type('circle');
     marker.color("#F2F3F3");
-    marker.stroke("#00000000");
+    marker.stroke("#00000000")
     marker.width('7.5%');
     marker.data([100]);
     // set the zIndex of the marker
@@ -96,11 +94,6 @@ export class TendenciaComportamentalComponent implements OnInit {
     let scale = this.gauge.scale();
     scale.minimum(0);
     scale.maximum(100);
-
-    this.markers.forEach(value => {
-      this.createMarker("IS", value);
-    });
-
     // set paddings
     this.gauge.padding([0, 40]);
   }
@@ -108,28 +101,5 @@ export class TendenciaComportamentalComponent implements OnInit {
   ngAfterViewInit() {
     this.gauge.container(this.container.nativeElement);
     this.gauge.draw();
-  }
-
-  createMarker(title: string, value: number) {
-    // add a marker pointer
-    let marker = this.gauge.marker(0);
-
-    // set the marker type and color
-    marker.type('circle');
-    marker.color("#007EFD");
-    marker.stroke("white", 2)
-    marker.width('6%');
-    marker.data([{ x: title, value: value, title: title }]);
-    // set the zIndex of the marker
-    marker.zIndex(100);
-    marker.offset('0.75%');
-
-    marker.labels(true);
-    marker.labels()
-      .vAlign("center")
-      .hAlign("left")
-      .offsetY("7%")
-      .offsetX("-3%")
-      .format("{%title}")
   }
 }

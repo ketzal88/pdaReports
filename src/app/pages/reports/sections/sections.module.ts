@@ -45,6 +45,16 @@ import { ProcessFeedbackComponent } from './process-feedback/process-feedback.co
 import { KnowMoreBehavioralProfileComponent } from './know-more-behavioral-profile/know-more-behavioral-profile.component';
 import { ExploreYourCVWithTheseTipsComponent } from './explore-your-cvwith-these-tips/explore-your-cvwith-these-tips.component';
 import { VideoSectionComponent } from './video-section/video-section.component';
+import { BalanceEdadGeneroComponent } from './charts/balance-edad-genero/balance-edad-genero.component';
+import { CompatibilidadGrupoCandidatosComponent } from './charts/compatibilidad-grupo-candidatos/compatibilidad-grupo-candidatos.component';
+import { CompatibilidadPuestoComponent } from './charts/compatibilidad-puesto/compatibilidad-puesto.component';
+import { CompatibilidadPuestosCandidatoComponent } from './charts/compatibilidad-puestos-candidato/compatibilidad-puestos-candidato.component';
+import { CompetenciasComponent } from './charts/competencias/competencias.component';
+import { ConsistenciaComponent } from './charts/consistencia/consistencia.component';
+import { GraficoComportamentalComponent } from './charts/grafico-comportamental/grafico-comportamental.component';
+import { RepnaComponent } from './charts/repna/repna.component';
+import { SmallBarWithNotchComponent } from './charts/small-bar-with-notch/small-bar-with-notch.component';
+import { TendenciaComportamentalComponent } from './charts/tendencia-comportamental/tendencia-comportamental.component';
 @NgModule({
   declarations: [
     CoverIndividualSectionComponent,
@@ -83,6 +93,16 @@ import { VideoSectionComponent } from './video-section/video-section.component';
     KnowMoreBehavioralProfileComponent,
     ExploreYourCVWithTheseTipsComponent,
     VideoSectionComponent,
+    CompatibilidadGrupoCandidatosComponent,
+    GraficoComportamentalComponent,
+    CompatibilidadPuestoComponent,
+    RepnaComponent,
+    SmallBarWithNotchComponent,
+    CompetenciasComponent,
+    BalanceEdadGeneroComponent,
+    TendenciaComportamentalComponent,
+    CompatibilidadPuestosCandidatoComponent,
+    ConsistenciaComponent,
   ],
   imports: [
     CommonModule,
@@ -130,7 +150,17 @@ import { VideoSectionComponent } from './video-section/video-section.component';
     ProcessFeedbackComponent,
     KnowMoreBehavioralProfileComponent,
     ExploreYourCVWithTheseTipsComponent,
-    VideoSectionComponent,
+    VideoSectionComponent,    
+    CompatibilidadGrupoCandidatosComponent,
+    GraficoComportamentalComponent,
+    CompatibilidadPuestoComponent,
+    RepnaComponent,
+    SmallBarWithNotchComponent,
+    CompetenciasComponent,
+    BalanceEdadGeneroComponent,
+    TendenciaComportamentalComponent,
+    CompatibilidadPuestosCandidatoComponent,
+    ConsistenciaComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [BehavioralGraphService, JobCompatibilitySectionService],

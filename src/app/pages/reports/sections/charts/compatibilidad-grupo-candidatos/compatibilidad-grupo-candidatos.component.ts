@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ThemeColors } from '../../themes/blue';
+import {ThemeColors} from '../../../themes/blue';
 
 
 @Component({
