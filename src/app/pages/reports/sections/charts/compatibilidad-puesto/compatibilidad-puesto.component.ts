@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {ThemeColors} from '../../../themes/blue';
 
 
@@ -9,16 +9,26 @@ import {ThemeColors} from '../../../themes/blue';
 })
 export class CompatibilidadPuestoComponent implements OnInit {
 
-  @ViewChild('chartContainer') container!: ElementRef;
+  @ViewChild('chartContainer') container!: ElementRef; 
+  private _value: number;
+  //Inputs
+  @Input() set value(newValue: number) {
+    this._value = newValue;
+    if (this.chart) {
+      this.chart.dispose();
+      this.loadChart();
+      this.showChart();
+    }
+  }
   constructor() { }
 
   chart!: anychart.charts.Pie;
 
-  ngOnInit(): void {
+  loadChart(): void{
     let data = anychart.data.set([
       // { value: 2.5, stroke: { thickness: 0 } },
       {
-        value: 27,
+        value: 100 - this._value,
         stroke: {
           color: "#F4F4F4",
           thickness: 40,
@@ -31,7 +41,7 @@ export class CompatibilidadPuestoComponent implements OnInit {
       },
       // { value: 2.5, stroke: { thickness: 0 } },
       {
-        value: 73,
+        value: this._value,
         stroke: {
           angle: 45,
           lineJoin: "round",
@@ -63,7 +73,7 @@ export class CompatibilidadPuestoComponent implements OnInit {
     let porc = anychart.standalones.label();
     porc
       .enabled(true)
-      .text('72%')
+      .text(this._value + '%')
       .width('100%')
       .height('100%')
       .adjustFontSize(true, true)
@@ -103,10 +113,18 @@ export class CompatibilidadPuestoComponent implements OnInit {
     chart.center().content(tab);
   }
 
-  ngAfterViewInit() {
+  showChart(): void {
     this.chart.container(this.container.nativeElement);
     this.chart.draw();
-    console.log(this.chart.toHtmlTable());
   }
+
+  ngOnInit(): void {   
+    this.loadChart();
+  }
+
+  ngAfterViewInit() {
+    this.showChart();
+  }
+  
 
 }

@@ -103,7 +103,7 @@ export class TendenciaComportamentalComponent implements OnInit {
     });
 
     // set paddings
-    this.gauge.padding([0, 18]);
+    this.gauge.padding([0, 15]);
   }
 
   ngAfterViewInit() {

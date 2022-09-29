@@ -1,42 +1,37 @@
 <ng-container *ngIf="dataIndividualSectionsResponse">
-  <div class="reports">
-    <ng-container *ngFor="let screenProfile of selectOnlyProfile.screens">
-      <div
-        class="slide-header"
-        [ngStyle]="{
+    <div class="reports">
+        <ng-container *ngFor="let screenProfile of selectOnlyProfile.screens">
+            <div class="slide-header" [ngStyle]="{
           'background-image': 'url(/assets/img/' + backgroundUserImage + ')'
         }">
-        <div class="header">
-          <div class="logo"><img [src]="logoImage" /></div>
-          <div class="respmenu">
-            <input type="checkbox" />
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-times"></i>
-            <nav>
-              <ul>
-                <li><a>Descargar PDF</a></li>
-                <li><a>Share</a></li>
-                <li><a>Audio Feedback</a></li>
-                <li><a (click)="goToConfiguration()">Configuración</a></li>
-                <li><a (click)="logout()">Salir</a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <div class="block-section">
-          <ng-container *ngFor="let sectionProfile of screenProfile.sections">
-            <div
-              class="section-internal"
-              [ngStyle]="{
+                <div class="header">
+                    <div class="logo"><img [src]="logoImage" /></div>
+                    <div class="respmenu">
+                        <input type="checkbox" />
+                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-times"></i>
+                        <nav>
+                            <ul>
+                                <li><a>Descargar PDF</a></li>
+                                <li><a>Share</a></li>
+                                <li><a>Audio Feedback</a></li>
+                                <li><a (click)="goToConfiguration()">Configuración</a></li>
+                                <li><a (click)="logout()">Salir</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="block-section">
+                    <ng-container *ngFor="let sectionProfile of screenProfile.sections">
+                        <div class="section-internal" [ngStyle]="{
                 width:
                   selectedReport.reportType.internalName ===
                   'HIRING_CANDIDATE_REVIEW'
                     ? '100%'
                     : null
               }">
-              <ng-container *ngFor="let item of sectionProfile.items">
-                <ng-container
-                  [ngTemplateOutlet]="
+                            <ng-container *ngFor="let item of sectionProfile.items">
+                                <ng-container [ngTemplateOutlet]="
                     item === 'profileItem'
                       ? profileItem
                       : item === 'consistencySection'
@@ -54,40 +49,35 @@
                       : item === 'videoSection'
                       ? videoSection
                       : null
-                  "
-                  [ngTemplateOutletContext]="{
+                  " [ngTemplateOutletContext]="{
                     data: ''
                   }"></ng-container>
-              </ng-container>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                </div>
             </div>
-          </ng-container>
-        </div>
-      </div>
-    </ng-container>
+        </ng-container>
 
-    <ng-container
-      *ngFor="let screen of selectReportType.screens; let idx = index">
-      <div
-        [ngClass]="{
+        <ng-container *ngFor="let screen of selectReportType.screens; let idx = index">
+            <div [ngClass]="{
           'section-behavioral':
             screen.block === 3 &&
             selectReportType.reportType === 'HIRING_SURVEY'
         }">
-        <!-- Pantallas -->
-        <div class="section-conductual block-section">
-          <div class="row">
-            <ng-container *ngFor="let section of screen.sections">
-              <!-- Se utiliza column '0' para contemplar una seccion centrada por arriba de otras secciones -->
-              <ng-container *ngIf="section.column === 0; else showAllSections">
-                <div
-                  style="
+                <!-- Pantallas -->
+                <div class="section-conductual block-section">
+                    <div class="row">
+                        <ng-container *ngFor="let section of screen.sections">
+                            <!-- Se utiliza column '0' para contemplar una seccion centrada por arriba de otras secciones -->
+                            <ng-container *ngIf="section.column === 0; else showAllSections">
+                                <div style="
                     display: flex;
                     flex-direction: column;
                     flex-basis: 100%;
                   ">
-                  <ng-container *ngFor="let item of section.items">
-                    <ng-container
-                      [ngTemplateOutlet]="
+                                    <ng-container *ngFor="let item of section.items">
+                                        <ng-container [ngTemplateOutlet]="
                         item === 'questionBehavioralProfile'
                           ? questionBehavioralProfile
                           : item === 'knowYourKeyCompetencies'
@@ -95,18 +85,16 @@
                           : item === 'exploreYourCVWithTheseTips'
                           ? exploreYourCVWithTheseTips
                           : null
-                      "
-                      [ngTemplateOutletContext]="{
+                      " [ngTemplateOutletContext]="{
                         data: ''
                       }"></ng-container>
-                  </ng-container>
-                </div>
-              </ng-container>
-              <ng-template #showAllSections>
-                <div class="section-descriptivos section-internal">
-                  <ng-container *ngFor="let item of section.items">
-                    <ng-container
-                      [ngTemplateOutlet]="
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-template #showAllSections>
+                                <div class="section-descriptivos section-internal">
+                                    <ng-container *ngFor="let item of section.items">
+                                        <ng-container [ngTemplateOutlet]="
                         item === 'jobCompatibilityIndividualAreaSection'
                           ? jobCompatibilityIndividualAreaSection
                           : item === 'jobCompatibilityMultipleColumnsSection'
@@ -158,36 +146,30 @@
                           : item === 'knowMoreBehavioralProfile'
                           ? knowMoreBehavioralProfile
                           : null
-                      "
-                      [ngTemplateOutletContext]="{
+                      " [ngTemplateOutletContext]="{
                         data: ''
                       }"></ng-container>
-                  </ng-container>
+                                    </ng-container>
+                                </div>
+                            </ng-template>
+                        </ng-container>
+                    </div>
                 </div>
-              </ng-template>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-  <footer class="footer">
-    <div class="top-footer"></div>
-    <div class="menu-footer">
-      <ul class="v-effect-link">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Descargar PDF</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+            </div>
+        </ng-container>
     </div>
-    <div class="social-icons">
-      <svg
-        width="222"
-        height="62"
-        viewBox="0 0 222 62"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg">
+    <footer class="footer">
+        <div class="top-footer"></div>
+        <div class="menu-footer">
+            <ul class="v-effect-link">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Descargar PDF</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="social-icons">
+            <svg width="222" height="62" viewBox="0 0 222 62" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -235,56 +217,46 @@
           d="M32.7343 41.5823V32.0838H35.8106L36.313 27.8623H32.7343V25.8064C32.7343 24.7194 32.7639 23.6408 34.3843 23.6408H36.0256V20.6224C36.0256 20.577 34.6158 20.4746 33.1896 20.4746C30.211 20.4746 28.346 22.2234 28.346 25.4349V27.8623H25.0547V32.0838H28.346V41.5823H32.7343Z"
           fill="white" />
       </svg>
-      <p style="margin-top: 20px">PDA International 2022. All right reserved</p>
-    </div>
-  </footer>
+            <p style="margin-top: 20px">PDA International 2022. All right reserved</p>
+        </div>
+    </footer>
 </ng-container>
 
 <!-- All Sections -->
 <ng-template #profileItem>
-  <app-profile-item
-    [coverIndividual]="
+    <app-profile-item [coverIndividual]="
       dataIndividualSectionsResponse?.coverIndividual
     "></app-profile-item>
 </ng-template>
 
 <ng-template #consistencySection>
-  <app-consistency-section
-    [consistencyIndicator]="
-      dataIndividualSectionsResponse?.consistencyIndicator
-    ">
-  </app-consistency-section>
+    <app-consistency-section [consistencyIndicator]="
+    dataIndividualSectionsResponse?.consistencyIndicator
+  ">
+    </app-consistency-section>
 </ng-template>
 
 <ng-template #competenciesSection>
-  <app-competencies-section
-    *ngIf="dataIndividualSectionsResponse?.competencyCompatibility"
-    [competencyCompatibility]="
+    <app-competencies-section *ngIf="dataIndividualSectionsResponse?.competencyCompatibility" [competencyCompatibility]="
       dataIndividualSectionsResponse?.competencyCompatibility
     "></app-competencies-section>
 </ng-template>
 
 <ng-template #discoverYourUniqueness>
-  <app-discover-your-uniqueness></app-discover-your-uniqueness>
+    <app-discover-your-uniqueness></app-discover-your-uniqueness>
 </ng-template>
 
 <ng-template #jobCompatibilitySection let-data="data">
-  <app-job-compatibility-section
-    *ngIf="
+    <app-job-compatibility-section *ngIf="
       !individualsSectionsLoader.isLoading() &&
       !jobsByCategoryLoader.isLoading() &&
       !categoryByJobLoader.isLoading()
-    "
-    [jobCompatibility]="dataIndividualSectionsResponse.jobCompatibility"
-    [jobs]="jobsByCategory"
-    [reportId]="reportId"
-    [myReport]="requestReportData"></app-job-compatibility-section>
+    " [jobCompatibility]="dataIndividualSectionsResponse.jobCompatibility" [jobs]="jobsByCategory" [reportId]="reportId" [myReport]="requestReportData"></app-job-compatibility-section>
 </ng-template>
 
 <ng-template #jobCompatibilityIndividualAreaSection>
-  <!-- Compatibilidad de puesto por individuo-->
-  <app-job-compatibility-individual-area-section
-    *ngIf="
+    <!-- Compatibilidad de puesto por individuo-->
+    <app-job-compatibility-individual-area-section *ngIf="
       !generatedReportsLoader.isLoading() &&
       !reportsLocalLoader.isLoading() &&
       !individualsSectionsLoader.isLoading() &&
@@ -292,180 +264,150 @@
       !jobCategoriesLoader.isLoading() &&
       !jobsByCategoryLoader.isLoading() &&
       !multipleJobCompatibilityLoader.isLoading()
-    "
-    [jobCompatibilityDetailed]="
+    " [jobCompatibilityDetailed]="
       dataIndividualSectionsResponse?.jobCompatibility?.jobCompatibilityDetailed
-    "
-    [multipleJobCompatibility]="multipleJobCompatibility"
-    [jobCategory]="jobCategory"></app-job-compatibility-individual-area-section>
+    " [multipleJobCompatibility]="multipleJobCompatibility" [jobCategory]="jobCategory"></app-job-compatibility-individual-area-section>
 </ng-template>
 <ng-template #jobCompatibilityMultipleColumnsSection let-data="data">
-  <!-- Compatibilidad de puesto por grupo-->
-  <app-job-compatibility-multiple-columns-section
-    [jobCompatibility]="
+    <!-- Compatibilidad de puesto por grupo-->
+    <app-job-compatibility-multiple-columns-section [jobCompatibility]="
       dataIndividualSectionsResponse.jobCompatibility
     "></app-job-compatibility-multiple-columns-section>
 </ng-template>
 
 <ng-template #behavioralTrend>
-  <!-- Tendencia comportamental de equipo de trabajo -->
-  <app-behavioral-trend></app-behavioral-trend>
+    <!-- Tendencia comportamental de equipo de trabajo -->
+    <app-behavioral-trend></app-behavioral-trend>
 </ng-template>
 <ng-template #ageGenderBalance>
-  <!-- Balance de edad y genero -->
-  <app-age-gender-balance></app-age-gender-balance>
+    <!-- Balance de edad y genero -->
+    <app-age-gender-balance></app-age-gender-balance>
 </ng-template>
 
 <ng-template #behavioralGraph>
-  <!-- Grafico comportamental-->
-  <app-behavioral-graph
-    *ngIf="
+    <!-- Grafico comportamental-->
+    <app-behavioral-graph *ngIf="
       !individualsSectionsLoader.isLoading() &&
       !jobsByCategoryLoader.isLoading()
-    "
-    [behavioralRadarChart]="
+    " [behavioralRadarChart]="
       dataIndividualSectionsResponse?.behavioralRadarChart
-    "
-    [jobCompatibility]="dataIndividualSectionsResponse?.jobCompatibility"
-    [jobs]="jobsByCategory"
-    [reportId]="reportId"
-    [myReport]="requestReportData"></app-behavioral-graph>
+    " [jobCompatibility]="dataIndividualSectionsResponse?.jobCompatibility" [jobs]="jobsByCategory" [reportId]="reportId" [myReport]="requestReportData"></app-behavioral-graph>
 </ng-template>
 
 <ng-template #behavioralProfileChartSection>
-  <app-behavioral-profile-chart-section
-    [behavioralProfileInfo]="
+    <app-behavioral-profile-chart-section [behavioralProfileInfo]="
       dataIndividualSectionsResponse?.behavioralProfileChart
     "></app-behavioral-profile-chart-section>
 </ng-template>
 
 <ng-template #imageProfileType>
-  <app-image-profile-type
-    *ngIf="dataIndividualSectionsResponse"
-    [coverIndividual]="dataIndividualSectionsResponse?.coverIndividual"
-    [behavioralDescriptors]="
+    <app-image-profile-type *ngIf="dataIndividualSectionsResponse" [coverIndividual]="dataIndividualSectionsResponse?.coverIndividual" [behavioralDescriptors]="
       dataIndividualSectionsResponse?.behavioralDescriptors
     "></app-image-profile-type>
 </ng-template>
 
 <ng-template #selfDescription>
-  <app-self-description
-    [selfDescription]="
+    <app-self-description [selfDescription]="
       dataIndividualSectionsResponse.selfDescription
     "></app-self-description>
 </ng-template>
 
 <ng-template #behavioralProfileDescriptionSection>
-  <app-behavioral-profile-description-section
-    [behavioralProfileDescription]="
+    <app-behavioral-profile-description-section [behavioralProfileDescription]="
       dataIndividualSectionsResponse?.behavioralProfileDescription
     "></app-behavioral-profile-description-section>
 </ng-template>
 
 <ng-template #emotionalInteligenceSection>
-  <app-emotional-inteligence-section
-    [emotionalIntelligence]="
+    <app-emotional-inteligence-section [emotionalIntelligence]="
       dataIndividualSectionsResponse?.emotionalIntelligence
     "></app-emotional-inteligence-section>
 </ng-template>
 
 <ng-template #potentialDeployment let-data="data">
-  <app-potential-deployment
-    [effectiveLeadership]="
+    <app-potential-deployment [effectiveLeadership]="
       dataIndividualSectionsResponse?.effectiveLeadership
     "></app-potential-deployment>
 </ng-template>
 <ng-template #communicationStyle let-data="data">
-  <app-communication-style
-    [communicationTitle]="
+    <app-communication-style [communicationTitle]="
       dataIndividualSectionsResponse.managementStyle.communicationTitle
-    "
-    [communicationDescriptions]="
+    " [communicationDescriptions]="
       dataIndividualSectionsResponse.managementStyle.communicationDescriptions
     "></app-communication-style>
 </ng-template>
 <ng-template #strengthsOverusedSection let-data="data">
-  <app-strengths-overused-section
-    [strengthsOverused]="
+    <app-strengths-overused-section [strengthsOverused]="
       dataIndividualSectionsResponse?.strengthsOverused
     "></app-strengths-overused-section>
 </ng-template>
 <ng-template #howToLeadIndividual let-data="data">
-  <app-how-to-lead-individual
-    [leadershipTitle]="
+    <app-how-to-lead-individual [leadershipTitle]="
       dataIndividualSectionsResponse.managementStyle.leadershipTitle
-    "
-    [leadershipDescriptions]="
+    " [leadershipDescriptions]="
       dataIndividualSectionsResponse.managementStyle.leadershipDescriptions
     "></app-how-to-lead-individual>
 </ng-template>
 
 <ng-template #expandedBehavioralProfile>
-  <app-expanded-behavioral-profile></app-expanded-behavioral-profile>
+    <app-expanded-behavioral-profile></app-expanded-behavioral-profile>
 </ng-template>
 
 <ng-template #currentSituation>
-  <app-current-situation
-    [currentSituation]="
+    <app-current-situation [currentSituation]="
       dataIndividualSectionsResponse.currentSituation
     "></app-current-situation>
 </ng-template>
 <ng-template #behavioralTrends let-data="data">
-  <app-behavioral-trends
-    [behavioralTrends]="
+    <app-behavioral-trends [behavioralTrends]="
       dataIndividualSectionsResponse.behavioralTrend
     "></app-behavioral-trends>
 </ng-template>
 
 <ng-template #developmentPlan>
-  <app-development-plan
-    [developmentPlan]="
+    <app-development-plan [developmentPlan]="
       dataIndividualSectionsResponse.developmentPlan
     "></app-development-plan>
 </ng-template>
 
 <ng-template #hrFeedback>
-  <app-hr-feedback
-    [hrFeedback]="dataIndividualSectionsResponse.hrFeedback"></app-hr-feedback>
+    <app-hr-feedback [hrFeedback]="dataIndividualSectionsResponse.hrFeedback"></app-hr-feedback>
 </ng-template>
 
 <ng-template #questionBehavioralProfile>
-  <app-question-behavioral-profile></app-question-behavioral-profile>
+    <app-question-behavioral-profile></app-question-behavioral-profile>
 </ng-template>
 
 <ng-template #knowWilliamMarstonTheory>
-  <app-know-william-marston-theory></app-know-william-marston-theory>
+    <app-know-william-marston-theory></app-know-william-marston-theory>
 </ng-template>
 
 <ng-template #knowBehavioralProfile>
-  <app-know-behavioral-profile></app-know-behavioral-profile>
+    <app-know-behavioral-profile></app-know-behavioral-profile>
 </ng-template>
 
 <ng-template #imageFullProfileType>
-  <app-image-full-profile-type
-    *ngIf="dataIndividualSectionsResponse"
-    [coverIndividual]="dataIndividualSectionsResponse?.coverIndividual"
-    [behavioralDescriptors]="
+    <app-image-full-profile-type *ngIf="dataIndividualSectionsResponse" [coverIndividual]="dataIndividualSectionsResponse?.coverIndividual" [behavioralDescriptors]="
       dataIndividualSectionsResponse?.behavioralDescriptors
     "></app-image-full-profile-type>
 </ng-template>
 
 <ng-template #knowYourKeyCompetencies>
-  <app-know-your-key-competencies></app-know-your-key-competencies>
+    <app-know-your-key-competencies></app-know-your-key-competencies>
 </ng-template>
 
 <ng-template #knowYourProfileComparedSkillsFuture>
-  <app-know-your-profile-compared-skills-future></app-know-your-profile-compared-skills-future>
+    <app-know-your-profile-compared-skills-future></app-know-your-profile-compared-skills-future>
 </ng-template>
 <ng-template #processFeedback>
-  <app-process-feedback></app-process-feedback>
+    <app-process-feedback></app-process-feedback>
 </ng-template>
 <ng-template #knowMoreBehavioralProfile>
-  <app-know-more-behavioral-profile></app-know-more-behavioral-profile>
+    <app-know-more-behavioral-profile></app-know-more-behavioral-profile>
 </ng-template>
 <ng-template #exploreYourCVWithTheseTips>
-  <app-explore-your-cvwith-these-tips></app-explore-your-cvwith-these-tips>
+    <app-explore-your-cvwith-these-tips></app-explore-your-cvwith-these-tips>
 </ng-template>
 <ng-template #videoSection>
-  <app-video-section></app-video-section>
+    <app-video-section></app-video-section>
 </ng-template>
