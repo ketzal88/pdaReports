@@ -1,7 +1,32 @@
-<p class="subtitle center">Tendencia Comportamental de equipo de trabajo</p>
-<p class="descripcion">
-  En este gráfico se muestra la correlación de las tendencias comportamentales
-  entre las personas que hacen parte del equipo de trabajo.
+<h4 class="h4 subtitle center">{{behavioralTrends.title}}</h4>
+<p class="body-1 center my-32">En este gráfico se muestra la correlación de las tendencias comportamentales entre las personas que hacen parte del equipo de trabajo.
 </p>
+<div style="width: 100%; border-radius: 8px">
+
+</div>
+
 <!-- TODO - Disenio: Grafico tendencia comportamental a re-ver por diseño -->
-<div style="width: 100%; height: 400px"></div>
+<div style="width: 100%; height: 400px">
+    <div class="section-graph-card">
+        <mat-accordion>
+            <ng-container *ngFor="let item of behavioralTrends.behavioralTrendsDetails; let idx = index">
+                <mat-expansion-panel (opened)="changeBehavioralTrend(idx)" (closed)="changeClose(idx)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title> {{ item.name }} </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>{{ item.description }}</p>
+                    <div class="progress-bar-selected">
+                        <div style="display: flex; justify-content: space-between">
+                            <span style="font-style: italic">{{ behavioralTrends.leftSideDescriptionWord }}</span>
+                            <span style="font-style: italic">{{ behavioralTrends.rightSideDescriptionWord }}</span>
+                        </div>
+                        <chart-tendencia-comportamental></chart-tendencia-comportamental>
+                    </div>
+                </mat-expansion-panel>
+                <div class="progress-bar-unselected" [ngStyle]="{ display: idxSelected === idx ? 'none' : 'block' }">
+                    <chart-tendencia-comportamental></chart-tendencia-comportamental>
+                </div>
+            </ng-container>
+        </mat-accordion>
+    </div>
+</div>

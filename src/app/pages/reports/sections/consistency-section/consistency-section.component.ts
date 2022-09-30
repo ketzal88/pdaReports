@@ -17,7 +17,10 @@ export class ConsistencySectionComponent implements OnInit {
   value = 57;
   bufferValue = 75;
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.warn(this.consistencyIndicator);
+  }
 }

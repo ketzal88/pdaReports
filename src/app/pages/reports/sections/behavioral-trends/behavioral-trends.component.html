@@ -1,40 +1,31 @@
 <p class="subtitle left">{{ behavioralTrends.title }}</p>
 <div style="width: 100%; border-radius: 8px">
-  <ng-container
-    *ngFor="
+    <ng-container *ngFor="
       let item of behavioralTrends.behavioralTrendsDetails;
       let idx = index
     ">
-    <mat-expansion-panel
-      (opened)="changeBehavioralTrend(item, idx)"
-      (closed)="changeClose(idx)">
-      <mat-expansion-panel-header>
-        <mat-panel-title> {{ item.name }} </mat-panel-title>
-      </mat-expansion-panel-header>
-      <p>{{ item.description }}</p>
-      <div class="progress-bar-selected">
-        <div style="display: flex; justify-content: space-between">
-          <span style="font-style: italic">{{
+        <mat-expansion-panel (opened)="changeBehavioralTrend(item, idx)" (closed)="changeClose(idx)">
+            <mat-expansion-panel-header>
+                <mat-panel-title> {{ item.name }} </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{ item.description }}</p>
+            <div class="progress-bar-selected">
+                <div style="display: flex; justify-content: space-between">
+                    <span style="font-style: italic">{{
             behavioralTrends.leftSideDescriptionWord
           }}</span>
-          <span style="font-style: italic">{{
+                    <span style="font-style: italic">{{
             behavioralTrends.rightSideDescriptionWord
           }}</span>
-        </div>
-        <mat-progress-bar
-          mode="determinate"
-          [value]="item.compatibilityPercentage"></mat-progress-bar>
-      </div>
-    </mat-expansion-panel>
-    <div
-      class="progress-bar-unselected"
-      [ngStyle]="{
+                </div>
+                <mat-progress-bar mode="determinate" [value]="item.compatibilityPercentage"></mat-progress-bar>
+            </div>
+        </mat-expansion-panel>
+        <div class="progress-bar-unselected" [ngStyle]="{
         display:
           idxSelected === idx || listViewTrends.includes(idx) ? 'none' : 'block'
       }">
-      <mat-progress-bar
-        mode="determinate"
-        [value]="item.compatibilityPercentage"></mat-progress-bar>
-    </div>
-  </ng-container>
+            <mat-progress-bar mode="determinate" [value]="item.compatibilityPercentage"></mat-progress-bar>
+        </div>
+    </ng-container>
 </div>

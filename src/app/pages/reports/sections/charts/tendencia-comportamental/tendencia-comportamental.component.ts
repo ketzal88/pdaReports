@@ -50,7 +50,7 @@ export class TendenciaComportamentalComponent implements OnInit {
     let scaleBar = this.gauge.scaleBar(0);
 
     // set the width of the Scale Bar
-    scaleBar.width('7.5%');
+    scaleBar.width('75%');
 
     // use the color scale (defined earlier) as the color scale of the Scale Bar
     scaleBar.colorScale(scaleBarColorScale);
@@ -62,7 +62,7 @@ export class TendenciaComportamentalComponent implements OnInit {
     marker.type('circle');
     marker.color(color);
     marker.stroke('black', 0);
-    marker.width('7.5%');
+    marker.width('75%');
     marker.data([0]);
     // set the zIndex of the marker
     marker.zIndex(10);
@@ -75,7 +75,7 @@ export class TendenciaComportamentalComponent implements OnInit {
     marker.type('circle');
     marker.color(color);
     marker.stroke('black', 0);
-    marker.width('7.5%');
+    marker.width('75%');
     marker.data([value]);
     // set the zIndex of the marker
     marker.zIndex(10);
@@ -88,7 +88,7 @@ export class TendenciaComportamentalComponent implements OnInit {
     marker.type('circle');
     marker.color("#F2F3F3");
     marker.stroke("#00000000");
-    marker.width('7.5%');
+    marker.width('75%');
     marker.data([100]);
     // set the zIndex of the marker
     marker.zIndex(-10);

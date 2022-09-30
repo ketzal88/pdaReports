@@ -4,16 +4,5 @@
     <p class="body-1">
         {{ consistencyIndicator.description }}
     </p>
-    <chart-consistencia></chart-consistencia>
-    <!-- <mat-card>
-        <mat-card-content>
-            <section class="example-section">
-                <div [ngClass]="{'custom-blue': true}">
-                    <mat-progress-bar class="example-margin" [mode]="mode" [value]="value" [bufferValue]="bufferValue">
-                    </mat-progress-bar>
-                </div>
-            </section>
-        </mat-card-content>
-        
-    </mat-card> -->
+    <chart-consistencia [value]="consistencyIndicator.consistencyValue"></chart-consistencia>
 </div>

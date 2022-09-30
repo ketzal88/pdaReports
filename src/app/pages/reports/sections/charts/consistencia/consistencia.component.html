@@ -1,7 +1,7 @@
-<div style="width: 500px; margin-top: -125px; margin-left: -2px; display: flex; ">
-    <chart-tendencia-comportamental color="#0075FF"></chart-tendencia-comportamental>
-    <chart-tendencia-comportamental color="#0075FF"></chart-tendencia-comportamental>
-    <chart-tendencia-comportamental color="#0075FF"></chart-tendencia-comportamental>
-    <chart-tendencia-comportamental color="#dddddd"></chart-tendencia-comportamental>
-    <chart-tendencia-comportamental color="#dddddd"></chart-tendencia-comportamental>
+<div style="width: 500px; margin-top: 10px; margin-left: -7px; display: flex; ">
+    <chart-tendencia-comportamental [color]="value > 16 ? '#0075FF' : '#dddddd'"></chart-tendencia-comportamental>
+    <chart-tendencia-comportamental [color]="value > 33 ? '#0075FF' : '#dddddd'"></chart-tendencia-comportamental>
+    <chart-tendencia-comportamental [color]="value > 50 ? '#0075FF' : '#dddddd'"></chart-tendencia-comportamental>
+    <chart-tendencia-comportamental [color]="value > 66 ? '#0075FF' : '#dddddd'"></chart-tendencia-comportamental>
+    <chart-tendencia-comportamental [color]="value > 83 ? '#0075FF' : '#dddddd'"></chart-tendencia-comportamental>
 </div>

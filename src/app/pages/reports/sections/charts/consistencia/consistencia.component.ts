@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'chart-consistencia',
@@ -7,6 +7,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class ConsistenciaComponent implements OnInit {
   constructor() { }
+  @Input() value: number = 0;
   ngOnInit(): void {
   }
 }

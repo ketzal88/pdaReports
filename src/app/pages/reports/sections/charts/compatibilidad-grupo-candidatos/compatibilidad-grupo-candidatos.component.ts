@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {ThemeColors} from '../../../themes/blue';
+import { MultipleJobCompatibility } from 'src/app/core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
 
 
 @Component({
@@ -12,6 +13,7 @@ export class CompatibilidadGrupoCandidatosComponent implements OnInit {
   constructor() { }
   @ViewChild('chartContainer') container!: ElementRef;
 
+  @Input() data!: MultipleJobCompatibility[];
   chart!: anychart.charts.Polar;
 
   ngOnInit() {
@@ -38,28 +40,15 @@ export class CompatibilidadGrupoCandidatosComponent implements OnInit {
     //   { x: "LO", value: Math.random() },
     //   { x: "AC", value: 1 },
     // ]);
-    let columnSeries = this.chart.column([
-      { x: "IS", value: 70 },
-      { x: "JS", value: 70 },
-      { x: "JG", value: 0 },
-      { x: "JC", value: 70 },
-      { x: "SH", value: 70 },
-      { x: "MA", value: 70 },
-      { x: "JBL", value: 70 },
-      { x: "FD", value: 50 },
-      { x: "JPR", value: 70 },
-      { x: "SC", value: 70 },
-      { x: "MHM", value: 70 },
-      { x: "HJ", value: 70 },
-      { x: "PLG", value: 70 },
-      { x: "DC", value: 70 },
-      { x: "FGG", value: 70 },
-      { x: "PA", value: 70 },
-      { x: "DK", value: 70 },
-      { x: "JU", value: 70 },
-      { x: "LO", value: 70 },
-      { x: "AC", value: 100 },
-    ]).tooltip(false);
+    const formattedData = this.data
+    .filter(x => x.jobTitle !== 'Average' && x.jobTitle !== 'Promedio')
+    .map(x => {
+      return {
+        x: x.jobTitle.split(":")[0].split(" ").map(x => x[0]).join(""),
+        value: x.compatibilityPercentage * 100,
+      };
+    });
+    let columnSeries = this.chart.column(formattedData).tooltip(false);
     columnSeries.color("#cccccc88").labels().format("{%value}%").enabled(false).fontColor("#ddddd").fontSize("100%");
     columnSeries.selected().fill("#ff4b7e").selected().labels().enabled(true);
 
@@ -86,7 +75,7 @@ export class CompatibilidadGrupoCandidatosComponent implements OnInit {
 
     // set x-scale
     this.chart.xScale('ordinal');
-    this.chart.innerRadius(150);
+    this.chart.innerRadius("50%");
     this.chart.background().fill("red", 0);
     let chart = this.chart;
     this.chart.listen('chartDraw', function () {

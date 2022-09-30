@@ -67,7 +67,7 @@
         }">
                 <!-- Pantallas -->
                 <div class="section-conductual block-section">
-                    <div class="row">
+                    <div class="row justify-content-between">
                         <ng-container *ngFor="let section of screen.sections">
                             <!-- Se utiliza column '0' para contemplar una seccion centrada por arriba de otras secciones -->
                             <ng-container *ngIf="section.column === 0; else showAllSections">

@@ -72,7 +72,7 @@
         }">
                 <!-- Pantallas -->
                 <div class="section-conductual block-section">
-                    <div class="row">
+                    <div class="row justify-content-between">
                         <ng-container *ngFor="let section of screen.sections">
                             <!-- Se utiliza column '0' para contemplar una seccion centrada por arriba de otras secciones -->
                             <ng-container *ngIf="section.column === 0; else showAllSections">
@@ -260,9 +260,9 @@
     "></app-job-compatibility-multiple-columns-section>
 </ng-template>
 
-<ng-template #behavioralTrend>
+<ng-template #behavioralTrend let-data="data">
     <!-- Tendencia comportamental de equipo de trabajo -->
-    <app-behavioral-trend></app-behavioral-trend>
+    <app-behavioral-trend [behavioralTrends]="dataIndividualSectionsResponse.behavioralTrend"></app-behavioral-trend>
 </ng-template>
 <ng-template #ageGenderBalance>
     <!-- Balance de edad y genero -->

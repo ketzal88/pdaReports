@@ -258,7 +258,7 @@ div.cdk-global-overlay-wrapper>div.cdk-overlay-pane {
 }
 
 .blue {
-    color: #3B43F2;
+    color: #0094ff;
     text-align: center;
 }
 
@@ -270,11 +270,13 @@ div.cdk-global-overlay-wrapper>div.cdk-overlay-pane {
 
 .selector {
     margin-top: 10px;
-    padding: 5px 20px;
-    border-radius: 10px;
-    border: 1px solid #BCBCBC;
-    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 25px;
+    border: 0px;
+    font-size: 19px;
+    line-height: 24px;
     font-weight: bold;
+    box-shadow: 5px 5px 20px rgb(0 0 0 / 15%);
     color: #1F140F;
 }
 
@@ -295,7 +297,6 @@ div.cdk-global-overlay-wrapper>div.cdk-overlay-pane {
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    align-items: center;
 }
 
 .column {
@@ -383,49 +384,42 @@ div.cdk-global-overlay-wrapper>div.cdk-overlay-pane {
     font-weight: 700;
     font-size: 96px;
     line-height: 96px;
-    color: #000000;
 }
 
 .h2 {
     font-weight: 700;
     font-size: 64px;
     line-height: 72px;
-    color: #000000;
 }
 
 .h3 {
     font-weight: 700;
     font-size: 48px;
     line-height: 56px;
-    color: #000000;
 }
 
 .h4 {
     font-weight: 700;
     font-size: 32px;
     line-height: 40px;
-    color: #000000;
 }
 
 .h5 {
     font-weight: 500;
     font-size: 24px;
     line-height: 32px;
-    color: #000000;
 }
 
 .h6 {
     font-weight: 300;
     font-size: 24px;
     line-height: 32px;
-    color: #000000;
 }
 
 .h7 {
     font-weight: 700;
     font-size: 19px;
     line-height: 24px;
-    color: #000000;
 }
 
 .body-1 {
@@ -454,6 +448,32 @@ div.cdk-global-overlay-wrapper>div.cdk-overlay-pane {
     font-size: 12px;
     line-height: 16px;
     color: #5E5E5E;
+}
+
+.my-32 {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.justify-content-between {
+    justify-content: space-between
+}
+
+select.small-shadow {
+    box-shadow: 0px 3px 5px #C3C4CA;
+}
+
+.section-graph-card {
+    width: 100%;
+    border: solid 1px #9999990a;
+    border-radius: 15px;
+    box-shadow: 2px 2px 20px 1px rgba(0, 0, 0, 0.1);
+    padding-bottom: 20px;
+    background-color: white;
+}
+
+.anychart-credits {
+    visibility: hidden;
 }
 
 
