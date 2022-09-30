@@ -24,7 +24,7 @@
                     </div>
                 </mat-expansion-panel>
                 <div class="progress-bar-unselected" [ngStyle]="{ display: idxSelected === idx ? 'none' : 'block' }">
-                    <chart-tendencia-comportamental></chart-tendencia-comportamental>
+                    <chart-tendencia-comportamental [value]="item.compatibilityPercentage" color="#D5D7D9"></chart-tendencia-comportamental>
                 </div>
             </ng-container>
         </mat-accordion>

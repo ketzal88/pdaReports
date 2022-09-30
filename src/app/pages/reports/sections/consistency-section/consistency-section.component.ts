@@ -21,6 +21,5 @@ export class ConsistencySectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.warn(this.consistencyIndicator);
   }
 }

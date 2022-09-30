@@ -13,12 +13,13 @@ export class TendenciaComportamentalComponent implements OnInit {
   @ViewChild('chartContainer') container!: ElementRef;
 
   @Input() markers: number[] = [];
+  @Input() value: number = 100;
   @Input() color: string = "#ff6819";
 
   gauge!: anychart.charts.LinearGauge;
 
   ngOnInit(): void {
-    let value = 100;
+    let value = this.value;
     let data = anychart.data.set([['AQI', value]]);
     let color = this.color;
     // set the gauge type

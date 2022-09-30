@@ -11,15 +11,15 @@ export class BehavioralTrendComponent implements OnInit {
   idxSelected: number;
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    console.warn(this.behavioralTrends)
+  }
   
   changeBehavioralTrend(idx: number): void {
     this.idxSelected = idx;
-    console.warn(this.idxSelected);
   }
 
   changeClose(idx: number): void {
     this.idxSelected = undefined;
-    console.warn(this.idxSelected);
   }
 }
