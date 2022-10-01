@@ -12,7 +12,7 @@ export class BehavioralTrendComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void { 
-    console.warn(this.behavioralTrends)
+    this.behavioralTrends.behavioralTrendsDetails = this.behavioralTrends.behavioralTrendsDetails.splice(0,5);
   }
   
   changeBehavioralTrend(idx: number): void {
@@ -20,6 +20,8 @@ export class BehavioralTrendComponent implements OnInit {
   }
 
   changeClose(idx: number): void {
-    this.idxSelected = undefined;
+    if (this.idxSelected == idx){
+      this.idxSelected = undefined;
+    }
   }
 }

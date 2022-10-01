@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
 type Polygon = ReturnType<anychart.charts.Polar["polygon"]>;
 
@@ -11,6 +11,34 @@ export class GraficoComportamentalComponent implements OnInit {
 
   constructor() { }
   @ViewChild('chartContainer') container!: ElementRef;
+
+  @Input()
+  get showPuesto(): boolean { return this._showPuesto; }
+  set showPuesto(showPuesto: boolean) {
+    this._showPuesto = showPuesto;
+    if (this.puesto){
+      this.puesto.enabled(showPuesto);
+    }
+  }
+  private _showPuesto = true;
+    @Input()
+  get showLider(): boolean { return this._showLider; }
+  set showLider(showLider: boolean) {
+    this._showLider = showLider;
+    if (this.lider){
+      this.lider.enabled(showLider);
+    }
+  }
+  private _showLider = false;
+  @Input()
+  get showEquipo(): boolean { return this._showEquipo; }
+  set showEquipo(showEquipo: boolean) {
+    this._showEquipo = showEquipo;    
+    if (this.equipo){
+      this.equipo.enabled(showEquipo);
+    }
+  }
+  private _showEquipo = false;
 
   chart!: anychart.charts.Polar;
   persona!: Polygon;
@@ -62,6 +90,10 @@ export class GraficoComportamentalComponent implements OnInit {
     this.puesto = this.createPolygon(puesto, chart, "#007efd")
     this.lider = this.createPolygon(lider, chart, "#0be300")
     this.equipo = this.createPolygon(equipo, chart, "#FF0000")
+
+    this.puesto.enabled(this.showPuesto);
+    this.lider.enabled(this.showLider);
+    this.equipo.enabled(this.showEquipo);
 
     // let puestoPoly = chart.polygon(puesto);
     // puestoPoly

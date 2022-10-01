@@ -1,55 +1,43 @@
-<p class="subtitle center">{{ behavioralRadarChart.title }}</p>
-<p class="descripcion">
-  {{ behavioralRadarChart.introduction }}
-</p>
-
+<h4 class="h4 subtitle center">{{behavioralRadarChart.title}}</h4>
+<p class="body-1 center my-32">
+    {{ behavioralRadarChart.introduction }}</p>
 <div class="section-grafic-comportamental">
-  <div
-    class="tipos-grafico-comportamental"
-    *ngIf="
+    <div class="tipos-grafico-comportamental" *ngIf="
       jobCompatibility?.jobCompatibilityDetailed
         ?.correlationJobBehavioralCompetencies &&
       jobCompatibility?.jobCompatibilityDetailed
         ?.correlationJobBehavioralCompetencies.length > 0
     ">
-    <mat-tab-group animationDuration="0ms" [selectedIndex]="selectedTab">
-      <mat-tab label="Persona" disabled></mat-tab>
-      <mat-tab label="Puesto">
-        <div class="puestos-compatibles">
-          <select
-            class="selector"
-            name="select"
-            [ngModel]="jobSelected"
-            (ngModelChange)="onChangeJob($event)">
-            <option *ngFor="let job of jobs" [ngValue]="job">
-              {{ job.name }}
-            </option>
-          </select>
+        <div class="role-tab">
+            <button mat-flat-button disabled class="h6 role-tab-button border-pink active">Persona</button>
+            <button mat-flat-button class="h6 role-tab-button border-blue" (click)="puesto = !puesto" [ngClass]="{'active': puesto}">Puesto</button>
+            <button mat-flat-button class="h6 role-tab-button border-red" (click)="lider = !lider" [ngClass]="{'active': lider}">Líder</button>
+            <button mat-flat-button class="h6 role-tab-button border-green" (click)="equipo = !equipo" [ngClass]="{'active': equipo}">Equipo</button>
         </div>
-      </mat-tab>
-      <mat-tab label="Líder" disabled>Líder</mat-tab>
-      <mat-tab label="Equipo" disabled>Equipo</mat-tab>
-    </mat-tab-group>
-  </div>
+        <div class="puestos-compatibles">
+            <select class="selector" name="select" [ngModel]="jobSelected" (ngModelChange)="onChangeJob($event)">
+              <option *ngFor="let job of jobs" [ngValue]="job">
+                {{ job.name }}
+              </option>
+            </select>
+        </div>
+    </div>
 
-  <div class="grafic-comportamental">
-    <app-stacked-polygon-polar
-      *ngIf="
+    <div class="grafic-comportamental">
+        <!-- <app-stacked-polygon-polar *ngIf="
         behavioralRadarChart?.behavioralAxiCompetencies ||
         (jobCompatibility?.jobCompatibilityDetailed
           ?.correlationJobBehavioralCompetencies &&
           naturalSelected !== undefined)
-      "
-      [behavioralRadarChart]="behavioralRadarChart.behavioralAxiCompetencies"
-      [correlationJobBehavioralCompetencies]="
+      " [behavioralRadarChart]="behavioralRadarChart.behavioralAxiCompetencies" [correlationJobBehavioralCompetencies]="
         jobCompatibility?.jobCompatibilityDetailed
           ?.correlationJobBehavioralCompetencies
-      "
-      [naturalSelected]="naturalSelected"></app-stacked-polygon-polar>
-  </div>
+      " [naturalSelected]="naturalSelected"></app-stacked-polygon-polar> -->
+        <chart-grafico-comportamental [showPuesto]="puesto" [showLider]="lider" [showEquipo]="equipo" [behavioralRadarChart]="behavioralRadarChart.behavioralAxiCompetencies" [correlationJobBehavioralCompetencies]="jobCompatibility?.jobCompatibilityDetailed?.correlationJobBehavioralCompetencies"></chart-grafico-comportamental>
+    </div>
 
-  <div class="buttons">
-    <a class="button" (click)="selectType(true)">Natural</a>
-    <a class="button" (click)="selectType(false)">Adaptado</a>
-  </div>
+    <div class="buttons">
+        <a class="button body-1" [class.active]="naturalSelected" (click)="selectType(true)">Natural</a>
+        <a class="button body-1" [class.active]="!naturalSelected" (click)="selectType(false)">Adaptado</a>
+    </div>
 </div>

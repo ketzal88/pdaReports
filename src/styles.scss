@@ -143,15 +143,14 @@ div.cdk-global-overlay-wrapper>div.cdk-overlay-pane {
     align-items: center;
     margin: 80px 0px;
     width: 1475px;
-    gap: 12%;
+    justify-content: space-evenly;
 }
 
 
 /*SECCIONES INTERNAS*/
 
 .section-internal {
-    width: 48%;
-    padding: 5px 24px;
+    width: 596px;
 }
 
 .section-behavioral {
@@ -450,6 +449,11 @@ div.cdk-global-overlay-wrapper>div.cdk-overlay-pane {
     color: #5E5E5E;
 }
 
+.px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .my-32 {
     margin-top: 32px;
     margin-bottom: 32px;
@@ -457,6 +461,10 @@ div.cdk-global-overlay-wrapper>div.cdk-overlay-pane {
 
 .justify-content-between {
     justify-content: space-between
+}
+
+.justify-content-evenly {
+    justify-content: space-evenly
 }
 
 select.small-shadow {
@@ -474,6 +482,10 @@ select.small-shadow {
 
 .anychart-credits {
     visibility: hidden;
+}
+
+div.mat-expansion-panel-body {
+    padding-bottom: 0px;
 }
 
 

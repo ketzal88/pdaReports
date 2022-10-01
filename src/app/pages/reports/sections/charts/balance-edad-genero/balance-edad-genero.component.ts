@@ -116,7 +116,7 @@ export class BalanceEdadGeneroComponent implements OnInit {
     this.chart.interactivity().hoverMode('by-x');
     this.chart.tooltip().displayMode('union');
 
-    this.chart.pointWidth(25);
+    this.chart.pointWidth(18);
   }
 
   ngAfterViewInit() {
