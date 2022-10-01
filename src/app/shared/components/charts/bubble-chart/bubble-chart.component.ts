@@ -298,7 +298,7 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
           { x: 45, value: this.roleREPNA.mediaValue },
           { x: 60, value: this.roleREPNA.mediaValue },
         ];
-    this.chart.line(mediaLine).stroke('#ff4040', 1);
+    // this.chart.line(mediaLine).stroke('#ff4040', 1);
   }
 
   setLabelFormatAndBubbleStyle(

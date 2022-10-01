@@ -1,7 +1,1 @@
-<p class="subtitle left">{{ developmentPlan.title }}</p>
-<div class="descriptivo">
-  <p class="descripcion left">
-    {{ introduction }}
-  </p>
-  <a class="button-text" (click)="showMore()">Ver más</a>
-</div>
+<app-behavioral-description-card [title]="developmentPlan.title" [description]="introduction" (showMore)="showMore()">

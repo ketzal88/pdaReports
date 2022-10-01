@@ -38,9 +38,7 @@ export class BehavioralGraphComponent implements OnInit, OnDestroy {
   @Input() reportId: string;
   @Input() myReport: MyReport;
   @Input() behavioralRadarChart!: BehavioralRadarChart;
-  @Input() set jobCompatibility(jobCompatibility: JobCompatibility) {
-    this._jobCompatibility = jobCompatibility;
-  }
+  @Input() jobCompatibility: JobCompatibility;
   @Input() jobs: Job[];
 
   //Subscriptions
@@ -52,9 +50,6 @@ export class BehavioralGraphComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.warn(this.jobs);
-    console.warn(this.behavioralRadarChart);
-    console.warn(this._jobCompatibility);
     this.naturalSelected = true;
     this.loadReportType();
     this.loadReportData();
@@ -128,9 +123,5 @@ export class BehavioralGraphComponent implements OnInit, OnDestroy {
       return;
     }
     this.naturalSelected = natural;
-  }
-
-  get jobCompatibility(): JobCompatibility {
-    return this._jobCompatibility;
   }
 }

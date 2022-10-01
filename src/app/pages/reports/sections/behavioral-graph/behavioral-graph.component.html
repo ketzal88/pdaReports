@@ -33,11 +33,11 @@
         jobCompatibility?.jobCompatibilityDetailed
           ?.correlationJobBehavioralCompetencies
       " [naturalSelected]="naturalSelected"></app-stacked-polygon-polar> -->
-        <chart-grafico-comportamental [showPuesto]="puesto" [showLider]="lider" [showEquipo]="equipo" [behavioralRadarChart]="behavioralRadarChart.behavioralAxiCompetencies" [correlationJobBehavioralCompetencies]="jobCompatibility?.jobCompatibilityDetailed?.correlationJobBehavioralCompetencies"></chart-grafico-comportamental>
+        <chart-grafico-comportamental [showPuesto]="puesto" [showLider]="lider" [showEquipo]="equipo" [behavioralRadarChart]="behavioralRadarChart.behavioralAxiCompetencies" [correlationJobBehavioralCompetencies]="jobCompatibility?.jobCompatibilityDetailed?.correlationJobBehavioralCompetencies"
+            [naturalSelected]="naturalSelected"></chart-grafico-comportamental>
     </div>
-
     <div class="buttons">
-        <a class="button body-1" [class.active]="naturalSelected" (click)="selectType(true)">Natural</a>
-        <a class="button body-1" [class.active]="!naturalSelected" (click)="selectType(false)">Adaptado</a>
+        <a class="button naturalButton body-1" [class.active]="naturalSelected" (click)="selectType(true)">Natural</a>
+        <a class="button naturalButton body-1" [class.active]="!naturalSelected" (click)="selectType(false)">Adaptado</a>
     </div>
 </div>

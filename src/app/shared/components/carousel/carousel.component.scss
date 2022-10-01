@@ -13,7 +13,6 @@
         left: 0;
         // background: #cccccc;
     }
-
     &__content {
         text-align: center;
         width: 100%;
@@ -46,7 +45,6 @@
             }
         }
     }
-
     &__btns {
         position: absolute;
         width: 90%;
@@ -54,7 +52,7 @@
         margin: auto;
         display: flex;
         justify-content: space-between;
-        > i {
+        >i {
             opacity: 0.7;
             color: #fff;
             font-size: 45px;
@@ -65,7 +63,6 @@
             }
         }
     }
-
     &__steps {
         position: absolute;
         bottom: 40px;
@@ -81,7 +78,8 @@
             cursor: pointer;
             transition: 0.75s all ease-in-out;
             background: #C4C4C4;
-            &:hover, &-active{
+            &:hover,
+            &-active {
                 opacity: 0.7;
                 background: #37A9FD;
             }
@@ -110,33 +108,32 @@
     opacity: 80%;
     // opacity effect on hover
     transition: opacity 150ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
-  
     &:hover,
     &:focus {
-      opacity: 1;
+        opacity: 1;
     }
-  
     /* Position the buttons */
     &.next {
-      right: 0;
+        right: 0;
     }
     &.prev {
-      left: 0;
+        left: 0;
     }
-  }
-  
-  /* style the arrows */
-  .arrow {
+}
+
+
+/* style the arrows */
+
+.arrow {
     display: block;
     border-left: 0.1em solid #1F140F;
     border-bottom: 0.1em solid #1F140F;
     width: 0.5em;
     height: 0.5em;
-  
     &.left {
-      transform: rotate(45deg);
+        transform: rotate(45deg);
     }
     &.right {
-      transform: rotate(225deg);
+        transform: rotate(225deg);
     }
-  }
+}

@@ -1,15 +1,38 @@
-.label-image-title{
-    position: absolute; left: 6%; top: 9%
+.label-image-title {
+    position: absolute;
+    left: 6%;
+    top: 9%
 }
 
-.content-image-title{
-    position: absolute; left: 6%; top: 15%
+.content-image-title {
+    position: absolute;
+    left: 6%;
+    top: 15%
 }
 
-.image-profile{
+.image-profile {
     width: 100%;
 }
 
-.content-image-description{
-    position: absolute; left: 6%
+.profile-image-detials {
+    display: flex;
+    align-items: center;
+}
+
+.description-detail {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 24px;
+    color: #0075FF;
+    padding-bottom: 20px;
+}
+
+.h2 {
+    color: #0075FF;
+}
+
+.description-icon {
+    vertical-align: middle;
 }

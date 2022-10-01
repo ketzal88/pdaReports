@@ -22,7 +22,7 @@ span {
 }
 
 .slide-header {
-    background-image: url('/assets/img/background-header.png');
+    // background-image: url('/assets/img/background-header.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -44,7 +44,7 @@ span {
 }
 
 .logo {
-    margin-left: 15%;
+    margin-left: 100px;
 }
 
 
@@ -176,4 +176,8 @@ span {
 
 .hamburger-icon {
     z-index: 1500;
+}
+
+.block-section.flex-start {
+    justify-content: flex-start;
 }

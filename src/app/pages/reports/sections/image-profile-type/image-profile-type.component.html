@@ -1,26 +1,30 @@
 <div class="perfil-type" style="position: relative">
-  <div class="label-image-title">
-    {{ 'TYPE_PROFILE' | translate }}
-  </div>
-  <div class="content-image-title">
-    <h1 style="margin-bottom: 0px">
-      {{ coverIndividual.profile }}
-    </h1>
-  </div>
-
-  <div class="image-profile">
-    <!-- TODO: Reemplazar por iconos svg cuando disenio los disponibilice -->
-    <app-happy></app-happy>
-  </div>
-  <ng-container
-    *ngFor="
+    <h6 class="h6">
+        Eres una persona
+    </h6>
+    <h2 class="h2">
+        {{ coverIndividual.profile }}
+    </h2>
+    <div class="profile-image-detials">
+        <div>
+            <ng-container *ngFor="
       let description of behavioralDescriptors.firstColumnWords;
       let idx = index
     ">
-    <div
-      class="content-image-description"
-      [ngStyle]="{ bottom: 26 + idx * 6 + '%' }">
-      <h2 style="margin-bottom: 0px">{{ description }}</h2>
+                <div class="content-image-description">
+                    <div class="description-detail">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="description-icon">
+              <path
+                d="M12.7479 4.80489L7.07331 10.4795L3.98199 7.39678L2.76785 8.61092L7.07331 12.9164L13.962 6.02764L12.7479 4.80489ZM8.79549 0C4.04226 0 0.18457 3.85769 0.18457 8.61092C0.18457 13.3641 4.04226 17.2218 8.79549 17.2218C13.5487 17.2218 17.4064 13.3641 17.4064 8.61092C17.4064 3.85769 13.5487 0 8.79549 0ZM8.79549 15.4997C4.98946 15.4997 1.90675 12.4169 1.90675 8.61092C1.90675 4.80489 4.98946 1.72218 8.79549 1.72218C12.6015 1.72218 15.6842 4.80489 15.6842 8.61092C15.6842 12.4169 12.6015 15.4997 8.79549 15.4997Z"
+                fill="#0175FE" />
+            </svg> {{ description }}
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="image-profile">
+            <!-- TODO: Reemplazar por iconos svg cuando disenio los disponibilice -->
+            <app-happy></app-happy>
+        </div>
     </div>
-  </ng-container>
 </div>

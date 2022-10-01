@@ -1,11 +1,11 @@
 <ng-container *ngIf="dataIndividualSectionsResponse">
-    <div class="reports">
+    <div class="reports" [ngStyle]="{'background-image': 'url(/assets/img/' + backgroundUserImage + ')'}">
         <ng-container *ngFor="let screenProfile of selectOnlyProfile.screens">
-            <div class="slide-header" [ngStyle]="{
-          'background-image': 'url(/assets/img/' + backgroundUserImage + ')'
-        }">
-                <div class="header">
-                    <div class="logo"><img [src]="logoImage" /></div>
+            <div class="slide-header">
+                <div class="block-section flex-start">
+                    <div class="logo">
+                        <img [src]="logoImage" />
+                    </div>
                     <div class="respmenu">
                         <input type="checkbox" id="hambuger-button" />
                         <label for="hambuger-button">
@@ -75,7 +75,7 @@
                     <div class="row justify-content-evenly">
                         <ng-container *ngFor="let section of screen.sections">
                             <!-- Se utiliza column '0' para contemplar una seccion centrada por arriba de otras secciones -->
-                            <ng-container *ngIf="section.column === 0; else showAllSections">
+                            <ng-container *ngIf="screen.sections.length === 1; else showAllSections">
                                 <div style="
                     display: flex;
                     flex-direction: column;
@@ -87,6 +87,8 @@
                           ? questionBehavioralProfile
                           : item === 'knowYourKeyCompetencies'
                           ? knowYourKeyCompetencies
+                          : item === 'behavioralProfileChartSection'
+                          ? behavioralProfileChartSection
                           : item === 'exploreYourCVWithTheseTips'
                           ? exploreYourCVWithTheseTips
                           : null

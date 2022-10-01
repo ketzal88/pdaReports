@@ -158,14 +158,19 @@ div.cdk-global-overlay-wrapper>div.cdk-overlay-pane {
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-image: url('/assets/img/background-job.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
+    // // background-image: url('/assets/img/background-job.png');
+    // background-position: center;
+    // background-repeat: no-repeat;
+    // background-size: 100% auto;
 }
 
 .section-repna {
     margin: 80px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.section-repna .content {
     width: 1168px;
 }
 
@@ -486,6 +491,27 @@ select.small-shadow {
 
 div.mat-expansion-panel-body {
     padding-bottom: 0px;
+}
+
+.buttons>.naturalButton {
+    color: black;
+    box-shadow: 0px 2.38553px 4.77106px #C3C4CA;
+    border: 0px;
+    text-transform: none;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.naturalButton:active {
+    color: white;
+    background-color: #006EDD;
+}
+
+.naturalButton.active,
+.naturalButton:hover:not(:active) {
+    color: white;
+    background-color: #007EFD;
 }
 
 

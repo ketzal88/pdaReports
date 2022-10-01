@@ -55,6 +55,7 @@ import { GraficoComportamentalComponent } from './charts/grafico-comportamental/
 import { RepnaComponent } from './charts/repna/repna.component';
 import { SmallBarWithNotchComponent } from './charts/small-bar-with-notch/small-bar-with-notch.component';
 import { TendenciaComportamentalComponent } from './charts/tendencia-comportamental/tendencia-comportamental.component';
+import { BehavioralDescriptionCardComponent } from './behavioral-description-card/behavioral-description-card.component';
 @NgModule({
   declarations: [
     CoverIndividualSectionComponent,
@@ -68,6 +69,7 @@ import { TendenciaComportamentalComponent } from './charts/tendencia-comportamen
     SelfDescriptionComponent,
     EmotionalInteligenceSectionComponent,
     BehavioralProfileDescriptionSectionComponent,
+    BehavioralDescriptionCardComponent,
     PotentialDeploymentComponent,
     CommunicationStyleComponent,
     HowToLeadIndividualComponent,
@@ -126,6 +128,7 @@ import { TendenciaComportamentalComponent } from './charts/tendencia-comportamen
     SelfDescriptionComponent,
     EmotionalInteligenceSectionComponent,
     BehavioralProfileDescriptionSectionComponent,
+    BehavioralDescriptionCardComponent,
     PotentialDeploymentComponent,
     CommunicationStyleComponent,
     HowToLeadIndividualComponent,

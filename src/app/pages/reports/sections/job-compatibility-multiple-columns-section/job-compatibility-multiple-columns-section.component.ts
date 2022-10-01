@@ -12,8 +12,5 @@ export class JobCompatibilityMultipleColumnsSectionComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log("a");
-    console.log(this.jobCompatibility);
-    console.log("a");
   }
 }

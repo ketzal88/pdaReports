@@ -1,5 +1,6 @@
 /**** REPNA****/
-.section-repna-content-table{
+
+.section-repna-content-table {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -7,6 +8,7 @@
     padding: 0px 30px;
     border-bottom: 1px solid #c4c4c4;
 }
+
 .section-repna-grafic {
     display: flex;
     flex-direction: row;
@@ -19,6 +21,7 @@
     width: 75%;
     padding: 5px 25px;
 }
+
 .grafic-repna {
     display: flex;
     justify-content: center;
@@ -26,24 +29,36 @@
 
 .energy {
     width: 25%;
-
 }
-.regulator-bars{
+
+.regulator-bars {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     width: 100%;
     padding: 5px 25px;
 }
-.grafic-bars{
+
+.grafic-bars {
     width: 60%;
     border-right: 1px solid #c4c4c4;
 }
-.table-repna{
+
+.table-repna {
     width: 40%;
     margin: 0 auto;
     padding: 0px 25px;
 }
-.bar{
+
+.bar {
     width: 33%;
+}
+
+.h4 {
+    padding-bottom: 24px;
+}
+
+.h4,
+.body-2 {
+    color: white;
 }

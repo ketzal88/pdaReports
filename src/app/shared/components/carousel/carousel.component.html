@@ -1,53 +1,46 @@
 <div class="dsc-carousel" [ngStyle]="{ 'min-height': finalHeight }">
-  <div class="dsc-carousel__btns">
-    <!-- controls -->
-    <button class="control prev" (click)="setBack()">
+    <div class="dsc-carousel__btns">
+        <!-- controls -->
+        <button class="control prev" (click)="setBack()">
       <span class="arrow left"></span>
     </button>
-    <button class="control next" (click)="setNext()">
+        <button class="control next" (click)="setNext()">
       <span class="arrow right"></span>
     </button>
-  </div>
-  <div
-    #carousel
-    class="dsc-carousel__content"
-    [ngStyle]="
+    </div>
+    <div #carousel class="dsc-carousel__content" [ngStyle]="
       contentType === CarouselType.TEXT_ONLY && {
         width: '50%',
         'align-items': 'center'
       }
     ">
-    <ng-container *ngFor="let section of items">
-      <div
-        class="dsc-carousel__content-item"
-        [ngStyle]="
+        <ng-container *ngFor="let section of items">
+            <div class="dsc-carousel__content-item" [ngStyle]="
           (contentType === CarouselType.IMAGE_ONLY && {
             'background-image': 'url(' + section.image + ')',
             'margin-left': section.marginLeft + '%'
           }) ||
           (contentType === CarouselType.TEXT_ONLY && {
-            height: '50%',
-            background: '#007efd',
+            height: '60%',
+            background: '#007efd',  
             'border-radius': '50%',
+            'padding': '20px',
             'margin-left': section.marginLeft + '%'
           })
         ">
-        <ng-container *ngIf="section.title">
-          <h1>
-            {{ section.title }}
-          </h1>
-          <p>{{ section.subtitle }}</p>
+                <ng-container *ngIf="section.title">
+                    <h1>
+                        {{ section.title }}
+                    </h1>
+                    <p>{{ section.subtitle }}</p>
+                </ng-container>
+            </div>
         </ng-container>
-      </div>
-    </ng-container>
-  </div>
-  <div class="dsc-carousel__steps">
-    <div
-      class="dsc-carousel__steps-step 
+    </div>
+    <div class="dsc-carousel__steps">
+        <div class="dsc-carousel__steps-step 
             dsc-carousel__steps-step-{{
         currentPosition === item.id ? 'active' : ''
-      }}"
-      *ngFor="let item of items"
-      (click)="setCurrentPosition(item.id)"></div>
-  </div>
+      }}" *ngFor="let item of items" (click)="setCurrentPosition(item.id)"></div>
+    </div>
 </div>

@@ -130,6 +130,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
     //TODO: Tratar dato de servicio cuando se retome la funcionalidad de grupos
     // this.loadGroupSections();
+    console.warn(this.selectReportType.screens);
   }
 
   ngOnDestroy(): void {

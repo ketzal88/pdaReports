@@ -267,22 +267,3 @@ ul.slider li:first-child {
 .mat-flat-button.mat-button-disabled.mat-button-disabled {
     background-color: #00000000;
 }
-
-.buttons>a.body-1 {
-    color: black;
-    box-shadow: 0px 2.38553px 4.77106px #C3C4CA;
-    border: 0px;
-    text-transform: none;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-.buttons>a.body-1.active,
-.buttons>a.body-1:hover {
-    color: white;
-}
-
-.buttons>a.body-1.active {
-    background-color: #007EFD;
-}

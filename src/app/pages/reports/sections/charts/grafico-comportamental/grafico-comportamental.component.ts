@@ -1,4 +1,6 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { BehavioralAxiCompetency } from 'src/app/core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
+import { CorrelationJobBehavioralCompetency } from '../../../../../core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
 
 type Polygon = ReturnType<anychart.charts.Polar["polygon"]>;
 
@@ -11,21 +13,22 @@ export class GraficoComportamentalComponent implements OnInit {
 
   constructor() { }
   @ViewChild('chartContainer') container!: ElementRef;
+  private _correlationJobBehavioralCompetencies: CorrelationJobBehavioralCompetency[];
 
   @Input()
   get showPuesto(): boolean { return this._showPuesto; }
   set showPuesto(showPuesto: boolean) {
     this._showPuesto = showPuesto;
-    if (this.puesto){
+    if (this.puesto) {
       this.puesto.enabled(showPuesto);
     }
   }
   private _showPuesto = true;
-    @Input()
+  @Input()
   get showLider(): boolean { return this._showLider; }
   set showLider(showLider: boolean) {
     this._showLider = showLider;
-    if (this.lider){
+    if (this.lider) {
       this.lider.enabled(showLider);
     }
   }
@@ -33,12 +36,31 @@ export class GraficoComportamentalComponent implements OnInit {
   @Input()
   get showEquipo(): boolean { return this._showEquipo; }
   set showEquipo(showEquipo: boolean) {
-    this._showEquipo = showEquipo;    
-    if (this.equipo){
+    this._showEquipo = showEquipo;
+    if (this.equipo) {
       this.equipo.enabled(showEquipo);
     }
   }
   private _showEquipo = false;
+  @Input()
+  get naturalSelected(): boolean { return this._naturalSelected; }
+  set naturalSelected(naturalSelected: boolean) {
+    this._naturalSelected = naturalSelected;
+    if (this.chart) {
+      this.resetChart();
+    }
+  }
+  private _naturalSelected = false;
+  @Input() behavioralRadarChart!: BehavioralAxiCompetency[];
+  @Input()
+  set correlationJobBehavioralCompetencies(
+    correlationJobBehavioralCompetencies: CorrelationJobBehavioralCompetency[]
+  ) {
+    this._correlationJobBehavioralCompetencies = correlationJobBehavioralCompetencies;
+    if (this.correlationJobBehavioralCompetencies) {
+      this.resetChart();
+    }
+  }
 
   chart!: anychart.charts.Polar;
   persona!: Polygon;
@@ -47,10 +69,24 @@ export class GraficoComportamentalComponent implements OnInit {
   equipo!: Polygon;
 
   ngOnInit(): void {
-    let persona = this.generateData();
-    let puesto = this.generateData();
-    let lider = this.generateData();
-    let equipo = this.generateData();
+    this.createChart();
+  }
+
+  ngAfterViewInit() {
+    if (this.chart){
+      this.chart.container(this.container.nativeElement);
+      this.chart.draw();
+    }
+  }
+
+  createChart() {
+    let persona = this.behavioralRadarChart
+      .map(x => ({ x: x.competencyName, value: this.naturalSelected ? x.natural : x.role }));
+    let puesto = this.correlationJobBehavioralCompetencies &&
+      persona.map((_, i) => this.correlationJobBehavioralCompetencies[i])
+        .map(x => ({ x: x.competencyName, value: this.naturalSelected ? x.natural : x.role }));
+    let lider = this.generateData(persona);
+    let equipo = this.generateData(persona);
 
     let chart = anychart.polar();
 
@@ -82,7 +118,6 @@ export class GraficoComportamentalComponent implements OnInit {
     // set chart x-axis ticks settings
     chart.xAxis().ticks().length(0).stroke('#FEFEFE');
 
-
     // set chart x-axis labels settings
     chart.xAxis().labels().padding(15).fontSize(12).fontOpacity(1).fontWeight(600);
 
@@ -94,13 +129,6 @@ export class GraficoComportamentalComponent implements OnInit {
     this.puesto.enabled(this.showPuesto);
     this.lider.enabled(this.showLider);
     this.equipo.enabled(this.showEquipo);
-
-    // let puestoPoly = chart.polygon(puesto);
-    // puestoPoly
-    //   .name('Polygon')
-    //   .color('#CD4A2D')
-    //   .fill('rgba(180, 180, 180, 0.2)')
-    //   .zIndex(31);
 
     // workaround to make even/odd xAxis labels coloring
     chart.listen('chartDraw', function () {
@@ -131,50 +159,28 @@ export class GraficoComportamentalComponent implements OnInit {
     this.chart = chart;
   }
 
-  ngAfterViewInit() {
-    this.chart.container(this.container.nativeElement);
-    this.chart.draw();
-  }
-
-  generateData() {
-    return [
-      { x: "Iniciativa", value: Math.random() + 0.5 },
-      { x: "Persuasión", value: Math.random() + 0.5 },
-      { x: "Influencia", value: Math.random() + 0.5 },
-      { x: "Autonomía", value: Math.random() + 0.5 },
-      { x: "Asesoramiento", value: Math.random() + 0.5 },
-      { x: "Servicio y soporte", value: Math.random() + 0.5 },
-      { x: "Amabilidad", value: Math.random() + 0.5 },
-      { x: "Paciencia", value: Math.random() + 0.5 },
-      { x: "Precisión", value: Math.random() + 0.5 },
-      { x: "Concentración", value: Math.random() + 0.5 },
-      { x: "Análisis", value: Math.random() + 0.5 },
-      { x: "Obediencia", value: Math.random() + 0.5 },
-      { x: "Implementación", value: Math.random() + 0.5 },
-      { x: "Dinamismo", value: Math.random() + 0.5 },
-      { x: "Determinación", value: Math.random() + 0.5 },
-      { x: "Expeditividad", value: Math.random() + 0.5 },
-    ];
-    // let i = 1;
-    //     return [
-    //   { x: "Iniciativa", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Persuasión", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Influencia", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Autonomía", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Asesoramiento", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Servicio y soporte", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Amabilidad", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Paciencia", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Precisión", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Concentración", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Análisis", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Obediencia", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Implementación", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Dinamismo", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Determinación", value: (i++ * (5*7*9*13*17*24)) % 254},
-    //   { x: "Expeditividad", value: (i++ * (5*7*9*13*17*24)) % 254},
+  generateData(examples: { x: string, value: number }[]) {
+    const max = Math.max(...examples.map(x => x.value));
+    const min = Math.min(...examples.map(x => x.value));
+    return examples.map(x => ({ x: x.x, value: min + Math.random() * (max - min) }));
+    // return [
+    //   { x: "Iniciativa", value: Math.random() + 0.5 },
+    //   { x: "Persuasión", value: Math.random() + 0.5 },
+    //   { x: "Influencia", value: Math.random() + 0.5 },
+    //   { x: "Autonomía", value: Math.random() + 0.5 },
+    //   { x: "Asesoramiento", value: Math.random() + 0.5 },
+    //   { x: "Servicio y soporte", value: Math.random() + 0.5 },
+    //   { x: "Amabilidad", value: Math.random() + 0.5 },
+    //   { x: "Paciencia", value: Math.random() + 0.5 },
+    //   { x: "Precisión", value: Math.random() + 0.5 },
+    //   { x: "Concentración", value: Math.random() + 0.5 },
+    //   { x: "Análisis", value: Math.random() + 0.5 },
+    //   { x: "Obediencia", value: Math.random() + 0.5 },
+    //   { x: "Implementación", value: Math.random() + 0.5 },
+    //   { x: "Dinamismo", value: Math.random() + 0.5 },
+    //   { x: "Determinación", value: Math.random() + 0.5 },
+    //   { x: "Expeditividad", value: Math.random() + 0.5 },
     // ];
-    
   }
 
   createPolygon(data: ReturnType<GraficoComportamentalComponent["generateData"]>, chart: anychart.charts.Polar, color: string) {
@@ -191,5 +197,16 @@ export class GraficoComportamentalComponent implements OnInit {
 
   togglePolygon(polygon: Polygon) {
     polygon.enabled(!polygon.enabled());
+  }
+
+  resetChart() {
+    if (this.chart){
+      this.chart.dispose();
+    }
+    this.createChart();
+    if (this.container){
+      this.chart.container(this.container.nativeElement);
+      this.chart.draw();
+    }
   }
 }
