@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 @Component({
   selector: 'chart-small-bar-with-notch',
   templateUrl: './small-bar-with-notch.component.html',
@@ -8,15 +8,19 @@ export class SmallBarWithNotchComponent implements OnInit {
 
   constructor() { }
   @ViewChild('chartContainer') container!: ElementRef;
+  @Input() value: number =  32;
+  @Input() text: string = "Energía";
+  @Input() color: string = "#007EFD";
+  @Input() layout: string = 'horizontal';
 
   gauge!: anychart.charts.LinearGauge;
 
 
   ngOnInit(): void {
-    let value = 32;
+    let value = 50;
     let data = anychart.data.set([['AQI', value]]);
-    let title = "Energía";
-    let color = "#007EFD"
+    let title = this.text;
+    let color = this.color;
     // set the gauge type
     this.gauge = anychart.gauges.linear();
     this.gauge.interactivity(false);
@@ -25,8 +29,8 @@ export class SmallBarWithNotchComponent implements OnInit {
     this.gauge.data(data);
 
     // set the layout
-    this.gauge.layout("horizontal");
-    this.gauge.background("transparent")
+    this.gauge.layout(this.layout);
+    this.gauge.background("transparent");
 
     // set labels
     this.gauge
@@ -34,34 +38,40 @@ export class SmallBarWithNotchComponent implements OnInit {
       .position('left-center')
       .anchor('left-center')
       .offsetY('-30px')
-      .offsetX('0px')
+      .offsetX('30px')
       .fontFamily('Poppins')
-      .fontColor('#555')
-      .fontSize(14)
-      .fontWeight(400)
-      .text(title);
+      .fontColor('#1F140F')
+      .fontSize(12)
+      .fontWeight(700)
+      .text(title)
+      .useHtml(true);
 
+      let valueOffset = value / 100 * 70 + 13;
+      valueOffset = Math.min(valueOffset,100);
+      valueOffset = Math.max(valueOffset,0);
     this.gauge
       .label(1)
       .position('left-center')
       .anchor('left-center')
-      .offsetY('30px')
-      .offsetX(title)
-      .fontColor('#777777')
-      .fontColor('#777777')
-      .fontSize(14)
-      .text(value.toString());
+      .offsetY('15px')
+      .offsetX(valueOffset.toString() + '%')
+      .fontFamily('Poppins')
+      .fontColor('##1F140F')
+      .fontWeight(600)
+      .fontSize(10)
+      .text(value.toString() + "%")
+      .useHtml(true);
 
-    // this.gauge
-    //   .label(2)
-    //   .position('right-center')
-    //   .anchor('right-center')
-    //   .offsetY('30px')
-    //   .offsetX('50px')
-    //   .fontColor('#777777')
-    //   .fontSize(12)
-    //   .fontFamily('Poppins')
-    //   .text(' ');
+    this.gauge
+      .label(2)
+      .position('right-center')
+      .anchor('right-center')
+      .offsetY('30px')
+      .offsetX('50px')
+      .fontColor('#777777')
+      .fontSize(12)
+      .fontFamily('Poppins')
+      .text(' ');
 
     // create a color scale
     let scaleBarColorScale = anychart.scales.ordinalColor().ranges([
@@ -158,6 +168,7 @@ export class SmallBarWithNotchComponent implements OnInit {
     // set the zIndex of the marker
     marker.zIndex(-10);
     marker.offset('0.05%');
+    
 
     // configure the scale
     let scale = this.gauge.scale();
