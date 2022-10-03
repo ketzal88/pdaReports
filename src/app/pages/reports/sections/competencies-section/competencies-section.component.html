@@ -1,20 +1,46 @@
-<!-- Competencies -->
-<div class="tipo-deperfil">
-    <p class="subtitle">{{ competencyCompatibility.title }}</p>
-    <ng-container *ngFor="
-      let competencyDetail of competencyCompatibility?.competencyCompatibilityDetail;
+<div class="block-section">
+    <div class="row justify-content-evenly">
+        <div class="section-internal">
+            <h4 class="h4">{{ competencyCompatibility.title }}</h4>
+            <p class="body-1 competencies-description">
+                Competencias Descripción
+            </p>
+        </div>
+        <div class="section-internal">
+        </div>
+    </div>
+    <div class="tipo-deperfil row justify-content-evenly">
+        <div class="section-internal" styles="margin-right: 10%">
+            <ng-container *ngFor="
+      let competencyDetail of getLeftCompetencies();
       let idx = index
     ">
-        <mat-card>
-            <mat-card-content>
-                <h2 class="example-h2">{{ competencyDetail.competency }}</h2>
-                <section class="example-section">
-                    <div [ngClass]="idx % 2 === 0 ? 'custom-acqua' : 'custom-blue'">
-                        <mat-progress-bar class="example-margin" [color]="color" [mode]="mode" [value]="competencyDetail.compatibilityPercentage || 0" [bufferValue]="bufferValue">
-                        </mat-progress-bar>
+                <div class="competency">
+                    <h5 class="h5">{{ competencyDetail.competency }}</h5>
+                    <div class="competency-bar">
+                        <div class="bar-shadow competency-graph">
+                            <chart-competencias [value]="competencyDetail.compatibilityPercentage" [color]="idx % 2 === 0 ? '#80BFFE' : '#0075FF'"></chart-competencias>
+                        </div>
+                        <div class="competency-percentage h4">{{competencyDetail.compatibilityPercentage}}%</div>
                     </div>
-                </section>
-            </mat-card-content>
-        </mat-card>
-    </ng-container>
+                </div>
+            </ng-container>
+        </div>
+        <div class="section-internal">
+            <ng-container *ngFor="
+      let competencyDetail of getRightCompetencies();
+      let idx = index
+    ">
+                <div class="competency">
+                    <h5 class="h5">{{ competencyDetail.competency }}</h5>
+                    <div class="competency-bar">
+                        <div class="bar-shadow competency-graph">
+                            <chart-competencias [value]="competencyDetail.compatibilityPercentage" [color]="idx % 2 === 1 ? '#80BFFE' : '#0075FF'"></chart-competencias>
+                        </div>
+                        <div class="competency-percentage h4">{{competencyDetail.compatibilityPercentage}}%</div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
 </div>

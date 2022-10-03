@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {ThemeColors} from '../../../themes/blue';
 
 @Component({
@@ -10,13 +10,15 @@ export class CompetenciasComponent implements OnInit {
 
   constructor() { }
   @ViewChild('chartContainer') container!: ElementRef;
+  @Input() value: number = 0;
+  @Input() color: string = ThemeColors.colorPrimary;
 
   gauge!: anychart.charts.LinearGauge;
 
   ngOnInit(): void {
-    let value = 50;
+    let value = this.value;
     let data = anychart.data.set([['AQI', value]]);
-    let color = ThemeColors.colorPrimary;
+    let color = this.color;
     // set the gauge type
     this.gauge = anychart.gauges.linear();
 
@@ -46,7 +48,7 @@ export class CompetenciasComponent implements OnInit {
     let scaleBar = this.gauge.scaleBar(0);
 
     // set the width of the Scale Bar
-    scaleBar.width('7.5%');
+    scaleBar.width('100%');
 
     // use the color scale (defined earlier) as the color scale of the Scale Bar
     scaleBar.colorScale(scaleBarColorScale);
@@ -58,7 +60,7 @@ export class CompetenciasComponent implements OnInit {
     marker.type('circle');
     marker.color(color);
     marker.stroke('black', 0);
-    marker.width('7.5%');
+    marker.width('100%');
     marker.data([0]);
     // set the zIndex of the marker
     marker.zIndex(10);
@@ -72,11 +74,11 @@ export class CompetenciasComponent implements OnInit {
     marker.type('circle');
     marker.color(color);
     marker.stroke('black', 0);
-    marker.width('10%');
+    marker.width('100%');
     marker.data([value]);
     // set the zIndex of the marker
     marker.zIndex(10);
-    marker.offset('-1.25%');
+    marker.offset('0%');
     
     // add a marker pointer
     marker = this.gauge.marker(0);
@@ -85,7 +87,7 @@ export class CompetenciasComponent implements OnInit {
     marker.type('circle');
     marker.color("#F2F3F3");
     marker.stroke("#00000000")
-    marker.width('7.5%');
+    marker.width('100%');
     marker.data([100]);
     // set the zIndex of the marker
     marker.zIndex(-10);

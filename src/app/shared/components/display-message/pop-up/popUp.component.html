@@ -1,32 +1,32 @@
 <ng-container *ngIf="data?.title">
-  <h1 mat-dialog-title>{{ data?.title }}</h1>
-  <hr style="margin-bottom: 15px" />
+    <h4 mat-dialog-title class="h4">{{ data?.title }}</h4>
 </ng-container>
 
 <ng-container *ngIf="data?.introduction">
-  <h3 mat-dialog-content>{{ data?.introduction }}</h3>
-  <div style="margin-bottom: 40px"></div>
+    <h3 mat-dialog-content>{{ data?.introduction }}</h3>
+    <div style="margin-bottom: 40px"></div>
 </ng-container>
 
 <ng-container *ngIf="data?.description && !isArray; else descriptionArray">
-  <h3 mat-dialog-content>{{ data?.description }}</h3>
+    <h3 mat-dialog-content>{{ data?.description }}</h3>
 </ng-container>
+
 <ng-template #descriptionArray>
-  <ul class="">
-    <li class="" *ngFor="let item of data?.description">
-      {{ item }}
-    </li>
-  </ul>
+    <ul class="">
+        <li class="" *ngFor="let item of data?.description">
+            {{ item }}
+        </li>
+    </ul>
 </ng-template>
 
 <ng-container *ngIf="data?.imageUrl">
-  <div mat-dialog-content>
-    <img [src]="data?.imageUrl" [alt]="data?.title" style="width: 100%" /></div
-></ng-container>
+    <div mat-dialog-content>
+        <img [src]="data?.imageUrl" [alt]="data?.title" style="width: 100%" /></div>
+</ng-container>
 
 <ng-container *ngIf="data?.closableOnlyWithButton">
-  <hr style="margin-bottom: 15px" />
-  <button mat-raised-button id="closeButton" (click)="closePopUp()">
+    <hr style="margin-bottom: 15px" />
+    <button mat-raised-button id="closeButton" (click)="closePopUp()">
     {{ data?.buttonText ? data?.buttonText : 'Aceptar' }}
   </button>
 </ng-container>

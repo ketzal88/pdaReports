@@ -63,6 +63,7 @@
                 </div>
             </div>
         </ng-container>
+        <ng-container [ngTemplateOutlet]="competenciesSection" [ngTemplateOutletContext]="{data: ''}"></ng-container>
 
         <ng-container *ngFor="let screen of selectReportType.screens; let idx = index">
             <div [ngClass]="{
@@ -164,9 +165,45 @@
                 </div>
             </div>
         </ng-container>
+        <div class="row justify-content-evenly">
+            <div class="section-internal">
+                <img src="/assets/img/certification-validation-people.png" />
+            </div>
+            <div class="section-internal">
+                <h4 class="h4">Certificación y validación</h4>
+                <p class="body-2 certification-description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                </p>
+                <div class="d-flex">
+                    <img src="/assets/img/certificaction-validation-icon-1.png" />
+                    <img src="/assets/img/certificaction-validation-icon-2.png" />
+                    <img src="/assets/img/certificaction-validation-icon-3.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reports">
+        <div class="section-conductual block-section">
+        </div>
+        <div class="grey-background">
+            <div class="block-section">
+                <div class="row justify-content-evenly">
+                    <div class="section-internal">
+                        <div class="recomendation">
+                            <h4 class="h4">¿Sabías que le puedes enviar al candidato un reporte personalizado?</h4>
+                            <p class="body-1">
+                                ¡Hazlo ya!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="section-internal">
+                        <img src="/assets/img/footer-envelope.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <footer class="footer">
-        <div class="top-footer"></div>
         <div class="menu-footer">
             <ul class="v-effect-link">
                 <li><a href="#">Home</a></li>
@@ -179,13 +216,13 @@
             <svg width="222" height="62" viewBox="0 0 222 62" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M190.914 61.1827C207.569 61.1827 221.07 47.6824 221.07 31.0288C221.07 14.3753 207.569 0.875 190.914 0.875C174.259 0.875 160.758 14.3753 160.758 31.0288C160.758 47.6824 174.259 61.1827 190.914 61.1827Z"
-          fill="#3B43F2" />
+          fill="#0000FF" />
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M188.032 40.0749C195.429 40.0749 199.474 33.6936 199.474 28.1603C199.474 27.9787 199.474 27.798 199.463 27.6184C200.25 27.0265 200.929 26.2918 201.469 25.4508C200.736 25.7897 199.956 26.0121 199.16 26.1101C199.999 25.5866 200.627 24.764 200.928 23.7935C200.138 24.2813 199.274 24.6252 198.374 24.81C196.851 23.1241 194.303 23.0424 192.683 24.6283C191.64 25.6509 191.196 27.1755 191.52 28.6298C188.287 28.4604 185.274 26.8704 183.231 24.2548C182.164 26.1683 182.71 28.6155 184.477 29.8442C183.837 29.8248 183.211 29.6452 182.651 29.3206V29.3737C182.652 31.3668 184.002 33.0833 185.878 33.4782C185.286 33.6466 184.664 33.6711 184.063 33.5497C184.589 35.256 186.099 36.4245 187.819 36.4581C186.395 37.6236 184.636 38.2563 182.825 38.2543C182.505 38.2532 182.186 38.2338 181.867 38.194C183.707 39.4227 185.846 40.0749 188.032 40.0718"
           fill="white" />
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M112.508 61.1827C129.163 61.1827 142.664 47.6824 142.664 31.0288C142.664 14.3753 129.163 0.875 112.508 0.875C95.853 0.875 82.3516 14.3753 82.3516 31.0288C82.3516 47.6824 95.853 61.1827 112.508 61.1827Z"
-          fill="#3B43F2" />
+          fill="#0000FF" />
         <mask id="mask0_344_11970" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="103" y="21" width="21"
           height="21">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M103.461 21.9824H123.063V41.5824H103.461V21.9824Z"
@@ -198,7 +235,7 @@
         </g>
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M31.0859 61.1827C47.7408 61.1827 61.2422 47.6824 61.2422 31.0288C61.2422 14.3753 47.7408 0.875 31.0859 0.875C14.4311 0.875 0.929688 14.3753 0.929688 31.0288C0.929688 47.6824 14.4311 61.1827 31.0859 61.1827Z"
-          fill="#3B43F2" />
+          fill="#0000FF" />
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M32.7343 41.5823V32.0838H35.8106L36.313 27.8623H32.7343V25.8064C32.7343 24.7194 32.7639 23.6408 34.3843 23.6408H36.0256V20.6224C36.0256 20.577 34.6158 20.4746 33.1896 20.4746C30.211 20.4746 28.346 22.2234 28.346 25.4349V27.8623H25.0547V32.0838H28.346V41.5823H32.7343Z"
           fill="white" />

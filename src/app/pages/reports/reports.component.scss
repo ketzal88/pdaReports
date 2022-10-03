@@ -19,6 +19,7 @@ span {
     justify-content: center;
     align-items: center;
     width: 100%;
+    background-repeat: no-repeat;
 }
 
 .slide-header {
@@ -41,6 +42,7 @@ span {
 .logo,
 .respmenu {
     width: 25%;
+    z-index: 141351;
 }
 
 .logo {
@@ -180,4 +182,33 @@ span {
 
 .block-section.flex-start {
     justify-content: flex-start;
+    margin-bottom: 0px;
+}
+
+.recomendation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: flex-start;
+    height: 100%;
+}
+
+.certification-description {
+    padding: 24px 0px;
+}
+
+.grey-background {
+    background: #EFEFEF;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 80px 0px;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.section-conductual {
+    padding-bottom: 60px;
 }

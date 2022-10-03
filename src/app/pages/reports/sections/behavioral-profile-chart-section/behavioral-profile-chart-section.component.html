@@ -24,15 +24,16 @@
                     </div>
                     <div class="regulator-bars">
                         <div class="bar">
-                            <app-gauge-linear [value]="decisionMakingValue" [text]="'Toma de decisiones'" [color]="'#007EFD'">
-                            </app-gauge-linear>
+                            <!-- <app-gauge-linear [value]="decisionMakingValue" [text]="'Toma de decisiones'" [color]="'#007EFD'">
+                            </app-gauge-linear> -->
+                            <chart-small-bar-with-notch [value]="decisionMakingValue" [text]="'Toma de decisiones'" [color]="'#007EFD'"></chart-small-bar-with-notch>
                         </div>
                         <div class="bar">
-                            <app-gauge-linear [value]="profileIntensityValue" [text]="'Intensidad del Perfil'" [color]="'#007EFD'">
-                            </app-gauge-linear>
+                            <chart-small-bar-with-notch [value]="profileIntensityValue" [text]="'Intensidad del Perfil'" [color]="'#007EFD'">
+                            </chart-small-bar-with-notch>
                         </div>
                         <div class="bar">
-                            <app-gauge-linear [value]="energyValue" [text]="'Energia'" [color]="'#007EFD'"></app-gauge-linear>
+                            <chart-small-bar-with-notch [value]="energyValue" [text]="'Energia'" [color]="'#007EFD'"></chart-small-bar-with-notch>
                         </div>
                     </div>
                 </div>
@@ -53,21 +54,21 @@
             </div>
             <div class="regulator-bars">
                 <div class="bar">
-                    <app-gauge-linear [value]="
+                    <chart-small-bar-with-notch [value]="
             behavioralProfileInfo?.behavioralProfileChartInformation
               .energyBalance * 100
-          " [text]="'Equilibrio de Energia'" [color]="'#007EFD'"></app-gauge-linear>
+          " [text]="'Equilibrio de Energia'" [color]="'#007EFD'"></chart-small-bar-with-notch>
                 </div>
                 <div class="bar">
-                    <app-gauge-linear [value]="
+                    <chart-small-bar-with-notch [value]="
             behavioralProfileInfo?.behavioralProfileChartInformation
               .profileModification * 100
-          " [text]="'Modificacion del Perfil'" [color]="'#007EFD'"></app-gauge-linear>
+          " [text]="'Modificacion del Perfil'" [color]="'#007EFD'"></chart-small-bar-with-notch>
                 </div>
                 <div class="bar">
-                    <app-gauge-linear [value]="
+                    <chart-small-bar-with-notch [value]="
             behavioralProfileInfo?.behavioralProfileChartInformation.duration
-          " [text]="'Tiempo del formulario'" [color]="'#007EFD'"></app-gauge-linear>
+          " [text]="'Tiempo del formulario'" [color]="'#007EFD'"></chart-small-bar-with-notch>
                 </div>
             </div>
         </div>
