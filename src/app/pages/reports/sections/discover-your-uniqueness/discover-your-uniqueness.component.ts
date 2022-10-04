@@ -26,7 +26,7 @@ export class DiscoverYourUniquenessComponent implements OnInit {
     ret.closeOnNavigation = false;
     ret.closableOnlyWithButton = false;
     ret.backdropClass = '';
-    this.displayMessageService.openPopUp(ret);
+    this.displayMessageService.openShowMoreModal(ret);
     this.displayMessageService.confirmedPopUp().subscribe(confirmed => {
       console.log('confirmed: ', confirmed);
       if (confirmed) {

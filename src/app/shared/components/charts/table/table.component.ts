@@ -5,6 +5,7 @@ import {
   AfterViewInit,
   Input,
   ElementRef,
+  SimpleChanges,
 } from '@angular/core';
 import 'anychart';
 import { disabledCredits } from '../../../utils/chart.util';
@@ -22,6 +23,20 @@ export class TableComponent implements OnInit, AfterViewInit {
     ['#', '4', '4', '9', '3', '4'],
     ['IE', '43%', '48%', '57%', '52%', '24%'],
   ];
+  @Input() color: boolean;
+
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    if (changes['color'] !== undefined) {
+      this.color = changes['color'].currentValue;
+      if (this.table) {
+        this.table.dispose();
+        this.ngOnInit();
+        this.ngAfterViewInit();
+      }
+    }
+  }
 
   stage: any;
   table!: any;
@@ -41,19 +56,19 @@ export class TableComponent implements OnInit, AfterViewInit {
       .getRow(0)
       .height(60) // set column width
       .cellFill('#fff') // set column background color
-      .fontSize(24)
-      .fontWeight(900);
+      .fontSize(20)
+      .fontWeight(800);
     this.table.getCol(0).width(70).fontWeight(900).fontColor('#000000');
-    var cell = this.table.getCell(0, 1);
-    cell.fontColor('#FF6819');
-    var cell = this.table.getCell(0, 2);
-    cell.fontColor('#FFD100');
-    var cell = this.table.getCell(0, 3);
-    cell.fontColor('#27ACF7');
-    var cell = this.table.getCell(0, 4);
-    cell.fontColor('#2FB039');
-    var cell = this.table.getCell(0, 5);
-    cell.fontColor('#8C24D2');
+    let cell = this.table.getCell(0, 1);
+    cell.fontColor(this.color ? '#FF6819' : "#727276");
+    cell = this.table.getCell(0, 2);
+    cell.fontColor(this.color ? '#FFD100' : "#727276");
+    cell = this.table.getCell(0, 3);
+    cell.fontColor(this.color ? '#27ACF7' : "#727276");
+    cell = this.table.getCell(0, 4);
+    cell.fontColor(this.color ? '#2FB039' : "#727276");
+    cell = this.table.getCell(0, 5);
+    cell.fontColor(this.color ? '#8C24D2' : "#727276");
 
     // Set first column width 70 px and bold the text
     this.table
@@ -71,7 +86,9 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     // set stage
-    this.stage = anychart.graphics.create(this.container.nativeElement.id);
+    if (!this.stage) {
+      this.stage = anychart.graphics.create(this.container.nativeElement.id);
+    }
     this.table.container(this.stage).draw();
     disabledCredits(this.stage);
   }

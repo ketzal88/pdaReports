@@ -39,16 +39,16 @@
                 </div>
                 <div class="table-repna">
                     <div [ngClass]="naturalSelected ? 'blue' : 'inactive-opacity'">
-                        <p [ngClass]="naturalSelected ? 'blue' : ' '">
+                        <p class="title-natural" [ngClass]="naturalSelected ? 'blue' : 'inactive-opacity'">
                             {{ behavioralProfileInfo?.naturalPBehaviorTitle }}
                         </p>
-                        <app-table [arrayValue]="arrayTableN" [idContainer]="'chartContainer1'"></app-table>
+                        <app-table [arrayValue]="arrayTableN" [idContainer]="'chartContainer1'" [color]="naturalSelected"></app-table>
                     </div>
                     <div [ngClass]="naturalSelected ? 'inactive-opacity' : ' blue'">
-                        <p [ngClass]="naturalSelected ? '' : ' blue'">
+                        <p class="title-natural" [ngClass]="naturalSelected ? 'inactive-opacity' : ' blue'">
                             {{ behavioralProfileInfo?.roleBehaviorTitle }}
                         </p>
-                        <app-table [arrayValue]="arrayTableR" [idContainer]="'chartContainer2'"></app-table>
+                        <app-table [arrayValue]="arrayTableR" [idContainer]="'chartContainer2'" [color]="!naturalSelected"></app-table>
                     </div>
                 </div>
             </div>

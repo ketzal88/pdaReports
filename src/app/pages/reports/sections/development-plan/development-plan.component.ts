@@ -34,7 +34,7 @@ export class DevelopmentPlanComponent implements OnInit {
     ret.introduction = this.developmentPlan.introduction;
     ret.description = this.developmentPlan.firstContent;
 
-    this.displayMessageService.openPopUp(ret);
+    this.displayMessageService.openShowMoreModal(ret);
     this.displayMessageService.confirmedPopUp().subscribe(confirmed => {
       if (confirmed) {
         //TODO: Realiza alguna accion al cierre del modal

@@ -7,6 +7,7 @@ import {
 } from '@angular/material/snack-bar';
 import { take, map, Observable } from 'rxjs';
 import { PopUpComponent } from 'src/app/shared/components/display-message/pop-up/popUp.component';
+import { ShowMoreComponent } from 'src/app/shared/components/display-message/showMore/showMore.component';
 import {
   PopUpMessage,
   SnackBarMessage,
@@ -17,6 +18,7 @@ import {
 })
 export class DisplayMessageService {
   dialogRef: MatDialogRef<PopUpComponent>;
+  showMoreRef: MatDialogRef<ShowMoreComponent>;
 
   constructor(private snackBar: MatSnackBar, private matDialog: MatDialog) {}
   // Observable string stream
@@ -53,6 +55,25 @@ export class DisplayMessageService {
       data: message,
     };
     this.dialogRef = this.matDialog.open(PopUpComponent, params);
+    return this.dialogRef;
+  }
+
+  
+  openShowMoreModal(message: PopUpMessage): MatDialogRef<PopUpComponent, any> {
+    const params = {
+      width: message.width ? message.width : 'auto',
+      hasBackdrop:
+        message.hasBackdrop !== undefined ? message.hasBackdrop : true,
+      backdropClass: message.backdropClass,
+      closeOnNavigation:
+        message.closeOnNavigation !== undefined
+          ? message.closeOnNavigation
+          : true,
+      disableClose:
+        message.disableClose !== undefined ? message.disableClose : false,
+      data: message,
+    };
+    this.showMoreRef = this.matDialog.open(ShowMoreComponent, params);
     return this.dialogRef;
   }
 

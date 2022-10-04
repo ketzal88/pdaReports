@@ -32,7 +32,7 @@ export class HRFeedbackComponent implements OnInit {
     ret.introduction = this.hrFeedback.introduction;
     ret.description = this.hrFeedback.firstContent;
 
-    this.displayMessageService.openPopUp(ret);
+    this.displayMessageService.openShowMoreModal(ret);
     this.displayMessageService.confirmedPopUp().subscribe(confirmed => {
       if (confirmed) {
         //TODO: Realiza alguna accion al cierre del modal
