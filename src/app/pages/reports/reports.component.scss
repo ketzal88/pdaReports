@@ -42,7 +42,7 @@ span {
 .logo,
 .respmenu {
     width: 25%;
-    z-index: 141351;
+    z-index: 999;
 }
 
 .logo {
@@ -177,7 +177,7 @@ span {
 }
 
 .hamburger-icon {
-    z-index: 1500;
+    z-index: 999;
 }
 
 .block-section.flex-start {
@@ -192,10 +192,19 @@ span {
     justify-content: center;
     align-content: flex-start;
     height: 100%;
+    padding: 60px 0px;
 }
 
 .certification-description {
+    margin-top: 30px;
     padding: 24px 0px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: justify;
+    color: #6D7783;
 }
 
 .grey-background {
@@ -211,4 +220,37 @@ span {
 
 .section-conductual {
     padding-bottom: 60px;
+}
+
+.button-text.send-report-button {
+    padding: 5px 72px;
+    background-color: #F99E10;
+    color: white;
+    border-color: #F99E10;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+}
+
+.do-it {
+    margin: 25px 0px;
+}
+
+.my-0 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.envelope-image {
+    margin-top: -70px;
+    margin-right: -50px;
+    width: 130%;
+}
+
+.certification-icons {
+    display: flex;
+    gap: 35px;
 }

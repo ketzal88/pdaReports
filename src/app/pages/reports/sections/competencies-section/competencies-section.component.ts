@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { CompetencyCompatibility, CompetencyCompatibilityDetail } from 'src/app/core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-competencies-section',
@@ -19,6 +21,7 @@ export class CompetenciesSectionComponent implements OnInit {
 
   ngOnInit(): void {
     console.warn(this.competencyCompatibility)
+    console.warn(this.competencyCompatibility.competencyCompatibilityDetail[0])
   }
   getLeftCompetencies() {
     let array = this.competencyCompatibility.competencyCompatibilityDetail;

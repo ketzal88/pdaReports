@@ -15,7 +15,7 @@
             <button mat-flat-button class="h6 role-tab-button border-green" (click)="equipo = !equipo" [ngClass]="{'active': equipo}">Equipo</button>
         </div>
         <div class="puestos-compatibles">
-            <select class="selector" name="select" [ngModel]="jobSelected" (ngModelChange)="onChangeJob($event)">
+            <select mat-select class="selector" name="select" [ngModel]="jobSelected" (ngModelChange)="onChangeJob($event)">
               <option *ngFor="let job of jobs" [ngValue]="job">
                 {{ job.name }}
               </option>

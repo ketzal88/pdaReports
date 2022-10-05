@@ -34,6 +34,8 @@ import { ModalService } from './core/services/modal.service';
 import { SendEmailService } from './core/services/microservices/email/send-email.service';
 import { IndividualService } from './core/services/microservices/individual/individual.service';
 import { GenderService } from './core/services/microservices/individual/gender.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -53,6 +55,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AppRoutingModule,
     NoopAnimationsModule,
     MaterialModule,
+    BrowserAnimationsModule,
+    MatTooltipModule,
     HttpClientModule,
     ReactiveFormsModule,
     DisplayMessageModule,

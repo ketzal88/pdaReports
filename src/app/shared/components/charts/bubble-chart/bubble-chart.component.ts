@@ -323,9 +323,10 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
 
     let serieLabel = serie.labels();
     serieLabel.enabled(isEnabled);
+    serieLabel.fontFamily('Poppins');
     serieLabel.format('{%name}');
     serieLabel.fontColor('white');
-    serieLabel.fontSize('16px');
-    serieLabel.fontWeight(600);
+    serieLabel.fontSize('24px');
+    serieLabel.fontWeight(500);
   }
 }

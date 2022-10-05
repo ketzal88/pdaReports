@@ -56,7 +56,7 @@ export class SmallBarWithNotchComponent implements OnInit {
       .offsetY('15px')
       .offsetX(valueOffset.toString() + '%')
       .fontFamily('Poppins')
-      .fontColor('##1F140F')
+      .fontColor('#1F140F')
       .fontWeight(600)
       .fontSize(10)
       .text(value.toString() + "%")
@@ -112,7 +112,7 @@ export class SmallBarWithNotchComponent implements OnInit {
     marker.data([value]);
     // set the zIndex of the marker
     marker.zIndex(30);
-    marker.offset();
+    // marker.height("20px");
 
     
     // add a marker pointer
@@ -169,6 +169,7 @@ export class SmallBarWithNotchComponent implements OnInit {
     marker.zIndex(-10);
     marker.offset('0.05%');
     
+    
 
     // configure the scale
     let scale = this.gauge.scale();
@@ -185,7 +186,7 @@ export class SmallBarWithNotchComponent implements OnInit {
     axis.offset('0%');
     axis.orientation('bottom');
     axis.labels(false);
-    axis.zIndex(11)
+    axis.zIndex(11);
 
     // set paddings
     this.gauge.padding([0, 40]);

@@ -48,6 +48,7 @@ export class GaugeLinearComponent implements OnInit, OnChanges, AfterViewInit {
 
     // set the data for the gauge
     this.gauge.data(data);
+    this.gauge.interactivity(false);
 
     // set the layout
     this.gauge.layout(this.layout);
@@ -55,26 +56,49 @@ export class GaugeLinearComponent implements OnInit, OnChanges, AfterViewInit {
     // set labels
     this.gauge
       .label(0)
-      .position('left-center')
-      .anchor('left-center')
-      .offsetY('-30px')
-      .offsetX('0px')
+      .position('center')
+      .anchor('center')
+      .offsetX('12%')
       .fontFamily('Poppins')
-      .fontColor('#555')
-      .fontSize(14)
-      .fontWeight(400)
-      .text(this.text);
+      .fontColor('#1F140F')
+      .fontSize(18)
+      .fontWeight(50)
+      .text(this.text)
+      .rotation(270);
 
-    this.gauge
+      this.gauge
       .label(1)
-      .position('left-center')
-      .anchor('left-center')
-      .offsetY('30px')
-      .offsetX(this.text)
-      .fontColor('#777777')
-      .fontColor('#777777')
-      .fontSize(14)
-      .text(this.value);
+      .position('center-top')
+      .anchor('center-top')
+      .offsetY('8px')
+      .offsetX('16%')
+      .fontFamily('Poppins')
+      .fontColor('#1F140F')
+      .fontSize(24)
+      .fontWeight(700)
+      .text("+");
+
+      this.gauge
+      .label(3)
+      .position('center-bottom')
+      .anchor('center-bottom')
+      .offsetX('16%')
+      .fontFamily('Poppins')
+      .fontColor('#1F140F')
+      .fontSize(24)
+      .fontWeight(700)
+      .text("-");
+
+    // this.gauge
+    //   .label(1)
+    //   .position('left-center')
+    //   .anchor('left-center')
+    //   .offsetY('30px')
+    //   .offsetX(this.text)
+    //   .fontColor('#777777')
+    //   .fontColor('#777777')
+    //   .fontSize(14)
+    //   .text(this.value);
 
     this.gauge
       .label(2)
@@ -91,18 +115,18 @@ export class GaugeLinearComponent implements OnInit, OnChanges, AfterViewInit {
     let scaleBarColorScale = anychart.scales.ordinalColor().ranges([
       {
         from: 0,
-        to: 19,
-        color: ['#F2F3F3'],
+        to: 20,
+        color: [this.color],
       },
       {
         from: 20,
         to: 80,
-        color: [this.color],
+        color: ['#F2F3F3'],
       },
       {
-        from: 81,
+        from: 80,
         to: 100,
-        color: ['#F2F3F3'],
+        color: [this.color],
       },
     ]);
 
@@ -118,15 +142,60 @@ export class GaugeLinearComponent implements OnInit, OnChanges, AfterViewInit {
     // add a marker pointer
     let marker = this.gauge.marker(0);
 
-    // set the marker type and color
-    marker.type('triangle-down');
-    marker.color('white');
-    marker.stroke('black');
-    marker.width('8.5%');
+     // add a marker pointer
+     marker = this.gauge.marker(0);
 
-    // set the zIndex of the marker
-    marker.zIndex(10);
-    marker.offset('-0.2%');
+     // set the marker type and color
+     marker.type('circle');
+     marker.color(this.color);
+     marker.stroke('black', 0);
+     marker.width('7.5%');
+     marker.data([20]);
+     // set the zIndex of the marker
+     marker.zIndex(10);
+     marker.offset('0%');
+ 
+     
+     // add a marker pointer
+     marker = this.gauge.marker(0);
+ 
+     // set the marker type and color
+     marker.type('circle');
+     marker.color(this.color);
+     marker.stroke('black', 0);
+     marker.width('7.5%');
+     marker.data([80]);
+     // set the zIndex of the marker
+     marker.zIndex(10);
+     marker.offset('0%');
+ 
+     
+     // add a marker pointer
+     marker = this.gauge.marker(0);
+ 
+     // set the marker type and color
+     marker.type('circle');
+     marker.color(this.color);
+     marker.stroke('black', 0);
+     marker.width('7.5%');
+     marker.data([0]);
+     // set the zIndex of the marker
+     marker.zIndex(-10);
+     marker.offset('0%');
+     
+     // add a marker pointer
+     marker = this.gauge.marker(0);
+ 
+     // set the marker type and color
+     marker.type('circle');
+     marker.color(this.color);
+     marker.width('7.5%');
+     marker.stroke('black', 0);
+     marker.data([100]);
+     // set the zIndex of the marker
+     marker.zIndex(-10);
+     marker.offset('0%');
+     
 
     // configure the scale
     let scale = this.gauge.scale();
@@ -145,7 +214,7 @@ export class GaugeLinearComponent implements OnInit, OnChanges, AfterViewInit {
     axis.labels(false);
 
     // set paddings
-    this.gauge.padding([0, 20]);
+    this.gauge.padding([20, 20]);
   }
   ngAfterViewInit(): void {
     this.gauge.container(this.container.nativeElement);

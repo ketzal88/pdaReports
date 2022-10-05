@@ -40,8 +40,13 @@
             p {
                 z-index: 1;
                 color: white;
-                font-weight: 500;
-                font-size: 20px;
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 17px;
+                line-height: 24px;
+                text-align: center;
+                margin: 0px 39px;
             }
         }
     }
@@ -53,26 +58,22 @@
         display: flex;
         justify-content: space-between;
         >i {
-            opacity: 0.7;
             color: #fff;
             font-size: 45px;
             cursor: pointer;
             justify-content: space-between;
-            &:hover {
-                opacity: 1;
-            }
         }
     }
     &__steps {
         position: absolute;
-        bottom: 40px;
+        bottom: 20px;
         width: 100%;
         display: flex;
         justify-content: center;
         &-step {
             height: 24px;
             width: 24px;
-            margin: 0 5px;
+            margin: 0 4px;
             border-radius: 50%;
             border: 1px solid rgba(255, 255, 255, 0.7);
             cursor: pointer;
@@ -80,8 +81,7 @@
             background: #C4C4C4;
             &:hover,
             &-active {
-                opacity: 0.7;
-                background: #37A9FD;
+                background: #FF4B7E;
             }
         }
     }
@@ -105,12 +105,11 @@
     font-size: 3em;
     user-select: none;
     height: 100%;
-    opacity: 80%;
-    // opacity effect on hover
-    transition: opacity 150ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
-    &:hover,
-    &:focus {
-        opacity: 1;
+    &:hover {
+        filter: contrast(0.9);
+    }
+    &:active {
+        filter: contrast(0.8);
     }
     /* Position the buttons */
     &.next {
@@ -125,15 +124,15 @@
 /* style the arrows */
 
 .arrow {
-    display: block;
-    border-left: 0.1em solid #1F140F;
-    border-bottom: 0.1em solid #1F140F;
-    width: 0.5em;
-    height: 0.5em;
-    &.left {
-        transform: rotate(45deg);
-    }
     &.right {
-        transform: rotate(225deg);
+        transform: scaleX(-1);
     }
+}
+
+.carousel-title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 72px;
 }

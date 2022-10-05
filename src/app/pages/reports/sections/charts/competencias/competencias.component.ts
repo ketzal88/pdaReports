@@ -12,7 +12,7 @@ export class CompetenciasComponent implements OnInit {
   @ViewChild('chartContainer') container!: ElementRef;
   @Input() value: number = 0;
   @Input() color: string = ThemeColors.colorPrimary;
-
+  @Input() tooltip: string = "";
   gauge!: anychart.charts.LinearGauge;
 
   ngOnInit(): void {
@@ -27,7 +27,11 @@ export class CompetenciasComponent implements OnInit {
 
     // set the layout
     this.gauge.layout("horizontal");
-    this.gauge.background("transparent")
+    this.gauge.background("transparent");
+
+    if (this.tooltip && this.tooltip !== ""){
+      this.gauge.tooltip().enabled(true).format(this.tooltip);
+    }
 
 
     // create a color scale

@@ -119,7 +119,7 @@ export class GraficoComportamentalComponent implements OnInit {
     chart.xAxis().ticks().length(0).stroke('#FEFEFE');
 
     // set chart x-axis labels settings
-    chart.xAxis().labels().padding(15).fontSize(12).fontOpacity(1).fontWeight(600);
+    chart.xAxis().labels().padding(2).fontSize(12).fontOpacity(1).fontWeight(600);
 
     this.persona = this.createPolygon(persona, chart, "#d213f1")
     this.puesto = this.createPolygon(puesto, chart, "#007efd")

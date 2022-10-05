@@ -15,7 +15,10 @@
       let competencyDetail of getLeftCompetencies();
       let idx = index
     ">
-                <div class="competency">
+                <div class="competency" matTooltip="Info about the action" aria-label="Button that displays a tooltip when focused or hovered over">
+                    <button mat-raised-button matTooltip="Info about the action" aria-label="Button that displays a tooltip when focused or hovered over">
+              Action
+            </button>
                     <h5 class="h5">{{ competencyDetail.competency }}</h5>
                     <div class="competency-bar">
                         <div class="bar-shadow competency-graph">
@@ -35,7 +38,7 @@
                     <h5 class="h5">{{ competencyDetail.competency }}</h5>
                     <div class="competency-bar">
                         <div class="bar-shadow competency-graph">
-                            <chart-competencias [value]="competencyDetail.compatibilityPercentage" [color]="idx % 2 === 1 ? '#80BFFE' : '#0075FF'"></chart-competencias>
+                            <chart-competencias [value]="competencyDetail.compatibilityPercentage" [color]="idx % 2 === 1 ? '#80BFFE' : '#0075FF'" [tooltip]="competencyDetail.description"></chart-competencias>
                         </div>
                         <div class="competency-percentage h4">{{competencyDetail.compatibilityPercentage}}%</div>
                     </div>
