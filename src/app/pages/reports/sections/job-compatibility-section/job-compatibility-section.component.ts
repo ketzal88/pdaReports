@@ -10,6 +10,7 @@ import { PDAIndividualSectionsResponse } from '../../../../core/services/microse
 import { PDAIndividualSectionsRequest } from '../../../../core/services/microservices/reports/interfaces/pdaIndividualSectionsRequest.interface';
 import { unsubscribe } from '../../../../core/utils/subscription.util';
 import { SelectedReport } from '../../../../core/models/reportType.model';
+import { getDottedFirstCharacters } from 'src/app/core/utils/strings.util';
 
 @Component({
   selector: 'app-job-compatibility-section',
@@ -111,5 +112,9 @@ export class JobCompatibilitySectionComponent implements OnInit, OnDestroy {
 
   get jobCompatibility(): JobCompatibility {
     return this._jobCompatibility;
+  }
+  
+  formatText(text: string) {
+    return getDottedFirstCharacters(text, 38);
   }
 }

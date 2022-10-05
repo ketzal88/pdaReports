@@ -53,6 +53,7 @@
 
 .competencies-description {
     margin-top: 16px;
+    margin-bottom: 30px;
 }
 
 .competency {
@@ -74,9 +75,15 @@
 
 .block-section {
     flex-direction: column;
+    gap: 0px;
 }
 
 .competency-bar {
     display: flex;
     align-items: center;
+}
+
+.columns {
+    gap: 275px;
+    flex-wrap: nowrap;
 }

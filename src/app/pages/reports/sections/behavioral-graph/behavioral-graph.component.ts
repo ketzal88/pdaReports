@@ -13,6 +13,7 @@ import { StoreKeys } from '../../../../core/consts/store-keys.enum';
 import { PDAIndividualSectionsRequest } from '../../../../core/services/microservices/reports/interfaces/pdaIndividualSectionsRequest.interface';
 import { unsubscribe } from '../../../../core/utils/subscription.util';
 import { SelectedReport } from '../../../../core/models/reportType.model';
+import { getDottedFirstCharacters } from 'src/app/core/utils/strings.util';
 
 @Component({
   selector: 'app-behavioral-graph',
@@ -123,5 +124,9 @@ export class BehavioralGraphComponent implements OnInit, OnDestroy {
       return;
     }
     this.naturalSelected = natural;
+  }
+  
+  formatText(text: string) {
+    return getDottedFirstCharacters(text, 38);
   }
 }

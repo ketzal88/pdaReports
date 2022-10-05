@@ -6,7 +6,7 @@
 <div class="puestos-compatibles">
     <select class="selector" name="select" [ngModel]="jobSelected" (ngModelChange)="onChangeJob($event)">
     <option *ngFor="let job of jobs" [ngValue]="job">
-      {{ job.name }}
+      {{ formatText(job.name) }}
     </option>
   </select>
 </div>

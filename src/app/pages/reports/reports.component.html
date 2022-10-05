@@ -73,7 +73,7 @@
         }">
                 <!-- Pantallas -->
                 <div class="section-conductual block-section">
-                    <div class="row justify-content-evenly">
+                    <div class="block-row">
                         <ng-container *ngFor="let section of screen.sections">
                             <!-- Se utiliza column '0' para contemplar una seccion centrada por arriba de otras secciones -->
                             <ng-container *ngIf="screen.sections.length === 1; else showAllSections">
@@ -165,12 +165,12 @@
                 </div>
             </div>
         </ng-container>
-        <div class="row justify-content-evenly">
+        <div class="block-row gap-0">
             <div class="section-internal">
                 <img src="/assets/img/certification-validation-people.png" />
             </div>
             <div class="section-internal">
-                <h3 class="h3">Certificación y validación</h3>
+                <h4 class="h4 certification-title">Certificación y validación</h4>
                 <p class="body-2 certification-description">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
                 </p>
@@ -186,8 +186,8 @@
         <div class="section-conductual block-section">
         </div>
         <div class="grey-background">
-            <div class="block-section my-0">
-                <div class="row justify-content-evenly">
+            <div class="block-section">
+                <div class="block-row gap-0">
                     <div class="section-internal">
                         <div class="recomendation">
                             <h4 class="h4">¿Sabías que le puedes enviar al candidato un reporte personalizado?</h4>

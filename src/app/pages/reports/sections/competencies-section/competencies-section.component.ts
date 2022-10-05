@@ -4,6 +4,7 @@ import { ProgressBarMode } from '@angular/material/progress-bar';
 import { CompetencyCompatibility, CompetencyCompatibilityDetail } from 'src/app/core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { getDottedFirstCharacters } from 'src/app/core/utils/strings.util';
 
 @Component({
   selector: 'app-competencies-section',
@@ -30,5 +31,8 @@ export class CompetenciesSectionComponent implements OnInit {
   getRightCompetencies() {
     let array = this.competencyCompatibility.competencyCompatibilityDetail;
     return array?.slice(array.length / 2) ?? [];
+  }
+  formatText(text: string) {
+    return getDottedFirstCharacters(text, 38);
   }
 }
