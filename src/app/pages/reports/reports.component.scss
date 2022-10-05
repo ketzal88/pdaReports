@@ -45,10 +45,6 @@ span {
     z-index: 999;
 }
 
-.logo {
-    margin-left: 100px;
-}
-
 
 /*MENU*/
 
@@ -90,11 +86,10 @@ span {
 .respmenu {
     color: #0000FF;
     position: sticky;
-    //background: #ffffff;
     min-height: 48px;
     position: fixed;
-    top: 20px;
-    right: 0px;
+    top: 41px;
+    right: -205px;
 }
 
 .respmenu nav {
