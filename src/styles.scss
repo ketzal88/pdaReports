@@ -517,6 +517,22 @@ div.mat-expansion-panel-body {
 }
 
 
+/******************************1440px*********************************************/
+
+@media (max-width: 1440px) {
+    .block-section {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        margin: 50px 0px;
+        width: 1282px;
+        justify-content: space-evenly;
+        gap: 202px;
+    }
+}
+
+
 /*********************************************************************************/
 
 @import "./assets/variables"

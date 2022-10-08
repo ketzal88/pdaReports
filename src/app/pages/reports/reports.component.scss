@@ -243,11 +243,6 @@ span {
     gap: 35px;
 }
 
-.block-section-gap {
-    gap: 275px;
-    flex-wrap: nowrap;
-}
-
 .block-row {
     justify-content: space-evenly;
     display: flex;
@@ -263,4 +258,10 @@ span {
 
 .gap-0 {
     gap: 0px;
+}
+
+@media (max-width: 1440px) {
+    .section-conductual {
+        padding-bottom: 20px;
+    }
 }
