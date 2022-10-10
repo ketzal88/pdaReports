@@ -1,16 +1,15 @@
 <div class="block-section">
-    <div class="row justify-content-evenly columns">
+    <div class="competency-row">
         <div class="section-internal">
             <h4 class="h4">{{ competencyCompatibility.title }}</h4>
             <p class="body-1 competencies-description">
                 Tiene una marcada tendencia hacia la especialización. Es altamente confiable, muy disciplinado y preciso.
             </p>
         </div>
-        <div class="section-internal">
-        </div>
+        <div class="section-internal d-md-none"></div>
     </div>
-    <div class="tipo-deperfil row justify-content-evenly columns">
-        <div class="section-internal" styles="margin-right: 10%">
+    <div class="tipo-deperfil competency-row move-to-the-right">
+        <div class="section-internal first-section">
             <ng-container *ngFor="
       let competencyDetail of getLeftCompetencies();
       let idx = index

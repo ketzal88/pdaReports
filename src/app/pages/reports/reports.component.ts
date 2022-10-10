@@ -276,7 +276,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     //TODO: Luego actualizar codigo cuando tengamos las imagenes en png o svg
     if (this.selectedReport) {
       this.backgroundUserImage =
-        'background-' + this.getBackgroundName() + '.svg';
+        'background-' + this.getBackgroundName();
     }
   }
 

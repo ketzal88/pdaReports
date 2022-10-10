@@ -470,10 +470,6 @@ div.cdk-global-overlay-wrapper>div.cdk-overlay-pane {
     justify-content: space-between
 }
 
-.justify-content-evenly {
-    justify-content: space-evenly
-}
-
 select.small-shadow {
     box-shadow: 0px 3px 5px #C3C4CA;
 }
@@ -529,6 +525,15 @@ div.mat-expansion-panel-body {
         width: 1282px;
         justify-content: space-evenly;
         gap: 202px;
+    }
+}
+
+@media (max-width: 744px) {
+    .block-section {
+        width: 100%;
+    }
+    .section-repna .content {
+        width: 100%;
     }
 }
 

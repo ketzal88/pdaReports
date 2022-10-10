@@ -14,3 +14,10 @@
     padding: 0 10%;
     color: #6D7783;
 }
+
+@media (max-width: 744px) {
+    .h4.subtitle,
+    .body-1 {
+        color: white;
+    }
+}

@@ -1,5 +1,5 @@
 <ng-container *ngIf="dataIndividualSectionsResponse">
-    <div class="reports" [ngStyle]="{'background-image': 'url(/assets/img/' + backgroundUserImage + ')'}">
+    <div class="reports" [ngClass]="backgroundUserImage">
         <ng-container *ngFor="let screenProfile of selectOnlyProfile.screens">
             <div class="slide-header">
                 <div class="block-section flex-start">
@@ -63,7 +63,10 @@
                 </div>
             </div>
         </ng-container>
-        <ng-container [ngTemplateOutlet]="competenciesSection" [ngTemplateOutletContext]="{data: ''}"></ng-container>
+
+        <app-competencies-section *ngIf="dataIndividualSectionsResponse?.competencyCompatibility" [competencyCompatibility]="
+    dataIndividualSectionsResponse?.competencyCompatibility
+  "></app-competencies-section>
 
         <ng-container *ngFor="let screen of selectReportType.screens; let idx = index">
             <div [ngClass]="{
@@ -77,11 +80,7 @@
                         <ng-container *ngFor="let section of screen.sections">
                             <!-- Se utiliza column '0' para contemplar una seccion centrada por arriba de otras secciones -->
                             <ng-container *ngIf="screen.sections.length === 1; else showAllSections">
-                                <div style="
-                    display: flex;
-                    flex-direction: column;
-                    flex-basis: 100%;
-                  ">
+                                <div class="section-block-conductual">
                                     <ng-container *ngFor="let item of section.items">
                                         <ng-container [ngTemplateOutlet]="
                         item === 'questionBehavioralProfile'
