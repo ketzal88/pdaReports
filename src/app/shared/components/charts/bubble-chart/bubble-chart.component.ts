@@ -53,8 +53,8 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
   ngOnInit(): void {
     // create a chart
     this.chart = anychart.cartesian();
-    this.chart.xAxis(0, { ticks: false, labels: false, stroke: '#ffffff' });
-    this.chart.yAxis(0, { ticks: false, labels: false, stroke: '#ffffff' });
+    this.chart.xAxis(0, { ticks: false, labels: false, stroke: '#ffffff00' });
+    this.chart.yAxis(0, { ticks: false, labels: false, stroke: '#ffffff00' });
 
     //UNSELECTED CHART
     if (this.naturalSelected) {
@@ -235,6 +235,8 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
         '#88868b',
         !this.naturalSelected ? this.opacityActive : this.opacitInactive
       );
+
+      this.chart.background("#00000000");
 
     let serieRoleR = this.chart.bubble(roleR);
     this.setLabelFormatAndBubbleStyle(

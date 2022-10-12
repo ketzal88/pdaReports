@@ -43,8 +43,7 @@ export class SmallBarWithNotchComponent implements OnInit {
       .fontColor('#1F140F')
       .fontSize(12)
       .fontWeight(700)
-      .text(title)
-      .useHtml(true);
+      .text(title);
 
       let valueOffset = value / 100 * 70 + 13;
       valueOffset = Math.min(valueOffset,100);
@@ -69,7 +68,7 @@ export class SmallBarWithNotchComponent implements OnInit {
       .offsetY('30px')
       .offsetX('50px')
       .fontColor('#777777')
-      .fontSize(12)
+      .fontSize(10)
       .fontFamily('Poppins')
       .text(' ');
 

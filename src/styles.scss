@@ -15,11 +15,11 @@ $pda-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 $pda-warn: mat.define-palette(mat.$red-palette);
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$pda-theme: mat.define-light-theme(( color: ( primary: $pda-primary, accent: $pda-accent, warn: $pda-warn, )));
+$pda-theme: mat.define-light-theme((color: (primary: $pda-primary, accent: $pda-accent, warn: $pda-warn, )));
 
 /**********************Configuration typografic*********************/
 
-$custom-typography: mat.define-typography-config( $font-family: "Poppins");
+$custom-typography: mat.define-typography-config($font-family: "Poppins");
 @include mat.core($custom-typography);
 
 /*******************************************************************/
@@ -534,6 +534,19 @@ div.mat-expansion-panel-body {
     }
     .section-repna .content {
         width: 100%;
+    }
+    .section-repna {
+        padding: 0px 70px;
+        width: 100vw;
+    }
+    .table-repna .inactive-opacity {
+        display: none;
+    }
+}
+
+@media (max-width: 375px) {
+    .section-repna {
+        padding: 0px 40px;
     }
 }
 

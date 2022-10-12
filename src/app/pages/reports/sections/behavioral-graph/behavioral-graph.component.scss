@@ -267,3 +267,14 @@ ul.slider li:first-child {
 .mat-flat-button.mat-button-disabled.mat-button-disabled {
     background-color: #00000000;
 }
+
+@media (max-width: 375px) {
+    .h6 {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .grafic-comportamental {
+        height: auto
+    }
+}

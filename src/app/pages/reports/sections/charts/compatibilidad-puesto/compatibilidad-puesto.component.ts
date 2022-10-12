@@ -31,7 +31,7 @@ export class CompatibilidadPuestoComponent implements OnInit {
         value: 100 - this._value,
         stroke: {
           color: "#F4F4F4",
-          thickness: 40,
+          thickness: "25%",
           lineJoin: "round",
           lineCap: "round",
         },
@@ -48,7 +48,7 @@ export class CompatibilidadPuestoComponent implements OnInit {
           lineCap: "round",
           mode: true,
           opacity: 1,
-          thickness: 40,
+          thickness: "25%",
           keys: [{ color: ThemeColors.colorPrimary, offset: 0, opacity: 1 }, { color: "#40c4ff", offset: 0.8, opacity: 1 }],
         },
         normal: {

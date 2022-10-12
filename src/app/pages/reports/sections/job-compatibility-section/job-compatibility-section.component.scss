@@ -16,3 +16,12 @@
     display: flex;
     justify-content: center;
 }
+
+@media (max-width: 744px) {
+    .descripcion {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+    }
+}

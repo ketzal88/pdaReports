@@ -47,3 +47,22 @@
         padding: 5px 30px;
     }
 }
+
+@media (max-width: 375px) {
+    .detalles {
+        flex-direction: column;
+    }
+    .h4 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32px;
+    }
+    .body-2 {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .detail-section {
+        width: 100%;
+    }
+}

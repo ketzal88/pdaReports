@@ -1,6 +1,12 @@
 .chart-container {
     width: 350px;
     margin: 30px;
+}
 
-  }
-  
+@media (max-width: 375px) {
+    .chart-container {
+        width: 100%;
+        margin: 0px;
+        margin-top: 20px;
+    }
+}

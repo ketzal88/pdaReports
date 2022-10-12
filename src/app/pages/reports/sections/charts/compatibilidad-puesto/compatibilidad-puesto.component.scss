@@ -20,3 +20,10 @@
         margin-top: -60px;
         padding-left: 10px;
     }
+    
+    @media (max-width: 375px) {
+        .compatibilidad-puesto-graph {
+            width: 240px;
+            height: 240px;
+        }
+    }

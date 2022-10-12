@@ -21,18 +21,16 @@
     </div>
     <div #carousel class="dsc-carousel__content" [ngStyle]="
       contentType === CarouselType.TEXT_ONLY && {
-        width: '388px',
         'align-items': 'center'
       }
     ">
         <ng-container *ngFor="let section of items">
-            <div class="dsc-carousel__content-item" [ngStyle]="
+            <div class="dsc-carousel__content-item carousel-content" [ngStyle]="
           (contentType === CarouselType.IMAGE_ONLY && {
             'background-image': 'url(' + section.image + ')',
             'margin-left': section.marginLeft + '%'
           }) ||
           (contentType === CarouselType.TEXT_ONLY && {
-            height: '388px',
             background: '#007efd',  
             'border-radius': '50%',
             'padding': '20px',
@@ -43,7 +41,7 @@
                     <h1 class="carousel-title ">
                         {{ section.title }}
                     </h1>
-                    <p>{{ section.subtitle }}</p>
+                    <p class="carousel-text">{{ section.subtitle }}</p>
                 </ng-container>
             </div>
         </ng-container>

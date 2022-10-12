@@ -97,13 +97,20 @@
     margin-right: 10%
 }
 
+.tipo-deperfil.competency-row {
+    gap: 134px;
+}
+
 @media (max-width: 1440px) {
     .competency-row {
-        gap: 113px;
+        gap: 0px;
     }
 }
 
 @media (max-width: 744px) {
+    .tipo-deperfil.competency-row {
+        gap: 0px;
+    }
     .competency-row {
         gap: 0px;
         justify-content: start;
@@ -137,5 +144,16 @@
         100% {
             margin-left: -100%;
         }
+    }
+}
+
+@media (max-width: 375px) {
+    .competency {
+        max-width: 280px;
+    }
+    .h5 {
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 24px;
     }
 }

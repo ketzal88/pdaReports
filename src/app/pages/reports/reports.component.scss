@@ -236,6 +236,7 @@ span {
 
 .do-it {
     margin-bottom: 25px;
+    width: 100%;
 }
 
 .certification-icons {
@@ -254,6 +255,10 @@ span {
 
 .recomendation>.h4 {
     padding-right: 20px;
+}
+
+.break-line-sm {
+    display: none;
 }
 
 .gap-0 {
@@ -305,5 +310,67 @@ span {
         width: auto;
         gap: 0px;
         align-items: center;
+    }
+    .recomendation {
+        text-align: center;
+        padding: 30px;
+        align-items: center;
+    }
+    .do-it {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 32px;
+    }
+    .certification-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 375px) {
+    .block-section {
+        width: 100vw;
+    }
+    .block-row {
+        width: 100vw;
+    }
+    .img-certification {
+        width: 100%;
+    }
+    .certification-title,
+    .certification-description,
+    .certification-icons {
+        gap: 0px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .certification-icon {
+        width: 90px;
+    }
+    .envelope-image {
+        padding: 0px 20px;
+        width: 100%;
+    }
+    .do-it {
+        margin-top: 20px;
+    }
+    .logo img {
+        width: 105px;
+    }
+    .respmenu {
+        right: 20px;
+        width: 35px;
+        height: 35px;
+    }
+    .hamburger-icon {
+        width: 100%;
+        height: 100%;
+    }
+    .v-effect-link li {
+        display: block;
+    }
+    .break-line-sm {
+        display: block;
     }
 }

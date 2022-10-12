@@ -136,3 +136,32 @@
     font-size: 64px;
     line-height: 72px;
 }
+
+.carousel-content {
+    height: 388px;
+    width: 388px;
+}
+
+.dsc-carousel__content {
+    width: 388px
+}
+
+@media (max-width: 375px) {
+    .carousel-content {
+        height: 218px;
+        width: 218px;
+    }
+    .carousel-title {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 40px;
+    }
+    .carousel-text {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+    }
+    .dsc-carousel__content {
+        width: 218px;
+    }
+}

@@ -46,7 +46,7 @@
 }
 
 .table-repna {
-    width: 40%;
+    width: 100%;
     margin: 0 auto;
     padding: 0px 25px;
 }
@@ -66,6 +66,7 @@
 
 .body-2 {
     text-align: center;
+    padding: 0px 20%;
 }
 
 .title-natural {
@@ -82,4 +83,147 @@
 
 .buttons {
     margin-left: 100px;
+}
+
+.section-grafico-conductual {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.section-repna-grafic {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.table-repna {
+    grid-column: 2;
+    grid-row: 1/3;
+}
+
+.regulator-bars {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.regulator-bars.bottom-bars {
+    grid-column: 1/3;
+    grid-row: 3;
+    width: 50%;
+    margin: 0px auto;
+}
+
+.buttons-mobile {
+    display: none;
+}
+
+@media (max-width: 744px) {
+    .body-2 {
+        padding: 0px;
+    }
+    .section-grafico-conductual {
+        width: 100%;
+    }
+    .regulator-bars.table-repna {
+        display: inherit;
+    }
+    .grafic-bars {
+        width: 100%;
+        border-right: 0px;
+    }
+    .section-repna-grafic {
+        grid-column: 1 / 3;
+        grid-row: 1;
+    }
+    .table-repna {
+        grid-column: 1;
+        grid-row: 2;
+        padding-right: 0px;
+    }
+    .regulator-bars {
+        grid-column: 2;
+        grid-row: 2;
+    }
+    .regulator-bars.bottom-bars {
+        grid-column: 1/3;
+        grid-row: 3;
+        width: 100%;
+        margin: 0px auto;
+    }
+    .top-bars {
+        flex-direction: column;
+        padding: 0px;
+        margin-top: 61px;
+    }
+    .top-bars .bar {
+        width: 125%;
+        margin-left: -25%;
+        margin-bottom: -25%;
+    }
+    .bottom-bars .bar {
+        width: 100%;
+        margin-left: -5%;
+        margin-bottom: -25%;
+    }
+}
+
+@media (max-width: 375px) {
+    .section-grafico-conductual {
+        grid-template-columns: 1fr 1fr;
+        padding: 20px
+    }
+    .section-repna-grafic {
+        grid-column: 1 / 3;
+        grid-row: 1;
+    }
+    .table-repna {
+        grid-column: 1/3;
+        grid-row: 2;
+        padding: 0px
+    }
+    .regulator-bars {
+        grid-column: 1;
+        grid-row: 3;
+    }
+    .regulator-bars.bottom-bars {
+        grid-column: 2;
+        grid-row: 3;
+    }
+    .top-bars {
+        flex-direction: column;
+        padding: 0px;
+        margin-top: 0px;
+    }
+    .grafic-repna {
+        margin-left: 80px;
+    }
+    .bottom-bars .bar,
+    .top-bars .bar {
+        width: 125%;
+        margin-left: -20%;
+        margin-bottom: -20%;
+        margin-top: 0px;
+    }
+    .bottom-bars {
+        flex-direction: column;
+        padding: 0px;
+    }
+    .buttons-desktop {
+        display: none;
+    }
+    .buttons-mobile {
+        display: block;
+        grid-column: 1/3;
+        grid-row: 4;
+    }
+    .buttons {
+        margin-left: 0px;
+    }
+    .title-natural {
+        margin-top: 30px;
+    }
+    .energy {
+        margin: 0px -50px;
+        width: auto;
+    }
 }

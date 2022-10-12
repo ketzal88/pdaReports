@@ -2,8 +2,18 @@
     width: 400px;
     height: 380px;
     margin-top: 30px;
- 
-  }
-#ac_path_1853f118_av{
-    stroke:#111;
+}
+
+#ac_path_1853f118_av {
+    stroke: #111;
+}
+
+@media (max-width: 375px) {
+    .grafic-repna {
+        margin-left: 80px;
+    }
+    .chart-container {
+        width: 200px;
+        height: 320px;
+    }
 }

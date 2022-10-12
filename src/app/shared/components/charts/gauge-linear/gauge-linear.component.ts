@@ -49,6 +49,7 @@ export class GaugeLinearComponent implements OnInit, OnChanges, AfterViewInit {
     // set the data for the gauge
     this.gauge.data(data);
     this.gauge.interactivity(false);
+    this.gauge.background("#00000000")
 
     // set the layout
     this.gauge.layout(this.layout);
