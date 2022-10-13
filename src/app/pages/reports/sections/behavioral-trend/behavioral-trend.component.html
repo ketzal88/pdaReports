@@ -12,14 +12,14 @@
             <ng-container *ngFor="let item of behavioralTrends.behavioralTrendsDetails; let idx = index">
                 <mat-expansion-panel (opened)="changeBehavioralTrend(idx)" (closed)="changeClose(idx)" class="pb-0 px-0">
                     <mat-expansion-panel-header>
-                        <mat-panel-title [ngClass]="{'title': true, 'highlighted': idx == idxSelected}"> {{ item.name }} </mat-panel-title>
+                        <mat-panel-title [ngClass]="{'title': true, 'highlighted': idx == idxSelected}" [title]="item.name"> {{ item.name }} </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="progress-bar-selected">
                         <div style="display: flex; justify-content: space-between">
                             <span style="font-style: italic">{{ behavioralTrends.leftSideDescriptionWord }}</span>
                             <span style="font-style: italic">{{ behavioralTrends.rightSideDescriptionWord }}</span>
                         </div>
-                        <chart-tendencia-comportamental></chart-tendencia-comportamental>
+                        <chart-tendencia-comportamental [markers]="[54]"></chart-tendencia-comportamental>
                     </div>
                 </mat-expansion-panel>
                 <div class="progress-bar-unselected" [ngStyle]="{ display: idxSelected === idx ? 'none' : 'block' }">

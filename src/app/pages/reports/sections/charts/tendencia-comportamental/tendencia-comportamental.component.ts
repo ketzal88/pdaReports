@@ -120,18 +120,18 @@ export class TendenciaComportamentalComponent implements OnInit {
     marker.type('circle');
     marker.color("#007EFD");
     marker.stroke("white", 2)
-    marker.width('6%');
+    marker.width('60%');
     marker.data([{ x: title, value: value, title: title }]);
     // set the zIndex of the marker
     marker.zIndex(100);
-    marker.offset('0.75%');
+    marker.offset('7.5%');
 
-    marker.labels(true);
-    marker.labels()
-      .vAlign("center")
-      .hAlign("left")
-      .offsetY("7%")
-      .offsetX("-3%")
-      .format("{%title}")
+    // marker.labels(true);
+    // marker.labels()
+    //   .vAlign("center")
+    //   .hAlign("left")
+    //   .offsetY("60%")
+    //   .offsetX("-3%")
+    //   .format("{%title}")
   }
 }

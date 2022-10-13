@@ -82,9 +82,10 @@ export class GraficoComportamentalComponent implements OnInit {
   createChart() {
     let persona = this.behavioralRadarChart
       .map(x => ({ x: x.competencyName, value: this.naturalSelected ? x.natural : x.role }));
-    let puesto = this.correlationJobBehavioralCompetencies &&
-      persona.map((_, i) => this.correlationJobBehavioralCompetencies[i])
-        .map(x => ({ x: x.competencyName, value: this.naturalSelected ? x.natural : x.role }));
+    // let puesto = this.correlationJobBehavioralCompetencies &&
+    //   persona.map((_, i) => this.correlationJobBehavioralCompetencies[i])
+    //     .map(x => ({ x: x.competencyName, value: this.naturalSelected ? x.natural : x.role }));
+    let puesto = this.generateData(persona);
     let lider = this.generateData(persona);
     let equipo = this.generateData(persona);
 

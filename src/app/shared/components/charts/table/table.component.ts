@@ -48,6 +48,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // create table
     this.table = anychart.standalones.table();
+    
 
     // set table content
     this.table.contents(this.arrayValue);
@@ -55,9 +56,10 @@ export class TableComponent implements OnInit, AfterViewInit {
     this.table
       .getRow(0)
       .height(60) // set column width
-      .cellFill('#fff') // set column background color
+      .cellFill('#00000000') // set column background color
       .fontSize(20)
-      .fontWeight(800);
+      .fontWeight(800)
+      .cellBorder('#00000000');
     this.table.getCol(0).width(70).fontWeight(900).fontColor('#000000');
     let cell = this.table.getCell(0, 1);
     cell.fontColor(this.color ? '#FF6819' : "#727276");

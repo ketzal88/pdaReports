@@ -48,3 +48,22 @@
         line-height: 40px;
     }
 }
+
+@media (max-width: 375px) {
+    .profile {
+        padding-top: 20px;
+    }
+    .h2 {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 40px;
+    }
+    .item {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .list-icon {
+        padding: 0px;
+    }
+}

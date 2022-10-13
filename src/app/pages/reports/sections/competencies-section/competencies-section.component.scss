@@ -150,10 +150,39 @@
 @media (max-width: 375px) {
     .competency {
         max-width: 280px;
+        margin-bottom: 20px;
+    }
+    .h4 {
+        margin-top: 0px;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32px;
+        text-align: center;
     }
     .h5 {
         font-weight: 400;
         font-size: 17px;
         line-height: 24px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .competencies-description {
+        text-align: center;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 0px;
+    }
+    .tipo-deperfil.competency-row {
+        overflow: hidden;
+    }
+    .competency-percentage {
+        font-weight: 700;
+        font-size: 17px;
+        line-height: 24px;
+    }
+    .competency-bar {
+        margin-top: 6px;
     }
 }

@@ -1,5 +1,8 @@
 .title-icon {
     vertical-align: middle;
+    flex-shrink: 0;
+    align-self: center;
+    flex-grow: 0;
 }
 
 .description-text {
@@ -21,4 +24,32 @@
 .behavioral-description-card {
     height: 350px;
     margin-bottom: 96px;
+}
+
+.title-with-icon {
+    display: flex;
+    gap: 16px;
+}
+
+.h4 {
+    flex-grow: 1;
+    align-self: center;
+}
+
+@media(max-width: 375px) {
+    .h4 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32px;
+    }
+    .description-text {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .button-text {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+    }
 }

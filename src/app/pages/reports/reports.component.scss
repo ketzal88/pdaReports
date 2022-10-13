@@ -56,8 +56,6 @@ span {
     border-bottom: 2px solid #fff;
     max-width: 200px;
     background: #ffffff;
-    font-variant: small-caps;
-    text-shadow: 1px 1px black;
 }
 
 .respmenu input[type="checkbox"],
@@ -106,6 +104,10 @@ span {
 
 .respmenu input:not(:checked)~.fa-times {
     display: none;
+}
+
+.respmenu li {
+    list-style: none;
 }
 
 
@@ -329,6 +331,28 @@ span {
 }
 
 @media (max-width: 375px) {
+    select {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        max-width: 260px;
+    }
+    .respmenu {
+        height: auto;
+        top: 18px;
+    }
+    .respmenu nav {
+        margin-left: -150px;
+    }
+    .section-internal {
+        padding: 5px 30px;
+    }
+    .block-section.flex-start {
+        margin-top: 30px;
+    }
+    .background-hiring-survey {
+        background-image: url('/assets/img/background-hiring-survey-mobile.svg');
+    }
     .block-section {
         width: 100vw;
     }
@@ -372,5 +396,31 @@ span {
     }
     .break-line-sm {
         display: block;
+    }
+    .reports,
+    .footer {
+        overflow-x: hidden;
+    }
+    .certification-description {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .certification-title,
+    .recomendation .h4 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32px;
+        text-align: center;
+    }
+    .recomendation {
+        padding-top: 60px;
+        padding-bottom: 30px;
+    }
+    .envelope-image {
+        padding-bottom: 20px;
+    }
+    .grey-background {
+        margin-bottom: 30px;
     }
 }

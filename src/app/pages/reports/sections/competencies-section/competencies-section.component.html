@@ -15,7 +15,7 @@
       let idx = index
     ">
                 <div class="competency">
-                    <h5 class="h5">{{ formatText(competencyDetail.competency) }}</h5>
+                    <h5 class="h5" [title]="formatText(competencyDetail.competency)">{{ formatText(competencyDetail.competency) }}</h5>
                     <div class="competency-bar">
                         <div class="bar-shadow competency-graph">
                             <chart-competencias [value]="competencyDetail.compatibilityPercentage" [color]="idx % 2 === 0 ? '#80BFFE' : '#0075FF'"></chart-competencias>

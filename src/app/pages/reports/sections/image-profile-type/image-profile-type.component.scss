@@ -38,3 +38,21 @@
 .description-icon {
     vertical-align: middle;
 }
+
+@media (max-width: 375px) {
+    .h2 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32px;
+    }
+    .h6 {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .profile-image-detials {
+        flex-direction: column;
+        margin-top: 20px;
+        margin-top: 40px;
+    }
+}

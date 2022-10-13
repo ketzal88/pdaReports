@@ -256,7 +256,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
     this.selectReportType.screens = [
       ...this.selectReportType.screens.filter(data => data.block !== 1),
     ];
-    console.warn(this.selectReportType.screens)
     //Filtro por bloque 1
     this.selectOnlyProfile = {
       ...[

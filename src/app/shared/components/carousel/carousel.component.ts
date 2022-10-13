@@ -53,7 +53,7 @@ export class CarouselComponent implements OnInit {
   }
 
   initCountDown(): void {
-    this.counter = timer(0, 1000).pipe(
+    this.counter = timer(0, 3000).pipe(
       take(this.count),
       map(() => --this.count)
     );

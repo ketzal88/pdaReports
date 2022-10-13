@@ -37,7 +37,7 @@ export class SmallBarWithNotchComponent implements OnInit {
       .label(0)
       .position('left-center')
       .anchor('left-center')
-      .offsetY('-30px')
+      .offsetY('-20px')
       .offsetX('30px')
       .fontFamily('Poppins')
       .fontColor('#1F140F')
@@ -58,8 +58,7 @@ export class SmallBarWithNotchComponent implements OnInit {
       .fontColor('#1F140F')
       .fontWeight(600)
       .fontSize(10)
-      .text(value.toString() + "%")
-      .useHtml(true);
+      .text(value.toString() + "%");
 
     this.gauge
       .label(2)

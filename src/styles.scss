@@ -547,6 +547,19 @@ div.mat-expansion-panel-body {
 @media (max-width: 375px) {
     .section-repna {
         padding: 0px 40px;
+        margin-bottom: 0px;
+    }
+    .selector {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        max-width: 260px;
+    }
+    .block-section {
+        margin: 0px;
+    }
+    .grafico-compatibility {
+        margin-bottom: -40px;
     }
 }
 

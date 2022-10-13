@@ -146,22 +146,39 @@
     width: 388px
 }
 
+.carousel-container {
+    min-height: 500px;
+}
+
 @media (max-width: 375px) {
     .carousel-content {
         height: 218px;
         width: 218px;
     }
-    .carousel-title {
-        font-weight: 700;
-        font-size: 32px;
-        line-height: 40px;
-    }
-    .carousel-text {
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 16px;
-    }
     .dsc-carousel__content {
         width: 218px;
+    }
+    .control {
+        padding: 0px;
+    }
+    .carousel-container {
+        min-height: 310px;
+    }
+    .dsc-carousel {
+        &__content {
+            &-item {
+                h1 {
+                    font-weight: 700;
+                    font-size: 32px;
+                    line-height: 40px;
+                }
+                p {
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 16px;
+                    margin: 0px 25px;
+                }
+            }
+        }
     }
 }

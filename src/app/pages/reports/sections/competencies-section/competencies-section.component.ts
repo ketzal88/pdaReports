@@ -21,8 +21,6 @@ export class CompetenciesSectionComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.warn(this.competencyCompatibility)
-    console.warn(this.competencyCompatibility.competencyCompatibilityDetail[0])
   }
   getLeftCompetencies() {
     let array = this.competencyCompatibility.competencyCompatibilityDetail;
