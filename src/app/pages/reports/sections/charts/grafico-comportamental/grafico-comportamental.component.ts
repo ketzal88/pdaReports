@@ -152,6 +152,11 @@ export class GraficoComportamentalComponent implements OnInit {
         }
         let label = chart.xAxis().labels().getLabel(i);
         if (label) {
+          if (window.innerWidth <= 375) {
+            label.fontSize(7);
+          } else {
+            label.fontSize(10);
+          }
           label.fontColor(color);
           label.draw();
         }

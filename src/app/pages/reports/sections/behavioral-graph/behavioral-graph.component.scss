@@ -248,19 +248,20 @@ ul.slider li:first-child {
     border-bottom: solid 2px #00000000;
 }
 
-.border-pink.active {
+::ng-deep .border-pink.active .mat-button-wrapper {
     border-bottom: solid 2px #D213F1;
+    color: #D5D7D9;
 }
 
-.border-blue.active {
+::ng-deep .border-blue.active .mat-button-wrapper {
     border-bottom: solid 2px #007EFD;
 }
 
-.border-red.active {
+::ng-deep .border-red.active .mat-button-wrapper {
     border-bottom: solid 2px #FF0000;
 }
 
-.border-green.active {
+::ng-deep .border-green.active .mat-button-wrapper {
     border-bottom: solid 2px #0be300;
 }
 
@@ -289,7 +290,7 @@ ul.slider li:first-child {
     .body-1 {
         font-weight: 400;
         font-size: 14px;
-        line-height: 20px;
+        line-height: 16px;
         text-align: center;
     }
 }

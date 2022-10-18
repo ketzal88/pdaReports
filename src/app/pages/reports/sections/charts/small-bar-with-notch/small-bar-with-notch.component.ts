@@ -37,7 +37,7 @@ export class SmallBarWithNotchComponent implements OnInit {
       .label(0)
       .position('left-center')
       .anchor('left-center')
-      .offsetY('-20px')
+      .offsetY('-25px')
       .offsetX('30px')
       .fontFamily('Poppins')
       .fontColor('#1F140F')

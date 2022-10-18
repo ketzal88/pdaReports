@@ -17,9 +17,7 @@ import { disabledCredits } from '../../../utils/chart.util';
   styleUrls: ['./bubble-chart.component.scss'],
 })
 export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
-  private opacityActive: number = 1;
-  private opacitInactive: number = 0.2;
-  private colorInactive: string = '#757575 0.3';
+  private colorInactive: string = '#DBDBDB';
   private colorR: string = '#ff6819 1';
   private colorE: string = '#FFD100 1';
   private colorP: string = '#27ACF7 1';
@@ -137,8 +135,8 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
     this.chart
       .line(naturalLine0)
       .stroke(
-        '#88868b',
-        this.naturalSelected ? this.opacityActive : this.opacitInactive
+        "#88868b",        
+        this.naturalSelected ? 1 : 0.3
       );
 
     let serieNaturalR = this.chart.bubble(naturalR);
@@ -179,13 +177,14 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
       this.colorA,
       this.naturalSelected
     );
+    serieNaturalA.zIndex(100);
   }
   drawRoleSeries(): void {
     const roleLine0 = [
-      { x: 0, value: this.roleREPNA.rValue },
-      { x: 15, value: this.roleREPNA.eValue },
-      { x: 30, value: this.roleREPNA.pValue },
-      { x: 45, value: this.roleREPNA.nValue },
+      { x: 0, value: this.roleREPNA.rValue , },
+      { x: 15, value: this.roleREPNA.eValue,  },
+      { x: 30, value: this.roleREPNA.pValue,  },
+      { x: 45, value: this.roleREPNA.nValue,  },
     ];
 
     const roleR = [
@@ -232,9 +231,10 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
     this.chart
       .line(roleLine0)
       .stroke(
-        '#88868b',
-        !this.naturalSelected ? this.opacityActive : this.opacitInactive
+        "#88868b",        
+        this.naturalSelected ? 1 : 0.3
       );
+
 
       this.chart.background("#00000000");
 
@@ -315,7 +315,7 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
     serie.selected().stroke(color);
 
     let tooltip = serie.tooltip();
-    tooltip.enabled(isEnabled);
+    tooltip.enabled(true);
     tooltip.title(false);
     tooltip.separator(false);
 

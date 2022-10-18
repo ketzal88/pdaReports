@@ -19,7 +19,7 @@ export class CompetenciasComponent implements OnInit {
     let value = this.value;
     let data = anychart.data.set([['AQI', value]]);
     let color = this.color;
-    // set the gauge type
+    // set/ the gauge type
     this.gauge = anychart.gauges.linear();
 
     // set the data for the gauge

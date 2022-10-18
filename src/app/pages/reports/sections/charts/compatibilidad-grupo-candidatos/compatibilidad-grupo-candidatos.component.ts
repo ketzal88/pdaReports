@@ -48,10 +48,11 @@ export class CompatibilidadGrupoCandidatosComponent implements OnInit {
         value: x.compatibilityPercentage * 100,
       };
     });
-    let columnSeries = this.chart.column(formattedData).tooltip(false);
+    let columnSeries = this.chart.column(formattedData).tooltip(false).selectionMode("none");
     columnSeries.color("#cccccc88").labels().format("{%value}%").enabled(false).fontColor("#ddddd").fontSize("100%");
-    columnSeries.selected().fill("#ff4b7e").selected().labels().enabled(true);
-    columnSeries.selected().labels().fontColor("#FFFFF");
+    columnSeries.hovered().fill("#ff4b7e").hovered().labels().enabled(true);
+    columnSeries.hovered().labels().fontColor("#FFFFF");
+    columnSeries.hovered().stroke("#ff3b6e")
 
     this.chart.column([
       { x: 'JG', value: 100, porc: 75 },
