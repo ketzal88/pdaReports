@@ -23,12 +23,11 @@ export class DiscoverYourUniquenessComponent implements OnInit {
       'Descripcion Descubre tu singularidad con el PDA Assessment';
     ret.hasBackdrop = true;
     ret.disableClose = false;
-    ret.closeOnNavigation = false;
+    ret.closeOnNavigation = true;
     ret.closableOnlyWithButton = false;
     ret.backdropClass = '';
     this.displayMessageService.openShowMoreModal(ret);
-    this.displayMessageService.confirmedPopUp().subscribe(confirmed => {
-      console.log('confirmed: ', confirmed);
+    this.displayMessageService.confirmedShowMoreModal().subscribe(confirmed => {
       if (confirmed) {
         //TODO: Realiza alguna accion al cierre del modal
       }

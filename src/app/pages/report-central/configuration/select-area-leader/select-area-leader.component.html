@@ -1,9 +1,11 @@
 <div class="mat-elevation-z8">
   <mat-form-field appearance="fill">
-    <mat-label>Area</mat-label>
+    <mat-label>{{
+      'REPORT_CONFIGURATION.selectAreaLeader.LABEL.TITLE' | translate
+    }}</mat-label>
     <mat-select
       [(value)]="selectedAreaId"
-      #areaSelect
+      #areaSelect="matSelect"
       name="area"
       (openedChange)="onAreaChange($event)">
       <mat-option *ngFor="let area of areas" [value]="area.areaId">
@@ -19,18 +21,26 @@
       <span style="margin-right: 10px" class="material-icons"
         >arrow_upward</span
       >
-      <p>Agregue un areá de trabajo utilizando el boton de arriba.</p>
+      <p>
+        {{
+          'REPORT_CONFIGURATION.selectAreaLeader.CONTENT.LABEL_DESCRIPTION'
+            | translate
+        }}
+      </p>
     </div>
   </div>
 </ng-container>
 
-<ng-container *ngIf="lockedSelectId && selectedAreaId && !loading">
+<ng-container *ngIf="selectedAreaId && !loading">
   <app-individuals-selection
     [selectedAreaId]="selectedAreaId"
     (selectedIndividualsEvent)="onSelectedIndividuals($event)"
     (selectedLeaderIdEvent)="onSelectedLeader($event)"
     [selectedClientId]="selectedClientId"
+    [selectedSubbaseId]="selectedSubbaseId"
     [lockedSelectId]="lockedSelectId"
+    [selectedIndividualIds]="selectedAreaIndividualsIds"
+    [selectedLeaderId]="selectedAreaIndividualLeaderId"
     [multipleSelection]="true"
     [hasSelectLeader]="true"
     [maxMultipleSelection]="maxMultipleSelection"

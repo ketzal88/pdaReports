@@ -4,21 +4,35 @@ import {
   OnInit,
   Output,
   OnDestroy,
+  Inject,
 } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { Subscription } from 'rxjs';
-import { SendEmailService } from '../../../../core/services/microservices/email/send-email.service';
-import {
-  Mail,
-  MailInfo,
-  SendEmailRequest,
-} from '../../../../core/services/microservices/email/sendEmailRequest.interface';
+import { combineLatest, Observable, Subscription, catchError, of } from 'rxjs';
+
 import { unsubscribe } from '../../../../core/utils/subscription.util';
 import { GuidService } from '../../../../core/services/guid.service';
 import { StoreService } from '../../../../core/services/store.service';
-import { VwGetAllIndividualWithBehaviouralProfile } from '../../../../core/services/microservices/individual/individual.interface';
 import { GeneratedReport } from '../../../../core/services/microservices/reports/interfaces/generatedReportsResponse.interface';
+import { EmailService } from '../../../../core/services/microservices/email/email.service';
+import { EmailTemplateService } from '../../../../core/services/microservices/email/email-template.service';
+import { SendReportOptions } from '../interfaces/send-report-options.interface';
+import { SendEmailByTemplateRequest } from '../../../../core/services/microservices/email/interfaces/sendEmailByTemplateRequest.interface';
+import { StoreKeys } from '../../../../core/consts/store-keys.enum';
+import { environment } from '../../../../../environments/environment';
+import {
+  MailTemplateCustomResponse,
+  MailTemplateCustom,
+} from '../../../../core/services/microservices/email/interfaces/emailRemplateResponse.interface';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { EmailTemplateDefaultResponse } from '../../../../core/services/microservices/email/interfaces/emailTemplateDefaultResponse.interface';
 
 @Component({
   selector: 'app-send-report',
@@ -28,39 +42,78 @@ import { GeneratedReport } from '../../../../core/services/microservices/reports
 export class SendReportComponent implements OnInit, OnDestroy {
   //bindings
   htmlContent: string;
-  inputWhatsapp: string;
-  inputEmails: string;
-  inputEmailsCc: string;
+  labelSelected: string;
   patternEmail = '^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$';
 
   //Variables
   guid: string;
+  // mailTemplateCustom: MailTemplateCustom;
+  mailTemplateCustom: EmailTemplateDefaultResponse;
   //TODO: Reemplazar por el tipo de datos de la lista de reportes generados
   reportList: GeneratedReport[];
+  userId: string;
+  reportUrl: string = environment.reportURL;
+
+  //Forms
+  sendEmailForm: FormGroup;
 
   //Subscriptions
-  sendEmailSub: Subscription;
+  sendSetObsSub: Subscription;
 
   config: AngularEditorConfig;
   @Output() closedButton = new EventEmitter();
   constructor(
     public dialogRef: MatDialogRef<SendReportComponent>,
-    private sendEmailService: SendEmailService,
+    @Inject(MAT_DIALOG_DATA) public data: SendReportOptions,
+    private emailService: EmailService,
+    private emailTemplateService: EmailTemplateService,
     private guidService: GuidService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.htmlContent = '';
-    this.inputWhatsapp = '';
-    this.inputEmails = '';
+    this.userId = this.storeService.getData(StoreKeys.USER_ID);
+    this.initSendEmailForm();
+    this.getMailTemplateDefault();
     this.initConfigHtml();
-    this.loadReportList();
-    this.loadHtmlContent();
+    this.loadLabelSelected();
   }
 
   ngOnDestroy(): void {
-    unsubscribe(this.sendEmailSub);
+    unsubscribe(this.sendSetObsSub);
+  }
+
+  initSendEmailForm(): void {
+    this.sendEmailForm = this.formBuilder.group({
+      inputWhatsapp: [''],
+      checkInputWhatsapp: [false],
+      inputEmail: ['', [this.commaEmail]],
+      checkInputEmail: [true],
+      inputEmailsCc: ['', [this.commaEmail]],
+      withoutSelected: [true],
+      inputHtml: [''],
+    });
+  }
+
+  getMailTemplateDefault(): void {
+    let mailTemplateType = 'SendPDAReportLink';
+
+    this.emailTemplateService
+      .getTemplateDefault(
+        mailTemplateType,
+        this.data.baseId,
+        this.data.subbaseId
+      )
+      .subscribe({
+        next: (resp: EmailTemplateDefaultResponse) => {
+          this.mailTemplateCustom = resp;
+          this.inputHtml.setValue(this.mailTemplateCustom.html);
+        },
+        error: err => {
+          console.log('error: ', err);
+        },
+      });
   }
 
   initConfigHtml(): void {
@@ -93,19 +146,22 @@ export class SendReportComponent implements OnInit, OnDestroy {
     };
   }
 
-  loadReportList(): void {
-    this.reportList = this.storeService.getData('reportList');
-    console.log('reportList: ', this.reportList);
-  }
-
-  loadHtmlContent(): void {
-    for (let i = 0; i < this.reportList.length; i++) {
-      this.htmlContent += this.reportList[i].individualId + '<br>';
+  loadLabelSelected(): void {
+    if (this.data.reportList.length > 1) {
+      this.labelSelected = `Se enviara los reportes a las ${this.data.reportList.length} personas seleccionadas`;
+    } else {
+      this.labelSelected = 'Se enviara los reportes a una persona seleccionada';
     }
   }
 
   changeCurrentWhatsapp(event: any): void {
-    console.log('event: ', event);
+    if (event.checked) {
+      this.inputEmail.enable();
+      this.inputEmailsCc.enable();
+    } else {
+      this.inputEmail.disable();
+      this.inputEmailsCc.disable();
+    }
   }
 
   closePopUp(): void {
@@ -125,57 +181,145 @@ export class SendReportComponent implements OnInit, OnDestroy {
 
   sendReport(): void {
     this.guid = this.guidService.generate();
-    let param: SendEmailRequest = {
-      mail: null,
-      mailInfo: null,
-      mailAttachment: [],
-    };
+    let templateType = 'SendPDAReportLink';
 
-    param.mail = this.getMail();
-    param.mailInfo = this.getMailInfo();
+    let listObs = [];
 
-    this.sendEmailSub = this.sendEmailService.sendEmail(param).subscribe({
-      next: (response: string) => {
-        this.confirm();
-      },
-      error: err => {
-        console.log('error: ', err);
-      },
-    });
-    // .subscribe(data => {
-    //   this.confirm();
-    // });
+    //Reportes enviados solo a los seleccionados
+    if (this.withoutSelected && this.inputEmail.value === '') {
+      for (let i = 0; i < this.data.reportList.length; i++) {
+        let obs: Observable<any> = this.loadObsRequest(
+          this.data.reportList[i],
+          templateType,
+          this.data.reportList[i]?.email ? [this.data.reportList[i].email] : []
+        );
+        listObs.push(obs);
+      }
+    }
+
+    //Reportes enviados a los seleccionados y
+    if (this.withoutSelected.value && this.inputEmail.value !== '') {
+      for (let i = 0; i < this.data.reportList.length; i++) {
+        let obs: Observable<any> = this.loadObsRequest(
+          this.data.reportList[i],
+          templateType,
+          [this.data.reportList[i].email, ...this.inputEmail.value.split(';')]
+        );
+        listObs.push(obs);
+      }
+    }
+    //Reportes enviados cuando decidimos no enviar a los seleccionados pero si a los ingresados de forma manual
+    let emails: string[] = this.inputEmail.value.split(';');
+    if (!this.withoutSelected.value && this.inputEmail.value !== '') {
+      for (let i = 0; i < emails.length; i++) {
+        for (let j = 0; j < this.data.reportList.length; j++) {
+          let obs: Observable<any> = this.loadObsRequest(
+            this.data.reportList[j],
+            templateType,
+            [emails[i]]
+          );
+
+          listObs.push(obs);
+        }
+      }
+    }
+
+    if (listObs.length > 0) {
+      this.sendSetObsSub = combineLatest(...listObs)
+        .pipe()
+        .subscribe({
+          next: (response: (any | any)[]) => {
+            this.close({
+              result: response,
+              emails,
+            });
+          },
+          error: (err: Error) => {},
+          complete: () => {},
+        });
+    }
   }
 
-  getMail(): Mail {
-    let mail: Mail = {
-      mailId: this.guid,
-      mailFrom: 'support@pdainternational.net',
-      mailTo: this.inputEmails,
-      cc: this.inputEmailsCc,
-      bcc: null,
-      subject: 'Envio reporte',
-      html: this.htmlContent,
-      createdDate: new Date(),
-      sendedDate: null,
-      sendedStatus: null,
-      parentId: null,
+  loadObsRequest(
+    generatedReport: GeneratedReport,
+    templateType: string,
+    emails: string[]
+  ): Observable<any> {
+    let request: SendEmailByTemplateRequest = {
+      // searchTemplateBy: {
+      //   nameTemplateDefault: templateType,
+      // },
+      searchTemplateType: {
+        templateType,
+        // idLanguage: this.mailTemplateCustom.languageId,
+      },
+      hasPriority: true,
+      baseId: this.data.baseId,
+      subBaseId: this.data.subbaseId,
+      userId: this.userId,
+      from: this.mailTemplateCustom.from,
+      toList: emails,
+      ccList:
+        this.inputEmailsCc && this.inputEmailsCc.value.length > 0
+          ? this.inputEmailsCc.value.split(';')
+          : null,
+      html:
+        this.inputHtml.value !== this.mailTemplateCustom.html
+          ? this.inputHtml.value
+          : null,
+      keywords: {
+        ReportLink: this.reportUrl + generatedReport.shortId,
+      },
     };
-    return mail;
+    return this.emailService.sendEmailByTemplate(request).pipe(
+      catchError(error => {
+        console.log('error: ', error);
+        return of(...emails);
+      })
+    );
   }
 
-  getMailInfo(): MailInfo {
-    let mailInfo: MailInfo = {
-      mailId: this.guid,
-      hasPriority: false,
-      mailIssuer: 'Angular-reports',
-      baseId: 'd92c7492-be33-4adb-b8a1-051248d315dd',
-      subbaseId: '13cd5f84-135b-47f4-929e-d538134f2d92',
-      userId: '2c5926c4-bda2-4edf-9bf8-8w9222b2dc8b',
-      templateId: null,
-      templateName: null,
-    };
+  onSlideToogle(event: MatSlideToggleChange): void {
+    if (!event.checked) {
+      this.sendEmailForm.markAllAsTouched();
+    }
+  }
 
-    return mailInfo;
+  //Valid Comma Email
+  commaEmail = (control: AbstractControl): { [key: string]: any } | null => {
+    const emails = control.value.split(';');
+    const forbidden = emails.some(email =>
+      Validators.email(new FormControl(email))
+    );
+    return forbidden ? { inputEmail: { value: control.value } } : null;
+  };
+
+  //Getters form
+  get inputEmail(): AbstractControl {
+    return this.sendEmailForm.get('inputEmail');
+  }
+
+  get inputEmailsCc(): AbstractControl {
+    return this.sendEmailForm.get('inputEmailsCc');
+  }
+
+  get inputWhatsapp(): AbstractControl {
+    return this.sendEmailForm.get('inputWhatsapp');
+  }
+
+  get checkInputWhatsapp(): AbstractControl {
+    return this.sendEmailForm.get('checkInputWhatsapp');
+  }
+
+  get checkInputEmail(): AbstractControl {
+    return this.sendEmailForm.get('checkInputEmail');
+  }
+
+  get withoutSelected(): AbstractControl {
+    return this.sendEmailForm.get('withoutSelected');
+  }
+
+  get inputHtml(): AbstractControl {
+    return this.sendEmailForm.get('inputHtml');
   }
 }

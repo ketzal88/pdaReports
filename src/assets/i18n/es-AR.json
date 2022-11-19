@@ -1,19 +1,27 @@
 {
-    "TITLE_PDA_CONFIGURATION": "Configuración",
+    "HEADER": {
+        "TITLE_PDA": "PDA",
+        "TITLE_PDA_CONFIGURATION": "Configuración"
+    },
     "VERSION": "Versión",
     "REPORTING_CENTER": {
         "TITLE":"Central de reportes",
+        "TITLE_ANALYTICS":"Gráfica analitica",
         "DEFAULTS": {
             "TITLE":"Predeterminados"
         },
         "MY_REPORTS": {
             "TITLE": "Mis reportes"
-        }
+        },
+        "MY_TEMPLATES":{
+            "TITLE": "Mis templates"
+        },
+        "ERROR_TYPES_REPORTS": "No hemos podido cargar correctamente la configuración de reportes. \nPor favor, vuelva a intentarlo en unos minutos."
     },
+    "NOT_FOUND_FILTER_TEXT" : "No se ha encontrado resultado para: ",
     "REDIRECT_PDA_PLATFORM": "Plataforma PDA",
     "CHANGE_LANGUAGE": "Cambiar idioma",
     "LANGUAGE": "Español",
-    "REPORT_CONFIGURATION": "Configuración de reportes",
     "HIRING": "Hiring",
     "DEVELOPMENT": "Desarrollo",
     "SALES": "Ventas",
@@ -24,7 +32,7 @@
     "report": "Informe",
     "candidate_review": "Reseña de candidato",
     "Consistent" : "Consistente",
-    "NotVeryConsistent" : "No muy consistente",
+    "NotVeryConsistent" : "Muy poco consistente",
     "Invalid" : "Invalido",
     "NotAvalaible" : "No consistente",
     "Gender" : "Genero",
@@ -47,24 +55,30 @@
     },
     "TYPE_PROFILE": "Perfil",
     "UPLOADER":{
+        "LABEL":{
+            "UPLOAD_IMAGE": "Cargar imagen",
+            "DRAG_AND_DROG_HERE": "Arrastre y suelte aquí su logo",
+            "PREVIEW": "Previsualización"
+        },
         "UPLOADING_STATUS": "Cargando",
         "FAILED_STATUS": "Error",
         "SUCCESSFUL_STATUS": "Exito",
         "FAILED_MESSAGE": "Se ha producido un error al cargar el archivo",
-        "FAILED_UPDATING_MESSAGE":"Se ha producido un error al cargar logo de archivo",
+        "FAILED_UPDATING_MESSAGE":"Se ha producido un error al cargar el archivo con su logo",
         "SUCCESSFUL_MESSAGE": "El archivo fue cargado exitosamente",
         "ONLY_ONE_FILE_MESSAGE": "Solo puede cargar un logo",
         "INVALID_FORMAT_TYPE_MESSAGE" : "{FORMAT_TYPE} no es un formato valido",
         "INVALID_MAX_SIZE_MESSAGE" : "{MAX_SIZE} Mb es el tamaño maximo permitido",
-        "INVALID_IMAGE_MIN_RESOLUTION_MESSAGE" : "No se cumple con el tamaño minimo ( {MIN_RESOLUTION} )",
+        "INVALID_IMAGE_MIN_RESOLUTION_MESSAGE" : "El tamaño del archivo es menor al tamaño minimo de ( {MIN_RESOLUTION} )",
         "INVALID_IMAGE_FORMAT_MESSAGE" : "No se mantiene el formato de la imagen"
     },
     "SEND_REPORT": {
         "TITLE": "Enviar reporte",
-        "SUBTITLE": "Desde aqui podrás compartir el link de los Reportes de Perfil Conductual directamente por correo electronico a Whatsapp",
+        "SUBTITLE": "Desde aqui podrás compartir el link de los Reportes de Perfil Conductual directamente por correo electronico o Whatsapp",
         "LABEL_EMAIL": "Ingrese email",
-        "LABEL_NUMBER": "Ingrese número",
-        "SEND": "Enviar"
+        "LABEL_NUMBER": "Ingrese número de Whatsapp",
+        "SEND": "Enviar",
+        "LABEL_SELECTED_EMAIL_CHECK": "Sí"
     },
     "GROUPING_COMPONENT": {
         "EDIT":"Edición",
@@ -73,51 +87,395 @@
         "BTN_SAVE": "Guardar",
         "BTN": "Selecionar",        
         "GROUP":{
-            "NEW": "Nuevo grupo",
-            "TYPE":"Grupo",
-            "SUBTITLE": "Un grupo es una caracteristica importante en los reportes......",
-            "INPUT_PLACEHOLDER":"Ingrese el nombre del grupo"
+            "NEW": "Nuevo grupo de candidatos",
+            "TYPE":"Grupo de candidatos",
+            "SUBTITLE": "En esta sección podrás hacer un matching entre candidatos a un mismo puesto",
+            "INPUT_PLACEHOLDER":"Ingrese el nombre del grupo de candidatos",
+            "ERROR": {
+                "ERROR_ADD_GROUP_INDIVIDUAL": "Error al actualizar los nuevos individuos del grupo de candidatos",
+                "ERROR_DELETE_GROUP_INDIVIDUAL": "Error al eliminar los individuos existentes del grupo de candidatos"
+            }
         },
         "AREA":{
             "NEW": "Nueva area",
             "TYPE":"Area",
-            "SUBTITLE": "Un area es una caracteristica importante en los reportes......",
-            "INPUT_PLACEHOLDER":"Ingrese el nombre del area"
-        }
-    },
-    "CONFIRM_DIALOG": {
-        "DELETE": {
-            "TITLE": "Eliminar {{TYPE}}",
-            "MESSAGE": "¿Estas seguro de eliminar el {{TYPE}} {{ENTITY_NAME}}?"
+            "SUBTITLE": "Un area de trabajo es una unidad funcional, que tiene asignadas personas, recursos y responsabilidades",
+            "INPUT_PLACEHOLDER":"Ingrese el nombre del area",
+            "ERROR": {
+                "ERROR_ADD_AREA_INDIVIDUAL": "Error al actualizar los nuevos individuos del area",
+                "ERROR_DELETE_AREA_INDIVIDUAL": "Error al eliminar los individuos existentes del area"
+            }
         }
     },
     "MY_REPORTS": {
+        "NOT_FOUND_ANY_REPORT_TEXT" : "No se ha encontrado ningun reporte.",
+        "INTRODUCTION" :"Aquí encontrarás todos los reportes en formato web que hayas generado.",
+        "FILTER_TAG": "Filtrar",
         "REPORT_TYPE_FILTER": "Tipo de reporte",
-        "HIRING_REPORT_FILTER": "Hiring/Informe",
-        "DEVELOP_REPORT_FILTER": "Desarrollo/Informe",
-        "HIRING_REVIEW_FILTER": "Hiring/Reseña",
-        "HIRING_SURVEY_FILTER": "Hiring/Relevamiento"
+        "FILTER_ACTIONS": {
+            "RESET": "Reset",
+            "FILTER": "Filtrar"
+        },
+        "SEND": {
+            "WARNING": "Uno o más reportes no se han podido enviar correctamente",
+            "SUCCESS": "Los reportes se han enviado con exito"
+        },
+        "TABLE":{
+           "COLUMN":{
+                "FIRSTNAME": "Nombre",
+                "LASTNAME": "Apellido",
+                "EMAIL": "Email",
+                "REPORT": "Reporte",
+                "LINK": "Link",
+                "DATE": "Fecha",
+                "ACTIONS": "Acciones"
+           } 
+        }
+    },
+    "MY_TEMPLATES": {
+        "NOT_FOUND_ANY_TEMPLATE_TEXT" : "No hamos encontrado ningun template de reporte.",
+        "INTRODUCTION" :"Aquí encontrarás todos los templates o plantillas de reportes que hayas creado previamente",
+        "LABEL":{
+            "BTN_NEW_TEMPLATE": "Nuevo template",
+            "BTN_RESET": "Reset",
+            "BTN_FILTER": "Filtrar"
+        },
+        "TABLE":{
+            "COLUMN":{
+                "NAME": "Nombre",
+                "REPORT": "Reporte",
+                "DATE": "Fecha",
+                "ACTIONS": "Acciones"
+            },
+            "ACTIONS":{   
+                "RENAME":"Renombrar",
+                "DUPLICATE": "Duplicar"
+            }
+        }
     },
     "CLIENT_FILTER": {
         "BASE": "Base",
-        "SUBBASE": "Subbase"
-    },
-    "SELECT_GROUP":{
-        "NAME": "Grupo"
+        "SUBBASE": "Subbase",
+        "AREA":"Area"
     },
     "LOGIN": {
         "NAME": "Login",
         "AUTOMATIC_NAME": "Login automático",
         "USERNAME_PLACEHOLDER": "Nombre de usuario",
         "PASSWORD_PLACEHOLDER": "Password",
-        "ACCEPT_BTN": "Aceptar"
+        "ACCEPT_BTN": "Aceptar",
+        "FORGOT_PASSWORD" : "¿Olvidó su contraseña?"
     },
+    "PASSWORD-RECOVERY": {
+        "NAME": "¿Olvidó su contraseña?",
+        "ACCEPT_BTN": "Aceptar",
+        "FORGOT_PASSWORD_DESCRIPTION" : "Introduzca su nombre de usuario ó email para obtener o cambiar su contraseña.",
+        "FORGOT_PASSWORD_SENDED_DESCRIPTION" : "Un Email le ha sido enviado para que pueda obtener o cambiar su Contraseña.",
+        "TOKEN_PLACEHOLDER": "Codigo recibido",
+        "NEW_PASSWORD_PLACEHOLDER": "Nueva contraseña",
+        "VALIDATION_SMALL_CASE" :"Debe contener al menos 1 minuscula.",
+        "VALIDATION_CAPITAL_CASE" :"Debe contener al menos una mayuscula.",
+        "VALIDATION_ONE_NUMBER" :" Debe contener al menos 1 número.",
+        "VALIDATION_MIN_LENGHT" :"Debe tener al menos 8 caracteres.",
+        "CHANGE_PASSWORD_BTN":"Cambiar contraseña"
+        },
     "CONFIGURATION":{
-        "SAVE": "Generar reporte",
+        "BACK": "Atras",
+        "NEXT": "Siguiente",
+        "SAVE": "Ver reporte",
+        "UPDATE": "Actualizar reporte",
+        "SAVE_TEMPLATE": "Guardar template",
         "ERROR": {
-            "ERROR_REPORT": "No hemos podido generar el reporte",
-            "ERROR_COMPETENCY_REPORT": "No hemos podido generar las competencias del reporte",
-            "ERROR_JOB_REPORT": "No hemos podido generar el puesto del reporte"
+            "ERROR_REPORT": "No hemos podido generar el reporte solicitado. \nPor favor, vuelva a intentarlo en unos minutos. ",
+            "ERROR_COMPETENCY_REPORT": "No hemos podido incluir las competencias seleccionadas ensu reporte. \nPor favor, vuelva a intentarlo en unos minutos. ",
+            "ERROR_AREA_INDIVIDUAL_REPORT": "No hemos podido incluir en el área de trabajo a los individuos seleccionados. \nPor favor, vuelva a intentarlo en unos minutos.",
+            "ERROR_GROUPING_INDIVIDUAL_REPORT": "No hemos podido incluir en el grupo de candidatos a los individuos seleccionados. \nPor favor, vuelva a intentarlo en unos minutos. ",
+            "ERROR_JOB_REPORT": "No hemos podido incluir correctamente el puesto seleccionado en el reporte. \nPor favor, vuelva a intentarlo en unos minutos.",
+            "ERROR_UPDATE_REPORT": "No hemos podido actualizar el reporte. \nPor favor, vuelva a intentarlo en unos minutos.",
+            "ERROR_UPDATE_COMPETENCY_REPORT" : "No hemos podido incluir correctamente las competencias seleccionadas en el reporte. \nPor favor, vuelva a intentarlo en unos minutos. ",
+            "ERROR_UPDATE_JOB_REPORT" : "No hemos podido incluir correctamente el puesto seleccionado en el reporte. \nPor favor, vuelva a intentarlo en unos minutos.",
+            "ERROR_UPDATE_AREA_INDIVIDUAL_REPORT" : "No hemos podido incluir correctamente a los individuos seleccionados en el área de trabajo. \nPor favor, vuelva a intentarlo en unos minutos.",
+            "ERROR_UPDATE_GROUPING_INDIVIDUAL_REPORT" : "No hemos podido incluir correctamente a los individuos seleccionados en el grupo de candidatos. \nPor favor, vuelva a intentarlo en unos minutos."
+        }
+    },
+    "REPORTS": {
+        "LOADING_REPORT": "Estamos generando su reporte",
+        "MISCELLANY":"Esta sección no ha sido configurada ",
+        "SECTIONS": {
+            "CONSISTENCY_SECTION": {
+                "TITLE": "Indicador de consistencia",
+                "TOOLTIP": {
+                    "INDICATOR_DESCRIPTION": "Conjunto de variables que indican si la información que brinda el reporte es válida para interpretar y de base sólida para tomar decisiones"   
+                }
+            },
+            "JOB_COMPATIBILITY_SECTION": {
+                "TITLE": "Compatibilidad \nde Puesto",
+                "TOOLTIP": {
+                    "TEXT_DESCRIPTION": "Comparación entre el puesto deseado y el perfil conductual del candidato"
+                }
+            },
+            "JOB_COMPATIBILITY_INDIVIDUAL_AREA_SECTION":{
+                "PARTIAL_FIRST_TITLE": "Compatibilidad de Puestos",
+                "PARTIAL_SECOND_TITLE": "por Candidato",
+                "DESCRIPTION": "En este gráfico se muestra la correlación del perfil de la persona con los puestos asignados por área."
+            },
+            "JOB_COMPATIBILITY_MULTIPLE_COLUMNS_SECTION":{
+                "PARTIAL_FIRST_TITLE": "Compatibilidad de Puestos",
+                "PARTIAL_SECOND_TITLE":"por grupo de Candidatos",
+                "DESCRIPTION": "En este gráfico se muestra la correlación del perfil del candidatos con los demás perfiles evaluados."
+            },
+            "EXPANDED_BEHAVIORAL_PROFILE": {
+                "TITLE": "Perfil conductual expandido",
+
+                "TOOLTIP": {
+                    "R_DESCRIPTION": "Se focaliza en el logro de resultados tangibles en un entorno desafiante y antagónico midiendo el grado de riesgo que la persona asume para lograrlos.",
+                    "E_DESCRIPTION": "Se focaliza en el trabajo con y a través de las personas en un entorno favorable. Mide el grado y circunstancia en que la persona desea interactuar con otras.",
+                    "P_DESCRIPTION": "Respuesta receptiva en un ambiente percibido como favorable. Refiere a la tendencia a responder de forma paciente y pacífica ante situaciones del ambiente.",
+                    "N_DESCRIPTION": "Respuesta receptiva en un ambiente percibido como antagónico o desfavorable. Refiere cuánto requiere sujetarse una persona a normas y procedimientos",
+                    "S_DESCRIPTION": "Refleja la manera en que la persona expresa su conducta desde la impulsividad a la rigidez, tanto en creencia como en acto."  
+                }
+            },
+            "BEHAVIORAL_TREND": {
+                "TITLE": "Tendencia comportamental de equipo de trabajo",
+                "TYPES": {
+                    "r": "Riesgo",
+                    "e": "Extroversión",
+                    "p": "Paciencia",
+                    "n": "Norma",
+                    "s": "Autocontrol"
+                },
+                "TOOLTIP": {
+                    "r_DESCRIPTION": "Se focaliza en el logro de resultados tangibles en un entorno desafiante y antagónico midiendo el grado de riesgo que la persona asume para lograrlos.",
+                    "e_DESCRIPTION": "Se focaliza en el trabajo con y a través de las personas en un entorno favorable. Mide el grado y circunstancia en que la persona desea interactuar con otras.",
+                    "p_DESCRIPTION": "Respuesta receptiva en un ambiente percibido como favorable. Refiere a la tendencia a responder de forma paciente y pacífica ante situaciones del ambiente.",
+                    "n_DESCRIPTION": "Respuesta receptiva en un ambiente percibido como antagónico o desfavorable. Refiere cuánto requiere sujetarse una persona a normas y procedimientos",
+                    "s_DESCRIPTION": "Refleja la manera en que la persona expresa su conducta desde la impulsividad a la rigidez, tanto en creencia como en acto."
+                }
+            },
+            "BEHAVIORAL_GRAPH":{
+                "TITLE_CHART": "Gráfico comportamental",
+                "TITLE":{
+                    "PERSON": "Persona",
+                    "JOB": "Puesto",
+                    "LEADER": "Líder",
+                    "TEAM": "Equipo"
+                },
+                "ACTIONS":{
+                    "NATURAL": "Natural",
+                    "ADAPTED": "Adaptado"
+                },
+                "TOOLTIP": {
+                    "INICIATIVA_DESCRIPTION": "Tendencia natural a anticiparte y proponer acciones novedosas.",
+                    "PERSUASION_DESCRIPTION": "Tendencia natural a ser sociable y hacer un esfuerzo por convencer a los demás.",
+                    "INFLUENCIA_DESCRIPTION": "Tendencia natural para influir e impactar en las personas creando compromiso y construyendo consenso.",
+                    "AUTONOMIA_DESCRIPTION": "Tendencia natural a orientarte a los resultados de forma segura, independiente y con autoconfianza.",
+                    "ASESORAMIENTO_DESCRIPTION": "Tendencia natural a desarrollar sus propios pensamientos y opiniones e idealmente hacer las cosas a “su modo",
+                    "SERVICIO_DESCRIPTION": "Tendencia natural orientado a resultados de forma servicial, escuchando y analizando la información.",
+                    "AMABILIDAD_DESCRIPTION": "Tendencia natural a la cordialidad hacia los demás, evitando la confrontación.",
+                    "PACIENCIA_DESCRIPTION": "Tendencia natural a la escucha profunda, desarrollo un alto nivel de empatía con otras personas.",
+                    "PRECISION_DESCRIPTION": "Tendencia natural a la aproximación analítica, cautelosa y detallada de los problemas con un método preciso.",
+                    "CONCENTRACION_DESCRIPTION": "Tendencia natural al seguimiento de procedimientos a través del análisis, la precisión y el orden.",
+                    "ANALISIS_DESCRIPTION": "Tendencia natural a la evaluación de la información y hechos, para procesar de forma lógica, sistemática y ordenada.",
+                    "PROCEDIMIENTO_DESCRIPTION": "Tendencia natural al detalle de los proyectos, centrado en el cumplimiento de pasos y el análisis de la información disponible.",
+                    "IMPLEMENTACION_DESCRIPTION": "Tendencia natural al desarrollo de soluciones de problemas y la toma de decisiones basadas en la lógica.",
+                    "DINAMISMO_DESCRIPTION": "Tendencia natural para que los proyectos se empiecen, sigan adelante y se obtengan resultados tan rápidamente como sea posible.",
+                    "DETERMINACION_DESCRIPTION": "Tendencia natural a mirar hacia adelante, con un estilo proactivo y resolutivo para conseguir tus metas.",
+                    "EXPEDITIVIDAD_DESCRIPTION": "Tendencia natural a la toma rápida de decisiones, con un alto sentido de urgencia."
+                }
+            },
+            "AGE_GENDER_BALANCE": {
+                "TITLE": "Diversidad e inclusión",
+                "AGE_TITLE": {
+                    "between18and30": "18 a 30",
+                    "between31and45": "31 a 45",
+                    "between46and59": "46 a 59",
+                    "moreThan60": "+60"
+                },
+                "LABELS": {
+                    "NO_BINARY": "No binario",
+                    "FEMALE": "Femenino",
+                    "MALE": "Masculino"
+                }
+            },
+            "IMAGE_PROFILE_TYPE": {
+                "TITLE": {
+                    "YOU_ARE_A_PERSON": "Tienes una tendencia de comportamiento"
+                }
+            },
+            "BEHAVIORAL_PROFILE_CHART_SECTION":{
+                "TITLE": "REPNA",
+                "LABEL":{
+                    "DECISION_MAKING": "Toma de decisiones",
+                    "PROFILE_INTENSITY": "Intensidad del perfil",
+                    "ENERGY": "Energía",
+                    "ENERGY_BALANCE": "Equilibrio de energía",
+                    "PROFILE_MODIFICATION":"Modificación de perfil",
+                    "FORM_TIME": "Tiempo de formulario"
+                },
+                "TOOLTIP": {
+                    "r_DESCRIPTION": "Se focaliza en el logro de resultados tangibles en un entorno desafiante y antagónico midiendo el grado de riesgo que la persona asume para lograrlos.",
+                    "e_DESCRIPTION": "Se focaliza en el trabajo con y a través de las personas en un entorno favorable. Mide el grado y circunstancia en que la persona desea interactuar con otras.",
+                    "p_DESCRIPTION": "Respuesta receptiva en un ambiente percibido como favorable. Refiere a la tendencia a responder de forma paciente y pacífica ante situaciones del ambiente.",
+                    "n_DESCRIPTION": "Respuesta receptiva en un ambiente percibido como antagónico o desfavorable. Refiere cuánto requiere sujetarse una persona a normas y procedimientos",
+                    "s_DESCRIPTION": "Refleja la manera en que la persona expresa su conducta desde la impulsividad a la rigidez, tanto en creencia como en acto.",
+                    "DECISION_MAKING": "Permite identificar si al momento de tomar decisiones la persona asumirá algún grado de riesgo o si procederá con un estilo más cauteloso.",
+                    "PROFILE_INTENSITY": "Define la intensidad total del perfil de la persona. Refleja cuán acentuado, característico y evidente es su estilo de comportamiento.",
+                    "ENERGY": "Refleja el quantum de energía disponible de la persona, lo que le permitirá o no responder efectivamente a las situaciones que se le presenten.",
+                    "ENERGY_BALANCE": "Es un indicador coyuntural que refleja la percepción del individuo en relación con su propia Energía y la que le requiere el rol que desempeña actualmente.",
+                    "PROFILE_MODIFICATION": "Refleja la capacidad que tiene la persona para modificar sus propias tendencias de comportamiento y adaptarlas a las requeridas en su situación actual."
+                }
+            },
+            "COMPETENCIES_SECTION": {
+                "TITLE": "Competencias",
+                "DESCRIPTION": "En este gráfico se muestra la correlación del perfil de la persona con las diferentes competencias seleccionadas"
+            }
+        },
+        "ACTIONS":{
+            "SEE_MORE": "Ver más"
+        }
+    },
+    "REPORT_CONFIGURATION":{
+        "TITLE": "Configuración de reporte",
+        "SUBTITLE": "Complete los pasos para generar su reporte",
+        "selectStyle":{
+            "TITLE":"Selecciona el estilo",
+            "SUBTITLE":"del reporte a realizar",
+            "CONTENT": {
+                "LABEL_BASE_SUBBASE": "Base y Subbase",
+                "LABEL_FILTER_CLIENT": "Seleccione la base y subbase para utilizar en sus reportes",
+                "LABEL_STYLE": "Aquí podrás seleccionar y personalizar la forma en que se verán tus reportes.",
+                "LABEL_STYLE_GRAPHIC": "Estilo grafico",
+                "LABEL_SHOW_EXAMPLE": "Ver ejemplo",
+                "LABEL_LOGO": "Logo",
+                "LABEL_LOGO_DESCRIPTION": "Cargue la imagen de su logo, para que sea utilizada en los reportes. Deberá ser en formato JPG o PNG de al menos 280px x 60px"
+            }
+        },
+        "selectJobs":{
+            "TITLE":"Selecciona el puesto",
+            "SUBTITLE":"a cubrir por la persona seleccionada",
+            "CONTENT": {
+                "LABEL_DESCRIPTION": "Aquí podras seleccionar el puesto que desempeñará quien está siendo evaluado"
+            }
+        },
+        "selectIndividuals":{
+            "TITLE":"Selecciona a la persona",
+            "SUBTITLE":"Sobre quien se realizará el reporte",
+            "CONTENT": {
+                "LABEL_TITLE": "Aquí podrás buscar y seleccionar el individuo sobre quien se realizará el reporte. Recuerda que puedes incluir filtros para encontrarlo de una manera más simple."
+            }
+        },
+        "selectGroup":{
+            "TITLE":"Conformar grupo de candidatos",
+            "SUBTITLE":"que se contrastarán con el aspirante ",
+            "LABEL":{
+                "TITLE": "Grupo"
+            },
+            "CONTENT": {
+                "LABEL_DESCRIPTION": "Aquí podrás crear y seleccionar grupos de candidatos para contrastar la compatibilidad de ellos sobre el puesto de trabajo disponible."
+            }
+        },
+        "selectCompetencies":{
+            "TITLE":"Selecciona las competencias",
+            "SUBTITLE":"a evaluar sobre el candidato",
+            "SELECTED_INDICATOR": {
+                "TITLE": "Seleccionados"
+            },
+            "CONTENT": {
+                "LABEL_TITLE": "Competencias",
+                "LABEL_DESCRIPTION": "Aquí podrás seleccionar las principales competencias a evaluar sobre el candidato. Recuerda que podrás utilizar tantas categorias como creas necesarias."
+            },
+            "ERROR": {
+                "RETRIEVING_COMPETENCIES": "No se pudo recuperar las competencias del reporte generado"
+            }
+        },
+        "selectAreaLeader":{
+            "TITLE":"Asignar lider y departamento",
+            "SUBTITLE":"al que pertenecerá el candidato",
+            "LABEL":{
+                "TITLE": "Departamento"
+            },
+            "CONTENT": {
+                "LABEL_DESCRIPTION": "Aquí podrás crear y seleccionar departamentos de trabajo. Los departamentos de trabajo permiten hacer un match entre el candidato y sus futuros compañeros de trabajo, asi cómo tambien con su futuro lider."
+            }
+        },
+        "selectHrFeedback":{
+            "TITLE":"Incorpore un feedback",
+            "SUBTITLE":"Como resultante del proceso",
+            "CONTENT": {
+                "LABEL_DESCRIPTION": "Aqui podras agregar y dar a conocer al candidato su feedback del proceso",
+                "LABEL_PLACEHOLDER": "Incorpore su textoo aquí..."
+            }
+        },
+        "ERROR_RETRIEVING_REPORT": "Error al recuperar datos del reportes generado",
+        "WARNING_WHEN_GENERATING_REPORT_WITHOUT_INDIVIDUALS": "No se han seleccionado individuos para generar el reporte",
+        "MODAL": {
+            "NEW_REPORT_CONFIRMATION": {
+                "TITLE": "Nuevo reporte",
+                "DESCRIPTION": "Ha seleccionado una persona diferente para realizar el reporte. Esto generará un nuevo reporte ¿Desea crear un nuevo reporte?"
+            },
+            "UPDATED_REPORT": {
+                "TITLE": "Se actualizo el reporte",
+                "DESCRIPTION": "¿Desea ver el nuevo reporte actualizado?"
+            },
+            "UPDATED_TEMPLATE": {
+                "TITLE": "Actualización de Plantilla",
+                "DESCRIPTION": "Se sobreescribirán sus anteriores preferencias ¿Desea actualizar su plantilla de todos modos?"
+            },
+            "CREATED_TEMPLATE": {
+                "TITLE": "Plantilla creada"
+            },
+            "NEW_TEMPLATE": {
+                "TITLE": "Nueva Plantilla",
+                "DESCRIPTION": "Se creará una nueva plantilla con la preferencias que establezcas"
+            },
+            "REPORT_CREATION": {
+                "TITLE": "Creacion de reportes",
+                "DESCRIPTION": "Estamos generando su reporte."
+            }
+        }
+    },
+    "TO_DELETE_EMOTIONAL_INTELLIGENCE": "Inteligencia emocional",
+    "TOOLTIPS":{
+        "SEARCH":"Buscar",
+        "COPY_LINK":"Copiar link",
+        "SEND_REPORT":"Enviar reporte",
+        "FILTER":"Filtrar",
+        "DELETE":"Borrar",
+        "RENAME":"Renombrar",
+        "DUPLICATE":"Duplicar",
+        "CONFIG_REPORT":"Configurar Reporte",
+        "USE_TEMPLATE" : "Usar template",
+        "LABEL_SEARCH_FILTER": "Filtro de búsqueda",
+        "LABEL_GENERATE_AND_SAVE_REPORT": "Generar y guardar reporte",
+        "LABEL_SAVE_TO_MY_REPORTS": "Guardar en Mis Reportes"
+    },
+    "MODAL":{
+        "ACTION":{
+            "ACCEPT":"Aceptar",
+            "LOADING": "loading",
+            "CANCEL": "Cancelar"
+        }
+    },
+    "NO_PAGE":{
+        "LABEL_TITLE": "Parece que estas perdido",
+        "LABEL_DESCRIPTION": "la página que estas buscando no está disponible.",
+        "LABEL_GO_HOME": "Volver al inicio"
+    },
+    "NOT_ALLOWED":{
+        "LABEL_TITLE": "No tienes permisos para ver este reporte",
+        "LABEL_DESCRIPTION": "Por favor, comuniquese con soporte si cree que esto es un error.",
+        "LABEL_GO_HOME": "Volver al inicio"
+    },
+    "MULTIPLE_REPORT": {
+        "LABEL": {
+            "ERROR": "Ha sucedido un error. Por favor, vuelva a intentarlo en unos minutos.",
+            "SUCCESS": "Generacion de reporte exitoso"
+        },
+        "ACTIONS": {
+            "SEE_REPORT": "Ver reporte"
+        },
+        "TOOLTIP":{
+            "COPY_LINK": "Copiar Link -t"
         }
     }
 }

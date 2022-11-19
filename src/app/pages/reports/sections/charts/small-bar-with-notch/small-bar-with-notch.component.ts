@@ -1,23 +1,31 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 @Component({
-  selector: 'chart-small-bar-with-notch',
+  selector: 'app-chart-small-bar-with-notch',
   templateUrl: './small-bar-with-notch.component.html',
-  styleUrls: ['./small-bar-with-notch.component.scss']
+  styleUrls: ['./small-bar-with-notch.component.scss'],
 })
-export class SmallBarWithNotchComponent implements OnInit {
-
-  constructor() { }
+export class SmallBarWithNotchComponent implements OnInit, AfterViewInit {
+  constructor() {}
   @ViewChild('chartContainer') container!: ElementRef;
-  @Input() value: number =  32;
-  @Input() text: string = "Energía";
-  @Input() color: string = "#007EFD";
+  @Input() value: number = 50;
+  @Input() valueSufix: string = '%';
+
+  @Input() text: string = 'Energía';
+  @Input() color: string = '#007EFD';
   @Input() layout: string = 'horizontal';
+  @Input() tooltip: string;
 
   gauge!: anychart.charts.LinearGauge;
 
-
   ngOnInit(): void {
-    let value = 50;
+    const value = this.value;
     let data = anychart.data.set([['AQI', value]]);
     let title = this.text;
     let color = this.color;
@@ -30,10 +38,16 @@ export class SmallBarWithNotchComponent implements OnInit {
 
     // set the layout
     this.gauge.layout(this.layout);
-    this.gauge.background("transparent");
+    this.gauge.background('transparent');
 
+    let fontSize = 12;
+    let fontWeight = 700;
+    if (window.innerWidth <= 440) {
+      fontSize = 10;
+      fontWeight = 400;
+    }
     // set labels
-    this.gauge
+    let titleLabel = this.gauge
       .label(0)
       .position('left-center')
       .anchor('left-center')
@@ -41,24 +55,25 @@ export class SmallBarWithNotchComponent implements OnInit {
       .offsetX('30px')
       .fontFamily('Poppins')
       .fontColor('#1F140F')
-      .fontSize(12)
-      .fontWeight(700)
+      .fontSize(fontSize)
+      .fontWeight(fontWeight)
       .text(title);
 
-      let valueOffset = value / 100 * 70 + 13;
-      valueOffset = Math.min(valueOffset,100);
-      valueOffset = Math.max(valueOffset,0);
+    let offsetMul = 0.7;
+    let valueOffset = value * offsetMul + 17;
+    // valueOffset = Math.min(valueOffset, 100);
+    // valueOffset = Math.max(valueOffset, 0);
     this.gauge
       .label(1)
       .position('left-center')
-      .anchor('left-center')
+      .anchor('center')
       .offsetY('15px')
       .offsetX(valueOffset.toString() + '%')
       .fontFamily('Poppins')
       .fontColor('#1F140F')
       .fontWeight(600)
       .fontSize(10)
-      .text(value.toString() + "%");
+      .text(value.toString() + this.valueSufix);
 
     this.gauge
       .label(2)
@@ -112,7 +127,6 @@ export class SmallBarWithNotchComponent implements OnInit {
     marker.zIndex(30);
     // marker.height("20px");
 
-    
     // add a marker pointer
     marker = this.gauge.marker(0);
 
@@ -126,7 +140,6 @@ export class SmallBarWithNotchComponent implements OnInit {
     marker.zIndex(10);
     marker.offset('0%');
 
-    
     // add a marker pointer
     marker = this.gauge.marker(0);
 
@@ -140,34 +153,31 @@ export class SmallBarWithNotchComponent implements OnInit {
     marker.zIndex(10);
     marker.offset('0%');
 
-    
     // add a marker pointer
     marker = this.gauge.marker(0);
 
     // set the marker type and color
     marker.type('circle');
-    marker.color("#F2F3F3");
+    marker.color('#F2F3F3');
     marker.stroke('#cecece');
     marker.width('7.3%');
     marker.data([0]);
     // set the zIndex of the marker
     marker.zIndex(-10);
     marker.offset('0.05%');
-    
+
     // add a marker pointer
     marker = this.gauge.marker(0);
 
     // set the marker type and color
     marker.type('circle');
-    marker.color("#F2F3F3");
+    marker.color('#F2F3F3');
     marker.stroke('#cecece');
     marker.width('7.3%');
     marker.data([100]);
     // set the zIndex of the marker
     marker.zIndex(-10);
     marker.offset('0.05%');
-    
-    
 
     // configure the scale
     let scale = this.gauge.scale();
@@ -188,53 +198,64 @@ export class SmallBarWithNotchComponent implements OnInit {
 
     // set paddings
     this.gauge.padding([0, 40]);
-  let drawer = function (this: anychart.core.series.RenderingSettings.Context | any) {
-    // if missing (not correct data), then skipping this point drawing
-    if (this.missing) {
-      return;
-    }
-    // get shapes group
-    let path = (this.shapes || this.getShapesGroup(this.pointState)).path as anychart.graphics.vector.Path;
-    // calculate the left value of the x-axis
-    let leftX = this.x - this.pointWidth / 2;
-    // calculate the right value of the x-axis
-    let rightX = leftX + this.pointWidth;
-    // calculate the half of point width
-    let rx = this.pointWidth / 2;
+    let drawer = function (
+      this: anychart.core.series.RenderingSettings.Context | any
+    ) {
+      // if missing (not correct data), then skipping this point drawing
+      if (this.missing) {
+        return;
+      }
+      // get shapes group
+      let path = (this.shapes || this.getShapesGroup(this.pointState))
+        .path as anychart.graphics.vector.Path;
+      // calculate the left value of the x-axis
+      let leftX = this.x - this.pointWidth / 2;
+      // calculate the right value of the x-axis
+      let rightX = leftX + this.pointWidth;
+      // calculate the half of point width
+      let rx = this.pointWidth / 2;
 
-    if (this.zero - this.value - rx < -4) {
+      if (this.zero - this.value - rx < -4) {
+        path
+          // resets all 'line' operations
+          .clear();
+        return;
+      }
       path
         // resets all 'line' operations
-        .clear();
-        return;
-    }
-    path
-      // resets all 'line' operations
-      .clear()
-      // draw column with rounded edges
-      .moveTo(leftX, this.zero - rx) //esq izq
-      .lineTo(leftX, this.value + rx)
-      .circularArc(leftX + rx, this.value + rx, rx, rx, 180, 180)
-      .lineTo(rightX, this.zero - rx)
-      .circularArc(leftX + rx, this.zero - rx, rx, rx, 0, 180)
-      // .lineTo(rightX, this.zero)
-      // close by connecting the last point with the first straight line
-      .close();
-  }
-  
-  // let shapes = series.rendering().shapes();
-  // series.rendering()
-  //   // set point function to drawing
-  //   .point(drawer)
-  //   // set update point function to drawing, change the point shape when the state changes
-  //   .updatePoint(drawer)
-  //   // set shapes
-  //   .shapes(shapes);
+        .clear()
+        // draw column with rounded edges
+        .moveTo(leftX, this.zero - rx) //esq izq
+        .lineTo(leftX, this.value + rx)
+        .circularArc(leftX + rx, this.value + rx, rx, rx, 180, 180)
+        .lineTo(rightX, this.zero - rx)
+        .circularArc(leftX + rx, this.zero - rx, rx, rx, 0, 180)
+        // .lineTo(rightX, this.zero)
+        // close by connecting the last point with the first straight line
+        .close();
+    };
+
+    // let shapes = series.rendering().shapes();
+    // series.rendering()
+    //   // set point function to drawing
+    //   .point(drawer)
+    //   // set update point function to drawing, change the point shape when the state changes
+    //   .updatePoint(drawer)
+    //   // set shapes
+    //   .shapes(shapes);
+    this.gauge.listen('chartDraw', function () {
+      fontSize = 12;
+      fontWeight = 700;
+      if (window.innerWidth <= 440) {
+        fontSize = 10;
+        fontWeight = 400;
+      }
+      titleLabel.fontSize(fontSize).fontWeight(fontWeight);
+    });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.gauge.container(this.container.nativeElement);
     this.gauge.draw();
   }
-
 }

@@ -1,0 +1,18 @@
+<div class="tipo-deperfil competency-row">
+  <div class="card-slider-controller">
+    <div
+      *ngFor="let card of this.indexedCards"
+      #sliderDesktop
+      class="card-slider">
+      <div class="card-container">
+        <div class="card-inner">
+          <h2 class="h2 text-blue">{{ card.cardIndex | number: '2.0' }}.</h2>
+          <h4 class="h4 text-blue">
+            {{ card.title }}
+          </h4>
+          <p class="body-1 text-dark-gray">{{ card.content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -29,7 +29,8 @@ export class AuthEnableAnonymousGuard implements CanActivate {
   ): Promise<boolean> {
     if (route.params['id'] !== null) {
       const id: string = route.params['id'].trim();
-      if (id.length === 22) {
+      //22 (ShortId) -- 36 (Complete GUID ID)
+      if (id.length === 22 || id.length === 36) {
         if (this.storeService.getData(StoreKeys.USER_IS_ANONYMOUS) === false) {
           return true;
         }

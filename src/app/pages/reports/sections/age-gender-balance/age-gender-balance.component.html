@@ -1,14 +1,84 @@
-<!-- TODO: Revisar con diseño los porcentajes del genero -->
-<div class="balance">
-    <h4 class="h4">Balance de edad y género</h4>
-    <div class="detalles">
-        <div class="text-balance detail-section">
-            <p class="body-2 text-left">
-                En este gráfico se muestra la representación presente en el equipo/área en relación con la edad y género.
-            </p>
+<!-- <div class="balance block-section">
+  <div class="text-balance section-internal">
+    <p class="subtitle">{{ balanceAgeGender.title }}</p>
+    <p class="descripcion text-left">
+      {{ balanceAgeGender.description }}
+    </p>
+  </div>
+  <div class="grafic-balance section-internal">
+    <div class="d-flex fd-column">
+      <div class="d-flex justify-center" style="">
+        <div
+          class="fd-column"
+          *ngFor="let balance of balanceLocal"
+          style="width: 70px">
+          <div class="" style="height: 110px">
+            <ng-container
+              *ngIf="
+                balance.contentAgeGender && balance.contentAgeGender.length > 0;
+                else withoutBalance
+              ">
+              <ng-container
+                *ngFor="
+                  let itemBalance of balance.contentAgeGender;
+                  let idx = index
+                ">
+                <div
+                  [ngStyle]="{ height: itemBalance.percentage + '%' }"
+                  class="d-flex justify-center">
+                  <app-oval-bar
+                    [background]="
+                      idx === 0 ? '#5de4e4' : idx === 1 ? '#e6a0f2' : '#ffa902'
+                    "
+                    [tooltip]="
+                      itemBalance.percentage +
+                      '%' +
+                      ' ' +
+                      itemBalance.genderName
+                    "></app-oval-bar>
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-template #withoutBalance>
+              <div style="height: 100%" class="d-flex justify-center">
+                <app-oval-bar [hasTooltip]="false"></app-oval-bar>
+              </div>
+            </ng-template>
+          </div>
+          <div class="text-center">
+            <h3>
+              {{
+                'REPORTS.SECTIONS.AGE_GENDER_BALANCE.TITLE.' +
+                  balance.labelAgeGender | translate
+              }}
+            </h3>
+          </div>
         </div>
-        <div class="grafic-balance detail-section">
-            <chart-balance-edad-genero></chart-balance-edad-genero>
-        </div>
+      </div>
     </div>
-</div>
+  </div>
+</div> -->
+
+<!-- TODO: Revisar con diseño los porcentajes del genero -->
+<ng-container *ngIf="balanceAgeGender; else emptyState">
+  <div class="balance">
+    <h4 class="h4">{{ balanceAgeGender.title }}</h4>
+    <div class="detalles">
+      <div class="text-balance detail-section">
+        <p class="body-2 text-left">
+          {{ balanceAgeGender.description }}
+        </p>
+      </div>
+      <div class="grafic-balance detail-section">
+        <app-chart-balance-edad-genero
+          [balanceLocal]="balanceLocal"></app-chart-balance-edad-genero>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #emptyState>
+  <app-empty-state
+    title="{{ 'REPORTS.SECTIONS.AGE_GENDER_BALANCE.TITLE' | translate }}"
+    description="{{ 'REPORTS.MISCELLANY' | translate }}"></app-empty-state>
+</ng-template>

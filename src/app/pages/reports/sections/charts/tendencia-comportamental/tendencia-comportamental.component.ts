@@ -1,20 +1,25 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import 'anychart';
-
+import { TypeBehavioral } from '../../behavioral-trend/interfaces/type-behavioral.interface';
 @Component({
-  selector: 'chart-tendencia-comportamental',
+  selector: 'app-chart-tendencia-comportamental',
   templateUrl: './tendencia-comportamental.component.html',
-  styleUrls: ['./tendencia-comportamental.component.scss']
+  styleUrls: ['./tendencia-comportamental.component.scss'],
 })
-export class TendenciaComportamentalComponent implements OnInit {
-
-  constructor() { 
-  }
+export class TendenciaComportamentalComponent implements OnInit, AfterViewInit {
+  constructor() {}
   @ViewChild('chartContainer') container!: ElementRef;
 
-  @Input() markers: number[] = [];
   @Input() value: number = 100;
-  @Input() color: string = "#ff6819";
+  @Input() color: string = '#F2F3F3';
+  @Input() data: TypeBehavioral;
 
   gauge!: anychart.charts.LinearGauge;
 
@@ -30,8 +35,8 @@ export class TendenciaComportamentalComponent implements OnInit {
     this.gauge.data(data);
 
     // set the layout
-    this.gauge.layout("horizontal");
-    this.gauge.background("transparent");
+    this.gauge.layout('horizontal');
+    this.gauge.background('transparent');
 
     // create a color scale
     let scaleBarColorScale = anychart.scales.ordinalColor().ranges([
@@ -87,8 +92,8 @@ export class TendenciaComportamentalComponent implements OnInit {
 
     // set the marker type and color
     marker.type('circle');
-    marker.color("#F2F3F3");
-    marker.stroke("#00000000");
+    marker.color('#F2F3F3');
+    marker.stroke('#00000000');
     marker.width('75%');
     marker.data([100]);
     // set the zIndex of the marker
@@ -98,28 +103,27 @@ export class TendenciaComportamentalComponent implements OnInit {
     let scale = this.gauge.scale();
     scale.minimum(0);
     scale.maximum(100);
-
-    this.markers.forEach(value => {
-      this.createMarker("IS", value);
-    });
-
     // set paddings
     this.gauge.padding([0, 15]);
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.gauge.container(this.container.nativeElement);
     this.gauge.draw();
   }
 
-  createMarker(title: string, value: number) {
+  createMarker(title: string, value: number, selected: boolean): void {
     // add a marker pointer
     let marker = this.gauge.marker(0);
 
     // set the marker type and color
     marker.type('circle');
-    marker.color("#007EFD");
-    marker.stroke("white", 2)
+    if (selected) {
+      marker.color('#007EFD');
+      marker.stroke('white', 2);
+    } else {
+      marker.color('white');
+    }
     marker.width('60%');
     marker.data([{ x: title, value: value, title: title }]);
     // set the zIndex of the marker

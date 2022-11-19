@@ -20,4 +20,16 @@ export class ModalService {
       })
     );
   }
+
+  getParams(message: string[], type: string, panelClass: string): any {
+    const params = {
+      width: '414px',
+      data: {
+        type,
+        message,
+      },
+      panelClass: panelClass,
+    };
+    return params;
+  }
 }

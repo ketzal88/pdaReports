@@ -83,4 +83,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       complete: () => {},
     });
   }
+
+  forgotPassword(): void {
+    console.log('passwordRecovery');
+    this.router.navigate(['passwordRecovery']);
+  }
 }

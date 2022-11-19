@@ -5,7 +5,6 @@ import {
   AfterViewInit,
   Input,
 } from '@angular/core';
-import 'anychart';
 import { disabledCredits } from '../../../utils/chart.util';
 import { JobCategory } from '../../../../core/services/microservices/job/job.interface';
 import {

@@ -1,6 +1,8 @@
 <div class="mat-elevation-z8">
   <mat-form-field appearance="fill">
-    <mat-label>{{ 'SELECT_GROUP.NAME' | translate }}</mat-label>
+    <mat-label>{{
+      'REPORT_CONFIGURATION.selectGroup.LABEL.TITLE' | translate
+    }}</mat-label>
     <mat-select
       #groupSelect="matSelect"
       (openedChange)="onGroupChange($event)"
@@ -18,17 +20,23 @@
       <span style="margin-right: 10px" class="material-icons"
         >arrow_upward</span
       >
-      <p>Agregue un grupo de trabajo utilizando el boton de arriba.</p>
+      <p>
+        {{
+          'REPORT_CONFIGURATION.selectGroup.CONTENT.LABEL_DESCRIPTION'
+            | translate
+        }}
+      </p>
     </div>
   </div>
 </ng-container>
 
-<ng-container *ngIf="lockedSelectId && selectedGroup && !loading">
+<ng-container *ngIf="selectedGroup && !loading">
   <!-- TODO: Cuando este disponible el servicio de creacion, quitar [selectedIndividualIds] -->
   <app-individuals-selection
     [lockedSelectId]="lockedSelectId"
     [multipleSelection]="true"
     [selectedClientId]="selectedClientId"
+    [selectedSubbaseId]="selectedSubbaseId"
     [selectedGroupingId]="selectedGroup"
     [selectedIndividualIds]="selectedIndividualIds"
     [typeFilterList]="typeFilterList"

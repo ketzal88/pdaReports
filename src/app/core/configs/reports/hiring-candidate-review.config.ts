@@ -51,7 +51,7 @@ export const HIRING_CANDIDATE_REVIEW: ConfigurationTypesReports = {
       sections: [
         {
           column: 1,
-          items: ['processFeedback', 'knowMoreBehavioralProfile'],
+          items: ['hrFeedback', 'knowMoreBehavioralProfile'],
         },
         {
           column: 2,
@@ -65,6 +65,24 @@ export const HIRING_CANDIDATE_REVIEW: ConfigurationTypesReports = {
         {
           column: 0,
           items: ['exploreYourCVWithTheseTips'],
+        },
+      ],
+    },
+    {
+      block: 6,
+      sections: [
+        {
+          column: 1,
+          items: ['certifications'],
+        },
+      ],
+    },
+    {
+      block: 7,
+      sections: [
+        {
+          column: 1,
+          items: ['shareYourProfileInTheRRSS'],
         },
       ],
     },

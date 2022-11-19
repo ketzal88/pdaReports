@@ -1,31 +1,61 @@
-<h4 class="h4 subtitle center">{{behavioralTrends.title}}</h4>
-<p class="body-1 center my-32">En este gráfico se muestra la correlación de las tendencias comportamentales entre las personas que hacen parte del equipo de trabajo.
-</p>
-<div style="width: 100%; border-radius: 8px">
+<ng-container *ngIf="repnsTrends; else emptyState">
+  <h4 class="h4 subtitle center">
+    {{ 'REPORTS.SECTIONS.BEHAVIORAL_TREND.TITLE' | translate }}
+    <!-- 
+      {{ repnsTrends.title }}
+     -->
+  </h4>
+  <p class="body-2 center my-32">
+    {{ getDottedFirstCharacters(repnsTrends.introduction, 147) }}
+  </p>
+  <div style="width: 100%; border-radius: 8px"></div>
 
-</div>
-
-<!-- TODO - Disenio: Grafico tendencia comportamental a re-ver por diseño -->
-<div style="width: 100%; max-height: 487px">
+  <!-- TODO - Disenio: Grafico tendencia comportamental a re-ver por diseño -->
+  <div style="width: 100%; max-height: 487px">
     <div class="section-graph-card">
-        <mat-accordion>
-            <ng-container *ngFor="let item of behavioralTrends.behavioralTrendsDetails; let idx = index">
-                <mat-expansion-panel (opened)="changeBehavioralTrend(idx)" (closed)="changeClose(idx)" class="pb-0 px-0">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title [ngClass]="{'title': true, 'highlighted': idx == idxSelected}" [title]="item.name"> {{ item.name }} </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div class="progress-bar-selected">
-                        <div style="display: flex; justify-content: space-between">
-                            <span style="font-style: italic">{{ behavioralTrends.leftSideDescriptionWord }}</span>
-                            <span style="font-style: italic">{{ behavioralTrends.rightSideDescriptionWord }}</span>
-                        </div>
-                        <chart-tendencia-comportamental [markers]="[54]"></chart-tendencia-comportamental>
-                    </div>
-                </mat-expansion-panel>
-                <div class="progress-bar-unselected" [ngStyle]="{ display: idxSelected === idx ? 'none' : 'block' }">
-                    <chart-tendencia-comportamental [value]="item.compatibilityPercentage" color="#D5D7D9"></chart-tendencia-comportamental>
-                </div>
-            </ng-container>
-        </mat-accordion>
+      <mat-accordion>
+        <ng-container
+          *ngFor="let itemBehavioralTrend of typeBehavioral; let idx = index">
+          <mat-expansion-panel
+            (opened)="changeBehavioralTrend(idx)"
+            (closed)="changeClose(idx)"
+            class="pb-0 px-0">
+            <mat-expansion-panel-header>
+              <mat-panel-title
+                #panelTitle
+                [ngClass]="{ title: true, highlighted: idx === idxSelected }"
+                [title]="itemBehavioralTrend.name"
+                [style]="{
+                  color: idx === idxSelected ? colors[idx] : undefined
+                }">
+                {{ itemBehavioralTrend.name }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="progress-bar-selected">
+              <div style="display: flex; justify-content: space-between">
+                <span style="font-style: italic">0%</span>
+                <span style="font-style: italic">100%</span>
+              </div>
+              <app-tendencia-comportamental-labeled
+                [data]="itemBehavioralTrend"
+                [color]="colors[idx]"></app-tendencia-comportamental-labeled>
+            </div>
+          </mat-expansion-panel>
+          <div
+            class="progress-bar-unselected"
+            [ngStyle]="{ display: idxSelected === idx ? 'none' : 'block' }">
+            <app-chart-tendencia-comportamental
+              color="#D5D7D9"></app-chart-tendencia-comportamental>
+          </div>
+        </ng-container>
+      </mat-accordion>
     </div>
-</div>
+  </div>
+</ng-container>
+<ng-template #emptyState>
+  <h4 class="h4 subtitle center">
+    {{ 'REPORTS.SECTIONS.BEHAVIORAL_TREND.TITLE' | translate }}
+  </h4>
+  <app-empty-state
+    description="{{ 'REPORTS.MISCELLANY' | translate }}"></app-empty-state>
+</ng-template>

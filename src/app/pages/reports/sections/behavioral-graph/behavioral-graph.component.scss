@@ -133,12 +133,12 @@
 
 .lider:active,
 .lider:hover {
-    text-decoration: underline #007EFD;
+    text-decoration: underline #01DAD8;
 }
 
 .team:active,
 .lider:hover {
-    text-decoration: underline #007EFD;
+    text-decoration: underline #FFA902;
 }
 
 .puestos-compatibles {
@@ -258,18 +258,24 @@ ul.slider li:first-child {
 }
 
 ::ng-deep .border-red.active .mat-button-wrapper {
-    border-bottom: solid 2px #FF0000;
+    border-bottom: solid 2px #01DAD8;
 }
 
 ::ng-deep .border-green.active .mat-button-wrapper {
-    border-bottom: solid 2px #0be300;
+    border-bottom: solid 2px #FFA902;
 }
 
 .mat-flat-button.mat-button-disabled.mat-button-disabled {
     background-color: #00000000;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 1200px) {
+    .grafic-comportamental {
+        margin-bottom: 70px;
+    }
+}
+
+@media (max-width: 440px) {
     .h4 {
         font-weight: 700;
         font-size: 24px;
@@ -282,7 +288,8 @@ ul.slider li:first-child {
         line-height: 20px;
     }
     .grafic-comportamental {
-        height: auto
+        height: auto;
+        margin-bottom: 0px;
     }
     .role-tab {
         gap: 0px;

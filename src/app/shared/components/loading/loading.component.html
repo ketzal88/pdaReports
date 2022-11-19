@@ -1,0 +1,17 @@
+<ng-container *ngIf="loading$ | async">
+  <div class="overlaySpinner">
+    <div
+      class="centerSpinner"
+      [ngClass]="{ 'loading-active': getMessage() ? true : false }">
+      <ng-container *ngIf="getMessage()">
+        <div style="text-align: center">
+          {{ getMessage() }}
+        </div>
+      </ng-container>
+    </div>
+    <div class="centerSpinner">
+      <mat-progress-spinner diameter="50" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+  </div>
+</ng-container>

@@ -22,6 +22,8 @@ import { ClientFilterModule } from '../../../shared/components/client-filter/cli
 import { SelectHrFeedbackComponent } from './select-hr-feedback/select-hr-feedback.component';
 import { ResponseDialogModule } from '../../../shared/components/modal/response-dialog/response-dialog.module';
 import { IconsModule } from '../../../shared/components/icons/icons.module';
+import { ConfigurationService } from './configuration.service';
+import { ConfigurationReportService } from '../../../core/services/microservices/reports/configuration-report.service';
 
 @NgModule({
   declarations: [
@@ -57,5 +59,6 @@ import { IconsModule } from '../../../shared/components/icons/icons.module';
     SelectStyleComponent,
     SelectIndividualsComponent,
   ],
+  providers: [ConfigurationService, ConfigurationReportService],
 })
 export class ConfigurationModule {}

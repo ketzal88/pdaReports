@@ -1,29 +1,29 @@
+.compatibilidad-puesto-graph {
+    width: 470px;
+    height: 470px;
+    border-radius: 100%;
+    background-color: #FFFFFF;
+    aspect-ratio: 1 / 1;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: 65px;
+}
+
+.compatibilidad-puesto-shadow {
+    width: 100%;
+    height: 100%;
+}
+
+.border-bottom-blue {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -60px;
+    padding-left: 10px;
+}
+
+@media (max-width: 440px) {
     .compatibilidad-puesto-graph {
-        width: 470px;
-        height: 470px;
-        border-radius: 100%;
-        background-color: #FFFFFF;
-        aspect-ratio: 1 / 1;
-        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
-        margin-bottom: 65px;
+        width: 240px;
+        height: 240px;
     }
-    
-    .compatibilidad-puesto-shadow {
-        width: 100%;
-        height: 100%;
-    }
-    
-    .border-bottom-blue {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: -60px;
-        padding-left: 10px;
-    }
-    
-    @media (max-width: 375px) {
-        .compatibilidad-puesto-graph {
-            width: 240px;
-            height: 240px;
-        }
-    }
+}

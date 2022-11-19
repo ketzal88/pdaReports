@@ -1,8 +1,13 @@
+<h4 class="select-individual-title">
+  {{ 'REPORT_CONFIGURATION.selectIndividuals.CONTENT.LABEL_TITLE' | translate }}
+</h4>
+
 <app-individuals-selection
   (selectedIndividualsEvent)="onIndividualsSelection($event)"
   [selectedClientId]="selectedClientId"
   [selectedSubbaseId]="selectedSubbaseId"
   [selectedIndividualIds]="selectedIndividualIds"
-  [typeFilterList]="typeFilterList">
+  [typeFilterList]="typeFilterList"
+  [multipleSelection]="multipleSelection">
   ></app-individuals-selection
 >

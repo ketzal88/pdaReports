@@ -5,4 +5,8 @@ export const SELECT_COMPETENCIES_STEP: ItemStepConfiguration = {
     title: 'Selecciona las competencias',
     subtitle: 'sobre quién se realizara el reporte',
   },
+  step: {
+    isComplete: false,
+    isEnabled: true,
+  },
 };

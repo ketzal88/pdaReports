@@ -1,45 +1,98 @@
-<div class="block-section">
-    <div class="competency-row">
-        <div class="section-internal">
-            <h4 class="h4">{{ competencyCompatibility.title }}</h4>
-            <p class="body-1 competencies-description">
-                Tiene una marcada tendencia hacia la especialización. Es altamente confiable, muy disciplinado y preciso.
-            </p>
-        </div>
-        <div class="section-internal d-md-none"></div>
+<ng-container *ngIf="competencyCompatibility; else emptyState">
+  <div class="competency-row" [ngClass]="{ forceSmall: forceSmall }">
+    <div class="section-internal">
+      <h4 #competencyTitle class="h4 competency-title">
+        {{ competencyCompatibility.title }}
+      </h4>
+      <p class="body-2 competencies-description">
+        {{ 'REPORTS.SECTIONS.COMPETENCIES_SECTION.DESCRIPTION' | translate }}.
+      </p>
     </div>
-    <div class="tipo-deperfil competency-row move-to-the-right">
-        <div class="section-internal first-section">
-            <ng-container *ngFor="
-      let competencyDetail of getLeftCompetencies();
-      let idx = index
-    ">
-                <div class="competency">
-                    <h5 class="h5" [title]="formatText(competencyDetail.competency)">{{ formatText(competencyDetail.competency) }}</h5>
-                    <div class="competency-bar">
-                        <div class="bar-shadow competency-graph">
-                            <chart-competencias [value]="competencyDetail.compatibilityPercentage" [color]="idx % 2 === 0 ? '#80BFFE' : '#0075FF'"></chart-competencias>
-                        </div>
-                        <div class="competency-percentage h4">{{competencyDetail.compatibilityPercentage}}%</div>
-                    </div>
+    <div class="section-internal d-md-none"></div>
+  </div>
+  <div class="tipo-deperfil competency-row">
+    <div
+      class="slider-controller desktop"
+      [ngClass]="{ forceSmall: forceSmall }">
+      <ng-container *ngFor="let competencyGroup of this.desktopCompetencies">
+        <div #sliderDesktop class="slider">
+          <ng-container
+            *ngFor="let competencyDetail of competencyGroup; let idx = index">
+            <div class="competency">
+              <!-- <h5 class="h5" [title]="formatText(competencyDetail.competency)"> -->
+              <h5 class="h5">
+                {{ formatText(competencyDetail.competency) }}
+              </h5>
+              <div class="competency-bar">
+                <div class="bar-shadow competency-graph">
+                  <app-chart-competencias
+                    [value]="competencyDetail.compatibilityPercentage"
+                    [color]="(idx + 1) % 4 < 2 ? '#80BFFE' : '#0075FF'"
+                    [tooltip]="competencyDetail.description">
+                  </app-chart-competencias>
                 </div>
-            </ng-container>
-        </div>
-        <div class="section-internal">
-            <ng-container *ngFor="
-      let competencyDetail of getRightCompetencies();
-      let idx = index
-    ">
-                <div class="competency">
-                    <h5 class="h5">{{ formatText(competencyDetail.competency) }}</h5>
-                    <div class="competency-bar">
-                        <div class="bar-shadow competency-graph">
-                            <chart-competencias [value]="competencyDetail.compatibilityPercentage" [color]="idx % 2 === 1 ? '#80BFFE' : '#0075FF'" [tooltip]="competencyDetail.description"></chart-competencias>
-                        </div>
-                        <div class="competency-percentage h4">{{competencyDetail.compatibilityPercentage}}%</div>
-                    </div>
+                <div class="competency-percentage h4">
+                  {{ competencyDetail.compatibilityPercentage }}%
                 </div>
-            </ng-container>
+              </div>
+            </div>
+          </ng-container>
         </div>
+      </ng-container>
     </div>
-</div>
+    <div
+      class="slider-controller mobile"
+      [ngClass]="{ forceSmall: forceSmall }">
+      <ng-container *ngFor="let competencyGroup of this.mobileCompetencies">
+        <div #sliderMobile class="slider">
+          <ng-container
+            *ngFor="let competencyDetail of competencyGroup; let idx = index">
+            <div class="competency">
+              <!-- <h5 class="h5" [title]="formatText(competencyDetail.competency)"> -->
+              <h5 class="h5">
+                {{ formatText(competencyDetail.competency) }}
+              </h5>
+              <div class="competency-bar">
+                <div class="bar-shadow competency-graph">
+                  <app-chart-competencias
+                    [value]="competencyDetail.compatibilityPercentage"
+                    [color]="idx % 2 === 0 ? '#80BFFE' : '#0075FF'"
+                    [tooltip]="competencyDetail.description">
+                  </app-chart-competencias>
+                </div>
+                <div class="competency-percentage h4">
+                  {{ competencyDetail.compatibilityPercentage }}%
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="dots-container desktop" [ngClass]="{ forceSmall: forceSmall }">
+    <div
+      class="dot"
+      *ngFor="let competencyGroup of this.desktopCompetencies; let idx = index"
+      (click)="setIndex(idx)"
+      [ngClass]="
+        this.index % this.desktopPageCount === idx ? 'active' : ''
+      "></div>
+  </div>
+  <div class="dots-container mobile" [ngClass]="{ forceSmall: forceSmall }">
+    <div
+      class="dot"
+      *ngFor="let competencyGroup of this.mobileCompetencies; let idx = index"
+      (click)="setIndex(idx)"
+      [ngClass]="
+        this.index % this.mobilePageCount === idx ? 'active' : ''
+      "></div>
+  </div>
+</ng-container>
+
+<ng-template #emptyState>
+  <!-- <app-empty-state title="{{ 'REPORTS.SECTIONS.COMPETENCIES_SECTION.TITLE' | translate }}" description="{{ 'REPORTS.MISCELLANY' | translate }} -->
+  <app-empty-state
+    description="{{ 'REPORTS.MISCELLANY' | translate }}
+    "></app-empty-state>
+</ng-template>

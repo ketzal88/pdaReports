@@ -1,60 +1,82 @@
-<app-client-filter
-  [selectedClientId]="selectedClientId"
-  [selectedSubbaseId]="selectedSubbaseId"
-  (selectedClientEvent)="changeClient($event)"
-  (selectedSubbaseEvent)="changeSubbase($event)"></app-client-filter>
+<div class="d-flex" style="gap: 80px">
+  <div class="d-flex fd-column">
+    <h2 class="select-style__title">
+      {{
+        'REPORT_CONFIGURATION.selectStyle.CONTENT.LABEL_BASE_SUBBASE'
+          | translate
+      }}
+    </h2>
+    <h4 class="filter-base-title">
+      {{
+        'REPORT_CONFIGURATION.selectStyle.CONTENT.LABEL_FILTER_CLIENT'
+          | translate
+      }}
+    </h4>
+  </div>
+
+  <app-client-filter
+    [selectedClientId]="selectedClientId"
+    [selectedSubbaseId]="selectedSubbaseId"
+    (selectedClientEvent)="changeClient($event)"
+    (selectedSubbaseEvent)="changeSubbase($event)"
+    [disable]="generatedReportByIdResponse ? true : false"></app-client-filter>
+</div>
+
+<div class="select-style d-flex fd-column">
+  <!-- <h4 class="select-style__info">
+    {{ 'REPORT_CONFIGURATION.selectStyle.CONTENT.LABEL_STYLE' | translate }}
+  </h4> -->
+
+  <h2 class="select-style__title">
+    {{
+      'REPORT_CONFIGURATION.selectStyle.CONTENT.LABEL_STYLE_GRAPHIC' | translate
+    }}
+  </h2>
+  <div class="d-flex" style="justify-content: space-around">
+    <ng-container *ngFor="let style of availableStyles">
+      <mat-card class="select-style__card">
+        <mat-card-header>
+          <div class="select-style__card__header">
+            <h3>
+              {{ style.name }}
+            </h3>
+            <h4 (click)="showPopUp(style)">
+              {{
+                'REPORT_CONFIGURATION.selectStyle.CONTENT.LABEL_SHOW_EXAMPLE'
+                  | translate
+              }}
+            </h4>
+          </div>
+        </mat-card-header>
+        <mat-card-content class="select-style__content">
+          <div
+            (click)="selectStyle(style)"
+            class="select-style__content__item"
+            [ngClass]="{
+              'select-style__content__item--active': style.selected
+            }">
+            <img [src]="style.image" [alt]="style.name" />
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </div>
+</div>
+
 <app-image-uploader
   *ngIf="!logoLoader.isLoading() && selectedClientId"
-  style="height: 550px"
   [dragAndDrop]="true"
   [validImageTypes]="validImageTypes"
   [imageSizingParameters]="imageSizingParameters"
-  title="Logo"
-  description="Cargue la imagen de su logo, para que sea utilizado en los reportes,
-  Deberá ser en formato JPG o PNG de al menos  280px x 60px"
+  title="{{
+    'REPORT_CONFIGURATION.selectStyle.CONTENT.LABEL_LOGO' | translate
+  }}"
+  description="{{
+    'REPORT_CONFIGURATION.selectStyle.CONTENT.LABEL_LOGO_DESCRIPTION'
+      | translate
+  }}"
   (uploadedImage)="uploadedImage($event)"
   [uploadFileName]="logoFileName"
   [selectedItemUrl]="selectedItemUrl"
   [selectedClientId]="selectedClientId">
 </app-image-uploader>
-
-<div style="display: flex">
-  <ng-container *ngFor="let style of availableStyles">
-    <mat-card>
-      <mat-card-header>
-        <h3>
-          <b>{{ style.name }}</b>
-        </h3>
-      </mat-card-header>
-      <mat-card-content style="text-align: center">
-        <div>
-          <img
-            [src]="style.imageUrl"
-            [alt]="style.name"
-            style="width: 90%"
-            (click)="showPopUp(style)" />
-        </div>
-        <p>
-          Es el mas parecido a nuestro branding, cuenta con detalles en blanco y
-          azul vibrante.
-        </p>
-        <div>
-          <button
-            mat-raised-button
-            color="primary"
-            style="margin-right: 15px"
-            (click)="showPopUp(style)">
-            Ver
-          </button>
-          <button
-            mat-raised-button
-            color="primary"
-            [disabled]="style.selected"
-            (click)="selectStyle(style)">
-            Seleccionar
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </ng-container>
-</div>

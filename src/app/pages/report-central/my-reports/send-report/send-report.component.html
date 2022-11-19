@@ -8,66 +8,75 @@
 <p>
   {{ 'SEND_REPORT.SUBTITLE' | translate }}
 </p>
-<div mat-dialog-content>
-  <div>
-    <mat-checkbox
-      class="checkbox-margin"
-      name="checkboxWhatsapp"
-      color="primary"
-      (change)="changeCurrentWhatsapp($event)"
-      #checkboxWhatsapp
-      [disabled]="true">
-      <app-whatsapp></app-whatsapp>
-    </mat-checkbox>
 
-    <mat-form-field appearance="fill">
-      <mat-label>{{ 'SEND_REPORT.LABEL_NUMBER' | translate }}</mat-label>
+<form [formGroup]="sendEmailForm" (submit)="sendReport()">
+  <div mat-dialog-content>
+    <div class="d-flex">
+      <div>
+        <p>
+          {{ labelSelected }}
+        </p>
+      </div>
+      <div class="ml-20">
+        <mat-slide-toggle
+          (change)="onSlideToogle($event)"
+          formControlName="withoutSelected"
+          >{{
+            'SEND_REPORT.LABEL_SELECTED_EMAIL_CHECK' | translate
+          }}</mat-slide-toggle
+        >
+      </div>
+    </div>
 
-      <input
-        [disabled]="!checkboxWhatsapp.checked"
-        name="inputWhatsapp"
-        matInput
-        [(ngModel)]="inputWhatsapp" />
-    </mat-form-field>
+    <div class="disabledDiv">
+      <mat-checkbox
+        class="checkbox-margin"
+        name="checkboxWhatsapp"
+        color="primary"
+        (change)="changeCurrentWhatsapp($event)"
+        formControlName="checkInputWhatsapp">
+        <app-whatsapp></app-whatsapp>
+      </mat-checkbox>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'SEND_REPORT.LABEL_NUMBER' | translate }}</mat-label>
+        <input name="inputWhatsapp" matInput formControlName="inputWhatsapp" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-checkbox
+        class="checkbox-margin"
+        name="checkboxEmail"
+        color="primary"
+        (change)="changeCurrentWhatsapp($event)"
+        formControlName="checkInputEmail">
+        <app-email></app-email>
+      </mat-checkbox>
+
+      <mat-form-field appearance="fill" style="margin-left: 20px">
+        <mat-label>{{ 'SEND_REPORT.LABEL_EMAIL' | translate }}</mat-label>
+        <input name="inputEmail" matInput formControlName="inputEmail" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="margin-left: 20px">
+        <mat-label>Cc</mat-label>
+        <input name="inputEmailCc" matInput formControlName="inputEmailsCc" />
+      </mat-form-field>
+    </div>
+
+    <angular-editor
+      formControlName="inputHtml"
+      [config]="config"></angular-editor>
   </div>
-  <div>
-    <mat-checkbox
-      class="checkbox-margin"
-      name="checkboxEmail"
-      color="primary"
-      (change)="changeCurrentWhatsapp($event)"
-      #checkboxEmail>
-      <app-email></app-email>
-    </mat-checkbox>
-
-    <mat-form-field appearance="fill" style="margin-left: 20px">
-      <mat-label>{{ 'SEND_REPORT.LABEL_EMAIL' | translate }}</mat-label>
-      <input
-        [disabled]="!checkboxEmail.checked"
-        name="inputEmail"
-        matInput
-        type="email"
-        [(ngModel)]="inputEmails"
-        #inputEmail="ngModel"
-        email />
-    </mat-form-field>
-    <mat-form-field appearance="fill" style="margin-left: 20px">
-      <mat-label>Cc</mat-label>
-      <input
-        [disabled]="!checkboxEmail.checked"
-        name="inputEmailCc"
-        matInput
-        [(ngModel)]="inputEmailsCc" />
-    </mat-form-field>
+  <div mat-dialog-actions>
+    <button
+      type="submit"
+      [disabled]="
+        (!withoutSelected.value && inputEmail.value === '') ||
+        (inputEmail.value !== '' && sendEmailForm.invalid) ||
+        (!withoutSelected.value && !checkInputEmail.value)
+      "
+      mat-button>
+      {{ 'SEND_REPORT.SEND' | translate }}
+    </button>
   </div>
-
-  <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
-</div>
-<div mat-dialog-actions>
-  <button
-    mat-button
-    (click)="sendReport()"
-    [disabled]="inputEmail.errors || inputEmails === '' || htmlContent === ''">
-    {{ 'SEND_REPORT.SEND' | translate }}
-  </button>
-</div>
+</form>

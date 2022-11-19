@@ -1,3 +1,200 @@
+//Custom angular material
+:host ::ng-deep {
+
+    .mat-expansion-panel-content {
+        background: #E7F1FE;
+    }
+
+    .mat-expansion-panel:not([class*=mat-elevation-z]) {
+        box-shadow: none;
+    }
+
+    .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true]) {
+        background: #E7F1FE;
+        border: 1px solid #C6DFFF;
+
+    }
+
+    .mat-expansion-panel-header {
+        background: #E7F1FE;
+        height: 30px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .mat-expansion-panel-header.mat-expanded:focus,
+    .mat-expansion-panel-header.mat-expanded:hover {
+        border: 1px solid #C6DFFF;
+        background: #E7F1FE;
+
+    }
+
+    .mat-expansion-panel-header:not([aria-disabled=true]) {
+        cursor: pointer;
+        border-bottom: 1px solid #C6DFFF;
+    }
+
+    .mat-expansion-panel-header-title,
+    .mat-expansion-panel-header-description {
+        color: #007EFD;
+    }
+
+    .mat-pseudo-checkbox {
+        display: none;
+    }
+
+    .mat-list-base{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-bottom: 8px;
+    }
+
+    .mat-list-base .mat-list-item .mat-list-item-content-reverse,
+    .mat-list-base .mat-list-option .mat-list-item-content-reverse {
+        min-height: 30px;
+        height: auto;
+        max-height: 100%;
+    }
+}
+
 .selected-jobs{
     margin-bottom: 25px;
+}
+
+.select-jobs__description {
+    font-weight: 400;
+    font-size: 14px;
+    color: #727276;
+    margin-bottom: 10px;
+}
+
+.select-jobs__input{
+    margin-bottom: 20px;
+}
+
+.select-jobs__selected {
+    margin-bottom: 25px;
+    margin-right: 40px;
+    background: #E7F1FE;
+    border-radius: 4px;
+    max-height: 250px;
+}
+
+.select-jobs__description {
+    font-weight: 400;
+    font-size: 14px;
+    color: #727276;
+    margin-bottom: 20px;
+}
+
+.select-jobs__title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.select-jobs__title h2 {
+    font-weight: 600;
+    font-size: 14px;
+    color: #667080;
+    margin-bottom: 0px;
+}
+
+.select-jobs__selected__item {
+    display: flex;
+    border-bottom: 1px solid #E3E6EB;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.select-jobs__selected__item__close {
+    cursor: pointer;
+}
+
+.select-jobs__selected__item__name {
+    font-weight: 500;
+    font-size: 12px;
+    color: #727276;
+}
+
+.select-jobs__selected__item__description {
+    font-weight: 400;
+    font-size: 10px;
+    color: #6D7783;
+}
+
+.select-jobs__groups,
+.select-jobs__items {
+    border: 1px solid #E7E9EB;
+    border-radius: 6px;
+    max-height: 410px;
+    width: 45%;
+}
+
+.select-jobs__items {
+    margin-right: 40px;
+    height: 100%;
+    max-height: 410px;
+}
+
+.select-jobs__groups__content {
+    width: 100%;
+}
+
+.select-jobs__groups__img img {
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 10px;
+}
+
+.select-jobs__groups__item.mat-list-option,
+.select-jobs__items mat-list-option {
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 12px;
+    height: 30px;
+}
+
+.select-jobs__items mat-list-option {
+    min-height: 30px;
+    height: 100%;
+}
+
+.select-jobs__items mat-list-option h4 {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.select-jobs__groups__item.mat-list-option:focus,
+.select-jobs__groups__item.mat-list-option:hover,
+.select-jobs__groups__item.mat-list-single-selected-option,
+.select-jobs__items mat-list-option:hover {
+    background: #E7F1FE;
+}
+
+.select-jobs__groups__item.mat-list-single-selected-option {
+    font-weight: 600;
+    font-size: 12px;
+    color: #007EFD;
+}
+
+.select-jobs__items mat-list-option[aria-selected='true'],
+.select-jobs__items mat-list-option[aria-selected='true']:hover,
+.select-jobs__items mat-list-option[aria-selected='true']:focus {
+    background: #E7F1FE;
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+.select-jobs__items mat-list-option[aria-selected='true'] h4 {
+    font-weight: 600;
+    font-size: 12px;
+    color: #727276;
 }

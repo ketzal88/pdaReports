@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BehavioralProfileChart } from 'src/app/core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
 import { REPNA } from '../../../../core/models/repna.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-behavioral-profile-chart-section',
@@ -24,10 +25,12 @@ export class BehavioralProfileChartSectionComponent implements OnInit {
 
   titleArray = [null, 'R', 'E', 'P', 'N', 'A'];
   naturalSelected: boolean = true;
+  tooltipsRepna: any[] = [];
 
-  constructor() {}
+  constructor(private translateService: TranslateService) {}
 
   ngOnInit(): void {
+    this.loadTranslateTooltips();
     this.arrayTableN = [
       this.titleArray,
       this.getProfileRow(true),
@@ -47,6 +50,30 @@ export class BehavioralProfileChartSectionComponent implements OnInit {
 
     this.naturalREPNA = this.getREPNA(true);
     this.roleREPNA = this.getREPNA(false);
+  }
+
+  loadTranslateTooltips(): void {
+    let listType: string[] = ['r', 'e', 'p', 'n', 's'];
+    this.translateService
+      .get([
+        'REPORTS.SECTIONS.BEHAVIORAL_PROFILE_CHART_SECTION.TOOLTIP.r_DESCRIPTION',
+        'REPORTS.SECTIONS.BEHAVIORAL_PROFILE_CHART_SECTION.TOOLTIP.e_DESCRIPTION',
+        'REPORTS.SECTIONS.BEHAVIORAL_PROFILE_CHART_SECTION.TOOLTIP.p_DESCRIPTION',
+        'REPORTS.SECTIONS.BEHAVIORAL_PROFILE_CHART_SECTION.TOOLTIP.n_DESCRIPTION',
+        'REPORTS.SECTIONS.BEHAVIORAL_PROFILE_CHART_SECTION.TOOLTIP.s_DESCRIPTION',
+      ])
+      .subscribe(translations => {
+        for (let i = 0; i < listType.length; i++) {
+          let newTooltip: any = {
+            key: listType[i],
+            tooltip:
+              translations[
+                `REPORTS.SECTIONS.BEHAVIORAL_PROFILE_CHART_SECTION.TOOLTIP.${listType[i]}_DESCRIPTION`
+              ],
+          };
+          this.tooltipsRepna.push(newTooltip);
+        }
+      });
   }
 
   setNaturalSelected(natural: boolean): void {
@@ -203,23 +230,23 @@ export class BehavioralProfileChartSectionComponent implements OnInit {
         (
           this.behavioralProfileInfo.behavioralProfileChartInformation
             .naturalRiskAxisIntensity * 100
-        ).toString(),
+        ).toFixed(0) + '%',
         (
           this.behavioralProfileInfo.behavioralProfileChartInformation
             .naturalExtroversionAxisIntensity * 100
-        ).toString(),
+        ).toFixed(0) + '%',
         (
           this.behavioralProfileInfo.behavioralProfileChartInformation
             .naturalPatienceAxisIntensity * 100
-        ).toString(),
+        ).toFixed(0) + '%',
         (
           this.behavioralProfileInfo.behavioralProfileChartInformation
             .naturalConformityNormsAxisIntensity * 100
-        ).toString(),
+        ).toFixed(0) + '%',
         (
           this.behavioralProfileInfo.behavioralProfileChartInformation
             .naturalSelfControlAxisIntensity * 100
-        ).toString(),
+        ).toFixed(0) + '%',
       ];
     }
 
@@ -228,23 +255,23 @@ export class BehavioralProfileChartSectionComponent implements OnInit {
       (
         this.behavioralProfileInfo.behavioralProfileChartInformation
           .roleRiskAxisIntensity * 100
-      ).toString(),
+      ).toFixed(0) + '%',
       (
         this.behavioralProfileInfo.behavioralProfileChartInformation
           .roleExtroversionAxisIntensity * 100
-      ).toString(),
+      ).toFixed(0) + '%',
       (
         this.behavioralProfileInfo.behavioralProfileChartInformation
           .rolePatienceAxisIntensity * 100
-      ).toString(),
+      ).toFixed(0) + '%',
       (
         this.behavioralProfileInfo.behavioralProfileChartInformation
           .roleConformityNormsAxisIntensity * 100
-      ).toString(),
+      ).toFixed(0) + '%',
       (
         this.behavioralProfileInfo.behavioralProfileChartInformation
           .roleSelfControlAxisIntensity * 100
-      ).toString(),
+      ).toFixed(0) + '%',
     ];
   }
 }

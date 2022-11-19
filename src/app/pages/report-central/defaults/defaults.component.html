@@ -1,44 +1,67 @@
-<div style="display: flex; justify-content: space-between; align-items: center">
+<div class="defaults">
   <ng-container *ngFor="let reportGroup of typesReportsGroup; let idx = index">
     <mat-card
-      style="height: 100%; cursor: pointer"
+      class="defaults__card"
+      [ngClass]="{
+        'not-allowed':
+          reportGroup.internalName === 'SALES' ||
+          reportGroup.internalName === 'EMOTIONAL_INTELLIGENCE' ||
+          reportGroup.internalName === 'DEVELOPMENT'
+      }"
       (click)="setGroupSelection(reportGroup)">
-      <h2>{{ reportGroup.name }}</h2>
-      <ng-container
-        [ngTemplateOutlet]="
-          reportGroup.internalName === 'HIRING'
-            ? hiring
-            : reportGroup.internalName === 'DEVELOPMENT'
-            ? development
-            : reportGroup.internalName === 'SALES'
-            ? sales
-            : null
-        "
-        [ngTemplateOutletContext]="{
-          data: ''
-        }"></ng-container>
-      <mat-selection-list
-        #reportTypes
-        [multiple]="false"
-        [ngClass]="
-          reportGroupSelected?.internalName === reportGroup?.internalName
-            ? 'content-block'
-            : 'content-none'
-        ">
+      <div
+        class="d-flex fd-column justify-center justify-space-evenly defaults__card__content">
+        <h2
+          class="defaults__card__title"
+          [ngStyle]="
+            reportGroup.name === 'EMOTIONAL_INTELLIGENCE' && {
+              'line-height': '20px'
+            }
+          ">
+          {{
+            reportGroup.name === 'EMOTIONAL_INTELLIGENCE'
+              ? ('TO_DELETE_EMOTIONAL_INTELLIGENCE' | translate)
+              : reportGroup.name
+          }}
+        </h2>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="
+              reportGroup.internalName === 'HIRING'
+                ? hiring
+                : reportGroup.internalName === 'DEVELOPMENT'
+                ? development
+                : reportGroup.internalName === 'SALES'
+                ? sales
+                : reportGroup.internalName === 'EMOTIONAL_INTELLIGENCE'
+                ? emotionalIntelligence
+                : null
+            "
+            [ngTemplateOutletContext]="{
+              data: ''
+            }"></ng-container>
+        </div>
+      </div>
+      <mat-selection-list [multiple]="false">
         <mat-list-option
-          *ngFor="let item of reportGroupSelected?.reportTypes"
+          class="defaults__card--report"
+          *ngFor="let item of reportGroup?.reportTypes"
           [value]="item"
           (click)="goToConfiguration(reportGroup, item.internalName)"
-          [disabled]="
-            reportGroup.internalName === 'SALES' &&
-            item.internalName === 'SALES_SURVEY'
-          ">
+          [ngClass]="{
+            'not-allowed':
+              (reportGroup.internalName === 'HIRING' &&
+                item.internalName === 'HIRING_REPORT') ||
+              (reportGroup.internalName === 'HIRING' &&
+                item.internalName === 'HIRING_CANDIDATE_REVIEW')
+          }">
           {{ item.name }}
         </mat-list-option>
       </mat-selection-list>
     </mat-card>
   </ng-container>
 </div>
+
 <!-- ALL icons -->
 <ng-template #hiring let-data="data">
   <app-hiring></app-hiring>
@@ -48,4 +71,9 @@
 </ng-template>
 <ng-template #sales let-data="data">
   <app-sales></app-sales>
+  <!-- <app-hiring></app-hiring> -->
+</ng-template>
+
+<ng-template #emotionalIntelligence>
+  <app-emotional-intelligence></app-emotional-intelligence>
 </ng-template>

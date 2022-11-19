@@ -1,6 +1,6 @@
 <app-card>
   <card-content>
-    <div>
+    <div class="center">
       <app-icon-error
         *ngIf="data?.type === reportResponseType.ERROR"></app-icon-error>
       <app-icon-success
@@ -10,13 +10,14 @@
     </div>
 
     <div
+      class="center"
       *ngIf="
         data?.type === reportResponseType.ERROR ||
         data?.type === reportResponseType.SUCCESS
       ">
       {{ data.message[0] | translate }}
     </div>
-    <div *ngIf="data?.type === reportResponseType.WARNING">
+    <div class="center" *ngIf="data?.type === reportResponseType.WARNING">
       <div *ngFor="let message of data.message">
         {{ message | translate }}
       </div>
@@ -34,7 +35,7 @@
             : 'btn-success'
         "
         (click)="confirm()">
-        Aceptar
+        {{ 'MODAL.ACTION.ACCEPT' | translate }}
       </button>
     </div>
   </card-actions>

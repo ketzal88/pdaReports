@@ -1,0 +1,7 @@
+<div class="container-tab-group" *ngIf="typesReportsGroup">
+  <app-defaults
+    [typesReportsGroup]="typesReportsGroup"
+    [reportsLocal]="reportsLocal"
+    (preRedirect)="onRedirect()">
+  </app-defaults>
+</div>

@@ -10,6 +10,10 @@ import {
 import { BehavioralAxiCompetency } from 'src/app/core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
 import { disabledCredits } from '../../../utils/chart.util';
 import { CorrelationJobBehavioralCompetency } from '../../../../core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
+import {
+  BehavioralRadarChartCompetenciesCompatibility,
+  Competency,
+} from '../../../../core/services/microservices/reports/interfaces/pdaGroupSectionsResponse.interface';
 
 @Component({
   selector: 'app-stacked-polygon-polar',
@@ -39,6 +43,11 @@ export class StackedPolygonPolarComponent
   }
 
   @Input() naturalSelected: boolean;
+
+  @Input()
+  behavioralRadarChartCompetenciesCompatibility: BehavioralRadarChartCompetenciesCompatibility[];
+
+  @Input() behavioralRadarChartGroupAverageByTeam: Competency[];
 
   //ViewChilds
   @ViewChild('chartContainer') container: any;
@@ -101,6 +110,13 @@ export class StackedPolygonPolarComponent
       },
       []
     );
+
+    dataTable = [...this.getInfoByDataType(dataTable)];
+
+    return dataTable;
+  }
+
+  getInfoByDataType(dataTable: any[]): any[] {
     if (
       this.correlationJobBehavioralCompetencies &&
       this.correlationJobBehavioralCompetencies.length > 0
@@ -108,6 +124,29 @@ export class StackedPolygonPolarComponent
       for (let idx = 0; idx < this.behavioralRadarChart.length; idx++) {
         dataTable[idx].push(
           this.correlationJobBehavioralCompetencies[idx]?.natural * 1000
+        );
+      }
+    }
+
+    if (
+      this.behavioralRadarChartCompetenciesCompatibility &&
+      this.behavioralRadarChartCompetenciesCompatibility.length > 0
+    ) {
+      for (let idx = 0; idx < this.behavioralRadarChart.length; idx++) {
+        dataTable[idx].push(
+          this.behavioralRadarChartCompetenciesCompatibility[idx]?.natural *
+            1000
+        );
+      }
+    }
+
+    if (
+      this.behavioralRadarChartGroupAverageByTeam &&
+      this.behavioralRadarChartGroupAverageByTeam.length > 0
+    ) {
+      for (let idx = 0; idx < this.behavioralRadarChart.length; idx++) {
+        dataTable[idx].push(
+          this.behavioralRadarChartGroupAverageByTeam[idx]?.natural * 1000
         );
       }
     }

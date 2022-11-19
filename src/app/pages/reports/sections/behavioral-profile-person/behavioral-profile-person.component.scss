@@ -1,7 +1,9 @@
 /* formateo parrafos */
+
 .white {
     color: #ffffff;
 }
+
 
 /*INFO PERFIL*/
 
@@ -23,7 +25,9 @@
     color: #6D7783;
 }
 
+
 /* SECCION NOMBRE DEL TIPO DE PERFIL*/
+
 .texto-perfil {
     width: 40%;
 }
@@ -36,7 +40,7 @@
     line-height: 160px;
     font-weight: bold;
     text-align: left;
-    word-wrap:break-word;
+    word-wrap: break-word;
     overflow-wrap: break-word;
     letter-spacing: 1px;
 }
@@ -47,18 +51,17 @@
     text-align: left;
 }
 
-/*SECCIONES INTERNAS*/
-@media (max-width: 600px) {
 
+/*SECCIONES INTERNAS*/
+
+@media (max-width: 600px) {
     .block-section {
         flex-direction: column;
         align-items: center;
         width: 100%;
     }
-
     .section-internal {
         width: 100%;
         padding: 5px 30px;
     }
-
 }

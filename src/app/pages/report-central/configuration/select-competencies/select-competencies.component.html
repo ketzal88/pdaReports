@@ -1,28 +1,68 @@
-<button class="button" (click)="Select10()">Select 10 - Development</button>
-<div class="selected-competencies">
+<!-- <button class="button" (click)="Select10()">Select 10 - Development</button> -->
+
+<h4 class="select-competencies__description">
+  {{
+    'REPORT_CONFIGURATION.selectCompetencies.CONTENT.LABEL_DESCRIPTION'
+      | translate
+  }}
+</h4>
+
+<div class="select-competencies__selected scroll-content">
   <mat-accordion>
     <mat-expansion-panel
-      (opened)="panelOpenState = true && competenciesSelected.length === 0"
-      (closed)="panelOpenState = false && competenciesSelected.length > 0">
-      <mat-expansion-panel-header>
-        <mat-panel-title> Seleccionados </mat-panel-title>
+      (opened)="panelOpenState = true && selectedCompetencies.length === 0"
+      (closed)="panelOpenState = false && selectedCompetencies.length > 0">
+      <mat-expansion-panel-header
+        [collapsedHeight]="'30px'"
+        [expandedHeight]="'30px'">
+        <mat-panel-title>
+          {{
+            'REPORT_CONFIGURATION.selectCompetencies.SELECTED_INDICATOR.TITLE'
+              | translate
+          }}
+        </mat-panel-title>
         <mat-panel-description>
-          {{ competenciesSelected.length }} / {{ neededQuantityCompetencies }}
+          {{ selectedCompetencies.length }} / {{ maxSelectableCompetencies }}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="competenciesSelected.length > 0">
-        <div *ngFor="let competency of competenciesSelected">
-          <p>
-            <b>{{ competency.name }} </b>{{ competency.description }}
-          </p>
+      <ng-container *ngIf="selectedCompetencies.length > 0">
+        <div
+          class="select-competencies__selected__item"
+          *ngFor="let competency of selectedCompetencies">
+          <div>
+            <h3 class="select-competencies__selected__item__name">
+              {{ competency.name }}
+            </h3>
+            <p class="select-competencies__selected__item__description">
+              {{ competency.description }}
+            </p>
+          </div>
+          <div
+            class="select-competencies__selected__item__close"
+            (click)="selectCompetency(competency)">
+            <app-icon-close></app-icon-close>
+          </div>
         </div>
       </ng-container>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
-<div class="d-flex">
-  <div class="d-flex fd-column w-100">
-    <div class="vertical-scroll">
+
+<div class="select-competencies__title">
+  <h2 class="">
+    {{
+      'REPORT_CONFIGURATION.selectCompetencies.CONTENT.LABEL_TITLE' | translate
+    }}
+  </h2>
+  <div>
+    <app-icon-help></app-icon-help>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between">
+  <div class="d-flex fd-column select-competencies__groups">
+    <div
+      class="select-competencies__groups__content vertical-scroll scroll-content">
       <mat-selection-list
         #competencyCategory
         [multiple]="false"
@@ -32,13 +72,14 @@
           )
         ">
         <mat-list-option
+          class="select-competencies__groups__item"
           *ngFor="let competencyCategory of availableCompetenciesCategories"
           [value]="competencyCategory">
           {{ competencyCategory.name }}
         </mat-list-option>
       </mat-selection-list>
     </div>
-    <div class="mb-20">
+    <div class="select-competencies__groups__img">
       <img
         src="/assets/img/report-central/Banner_Competencies.svg"
         width="100%"
@@ -47,15 +88,34 @@
         (click)="openCompetenciesPopUp()" />
     </div>
   </div>
-  <ng-container *ngIf="availableCompetencies">
-    <div class="vertical-scroll mb-20">
+  <ng-container
+    *ngIf="availableCompetencies && availableCompetencies.length > 0">
+    <div class="select-competencies__items vertical-scroll scroll-content">
       <mat-selection-list #category>
         <mat-list-option
           *ngFor="let competency of availableCompetencies"
           [value]="competency"
           [selected]="isChecked(competency)"
           (click)="selectCompetency(competency)">
-          {{ competency.name }}
+          <div
+            class="d-flex justify-content-between"
+            style="gap: 10px; align-items: center">
+            <div>
+              <h4>
+                {{ competency.name }}
+              </h4>
+              <ng-container *ngIf="isChecked(competency)">
+                <h5 class="select-competencies__items__description">
+                  {{ competency.description }}
+                </h5>
+              </ng-container>
+            </div>
+            <ng-container *ngIf="isChecked(competency)">
+              <div>
+                <app-icon-close></app-icon-close>
+              </div>
+            </ng-container>
+          </div>
         </mat-list-option>
       </mat-selection-list>
     </div>

@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DisplayMessageService } from 'src/app/core/services/displayMessage.service';
 import { EffectiveLeadership } from 'src/app/core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
 import { PopUpMessage } from '../../../../shared/components/display-message/displayMessage.interface';
-import { getDottedLastCharacters } from '../../../../core/utils/strings.util';
+import { getDottedFirstCharacters } from '../../../../core/utils/strings.util';
+import { NoSectionDataPipe } from '../../../../shared/pipes/no-section-data.pipe';
 
 @Component({
   selector: 'app-potential-deployment',
@@ -16,11 +17,14 @@ export class PotentialDeploymentComponent implements OnInit {
   //Bindings
   description: string;
 
-  constructor(private displayMessageService: DisplayMessageService) {}
+  constructor(
+    private displayMessageService: DisplayMessageService,
+    private noSectionDataPipe: NoSectionDataPipe
+  ) {}
 
   ngOnInit(): void {
-    this.description = getDottedLastCharacters(
-      this.effectiveLeadership.description[0]
+    this.description = this.noSectionDataPipe.transform(
+      getDottedFirstCharacters(this.effectiveLeadership.description[0])
     );
   }
 
@@ -29,12 +33,11 @@ export class PotentialDeploymentComponent implements OnInit {
     ret.description = this.effectiveLeadership.description;
     ret.hasBackdrop = true;
     ret.disableClose = false;
-    ret.closeOnNavigation = false;
+    ret.closeOnNavigation = true;
     ret.closableOnlyWithButton = false;
     ret.backdropClass = '';
     this.displayMessageService.openShowMoreModal(ret);
-    this.displayMessageService.confirmedPopUp().subscribe(confirmed => {
-      console.log('confirmed: ', confirmed);
+    this.displayMessageService.confirmedShowMoreModal().subscribe(confirmed => {
       if (confirmed) {
         //TODO: Realiza alguna accion al cierre del modal
       }

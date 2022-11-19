@@ -1,0 +1,56 @@
+::ng-deep .see-more-modal {
+
+    mat-card{
+        padding: 0;
+    }
+
+    mat-dialog-container {
+        width: 1033px;
+        max-height: 686px;
+        padding: 10px;
+    }
+
+    mat-card-header{
+        display: block;
+    }
+}
+
+.icon-info-close{
+    justify-content: end;
+    padding-right: 70px;
+    padding-left: 96px;
+    padding-top: 44px;
+}
+
+.icon-info-close div{
+    cursor: pointer;
+}
+
+.see-more-title{
+    padding-left: 96px;
+    padding-right: 96px;
+}
+
+.see-more-title div{
+ margin-left: 26px;
+}
+
+.see-more-title h1{
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 32px;
+}
+
+.see-more-content{
+    margin-top: 30px;
+    padding-left: 96px;
+    padding-right: 96px;
+    padding-bottom: 7px;
+}
+
+.see-more-content p{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #6D7783;
+}

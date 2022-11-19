@@ -85,9 +85,9 @@ export class AreaService {
     );
   }
 
-  getAreaIndividuals(areaId: string): Observable<AreaIndividual> {
-    return this.httpClient.request<AreaIndividual>(
-      'get',
+  getAreaIndividuals(areaId: string): Observable<AreaIndividual[]> {
+    return this.httpClient.request<AreaIndividual[]>(
+      'GET',
       `${this.basePath}/Area/${areaId}/Individual`
     );
   }
@@ -95,8 +95,8 @@ export class AreaService {
   addAreaIndividual(
     areaId: string,
     individualIds: string[]
-  ): Observable<AreaIndividual> {
-    return this.httpClient.request<AreaIndividual>(
+  ): Observable<string> {
+    return this.httpClient.request<string>(
       'POST',
       `${this.basePath}/Area/${areaId}/Individual`,
       {
@@ -108,12 +108,12 @@ export class AreaService {
 
   deleteAreaIndividual(
     areaId: string,
-    areaIndividualId: string
+    individualIds: string[]
   ): Observable<string> {
     return this.httpClient.request<string>(
       'DELETE',
-      `${this.basePath}/Area/${areaId}/Individual/${areaIndividualId}`,
-      { responseType: 'text' as 'json' }
+      `${this.basePath}/Area/${areaId}/Individual`,
+      { responseType: 'text' as 'json', body: individualIds }
     );
   }
 }

@@ -20,6 +20,10 @@ export class AuthenticationService {
     private languageService: LanguageService
   ) {}
 
+  get isUserLoged(): boolean {
+    return this.cookieStorageService.getCookie('JWTToken') !== null;
+  }
+
   logOut(): void {
     this.localStorage.clearAllLocalStorage();
     this.cookieStorageService.deleteCookie('JWTToken');
@@ -34,7 +38,7 @@ export class AuthenticationService {
     }
 
     this.storeService.setData(
-      'userDetails',
+      StoreKeys.USER_DETAILS,
       JSON.stringify(loginResponse.userDetails)
     );
 

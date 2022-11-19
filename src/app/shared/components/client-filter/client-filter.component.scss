@@ -1,0 +1,14 @@
+:host ::ng-deep {
+    .mat-form-field-underline {
+        display: none;
+    }
+
+    .mat-form-field-wrapper {
+        border: 1px solid #DBDBDB;
+        border-radius: 6px;
+        padding-left: 6px;
+        padding-right: 6px;
+        padding-top: 6px;
+        padding-bottom: 0px;
+    }
+}

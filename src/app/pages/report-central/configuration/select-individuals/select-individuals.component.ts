@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StepModel } from '../../../../core/models/step.model';
-import { VwGetAllIndividualWithBehaviouralProfile } from 'src/app/core/services/microservices/individual/individual.interface';
 
 import { StoreService } from '../../../../core/services/store.service';
 import { StoreKeys } from '../../../../core/consts/store-keys.enum';
 import { TypeFilter } from '../../../../shared/components/mat-custom-individuals-table/models/type-filter.interface';
+import { GeneratedReportByIdResponse } from '../../../../core/services/microservices/reports/interfaces/generatedReportsResponse.interface';
 
 @Component({
   selector: 'app-select-individuals',
@@ -22,44 +22,52 @@ export class SelectIndividualsComponent implements OnInit {
   @Input() typeFilterList: TypeFilter[];
   @Input() selectedClientId: string;
   @Input() selectedSubbaseId?: string = undefined;
+  @Input() generatedReportByIdResponse: GeneratedReportByIdResponse;
 
   //Outputs
-  @Output() selectedItem = new EventEmitter<
-    VwGetAllIndividualWithBehaviouralProfile[]
-  >();
+  @Output() selectedItem = new EventEmitter<string[]>();
 
   constructor(private storeService: StoreService) {}
   ngOnInit(): void {
     this.loadIndividualIds();
-    if (this.selectedIndividualIds?.length > 0) {
-      this.step.isComplete = true;
-    } else {
-      this.step.isComplete = false;
-    }
   }
 
   loadIndividualIds(): void {
-    let selectedIndividualdsFound: VwGetAllIndividualWithBehaviouralProfile[] =
-      this.storeService.getData(StoreKeys.SELECTED_INDIVIDUALS);
-
-    this.selectedIndividualIds = selectedIndividualdsFound?.reduce(
-      (
-        acc: string[],
-        currentValue: VwGetAllIndividualWithBehaviouralProfile
-      ) => {
-        acc.push(currentValue.individualId);
-        return acc;
-      },
-      []
+    let selectedIndividualdsFound: string[] = this.storeService.getData(
+      StoreKeys.SELECTED_INDIVIDUALS
     );
+    //Obtengo el individualId del reporte generado
+    if (!selectedIndividualdsFound) {
+      if (this.generatedReportByIdResponse) {
+        if (this.generatedReportByIdResponse.individualId) {
+          selectedIndividualdsFound = [
+            this.generatedReportByIdResponse.individualId,
+          ];
+        } else {
+          selectedIndividualdsFound = [];
+        }
+        this.selectedIndividualIds = selectedIndividualdsFound;
+        this.loadAndSaveIndividual();
+      }
+    } else {
+      this.selectedIndividualIds = selectedIndividualdsFound;
+      this.loadAndSaveIndividual();
+    }
   }
 
-  onIndividualsSelection(
-    event: VwGetAllIndividualWithBehaviouralProfile[]
-  ): void {
-    this.storeService.setData(StoreKeys.SELECTED_INDIVIDUALS, event);
-    this.selectedItem.emit(event);
-    if (event.length > 0) {
+  onIndividualsSelection(selectedIndividualIds: string[]): void {
+    this.selectedIndividualIds = selectedIndividualIds;
+    this.loadAndSaveIndividual();
+  }
+
+  loadAndSaveIndividual(): void {
+    this.storeService.setData(
+      StoreKeys.SELECTED_INDIVIDUALS,
+      this.selectedIndividualIds
+    );
+    this.selectedItem.emit(this.selectedIndividualIds);
+
+    if (this.selectedIndividualIds.length > 0) {
       this.step.isComplete = true;
     } else {
       this.step.isComplete = false;

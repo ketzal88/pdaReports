@@ -1,6 +1,7 @@
 export interface ReportStyles {
   key: string;
   name: string;
-  imageUrl: string;
+  image: string;
+  fullImage: string;
   selected: boolean;
 }

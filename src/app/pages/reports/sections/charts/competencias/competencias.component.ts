@@ -1,18 +1,26 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import {ThemeColors} from '../../../themes/blue';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
+import { ThemeColors } from '../../../themes/blue';
+import tippy, { followCursor } from 'tippy.js';
+import { TippyService } from 'src/app/core/services/tippy.service';
 
 @Component({
-  selector: 'chart-competencias',
+  selector: 'app-chart-competencias',
   templateUrl: './competencias.component.html',
-  styleUrls: ['./competencias.component.scss']
+  styleUrls: ['./competencias.component.scss'],
 })
-export class CompetenciasComponent implements OnInit {
-
-  constructor() { }
+export class CompetenciasComponent implements OnInit, AfterViewInit {
+  constructor(private tippyService: TippyService) {}
   @ViewChild('chartContainer') container!: ElementRef;
   @Input() value: number = 0;
   @Input() color: string = ThemeColors.colorPrimary;
-  @Input() tooltip: string = "";
+  @Input() tooltip: string = '';
   gauge!: anychart.charts.LinearGauge;
 
   ngOnInit(): void {
@@ -26,14 +34,9 @@ export class CompetenciasComponent implements OnInit {
     this.gauge.data(data);
 
     // set the layout
-    this.gauge.layout("horizontal");
-    this.gauge.background("transparent");
-
-    if (this.tooltip && this.tooltip !== ""){
-      this.gauge.tooltip().enabled(true).format(this.tooltip);
-    }
-
-
+    this.gauge.layout('horizontal');
+    this.gauge.background('transparent');
+    this.gauge.tooltip().enabled(false)
     // create a color scale
     let scaleBarColorScale = anychart.scales.ordinalColor().ranges([
       {
@@ -56,7 +59,7 @@ export class CompetenciasComponent implements OnInit {
 
     // use the color scale (defined earlier) as the color scale of the Scale Bar
     scaleBar.colorScale(scaleBarColorScale);
-    
+
     // add a marker pointer
     let marker = this.gauge.marker(0);
 
@@ -70,7 +73,6 @@ export class CompetenciasComponent implements OnInit {
     marker.zIndex(10);
     marker.offset('0%');
 
-    
     // add a marker pointer
     marker = this.gauge.marker(0);
 
@@ -83,14 +85,14 @@ export class CompetenciasComponent implements OnInit {
     // set the zIndex of the marker
     marker.zIndex(10);
     marker.offset('0%');
-    
+
     // add a marker pointer
     marker = this.gauge.marker(0);
 
     // set the marker type and color
     marker.type('circle');
-    marker.color("#F2F3F3");
-    marker.stroke("#00000000")
+    marker.color('#F2F3F3');
+    marker.stroke('#00000000');
     marker.width('100%');
     marker.data([100]);
     // set the zIndex of the marker
@@ -104,8 +106,12 @@ export class CompetenciasComponent implements OnInit {
     this.gauge.padding([0, 40]);
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.gauge.container(this.container.nativeElement);
     this.gauge.draw();
+    this.tippyService.setTooltipOnElement(
+      this.container.nativeElement,
+      this.tooltip
+    );
   }
 }

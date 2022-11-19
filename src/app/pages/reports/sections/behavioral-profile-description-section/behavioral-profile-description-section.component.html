@@ -1,4 +1,8 @@
 <div class="card-behavioral-description">
-    <app-behavioral-description-card [title]="behavioralProfileDescription.title" [description]="description" (showMore)="showMore()">
-    </app-behavioral-description-card>
+  <app-behavioral-description-card
+    [title]="behavioralProfileDescription.title"
+    [introduction]="behavioralProfileDescription.introduction"
+    [description]="description"
+    (showMore)="showMore()">
+  </app-behavioral-description-card>
 </div>

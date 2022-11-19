@@ -14,7 +14,7 @@ export interface PDAIndividualSectionsResponse {
   selfDescription: Introduction;
   radarChart: RadarChart;
   wheelChart: WheelChart;
-  behavioralRadarChart: BehavioralRadarChart;
+  behavioralRadarChart: BehavioralRadarChartIndividual;
   behavioralTrend: BehavioralTrend;
   emotionalIntelligence: EmotionalIntelligence;
   competencyCompatibility: CompetencyCompatibility;
@@ -25,6 +25,15 @@ export interface PDAIndividualSectionsResponse {
   developmentPlan: DevelopmentPlan;
   hrFeedback: HRFeedback;
   audiovisualContent: AudiovisualContent;
+  knowWhatYourKeyCompetenciesAre: KnowWhatYourKeyCompetenciesAre;
+  profileAgainstTheSkillsOfTheFuture: ProfileAgainstTheSkillsOfTheFuture;
+  logosAndCertifications: LogosAndCertifications;
+  doYouKnowWhataBehavioralProfileIs: DoYouKnowWhataBehavioralProfileIs;
+  knowTheTheoryOfWillianMarston: KnowTheTheoryOfWillianMarston;
+  learnMoreAboutYourBehavioralProfile: LearnMoreAboutYourBehavioralProfile;
+  balanceAgeGender: BalanceAgeGender;
+  behavioralProfileInfo: BehavioralProfileInfo;
+  resumeTips: ResumeTips;
 }
 
 export interface AudiovisualContent {
@@ -39,12 +48,15 @@ export interface BehavioralDescriptors {
   firstColumnWords: string[];
   secondColumnWords: string[];
   thirdColumnWords: string[];
+  profileName: string;
+  profileAlternativeFemale: string;
 }
 
 export interface BehavioralProfileChart {
   naturalChartImage: null;
   roleChartImage: null;
   title: string;
+  description: string;
   naturalPBehaviorTitle: string;
   roleBehaviorTitle: string;
   naturalDecisionMakingChartImage: null;
@@ -133,7 +145,7 @@ export interface BehavioralProfileDescription {
   description: string;
 }
 
-export interface BehavioralRadarChart {
+export interface BehavioralRadarChartIndividual {
   title: string;
   image: null;
   withoutLegendsImage: null;
@@ -198,6 +210,7 @@ export interface CoverIndividual {
   email: string;
   assessmentDate: Date;
   birthdayDate: Date;
+  profileNumber: number;
   profile: string;
 }
 
@@ -218,6 +231,7 @@ export interface DevelopmentPlan {
   title: string;
   introduction: string;
   firstContent: string;
+  descriptions: string[];
 }
 
 export interface HRFeedback {
@@ -239,6 +253,7 @@ export interface StrengthsOverused {
 }
 
 export interface EmotionalIntelligence {
+  title: string;
   detail: string;
 }
 
@@ -252,6 +267,7 @@ export interface MultipleJobCompatibility {
   compatibilityPercentage: number;
   image: null;
   individualName: string;
+  individualId: string;
 }
 
 export interface ManagementStyle {
@@ -356,4 +372,69 @@ export interface CorrelationJobBehavioralCompetency {
   description: string;
   natural: number;
   role: number;
+}
+
+export interface KnowWhatYourKeyCompetenciesAre {
+  title: string;
+  description: string;
+}
+
+export interface ProfileAgainstTheSkillsOfTheFuture {
+  title: string;
+  description: string;
+  html: string;
+}
+
+export interface LogosAndCertifications {
+  title?: string;
+  description?: string;
+  logosHtml?: string;
+}
+
+export interface DoYouKnowWhataBehavioralProfileIs {
+  title?: string;
+  description?: string;
+}
+
+export interface KnowTheTheoryOfWillianMarston {
+  title?: string;
+  description?: string;
+  html?: string;
+}
+
+export interface LearnMoreAboutYourBehavioralProfile {
+  title?: string;
+  description?: string;
+  html?: string;
+}
+
+export interface BalanceAgeGender {
+  title?: string;
+  description?: string;
+  between18and30?: AgeGenderRange[];
+  between31and45?: AgeGenderRange[];
+  between46and59?: AgeGenderRange[];
+  moreThan60?: AgeGenderRange[];
+}
+
+export interface AgeGenderRange {
+  genderName?: string;
+  genderCategory?: string;
+  percentage?: number;
+}
+
+export interface BehavioralProfileInfo {
+  title: string;
+  description: string;
+}
+
+export interface ResumeTips {
+  title: string;
+  description: string;
+  tips: Tip[];
+}
+
+export interface Tip {
+  title: string;
+  description: string;
 }

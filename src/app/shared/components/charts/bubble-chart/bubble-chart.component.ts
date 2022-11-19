@@ -7,7 +7,6 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import 'anychart';
 import { REPNA } from 'src/app/core/models/repna.model';
 import { disabledCredits } from '../../../utils/chart.util';
 
@@ -27,8 +26,9 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() naturalREPNA: REPNA;
   @Input() roleREPNA: REPNA;
   @Input() naturalSelected: boolean;
+  @Input() tooltipsRepna: any[];
 
-  chart!: any;
+  chart!: anychart.charts.Cartesian;
   names!: any;
   series!: any;
 
@@ -37,7 +37,6 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     if (changes['naturalSelected'] !== undefined) {
       this.naturalSelected = changes['naturalSelected'].currentValue;
       if (this.chart) {
@@ -51,14 +50,19 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
   ngOnInit(): void {
     // create a chart
     this.chart = anychart.cartesian();
+    this.chart.interactivity(false);
+    this.chart.tooltip(false);
+    
     this.chart.xAxis(0, { ticks: false, labels: false, stroke: '#ffffff00' });
     this.chart.yAxis(0, { ticks: false, labels: false, stroke: '#ffffff00' });
 
+    let natural: anychart.core.cartesian.series.Bubble[] = [];
+    let role: anychart.core.cartesian.series.Bubble[] = [];
     //UNSELECTED CHART
     if (this.naturalSelected) {
-      this.drawNaturalSeries();
+      natural = this.drawNaturalSeries();
     } else {
-      this.drawRoleSeries();
+      role = this.drawRoleSeries();
     }
 
     //SPACER
@@ -69,11 +73,36 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
 
     //SELECTED CHART
     if (!this.naturalSelected) {
-      this.drawNaturalSeries();
+      natural = this.drawNaturalSeries();
     } else {
-      this.drawRoleSeries();
+      role = this.drawRoleSeries();
     }
-
+    let fontSize = '24px';
+    if (window.innerWidth <= 440) {
+      fontSize = '16px';
+    } else if (window.innerWidth <= 1200) {
+      fontSize = '20px';
+    }
+    role.forEach((element: anychart.core.cartesian.series.Bubble) => {
+      element.labels().fontSize(fontSize);
+    });
+    natural.forEach((element: anychart.core.cartesian.series.Bubble) => {
+      element.labels().fontSize(fontSize);
+    });
+    this.chart.listen('chartDraw', function () {
+      fontSize = '24px';
+      if (window.innerWidth <= 440) {
+        fontSize = '16px';
+      } else if (window.innerWidth <= 1200) {
+        fontSize = '20px';
+      }
+      role.forEach((element: anychart.core.cartesian.series.Bubble) => {
+        element.labels().fontSize(fontSize);
+      });
+      natural.forEach((element: anychart.core.cartesian.series.Bubble) => {
+        element.labels().fontSize(fontSize);
+      });
+    });
     this.chart.maxBubbleSize('9%');
   }
 
@@ -83,7 +112,7 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
     disabledCredits(this.chart);
   }
 
-  drawNaturalSeries(): void {
+  drawNaturalSeries(): anychart.core.cartesian.series.Bubble[] {
     const naturalLine0 = [
       { x: 0, value: this.naturalREPNA.rValue },
       { x: 15, value: this.naturalREPNA.eValue },
@@ -134,10 +163,8 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
 
     this.chart
       .line(naturalLine0)
-      .stroke(
-        "#88868b",        
-        this.naturalSelected ? 1 : 0.3
-      );
+      .stroke('#88868b', this.naturalSelected ? 1 : 0.3)
+      .zIndex(this.naturalSelected ? 101 : 0);
 
     let serieNaturalR = this.chart.bubble(naturalR);
     this.setLabelFormatAndBubbleStyle(
@@ -145,7 +172,6 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
       this.colorR,
       this.naturalSelected
     );
-    serieNaturalR.zIndex(100);
 
     let serieNaturalE = this.chart.bubble(naturalE);
     this.setLabelFormatAndBubbleStyle(
@@ -153,7 +179,6 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
       this.colorE,
       this.naturalSelected
     );
-    serieNaturalE.zIndex(100);
 
     let serieNaturalP = this.chart.bubble(naturalP);
     this.setLabelFormatAndBubbleStyle(
@@ -161,7 +186,6 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
       this.colorP,
       this.naturalSelected
     );
-    serieNaturalP.zIndex(100);
 
     let serieNaturalN = this.chart.bubble(naturalN);
     this.setLabelFormatAndBubbleStyle(
@@ -169,7 +193,6 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
       this.colorN,
       this.naturalSelected
     );
-    serieNaturalN.zIndex(100);
 
     let serieNaturalA = this.chart.bubble(naturalA);
     this.setLabelFormatAndBubbleStyle(
@@ -177,14 +200,24 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
       this.colorA,
       this.naturalSelected
     );
-    serieNaturalA.zIndex(100);
+
+    if (this.naturalSelected) {
+      this.setRedBorder(serieNaturalP);
+    }
+    return [
+      serieNaturalR,
+      serieNaturalE,
+      serieNaturalP,
+      serieNaturalN,
+      serieNaturalA,
+    ];
   }
-  drawRoleSeries(): void {
+  drawRoleSeries(): anychart.core.cartesian.series.Bubble[] {
     const roleLine0 = [
-      { x: 0, value: this.roleREPNA.rValue , },
-      { x: 15, value: this.roleREPNA.eValue,  },
-      { x: 30, value: this.roleREPNA.pValue,  },
-      { x: 45, value: this.roleREPNA.nValue,  },
+      { x: 0, value: this.roleREPNA.rValue },
+      { x: 15, value: this.roleREPNA.eValue },
+      { x: 30, value: this.roleREPNA.pValue },
+      { x: 45, value: this.roleREPNA.nValue },
     ];
 
     const roleR = [
@@ -230,13 +263,10 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
 
     this.chart
       .line(roleLine0)
-      .stroke(
-        "#88868b",        
-        this.naturalSelected ? 1 : 0.3
-      );
+      .stroke('#88868b', !this.naturalSelected ? 1 : 0.3)
+      .zIndex(!this.naturalSelected ? 101 : 0);
 
-
-      this.chart.background("#00000000");
+    this.chart.background('#00000000');
 
     let serieRoleR = this.chart.bubble(roleR);
     this.setLabelFormatAndBubbleStyle(
@@ -244,7 +274,6 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
       this.colorR,
       !this.naturalSelected
     );
-    serieRoleR.zIndex(100);
 
     let serieRoleE = this.chart.bubble(roleE);
     this.setLabelFormatAndBubbleStyle(
@@ -252,7 +281,6 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
       this.colorE,
       !this.naturalSelected
     );
-    serieRoleE.zIndex(100);
 
     let serieRoleP = this.chart.bubble(roleP);
     this.setLabelFormatAndBubbleStyle(
@@ -260,15 +288,12 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
       this.colorP,
       !this.naturalSelected
     );
-    serieRoleP.zIndex(100);
-
     let serieRoleN = this.chart.bubble(roleN);
     this.setLabelFormatAndBubbleStyle(
       serieRoleN,
       this.colorN,
       !this.naturalSelected
     );
-    serieRoleN.zIndex(100);
 
     let serieRoleA = this.chart.bubble(roleA);
     this.setLabelFormatAndBubbleStyle(
@@ -276,6 +301,11 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
       this.colorA,
       !this.naturalSelected
     );
+
+    if (!this.naturalSelected) {
+      this.setRedBorder(serieRoleP);
+    }
+    return [serieRoleR, serieRoleE, serieRoleP, serieRoleN, serieRoleA];
   }
   drawResizingSeries(): void {
     /* ESTE DATO NO SE USA, ES SOLO PARA LOGRAR QUE SE MUESTREN LAS BURBUJAS EN 0*/
@@ -304,31 +334,33 @@ export class BubbleChartComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   setLabelFormatAndBubbleStyle(
-    serie: any,
+    serie: anychart.core.cartesian.series.Bubble,
     color: string,
     isEnabled: boolean
   ): void {
     color = isEnabled ? color : this.colorInactive;
     serie.normal().fill(color);
     serie.selected().fill(color);
+    serie.hovered().fill(color);
     serie.normal().stroke(color);
     serie.selected().stroke(color);
-
-    let tooltip = serie.tooltip();
-    tooltip.enabled(true);
-    tooltip.title(false);
-    tooltip.separator(false);
-
-    tooltip.format(function (e: any) {
-      return e.getData('name') + ' : ' + e.getData('value');
-    });
+    serie.hovered().stroke(color);
+    serie.zIndex(isEnabled ? 102 : 101);
+    serie.tooltip(false);
 
     let serieLabel = serie.labels();
-    serieLabel.enabled(isEnabled);
+    serieLabel.enabled(true);
     serieLabel.fontFamily('Poppins');
     serieLabel.format('{%name}');
     serieLabel.fontColor('white');
     serieLabel.fontSize('24px');
     serieLabel.fontWeight(500);
+    // serieLabel.zIndex(isEnabled ? 102 : 101);
+  }
+
+  setRedBorder(bubble: anychart.core.cartesian.series.Bubble) {
+    bubble.normal().stroke('#FF2519', 3);
+    bubble.selected().stroke('#FF2519', 3);
+    bubble.hovered().stroke('#FF2519', 3);
   }
 }

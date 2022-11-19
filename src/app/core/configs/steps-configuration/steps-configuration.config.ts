@@ -10,6 +10,7 @@ import { SELECT_HR_FEEDBACK_STEP } from './select-hr-feedback-step.config';
 const DEVELOPMENT_SURVEY_TYPE_CONFIG: StepConfiguration = {
   groupReport: 'DEVELOPMENT',
   reportType: 'DEVELOPMENT_SURVEY',
+  translationPrefix: 'REPORT_CONFIGURATION',
   steps: [
     SELECT_STYLE_STEP,
     SELECT_INDIVIDUALS_STEP,
@@ -22,6 +23,7 @@ const DEVELOPMENT_SURVEY_TYPE_CONFIG: StepConfiguration = {
 const DEVELOPMENT_REPORT_TYPE_CONFIG: StepConfiguration = {
   groupReport: 'DEVELOPMENT',
   reportType: 'DEVELOPMENT_REPORT',
+  translationPrefix: 'REPORT_CONFIGURATION',
   steps: [
     SELECT_STYLE_STEP,
     SELECT_INDIVIDUALS_STEP,
@@ -34,6 +36,7 @@ const DEVELOPMENT_REPORT_TYPE_CONFIG: StepConfiguration = {
 const DEVELOPMENT_REVIEW_TYPE_CONFIG: StepConfiguration = {
   groupReport: 'DEVELOPMENT',
   reportType: 'DEVELOPMENT_CANDIDATE_REVIEW',
+  translationPrefix: 'REPORT_CONFIGURATION',
   steps: [
     SELECT_STYLE_STEP,
     SELECT_INDIVIDUALS_STEP,
@@ -45,6 +48,7 @@ const DEVELOPMENT_REVIEW_TYPE_CONFIG: StepConfiguration = {
 const HIRING_SURVEY_TYPE_CONFIG: StepConfiguration = {
   groupReport: 'HIRING',
   reportType: 'HIRING_SURVEY',
+  translationPrefix: 'REPORT_CONFIGURATION',
   steps: [
     SELECT_STYLE_STEP,
     SELECT_INDIVIDUALS_STEP,
@@ -58,6 +62,7 @@ const HIRING_SURVEY_TYPE_CONFIG: StepConfiguration = {
 const HIRING_REPORT_TYPE_CONFIG: StepConfiguration = {
   groupReport: 'HIRING',
   reportType: 'HIRING_REPORT',
+  translationPrefix: 'REPORT_CONFIGURATION',
   steps: [
     SELECT_STYLE_STEP,
     SELECT_INDIVIDUALS_STEP,
@@ -71,6 +76,7 @@ const HIRING_REPORT_TYPE_CONFIG: StepConfiguration = {
 const HIRING_CANDIDATE_REVIEW_TYPE_CONFIG: StepConfiguration = {
   groupReport: 'HIRING',
   reportType: 'HIRING_CANDIDATE_REVIEW',
+  translationPrefix: 'REPORT_CONFIGURATION',
   steps: [
     SELECT_STYLE_STEP,
     SELECT_INDIVIDUALS_STEP,

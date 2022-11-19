@@ -19,15 +19,13 @@ import { unsubscribe } from 'src/app/core/utils/subscription.util';
 import { ImageSizingParameters } from '../../../../shared/components/uploaders/image-uploader/image-uploader.interface';
 import { StoreService } from '../../../../core/services/store.service';
 import { StoreKeys } from 'src/app/core/consts/store-keys.enum';
-import { TypeFilterItem } from '../../../../shared/components/mat-custom-individuals-table/models/type-filter-item.interface';
-import { Consistency } from '../../../../core/services/microservices/individual/individual.interface';
 import { TypeFilter } from '../../../../shared/components/mat-custom-individuals-table/models/type-filter.interface';
 import { Loader } from '../../../../core/services/loader/loader';
-import { GenderService } from '../../../../core/services/microservices/individual/gender.service';
-import { GenderResponse } from '../../../../core/services/microservices/individual/gender.interface';
 import { ClientService } from '../../../../core/services/microservices/client/client.service';
 import { environment } from '../../../../../environments/environment';
 import { ClientResponse } from '../../../../core/services/microservices/client/client.interface';
+import { GeneratedReportByIdResponse } from '../../../../core/services/microservices/reports/interfaces/generatedReportsResponse.interface';
+import { IndividualFilterService } from '../../../../core/services/individual/individual-filter.service';
 
 @Component({
   selector: 'app-select-style',
@@ -61,6 +59,7 @@ export class SelectStyleComponent implements OnInit, OnDestroy {
 
   //Inputs
   @Input() step!: StepModel;
+  @Input() generatedReportByIdResponse: GeneratedReportByIdResponse;
 
   //Outputs
   @Output() selectedItem = new EventEmitter<ReportStyles>();
@@ -85,19 +84,22 @@ export class SelectStyleComponent implements OnInit, OnDestroy {
     {
       key: 'pda',
       name: 'Estilo PDA',
-      imageUrl: '/assets/styleImages/Type1.jpg',
+      image: '/assets/styleImages/HIRING-Estilo1-S.png',
+      fullImage: '/assets/styleImages/HIRING-Estilo1-XL.jpg',
       selected: false,
     },
     {
       key: 'pda-night',
       name: 'Estilo Night',
-      imageUrl: '/assets/styleImages/Type2.jpg',
+      image: '/assets/styleImages/HIRING-Estilo2-S.png',
+      fullImage: '/assets/styleImages/HIRING-Estilo2-XL.jpg',
       selected: false,
     },
     {
       key: 'pda-sea',
       name: 'Estilo Sea',
-      imageUrl: '/assets/styleImages/Type3.jpg',
+      image: '/assets/styleImages/HIRING-Estilo3-S.png',
+      fullImage: '/assets/styleImages/HIRING-Estilo3-XL.jpg',
       selected: false,
     },
   ];
@@ -108,8 +110,8 @@ export class SelectStyleComponent implements OnInit, OnDestroy {
     private displayMessageService: DisplayMessageService,
     private languageService: LanguageService,
     private storeService: StoreService,
-    private genderService: GenderService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private individualFilterService: IndividualFilterService
   ) {}
 
   ngOnInit(): void {
@@ -129,7 +131,6 @@ export class SelectStyleComponent implements OnInit, OnDestroy {
           this.languageService.setChangeStateLanguage(StateLanguage.CHANGED);
         }
       });
-    this.loadStateConsistencyFilter();
   }
 
   ngOnDestroy(): void {
@@ -188,7 +189,7 @@ export class SelectStyleComponent implements OnInit, OnDestroy {
     );
     if (foundItem) {
       let parameters = new PopUpMessage(foundItem.name);
-      parameters.imageUrl = foundItem.imageUrl;
+      parameters.imageUrl = foundItem.fullImage;
       parameters.width = '60%';
       this.displayMessageService.openPopUp(parameters);
     }
@@ -225,59 +226,13 @@ export class SelectStyleComponent implements OnInit, OnDestroy {
       this.selectedClientId = client;
       this.getLogoClient();
     });
-    //Cargo filtros por genero
-    this.loadGenderFilter(client);
-    this.typeFiltersEvent.emit(this.typeFilterList);
+    this.individualFilterService.loadGenderFilter(client);
   }
 
   changeSubbase(subbase: string): void {
     this.selectedSubbaseEvent.emit(subbase);
     setTimeout(() => {
       this.selectedSubbaseId = subbase;
-    });
-  }
-
-  loadGenderFilter(clientId: string): void {
-    this.gendersSub = this.gendersLoader
-      .load(this.genderService.getGenders(clientId))
-      .subscribe({
-        next: (data: GenderResponse[]) => {
-          //TODO: Revisar filtro si es necesario
-          let genders = data.filter(gender => {
-            return [0, 1, 2].includes(gender.idGender);
-          });
-
-          const GenderFilters: TypeFilterItem[] = genders.map(
-            (gender: GenderResponse) => ({
-              key: gender.idGender.toString(),
-              name: gender.genderText,
-            })
-          );
-          let idxGender = this.typeFilterList.findIndex(
-            data => data.key === 'Gender'
-          );
-          if (idxGender > -1) {
-            this.typeFilterList[idxGender].data = [...GenderFilters];
-          } else {
-            this.typeFilterList.unshift({
-              key: 'Gender',
-              name: 'Genero',
-              data: GenderFilters,
-            });
-          }
-        },
-        error: err => {},
-      });
-  }
-
-  loadStateConsistencyFilter(): void {
-    const ConsistencyFilters: TypeFilterItem[] = Object.keys(Consistency)
-      .filter(k => typeof Consistency[k] === 'string')
-      .map(filter => ({ key: filter, name: Consistency[filter] }));
-    this.typeFilterList.push({
-      key: 'Consistency',
-      name: 'Estado del assesment',
-      data: ConsistencyFilters,
     });
   }
 }

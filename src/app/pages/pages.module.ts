@@ -6,12 +6,12 @@ import { HeaderModule } from '../shared/header/header.module';
 import { SideBarModule } from '../shared/side-bar/side-bar.module';
 import { StepsService } from '../core/services/steps.service';
 import { ReportsModule } from './reports/reports.module';
-import { JobService } from '../core/services/microservices/job/job.service';
 import { CompetencyService } from '../core/services/microservices/competency/compentecy.service';
 import { GroupingService } from '../core/services/microservices/individual/grouping.service';
 import { AreaService } from '../core/services/microservices/individual/area.service';
-import { GlobalsServiceModule } from '../core/globals/globals-service/globals-service.module';
 import { ClientService } from '../core/services/microservices/client/client.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { SectionsModule } from './reports/sections/sections.module';
 
 @NgModule({
   declarations: [PagesComponent],
@@ -21,7 +21,8 @@ import { ClientService } from '../core/services/microservices/client/client.serv
     HeaderModule,
     SideBarModule,
     ReportsModule,
-    GlobalsServiceModule,
+    TranslateModule,
+    SectionsModule,
   ],
   exports: [],
   providers: [

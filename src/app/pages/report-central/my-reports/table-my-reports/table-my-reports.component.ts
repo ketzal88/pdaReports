@@ -10,13 +10,15 @@ import {
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { StoreService } from '../../../../core/services/store.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { TypeFilterItem } from '../../../../shared/components/mat-custom-individuals-table/models/type-filter-item.interface';
 import { TypeFilter } from '../../../../shared/components/mat-custom-individuals-table/models/type-filter.interface';
-import { SelectItem } from '../../../../shared/components/mat-custom-individuals-table/models/select-item.interface';
 import { TableColumn } from '../../../../shared/components/mat-custom-individuals-table/models/tableColumn.interface';
 import { GeneratedReport } from '../../../../core/services/microservices/reports/interfaces/generatedReportsResponse.interface';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { ReportLinkPipe } from '../../../../shared/pipes/report-link.pipe';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-table-my-reports',
@@ -32,14 +34,20 @@ export class TableMyReportsComponent implements OnInit, AfterViewInit {
   showFilter: boolean = false;
   selectedReport: GeneratedReport[];
 
-  pageCurrent: number = 0;
-
   filtersChips: TypeFilterItem[] = [];
   chipItems: TypeFilterItem[] = [];
 
   typeFilterItemsSelected: TypeFilter[] = [];
 
   selection = new SelectionModel<GeneratedReport>(true, []);
+
+  //Tooltips
+  languageChangeSubscription: Subscription;
+  copyLinkTooltip: string;
+  sendReportTooltip: string;
+  configReportTooltip: string;
+  filterTooltip: string;
+  deleteReportTooltip: string;
 
   //Viewchilds
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -52,7 +60,8 @@ export class TableMyReportsComponent implements OnInit, AfterViewInit {
   @Input() hasSelect: boolean = true;
   @Input() totalSize: number = 0;
   @Input() dataSource: MatTableDataSource<any>;
-  @Input() typeFilterList!: TypeFilter[];
+  @Input() typeFilterList: TypeFilter[];
+  @Input() pageCurrent: number = 0;
 
   @Input() parentType: string = 'Individual';
 
@@ -64,18 +73,25 @@ export class TableMyReportsComponent implements OnInit, AfterViewInit {
   @Output() filters: EventEmitter<TypeFilter[]> = new EventEmitter<
     TypeFilter[]
   >();
-  @Output() selectedChangeLeader: EventEmitter<number> =
-    new EventEmitter<number>();
+
+  @Output() deleteReportEvent: EventEmitter<GeneratedReport> =
+    new EventEmitter<GeneratedReport>();
 
   @Output() sendReportEvent: EventEmitter<boolean> =
     new EventEmitter<boolean>();
+  @Output() editReportSettingEvent: EventEmitter<GeneratedReport> =
+    new EventEmitter<GeneratedReport>();
 
   //Paginator
   pageSizeOptions: number[] = [5, 10, 25, 50];
   pageSize: number = 10;
   //TODO: ESTE PAGESIZE DEBE SER UN INPUT PARA QUE SE PUEDA ELEGIR DESDE EL COMPONENTE EL PAGINADO INCIAL.
 
-  constructor(private storeService: StoreService) {}
+  constructor(
+    private clipboard: Clipboard,
+    private reportLinkPipe: ReportLinkPipe,
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit(): void {
     // Se agrega de forma opcional la columna de checkbox
@@ -92,12 +108,30 @@ export class TableMyReportsComponent implements OnInit, AfterViewInit {
     if (this.hasSelectActions) {
       this.displayedColumns.push('actions');
     }
+
+    this.getTooltipTexts();
+    this.languageChangeSubscription =
+      this.translateService.onLangChange.subscribe(() => {
+        this.getTooltipTexts();
+      });
   }
 
   ngAfterViewInit(): void {
     // Paginacion
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  getTooltipTexts(): void {
+    this.copyLinkTooltip = this.translateService.instant('TOOLTIPS.COPY_LINK');
+    this.sendReportTooltip = this.translateService.instant(
+      'TOOLTIPS.SEND_REPORT'
+    );
+    this.configReportTooltip = this.translateService.instant(
+      'TOOLTIPS.CONFIG_REPORT'
+    );
+    this.deleteReportTooltip = this.translateService.instant('TOOLTIPS.DELETE');
+    this.filterTooltip = this.translateService.instant('TOOLTIPS.FILTER');
   }
 
   onPaginateChange(event: PageEvent): void {
@@ -107,15 +141,6 @@ export class TableMyReportsComponent implements OnInit, AfterViewInit {
 
   onFilterInput(event: string): void {
     this.filterInput.emit(event);
-  }
-
-  getSelectPerson(itemCheck: boolean, idx: number): SelectItem {
-    let selectedCheck: SelectItem = {
-      checked: itemCheck,
-      idx,
-      pageIndex: this.pageCurrent,
-    };
-    return selectedCheck;
   }
 
   isChecked(item: TypeFilterItem): boolean {
@@ -260,13 +285,16 @@ export class TableMyReportsComponent implements OnInit, AfterViewInit {
     this.chipItems = [];
     this.filtersChips = [];
     this.showFilter = !this.showFilter;
+    this.typeFilterItemsSelected = [];
+    this.applyFilter();
   }
 
   sendReportIndividual(element: GeneratedReport): void {
-    this.selectedReport = this.selection.selected.filter(
-      (data: any) => data.individualId === element.individualId
-    );
-
+    //TODO: Descomentar codigo en caso de que no se contemple el dato si no esta chequeado
+    // this.selectedReport = this.selection.selected.filter(
+    //   (data: any) => data.individualId === element.individualId
+    // );
+    this.selectedReport = [element];
     this.sendReport();
   }
 
@@ -282,6 +310,13 @@ export class TableMyReportsComponent implements OnInit, AfterViewInit {
     );
     this.sendReportEvent.emit(true);
   }
+  copyLinkToClipboard(text: any): void {
+    const reportLink = this.reportLinkPipe.transform(text);
+    this.clipboard.copy(reportLink);
+  }
+  editReportSettings(element: GeneratedReport): void {
+    this.editReportSettingEvent.emit(element);
+  }
 
   isAllSelected(): boolean {
     const numSelected = this.selection.selected.length;
@@ -294,4 +329,10 @@ export class TableMyReportsComponent implements OnInit, AfterViewInit {
       ? this.selection.clear()
       : this.dataSource.data.forEach(row => this.selection.select(row));
   }
+
+  deleteTemplate(element: GeneratedReport): void {
+    this.deleteReportEvent.emit(element);
+  }
+
+  //this.displayMessageService.openSnackBar({type});
 }

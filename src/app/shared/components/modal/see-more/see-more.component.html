@@ -1,0 +1,43 @@
+<ng-container *ngIf="!data.html; else htmlContent">
+  <app-card>
+    <card-header>
+      <div class="d-flex icon-info-close">
+        <div (click)="closePopUp()">
+          <app-icon-info-close></app-icon-info-close>
+        </div>
+      </div>
+      <div class="d-flex see-more-title">
+        <div><app-icon-sphere></app-icon-sphere></div>
+        <div>
+          <h1>{{ data.title }}</h1>
+        </div>
+      </div>
+    </card-header>
+    <card-content>
+      <div class="see-more-content">
+        <ng-container
+          *ngIf="data?.description && !isArray; else descriptionArray">
+          <p>{{ data?.description }}</p>
+        </ng-container>
+        <ng-template #descriptionArray>
+          <p *ngFor="let desc of data.description">
+            {{ desc }}
+          </p>
+        </ng-template>
+        <div
+          class="section-item-description-card"
+          *ngFor="let itemCard of data.descriptionCard">
+          <p>{{ itemCard }}</p>
+        </div>
+      </div>
+    </card-content>
+  </app-card>
+</ng-container>
+
+<ng-template #htmlContent>
+  <app-card>
+    <card-content>
+      <div class="see-more-content-html" [innerHtml]="data.html"></div>
+    </card-content>
+  </app-card>
+</ng-template>

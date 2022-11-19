@@ -1,28 +1,23 @@
-<div class="configuration-page-container">
+<div class="configuration-title">
+  <h1>{{ 'REPORT_CONFIGURATION.TITLE' | translate }}</h1>
+  <h3>
+    {{ selectedReport?.reportGroup.name | translate }} |
+    {{ selectedReport?.reportType.name }}
+  </h3>
+  <!-- <h4>{{ 'REPORT_CONFIGURATION.SUBTITLE' | translate }}</h4> -->
+</div>
+<div
+  class="configuration-page-container"
+  *ngIf="!configurationReportLoader?.isLoading()">
   <div>
-    <div class="configuration-title">
-      <h1>{{ 'REPORT_CONFIGURATION' | translate }}</h1>
-      <h3>
-        {{ selectedReport?.reportGroup.name | translate }} |
-        {{ selectedReport?.reportType.name }}
-      </h3>
-    </div>
     <app-step-card
-      [configurationSteps]="selectedStepConfiguration?.steps"></app-step-card>
-    <div>
-      <button
-        class="configuration-continue-btn step-btn"
-        (click)="generateReport()"
-        [disabled]="!isReportGenerate">
-        {{ 'CONFIGURATION.SAVE' | translate }}
-      </button>
-    </div>
+      [stepConfiguration]="selectedStepConfiguration"></app-step-card>
   </div>
   <div class="step-page-container">
     <div class="configuration-step">
       <ng-container
         *ngFor="let step of selectedStepConfiguration?.steps; let idx = index">
-        <ng-container [ngSwitch]="currentStep?.stepIndex - 1">
+        <ng-container [ngSwitch]="currentStep?.stepIndex">
           <ng-container *ngSwitchCase="idx">
             <ng-container
               [ngTemplateOutlet]="
@@ -46,27 +41,74 @@
         </ng-container>
       </ng-container>
     </div>
-    <div *ngIf="currentStep">
-      <button
-        [disabled]="currentStep.stepIndex === 1"
-        (click)="onPrevStep()"
-        class="configuration-continue-btn step-btn">
-        Atras
-      </button>
-      <button
-        (click)="onNextStep()"
-        [disabled]="!currentStep?.isComplete"
-        class="configuration-continue-btn step-btn">
-        {{ showLabelStep }}
-      </button>
+    <div
+      *ngIf="currentStep"
+      class="d-flex justify-content-between"
+      style="margin-top: 20px; margin-bottom: 20px">
+      <div class="d-flex" style="gap: 6px">
+        <button
+          [disabled]="currentStep.stepIndex === 0"
+          (click)="onPrevStep()"
+          class="step-btn">
+          <app-icon-arrow
+            [color]="currentStep.stepIndex > 0 ? '#007EFD' : '#C4C4C4'"
+            [rotate]="'rotate(180)'"></app-icon-arrow>
+          {{ 'CONFIGURATION.BACK' | translate }}
+        </button>
+        <button
+          (click)="onNextStep()"
+          [disabled]="!currentStep?.isComplete || selectedSubbaseId === null"
+          class="step-btn"
+          [ngClass]="{
+            'step-btn--active': !(
+              !currentStep?.isComplete || selectedSubbaseId === null
+            )
+          }">
+          {{ showLabelStep }}
+          <app-icon-arrow
+            [color]="
+              !(!currentStep?.isComplete || selectedSubbaseId === null)
+                ? '#ffffff'
+                : '#D8D8D8'
+            "></app-icon-arrow>
+        </button>
+      </div>
+      <div class="d-flex" style="gap: 6px; margin-right: 44px">
+        <button
+          #tooltip="matTooltip"
+          matTooltip="{{
+            'TOOLTIPS.LABEL_GENERATE_AND_SAVE_REPORT' | translate
+          }}"
+          matTooltipPosition="above"
+          aria-tooltip="Filter"
+          class="step-btn"
+          (click)="generateReport()"
+          *ngIf="!templateConfiguration?.templateCreation"
+          [disabled]="!isReportGenerate">
+          {{
+            !generatedReportByIdResponse ||
+            (myReportSaved?.individualIds &&
+              generatedReportByIdResponse?.individualId !==
+                myReportSaved?.individualIds[0])
+              ? ('CONFIGURATION.SAVE' | translate)
+              : ('CONFIGURATION.UPDATE' | translate)
+          }}
+        </button>
+        <button
+          (click)="saveTemplateButton()"
+          [disabled]="!isReportGenerate"
+          class="step-btn">
+          {{ 'CONFIGURATION.SAVE_TEMPLATE' | translate }}
+        </button>
+      </div>
     </div>
   </div>
 </div>
-
 <!-- ALL Steps Configurations -->
 <ng-template #selectStyle>
   <app-select-style
     [step]="currentStep"
+    [generatedReportByIdResponse]="generatedReport"
     (selectedItem)="saveReportStyle($event)"
     (selectedClientEvent)="changeClient($event)"
     (selectedSubbaseEvent)="changeSubbase($event)"
@@ -75,10 +117,11 @@
 <ng-template #selectIndividuals>
   <app-select-individuals
     [step]="currentStep"
-    [multipleSelection]="saveMultipleIndividualsIds"
+    [multipleSelection]="templateConfiguration?.isTemplate ? true : false"
     [selectedClientId]="selectedClientId"
     [selectedSubbaseId]="selectedSubbaseId"
     [typeFilterList]="typeFilterList"
+    [generatedReportByIdResponse]="generatedReport"
     (selectedItem)="saveReportIndividual($event)"></app-select-individuals>
 </ng-template>
 
@@ -88,6 +131,7 @@
     [selectedClientId]="selectedClientId"
     [selectedSubbaseId]="selectedSubbaseId"
     [typeFilterList]="typeFilterList"
+    [generatedReportByIdResponse]="generatedReport"
     (selectedGroupChange)="saveReportGroup($event)"
     (selectedIndividualsOfGroupChange)="
       saveGroupOfIndividuals($event)
@@ -100,6 +144,7 @@
     [selectedClientId]="selectedClientId"
     [selectedSubbaseId]="selectedSubbaseId"
     [typeFilterList]="typeFilterList"
+    [generatedReportByIdResponse]="generatedReport"
     (selectedAreaChange)="saveReportArea($event)"
     (selectedAreaIndividualsIdsEvent)="saveAreaOfIndividuals($event)"
     (selectedAreaIndividualLeaderIdEvent)="
@@ -112,6 +157,7 @@
     [step]="currentStep"
     [selectedClientId]="selectedClientId"
     [selectedSubbaseId]="selectedSubbaseId"
+    [generatedReportByIdResponse]="generatedReport"
     (selectedJobEvent)="saveReportJob($event)"
     (selectedJobsByCategoryEvent)="saveJobsByCategory($event)"
     (selectedJobCategoryEvent)="saveJobCategory($event)"></app-select-jobs>
@@ -122,11 +168,13 @@
     [step]="currentStep"
     [selectedClientId]="selectedClientId"
     [selectedSubbaseId]="selectedSubbaseId"
+    [generatedReportByIdResponse]="generatedReport"
     (selectedItem)="saveReportCompetencies($event)"></app-select-competencies>
 </ng-template>
 
 <ng-template #selectHrFeedback>
   <app-select-hr-feedback
     [step]="currentStep"
+    [generatedReportByIdResponse]="generatedReport"
     (selectedItem)="saveHrFeedbackText($event)"></app-select-hr-feedback>
 </ng-template>

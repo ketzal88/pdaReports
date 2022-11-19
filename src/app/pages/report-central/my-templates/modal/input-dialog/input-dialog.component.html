@@ -1,0 +1,40 @@
+<div class="d-flex" style="justify-content: space-between">
+  <div>
+    <h1 mat-dialog-title>
+      {{ title }}
+    </h1>
+  </div>
+  <div (click)="onClose()" style="cursor: pointer">
+    <app-icon-close></app-icon-close>
+  </div>
+</div>
+
+<div mat-dialog-content class="center">
+  <div class="container">
+    <p>{{ message }}</p>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      type="text"
+      class="inp"
+      appearance="outline"
+      aria-describedby="templateName-text"
+      [(ngModel)]="inputText"
+      placeholder="Ingrese un nombre"
+      autofocus />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions style="justify-content: center">
+  <button
+    mat-raised-button
+    [disabled]="inputText.length < 2"
+    (click)="onCommand()">
+    {{ 'MODAL.ACTION.ACCEPT' | translate }}
+  </button>
+  <button mat-raised-button (click)="onClose()">
+    {{ 'MODAL.ACTION.CANCEL' | translate }}
+  </button>
+</div>

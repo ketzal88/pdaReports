@@ -1,0 +1,118 @@
+<app-card>
+  <card-content>
+    <div class="center" style="margin-bottom: 50px">
+      <div *ngIf="anyError">
+        <app-icon-error></app-icon-error>
+        <h2 style="margin-top: 10px; margin-left: 20px">
+          {{ 'MULTIPLE_REPORT.LABEL.ERROR' | translate }}
+        </h2>
+      </div>
+      <div *ngIf="!anyError">
+        <app-icon-success></app-icon-success>
+        <h2 style="margin-top: 10px; margin-left: 20px">
+          {{ 'MULTIPLE_REPORT.LABEL.SUCCESS' | translate }}
+        </h2>
+      </div>
+    </div>
+    <!--PASAR ESTO A UNA TABLA-->
+    <div class="center">
+      <table
+        style="width: 100%"
+        mat-table
+        [dataSource]="multipleReportGeneratedResponse"
+        class="mat-elevation-z8">
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <app-icon-error *ngIf="!element.ok"></app-icon-error>
+            <app-icon-success *ngIf="element.ok"></app-icon-success>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="individualName">
+          <th mat-header-cell *matHeaderCellDef>Individual Name</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.individualName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="result">
+          <th mat-header-cell *matHeaderCellDef>Result</th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.ok">
+              <div style="align-self: center">
+                <a
+                  target="_blank"
+                  href="{{ element.reportGeneratedId | reportLink }}"
+                  >{{ 'MULTIPLE_REPORT.ACTIONS.SEE_REPORT' | translate }}</a
+                >
+              </div>
+              <button
+                style="align-self: center"
+                mat-icon-button
+                (click)="copyLinkToClipboard(element.reportGeneratedId)"
+                matTooltip="{{
+                  'MULTIPLE_REPORT.TOOLTIP.COPY_LINK' | translate
+                }}"
+                matTooltipPosition="below">
+                <app-icon-copy-clipboard></app-icon-copy-clipboard>
+              </button>
+            </div>
+            <div *ngIf="!element.ok">
+              <div style="align-self: center">
+                {{ element.errorMessage }}
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <!--
+      <div
+        *ngFor="let response of multipleReportGeneratedResponse"
+        style="display: flex; justify-content: space-between; margin-top: 15px">
+        <div style="display: flex; align-items: center">
+          <app-icon-error *ngIf="!response.ok"></app-icon-error>
+          <app-icon-success *ngIf="response.ok"></app-icon-success>
+          <div>
+            <p>{{ response.individualName }}</p>
+          </div>
+        </div>
+        <div *ngIf="response.ok">
+          <div style="align-self: center">
+            <a
+              target="_blank"
+              href="{{ response.reportGeneratedId | reportLink }}"
+              >{{ 'MULTIPLE_REPORT.ACTIONS.SEE_REPORT' | translate }}</a
+            >
+          </div>
+          <button
+            style="align-self: center"
+            mat-icon-button
+            (click)="copyLinkToClipboard(response.reportGeneratedId)"
+            matTooltip="{{ 'MULTIPLE_REPORT.TOOLTIP.COPY_LINK' | translate }}"
+            matTooltipPosition="below">
+            <app-icon-copy-clipboard></app-icon-copy-clipboard>
+          </button>
+        </div>
+        <div *ngIf="!response.ok">
+          <div style="align-self: center">
+            {{ response.errorMessage }}
+          </div>
+        </div>
+      </div>-->
+    </div>
+  </card-content>
+  <card-actions>
+    <div class="center">
+      <button
+        class="btn-response"
+        [ngClass]="anyError ? 'btn-error' : 'btn-success'"
+        (click)="confirm()">
+        {{ 'MODAL.ACTION.ACCEPT' | translate }}
+      </button>
+    </div>
+  </card-actions>
+</app-card>

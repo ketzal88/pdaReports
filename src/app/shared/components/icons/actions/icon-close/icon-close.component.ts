@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-icon-close',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./icon-close.component.scss'],
 })
 export class IconCloseComponent implements OnInit {
+  @Input() color = '#87858A';
   constructor() {}
 
   ngOnInit(): void {}

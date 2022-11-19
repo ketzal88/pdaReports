@@ -29,16 +29,21 @@ export class TokenValidationInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    let loginUrlIndex = req.url.toUpperCase().indexOf('LOGIN');
+    const anonnymusLink =
+      req.url.toUpperCase().indexOf('LOGIN') !== -1 ||
+      req.url.toUpperCase().indexOf('FORGOTPASSWORD') !== -1 ||
+      req.url.toUpperCase().indexOf('RECOVERYPASSWORD') !== -1;
+
+    //let loginUrlIndex = req.url.toUpperCase().indexOf('LOGIN');
     let token = this.cookieStorageService.getCookie('JWTToken');
 
-    if (!token && loginUrlIndex === -1) {
+    if (!token && !anonnymusLink) {
       this.unauthorizedExpiredToken('token not found/expired');
       return throwError(() => new Error('token not found/expired'));
     }
 
     //TODO: Analizar - Nunca entra porque si se expira, desaparece la cookie directamente
-    if (token && tokenExpired(token) && loginUrlIndex === -1) {
+    if (token && tokenExpired(token) && !anonnymusLink) {
       this.unauthorizedExpiredToken('token is expired');
       return throwError(() => new Error('token is expired'));
     }
@@ -50,8 +55,9 @@ export class TokenValidationInterceptor implements HttpInterceptor {
             if (err instanceof HttpErrorResponse) {
               const errResp = <HttpErrorResponse>err;
               if (
-                (errResp.status === 401 || errResp.status === 403) &&
-                loginUrlIndex === -1
+                //(errResp.status === 403 || ) --Otros servicios devuelven 403
+                errResp.status === 401 &&
+                !anonnymusLink
               ) {
                 this.unauthorizedExpiredToken('token is invalid');
               }

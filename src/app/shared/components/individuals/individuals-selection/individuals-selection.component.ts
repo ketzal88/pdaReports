@@ -7,6 +7,8 @@ import {
   ChangeDetectorRef,
   Output,
   EventEmitter,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -33,7 +35,9 @@ import { StoreKeys } from '../../../../core/consts/store-keys.enum';
   templateUrl: './individuals-selection.component.html',
   styleUrls: ['./individuals-selection.component.scss'],
 })
-export class IndividualsSelectionComponent implements OnInit, OnDestroy {
+export class IndividualsSelectionComponent
+  implements OnInit, OnDestroy, OnChanges
+{
   //Inputs
   @Input() multipleSelection: boolean = false;
   @Input() maxMultipleSelection: number;
@@ -48,12 +52,17 @@ export class IndividualsSelectionComponent implements OnInit, OnDestroy {
   @Input() hasSelectLeader?: boolean = false;
   @Input() hasSelect: boolean = true;
   @Input() groupingAction: string;
-  preselectedIds: string[];
+  @Input() preselectedIds: string[];
+  @Input() typeFilterList: TypeFilter[];
+
+  //TODO: Borrar esta variable cuando este definido la funcionalidad de alta, editar y seleccion de Area/grupo
+  @Input() disableGrouping: boolean;
+
+  @Input() pageSize: number = 10;
+  typeFilterItemsSelected: TypeFilter[] = [];
 
   //Outputs
-  @Output() selectedIndividualsEvent = new EventEmitter<
-    VwGetAllIndividualWithBehaviouralProfile[] | null
-  >();
+  @Output() selectedIndividualsEvent = new EventEmitter<string[] | null>();
 
   @Output() selectedLeaderIdEvent = new EventEmitter<string | null>();
 
@@ -75,13 +84,9 @@ export class IndividualsSelectionComponent implements OnInit, OnDestroy {
     { columnDef: 'date', header: 'Date', columnType: 'date' },
   ];
 
-  @Input() typeFilterList: TypeFilter[];
-  typeFilterItemsSelected: TypeFilter[] = [];
-
   //Pagination
   pageSizeOptions = [5, 10, 25, 50];
   totalSize: number = 0;
-  @Input() pageSize: number = 10;
   pageNumber: number = 1;
 
   filterText: string = '';
@@ -97,6 +102,7 @@ export class IndividualsSelectionComponent implements OnInit, OnDestroy {
 
   //Loader
   gendersLoader: Loader;
+  getAllIndividualsWithBehavioralProfileLoader: Loader;
 
   dataSource: MatTableDataSource<VwGetAllIndividualWithBehaviouralProfile> =
     new MatTableDataSource<VwGetAllIndividualWithBehaviouralProfile>([]);
@@ -117,11 +123,42 @@ export class IndividualsSelectionComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.gendersLoader = new Loader();
-    this.preselectedIds = [];
+    this.getAllIndividualsWithBehavioralProfileLoader = new Loader();
     this.listenLanguageChangeEvent();
     this.pageNumber = 1;
     this.requestAndFillTable();
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    //TODO: Borrar este codigo con la validacion hasta que este definido la funcionalidad
+    //de alta, editar y seleccion de Area/Grupo
+    if (this.disableGrouping) {
+      if (
+        changes['selectedAreaId'] &&
+        changes['selectedAreaId'].previousValue !== undefined
+      ) {
+        if (
+          changes['selectedAreaId'].currentValue !==
+          changes['selectedAreaId'].previousValue
+        ) {
+          this.requestAndFillTable();
+        }
+      }
+
+      if (
+        changes['selectedGroupingId'] &&
+        changes['selectedGroupingId'].previousValue !== undefined
+      ) {
+        if (
+          changes['selectedGroupingId'].currentValue !==
+          changes['selectedGroupingId'].previousValue
+        ) {
+          this.requestAndFillTable();
+        }
+      }
+    }
+  }
+
   ngOnDestroy(): void {
     unsubscribe(this.individualDataSub);
     unsubscribe(this.languageServiceSub);
@@ -135,9 +172,16 @@ export class IndividualsSelectionComponent implements OnInit, OnDestroy {
       .subscribe(stateLanguage => {
         this.stateLanguage = stateLanguage;
         if (this.stateLanguage === StateLanguage.CHANGING) {
-          this.pageNumber = 1;
           this.requestAndFillTable();
         }
+      });
+  }
+
+  listenAreaChangeEvent(): void {
+    this.languageServiceSub = this.languageService
+      .getCurrentStateLanguage()
+      .subscribe((areaId: string) => {
+        this.requestAndFillTable();
       });
   }
 
@@ -152,8 +196,12 @@ export class IndividualsSelectionComponent implements OnInit, OnDestroy {
     }
 
     this.nothingFound = false;
-    this.individualDataSub = this.individualService
-      .getAllIndividualsWithBehavioralProfile(this.getRequestAllIndividuals())
+    this.individualDataSub = this.getAllIndividualsWithBehavioralProfileLoader
+      .load(
+        this.individualService.getAllIndividualsWithBehavioralProfile(
+          this.getRequestAllIndividuals()
+        )
+      )
       .subscribe(
         (res: GetAllIndividualWithBehaviouralProfileResponse) => {
           if (!res) {
@@ -233,9 +281,9 @@ export class IndividualsSelectionComponent implements OnInit, OnDestroy {
       (this.selectedGroupingId || this.selectedAreaId) &&
       this.groupingAction === GroupingActions.VIEW
     ) {
-      this.preselectedIds = data.map(data => {
-        return data.individualId;
-      });
+      // this.preselectedIds = data.map(data => {
+      //   return data.individualId;
+      // });
       this.storeService.setData(StoreKeys.PRESELECTED_IDS, this.preselectedIds);
     } else {
       this.preselectedIds =
@@ -250,33 +298,37 @@ export class IndividualsSelectionComponent implements OnInit, OnDestroy {
   }
 
   onSelectedIndividualsChange(selected: string[]): void {
-    if (!this.multipleSelection) {
+    this.selectedIndividualIds = selected;
+    if (this.multipleSelection === false) {
       let selectedIndividual = this.dataSource.filteredData.find(data => {
         return data.individualId === selected[0];
       });
       if (selectedIndividual) {
-        this.selectedIndividualsEvent.emit([selectedIndividual]);
+        this.selectedIndividualsEvent.emit([selectedIndividual.individualId]);
       } else {
         this.selectedIndividualsEvent.emit([]);
       }
     } else {
-      let selectedIndividuals: VwGetAllIndividualWithBehaviouralProfile[] = [];
-      selected.forEach(selectedIndividualId => {
-        let selectedIndividual = this.dataSource.filteredData.find(
-          (data, index) => {
-            return data.individualId === selectedIndividualId;
-          }
-        );
-        if (selectedIndividual) {
-          selectedIndividuals.push(selectedIndividual);
-        }
-      });
+      this.selectedIndividualsEvent.emit(selected);
+      // let selectedIndividuals: VwGetAllIndividualWithBehaviouralProfile[] = [];
+      // selected.forEach(selectedIndividualId => {
+      //   let selectedIndividual = this.dataSource.filteredData.find(
+      //     (data, index) => {
+      //       return data.individualId === selectedIndividualId;
+      //     }
+      //   );
+      //   if (selectedIndividual) {
+      //     selectedIndividuals.push(selectedIndividual);
+      //   }
+      // });
 
-      if (selectedIndividuals.length > 0) {
-        this.selectedIndividualsEvent.emit(selectedIndividuals);
-      } else {
-        this.selectedIndividualsEvent.emit([]);
-      }
+      // if (selectedIndividuals.length > 0) {
+      //   this.selectedIndividualsEvent.emit(
+      //     selectedIndividuals.map(data => data.individualId)
+      //   );
+      // } else {
+      //   this.selectedIndividualsEvent.emit([]);
+      // }
     }
   }
 

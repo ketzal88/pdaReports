@@ -1,0 +1,8 @@
+:host ::ng-deep .how-to-lead .behavioral-description-card {
+  margin-bottom: 0px !important;
+
+  @media (max-width: 1200px) {
+    margin-bottom: 0px !important;
+    height: 200px;    
+  }
+}

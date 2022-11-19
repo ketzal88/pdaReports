@@ -1,0 +1,261 @@
+.tipo-deperfil {
+  padding-top: 20px;
+  display: flex;
+  width: 100%;
+}
+
+.text-dark-gray {
+  color: #727276;
+}
+
+.perfil {
+  font-size: 28px;
+  font-weight: bold;
+  color: #007efd;
+}
+
+.example-h2 {
+  font-size: 15px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 0px;
+}
+
+.example-margin {
+  margin: 8px 0px;
+}
+
+.competencies-description {
+  margin-top: 16px;
+  margin-bottom: 30px;
+}
+
+.competency {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.competency-graph {
+  margin-left: -31.5px;
+  filter: drop-shadow(0px 4px 2px #c3c4ca);
+  flex-grow: 1;
+}
+
+.competency-percentage {
+  flex-shrink: 1;
+}
+
+.block-section {
+  flex-direction: column;
+  gap: 0px;
+}
+
+.competency-bar {
+  display: flex;
+  align-items: center;
+}
+
+.competency-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 275px;
+}
+
+.tipo-deperfil.competency-row {
+  gap: 134px;
+}
+
+.h5 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.card-slider-controller {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.card-slider {
+  grid-column: 2;
+  grid-row: 1;
+  transition-property: transform;
+  transition-duration: 1s;
+}
+
+.slider-controller {
+  flex-wrap: nowrap;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  padding: 0px;
+  width: 100%;
+  overflow: hidden;
+  max-width: 95vw;
+}
+
+.dots-container.mobile:not(.forceSmall),
+.slider-controller.mobile:not(.forceSmall) {
+  display: none;
+}
+
+.dots-container.desktop.forceSmall,
+.slider-controller.desktop.forceSmall {
+  display: none;
+}
+
+.slider {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px;
+  flex: 33.3333%;
+  flex-shrink: 0;
+  transition-property: transform;
+  transition-duration: 1s;
+  max-width: 95vw;
+}
+
+.slider-controller.mobile .competency {
+  flex: 100%;
+  flex-grow: 0;
+}
+
+.slider-controller.desktop .competency {
+  flex: 50%;
+  flex-grow: 0;
+}
+
+.slider-controller.desktop .competency:nth-child(odd) {
+  padding-right: 20px;
+}
+
+.slider-controller.desktop .competency:nth-child(even) {
+  padding-left: 20px;
+}
+
+.card-container {
+  background: #ffffff;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.12);
+  border-radius: 24px;
+  padding: 28px;
+}
+///Transitions
+.to-big {
+  transform: translateX(0%) scale(125%);
+  z-index: 3;
+}
+.to-small-left {
+  transform: translateX(-100%);
+  transition-property: transform;
+  z-index: 2;
+}
+.to-small-right {
+  transform: translateX(100%);
+  transition-property: transform;
+  z-index: 2;
+}
+.stay-left {
+  transform: translateX(-100%);
+  z-index: -2;
+}
+.stay-right {
+  transform: translateX(100%);
+  z-index: -2;
+}
+
+@media (max-width: 1440px) {
+  .tipo-deperfil.competency-row {
+    gap: 0px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .dots-container.desktop,
+  .slider-controller.desktop {
+    display: none;
+  }
+  .dots-container.mobile,
+  .slider-controller.mobile {
+    display: flex;
+  }
+  .tipo-deperfil.competency-row {
+    gap: 0px;
+  }
+  .competency-row {
+    gap: 0px;
+    justify-content: start;
+  }
+  .block-section {
+    width: 100%;
+  }
+  .d-md-none {
+    display: none;
+  }
+  .tipo-deperfil.competency-row {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 980px) {
+  .slider {
+    padding: 5px 25px;
+  }
+}
+
+@media (max-width: 440px) {
+  .competency {
+    margin-bottom: 20px;
+  }
+  .h4 {
+    margin-top: 0px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+  }
+  .h4.competency-title {
+    margin-top: 15px;
+  }
+  .h5 {
+    max-width: 85vw;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 24px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .competencies-description {
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0px;
+  }
+  .tipo-deperfil.competency-row {
+    overflow: hidden;
+  }
+  .competency-percentage {
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 24px;
+  }
+  .competency-bar {
+    margin-top: 6px;
+  }
+  .dots-container {
+    margin-top: 0px;
+    margin-bottom: 30px;
+  }
+}

@@ -1,15 +1,63 @@
-<div class="grafico-compatibility">
+<ng-container
+  *ngIf="jobCompatibility?.jobCompatibilityDetailed; else emptyState">
+  <div class="grafico-compatibility">
     <div class="">
-        <chart-compatibilidad-puesto [value]="jobCompatibility.jobCompatibilityDetailed?.compatibility"></chart-compatibilidad-puesto>
+      <app-chart-compatibilidad-puesto
+        [value]="
+          jobCompatibility.jobCompatibilityDetailed?.compatibility
+        "></app-chart-compatibilidad-puesto>
+      <!-- <app-solid-gauge
+      [value]="jobCompatibility.jobCompatibilityDetailed?.compatibility">
+    </app-solid-gauge> -->
     </div>
-</div>
-<div class="puestos-compatibles">
-    <select class="selector" name="select" [ngModel]="jobSelected" (ngModelChange)="onChangeJob($event)">
-    <option *ngFor="let job of jobs" [ngValue]="job">
-      {{ formatText(job.name) }}
-    </option>
-  </select>
-</div>
-<p class="descripcion">
-    {{ jobCompatibility.jobCompatibilityDetailed?.compatibilityDescription }}
-</p>
+  </div>
+  <div class="puestos-compatibles">
+    <select
+      class="selector"
+      name="select"
+      [ngModel]="jobSelected"
+      (ngModelChange)="onChangeJob($event)">
+      <option *ngFor="let job of jobs" [ngValue]="job">
+        {{ getDottedFirstCharacters(job.name, 38) }}
+      </option>
+    </select>
+  </div>
+  <p class="descripcion">
+    {{
+      getDottedFirstCharacters(
+        jobCompatibility.jobCompatibilityDetailed?.compatibilityDescription,
+        300
+      )
+    }}
+  </p>
+</ng-container>
+<ng-template #emptyState>
+  <div
+    style="
+      padding: 20px 0;
+      border: solid 1px #9999990a;
+      border-radius: 15px;
+      box-shadow: 2px 2px 20px 1px rgb(0 0 0 / 10%);
+      background-color: #ffffff;
+      margin-top: 30px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      margin: 60px 0px;
+      justify-content: space-evenly;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    ">
+    <h4 class="h4">
+      {{ 'REPORTS.SECTIONS.JOB_COMPATIBILITY_SECTION.TITLE' | translate }}
+    </h4>
+    <div class="detalles">
+      <div class="text-empty-state">
+        <p class="body-2 text-left">
+          {{ 'REPORTS.MISCELLANY' | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-template>

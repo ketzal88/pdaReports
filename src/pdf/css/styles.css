@@ -1,0 +1,111 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.header {
+    margin-left: 60px;
+    margin-right: 60px;
+    margin-top: 27px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header .pda {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+}
+
+.footer {
+    margin-right: 60px;
+    margin-bottom: 19px;
+    display: flex;
+}
+
+.footer .page {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Balance de edad y genero */
+.gender-bar {
+    width: 10px;
+    border-radius: 10px;
+}
+
+/* Tendencia comportamental de equipo de trabajo*/
+
+.behavioral-bar__content {
+    height: 30px;
+    position: relative;
+}
+
+.behavioral-bar__content__back {
+    height: 15px;
+    width: 600px;
+    border-radius: 100px;
+    background: #FF6819;    ;
+}
+
+.behavioral-bar__content__back--abs{
+    position: absolute; 
+    top: 0; 
+    background: transparent
+}
+
+.behavioral-bar__percentage{
+    justify-content: space-between
+}
+
+.behavioral-bar__percentage__item{
+    font-style: italic;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.behavioral-bar__content__back__person{
+    width: 15px;
+    height: 15px;
+    background: #ffffff;
+    border-radius: 13px;
+    left: 100%;
+    position: relative;
+}
+
+.behavioral-bar__content__back__person--active{
+    background: #007EFD;
+    border: 2px solid #ffffff;
+}
+
+.behavioral-bar__content__back__name{
+    left: 100%;
+    position: relative;
+}
+
+.behavioral-bar__content__back__name span{
+    font-weight: 500; 
+    font-size: 16px; 
+    line-height: 24px
+}

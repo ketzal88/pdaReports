@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DirectivesModule } from '../../../core/directives/directives.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [InputComponent],
@@ -15,6 +16,7 @@ import { DirectivesModule } from '../../../core/directives/directives.module';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTooltipModule,
   ],
   exports: [InputComponent],
 })

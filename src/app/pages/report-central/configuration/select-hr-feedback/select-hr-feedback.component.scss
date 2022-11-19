@@ -1,0 +1,52 @@
+:host ::ng-deep {
+    .mat-form-field-underline {
+        display: none;
+    }
+
+    .mat-form-field-infix {
+        border: 1px solid #DBDBDB;
+        border-radius: 6px;
+        /* padding-left: 20px; */
+        /* padding-top: 15px; */
+        padding: 15px 20px;
+        width: 676px;
+        height: 292px;
+    }
+}
+
+.select-hr-feedback__title {
+    font-weight: 400;
+    font-size: 14px;
+    color: #727276;
+    margin-bottom: 20px;
+}
+
+
+.select-hr-feedback__input{
+    color: #727276;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 24px;
+}
+
+.select-hr-feedback__input::-webkit-input-placeholder {
+    font-weight: 400;
+    color: #C4C4C4;
+}
+
+.select-hr-feedback__input:-moz-placeholder {
+    /* Firefox 18- */
+    font-weight: 400;
+    color: #C4C4C4;
+}
+
+.select-hr-feedback__input::-moz-placeholder {
+    /* Firefox 19+ */
+    font-weight: 400;
+    color: #C4C4C4;
+}
+
+.select-hr-feedback__input:-ms-input-placeholder {
+    font-weight: 400;
+    color: #C4C4C4;
+}

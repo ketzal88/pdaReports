@@ -56,7 +56,25 @@ export const DEVELOPMENT_CANDIDATE_REVIEW: ConfigurationTypesReports = {
         },
         {
           column: 2,
-          items: ['strengthsOverusedSection', 'processFeedback'],
+          items: ['strengthsOverusedSection', 'hrFeedback'],
+        },
+      ],
+    },
+    {
+      block: 6,
+      sections: [
+        {
+          column: 1,
+          items: ['certifications'],
+        },
+      ],
+    },
+    {
+      block: 7,
+      sections: [
+        {
+          column: 1,
+          items: ['shareYourProfileInTheRRSS'],
         },
       ],
     },

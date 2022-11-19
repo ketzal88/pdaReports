@@ -1,19 +1,27 @@
 {
-    "TITLE_PDA_CONFIGURATION": "Configuration",
+    "HEADER": {
+        "TITLE_PDA": "PDA",
+        "TITLE_PDA_CONFIGURATION": "Configuración"
+    },
     "VERSION": "Version",
     "REPORTING_CENTER": {
         "TITLE":"Reporting center",
+        "TITLE_ANALYTICS":"Gráfica analitica",
         "DEFAULTS": {
             "TITLE":"Defaults"
         },
         "MY_REPORTS": {
             "TITLE": "My reports"
-        }
+        },
+        "MY_TEMPLATES":{
+            "TITLE": "My templates"
+        },
+        "ERROR_TYPES_REPORTS": "Error al obtener servicio de reports y tipos de reportes"
     },
+    "NOT_FOUND_FILTER_TEXT" : "There was no result for: ",
     "REDIRECT_PDA_PLATFORM": "PDA Platform",
     "CHANGE_LANGUAGE": "Change language",
     "LANGUAGE": "English",
-    "REPORT_CONFIGURATION": "Report configuration",
     "HIRING": "Hiring",
     "DEVELOPMENT": "Development",
     "SALES": "Sales",
@@ -47,6 +55,11 @@
     },
     "TYPE_PROFILE": "Profile",
     "UPLOADER":{
+        "LABEL":{
+            "UPLOAD_IMAGE": "Cargar imagen",
+            "DRAG_AND_DROG_HERE": "Arrastre y suelte aquí",
+            "PREVIEW": "Previsualización"
+        },
         "UPLOADING_STATUS": "Uploading",
         "FAILED_STATUS": "Failed",
         "SUCCESSFUL_STATUS": "Successful",
@@ -64,7 +77,8 @@
         "SUBTITLE": "From here you can share the link of the Behavioral Profile Reports directly by email to Whatsapp",
         "LABEL_EMAIL": "Enter your email",
         "LABEL_NUMBER": "Enter your number",
-        "SEND": "Send"
+        "SEND": "Send",
+        "LABEL_SELECTED_EMAIL_CHECK": "Sí"
     },
     "GROUPING_COMPONENT": {
         "EDIT":"Edit",
@@ -76,48 +90,336 @@
             "NEW": "New group",
             "TYPE":"Group",
             "SUBTITLE": "Existent Group",
-            "INPUT_PLACEHOLDER":"Ingrese nombre de nuevo grupo"
+            "INPUT_PLACEHOLDER":"Ingrese nombre de nuevo grupo",
+            "ERROR": {
+                "ERROR_ADD_GROUP_INDIVIDUAL": "Error al actualizar los nuevos individuos del area",
+                "ERROR_DELETE_GROUP_INDIVIDUAL": "Error al eliminar los individuos existentes del area"
+            }
         },
         "AREA":{
             "NEW": "New area",
             "TYPE":"Area",
             "SUBTITLE": "Existent Area",
-            "INPUT_PLACEHOLDER":"Ingrese nombre de nueva area"
-        }
-    },
-    "CONFIRM_DIALOG": {
-        "DELETE": {
-            "TITLE": "Eliminar {{TYPE}}",
-            "MESSAGE": "¿Estas seguro de eliminar el {{TYPE}} {{ENTITY_NAME}}?"
+            "INPUT_PLACEHOLDER":"Ingrese nombre de nueva area",
+            "ERROR": {
+                "ERROR_ADD_AREA_INDIVIDUAL": "Error al actualizar los nuevos individuos del area",
+                "ERROR_DELETE_AREA_INDIVIDUAL": "Error al eliminar los individuos existentes del area"
+            }
         }
     },
     "MY_REPORTS": {
+        "NOT_FOUND_ANY_REPORT_TEXT" : "Not found any report",
+        "INTRODUCTION" :"Here you will find... encontrarás todos los reportes en formato web que hayas generado.",
+        "FILTER_TAG": "Filter",
         "REPORT_TYPE_FILTER": "Tipo de reporte",
-        "HIRING_REPORT_FILTER": "Hiring/Informe",
-        "DEVELOP_REPORT_FILTER": "Desarrollo/Informe",
-        "HIRING_REVIEW_FILTER": "Hiring/Reseña",
-        "HIRING_SURVEY_FILTER": "Hiring/Relevamiento"
+        "FILTER_ACTIONS": {
+            "RESET": "Reset",
+            "FILTER": "Filter"
+        },
+        "SEND": {
+            "WARNING": "Uno o más reportes no se han podido enviar correctamente",
+            "SUCCESS": "Los reportes se han enviado con exito"
+        },
+        "TABLE":{
+            "COLUMN":{
+                 "FIRSTNAME": "Nombre",
+                 "LASTNAME": "Apellido",
+                 "EMAIL": "Email",
+                 "REPORT": "Reporte",
+                 "LINK": "Link",
+                 "DATE": "Fecha",
+                 "ACTIONS": "Acciones"
+            } 
+         }
+    },
+    "MY_TEMPLATES": {
+        "NOT_FOUND_ANY_TEMPLATE_TEXT" : "Not found any template.",
+        "INTRODUCTION" :"Here you will find... TEMPLATES",
+        "LABEL":{
+            "BTN_NEW_TEMPLATE": "Nuevo template",
+            "BTN_RESET": "Reset",
+            "BTN_FILTER": "Filtrar"
+        },
+        "TABLE":{
+            "COLUMN":{
+                "NAME": "Name",
+                "REPORT": "Report",
+                "DATE": "Date",
+                "ACTIONS": "Acciones"
+            },
+            "ACTIONS":{
+                "RENAME":"Renombrar",
+                "DUPLICATE": "Duplicar"
+            }
+        }
     },
     "CLIENT_FILTER": {
         "BASE": "Base",
-        "SUBBASE": "Subbase"
-    },
-    "SELECT_GROUP":{
-        "NAME": "Grupo"
+        "SUBBASE": "Subbase",
+        "AREA":"Departamento"
     },
     "LOGIN": {
         "NAME": "Login",
         "AUTOMATIC_NAME": "Login automático",
         "USERNAME_PLACEHOLDER": "Nombre de usuario",
         "PASSWORD_PLACEHOLDER": "Password",
-        "ACCEPT_BTN": "Aceptar"
+        "ACCEPT_BTN": "Accept",
+        "FORGOT_PASSWORD" : "¿Forgotten password?"
+    },
+    "PASSWORD-RECOVERY": {
+        "NAME": "¿Forgotten password?",
+        "ACCEPT_BTN": "Accept",
+        "FORGOT_PASSWORD_DESCRIPTION" : "Introduzca su nombre de usuario ó email para recibir información de cómo obtener o cambiar su contraseña.",
+        "FORGOT_PASSWORD_SENDED_DESCRIPTION" : "Un Email le ha sido enviado con información para que pueda obtener o cambiar su Contraseña.",
+        "TOKEN_PLACEHOLDER": "Received Code",
+        "NEW_PASSWORD_PLACEHOLDER": "New Password",
+        "VALIDATION_SMALL_CASE" :"Must contain at least 1 Letter in Small Case",
+        "VALIDATION_CAPITAL_CASE" :"Must contain at least 1 in Capital Case",
+        "VALIDATION_ONE_NUMBER" :" Must contain at least 1 number",
+        "VALIDATION_MIN_LENGHT" :"Must be at least 8 characters",
+        "CHANGE_PASSWORD_BTN":"Change password"
     },
     "CONFIGURATION":{
+        "BACK": "Atrás",
+        "NEXT": "Siguiente",
         "SAVE": "Generar reporte",
+        "UPDATE": "Actualizar reporte",
+        "SAVE_TEMPLATE": "Guardar template",
         "ERROR": {
             "ERROR_REPORT": "No hemos podido generar el reporte",
             "ERROR_COMPETENCY_REPORT": "No hemos podido generar las competencias del reporte",
-            "ERROR_JOB_REPORT": "No hemos podido generar el puesto del reporte"
+            "ERROR_AREA_INDIVIDUAL_REPORT": "No hemos podido generar los individuos de area",
+            "ERROR_GROUPING_INDIVIDUAL_REPORT": "No hemos podido generar los individuos de grupo",
+            "ERROR_JOB_REPORT": "No hemos podido generar el puesto del reporte",
+            "ERROR_UPDATE_REPORT": "No hemos podido actualizasr el reporte",
+            "ERROR_UPDATE_COMPETENCY_REPORT" : "No hemos podido actualizar las competencias",
+            "ERROR_UPDATE_JOB_REPORT" : "No hemos podido actualizar el puesto",
+            "ERROR_UPDATE_AREA_INDIVIDUAL_REPORT" : "No hemos podido actualizar los individuos del area",
+            "ERROR_UPDATE_GROUPING_INDIVIDUAL_REPORT" : "No hemos podido actualizar los individuos del grupo"
+        }
+    },
+    "REPORTS": {
+        "LOADING_REPORT": "We are generating your report",
+        "MISCELLANY":"No hay información cargada de la sección",
+        "SECTIONS": {
+            "JOB_COMPATIBILITY_SECTION": {
+                "TITLE": "Compatibilidad \nde Puesto"
+            },
+            "JOB_COMPATIBILITY_INDIVIDUAL_AREA_SECTION":{
+                "PARTIAL_FIRST_TITLE": "Compatibilidad de Puestos",
+                "PARTIAL_SECOND_TITLE": "por Candidato",
+                "DESCRIPTION": "En este gráfico se muestra la correlación del perfil de la persona con los puestos asignados por área."
+            },
+            "JOB_COMPATIBILITY_MULTIPLE_COLUMNS_SECTION":{
+                "PARTIAL_FIRST_TITLE": "Compatibilidad de Puestos",
+                "PARTIAL_SECOND_TITLE":"por grupo de Candidato",
+                "DESCRIPTION": "En este gráfico se muestra la correlación del perfil de la persona con los demás perfiles evaluados."
+            },
+            "EXPANDED_BEHAVIORAL_PROFILE": {
+                "TITLE": "Perfil conductual expandido"
+            },
+            "BEHAVIORAL_TREND": {
+                "TITLE": "Tendencia comportamental de equipo de trabajo",
+                "TYPES": {
+                    "r": "Riesgo",
+                    "e": "Extroversión",
+                    "p": "Paciencia",
+                    "n": "Norma",
+                    "s": "Autocontrol"
+                }
+            },
+            "BEHAVIORAL_GRAPH":{
+                "TITLE_CHART": "Gráfico comportamental",
+                "TITLE":{
+                    "PERSON": "Person",
+                    "JOB": "Job",
+                    "LEADER": "Leader",
+                    "TEAM": "Team"
+                },
+                "ACTIONS":{
+                    "NATURAL": "Natural",
+                    "ADAPTED": "Adaptado"
+                }
+            },
+            "AGE_GENDER_BALANCE": {
+                "TITLE": "Balance de edad y género",
+                "AGE_TITLE": {
+                    "between18and30": "18 a 30",
+                    "between31and45": "31 a 45",
+                    "between46and59": "46 a 59",
+                    "moreThan60": "+60"
+                },
+                "LABELS": {
+                    "NO_BINARY": "No binario",
+                    "FEMALE": "Femenino",
+                    "MALE": "Masculino"
+                }
+            },
+            "IMAGE_PROFILE_TYPE": {
+                "TITLE": {
+                    "YOU_ARE_A_PERSON": "Eres una persona"
+                }
+            },
+            "BEHAVIORAL_PROFILE_CHART_SECTION":{
+                "LABEL":{
+                    "DECISION_MAKING": "Toma de decisiones",
+                    "PROFILE_INTENSITY": "Intensidad del perfil",
+                    "ENERGY": "Energía",
+                    "ENERGY_BALANCE": "Equilibrio de energía",
+                    "PROFILE_MODIFICATION":"Modificación de perfil",
+                    "FORM_TIME": "Tiempo de formulario"
+                }
+            },
+            "COMPETENCIES_SECTION": {
+                "TITLE": "Competencias",
+                "DESCRIPTION": "Descripcion - Tiene una marcada tendencia hacia la especialización. Es altamente confiable, muy disciplinado y preciso"
+            }
+        },
+        "ACTIONS":{
+            "SEE_MORE": "Ver más"
+        }
+    },
+    "REPORT_CONFIGURATION":{
+        "TITLE": "Report configuration",
+        "SUBTITLE": "Complete the steps to generate report",
+        "selectStyle":{
+            "TITLE":"Select style",
+            "SUBTITLE":"del reporte a realizar--",
+            "CONTENT": {
+                "LABEL_BASE_SUBBASE": "Base y Subbase",
+                "LABEL_FILTER_CLIENT": "Aquí podrás seleccionar la base y subbase configurada para tus reportes.--",
+                "LABEL_STYLE": "Aquí podrás seleccionar y personalizar la forma en que se verán tus reportes.--",
+                "LABEL_STYLE_GRAPHIC": "Estilo grafico--",
+                "LABEL_SHOW_EXAMPLE": "Ver ejemplo--",
+                "LABEL_LOGO": "Logo",
+                "LABEL_LOGO_DESCRIPTION": "Cargue la imagen de su logo, para que sea utilizada en los reportes. Deberá ser en formato JPG o PNG de al menos 280px x 60px"
+            }
+        },
+        "selectJobs":{
+            "TITLE":"Select job",
+            "SUBTITLE":"sobre quién se realizara el reporte--",
+            "CONTENT": {
+                "LABEL_DESCRIPTION": "Aquí podras seleccionar el puesto para su reporte."
+            }
+        },
+        "selectIndividuals":{
+            "TITLE":"Select individual",
+            "SUBTITLE":"Sobre quien se realizará el reporte--",
+            "CONTENT": {
+                "LABEL_TITLE": "Aquí podrás buscar y seleccionar el individuo para su reporte."
+            }
+        },
+        "selectGroup":{
+            "TITLE":"Select group",
+            "SUBTITLE":"contra quién se realizara el reporte--",
+            "LABEL":{
+                "TITLE": "Grupo"
+            },
+            "CONTENT": {
+                "LABEL_DESCRIPTION": "Agregue un grupo de trabajo utilizando el boton de arriba"
+            }
+        },
+        "selectCompetencies":{
+            "TITLE":"Select competencies",
+            "SUBTITLE":"sobre quién se realizara el reporte--",
+            "SELECTED_INDICATOR": {
+                "TITLE": "Seleccionados"
+            },
+            "CONTENT": {
+                "LABEL_TITLE": "Competencias",
+                "LABEL_DESCRIPTION": "Aquí podrás seleccionar las competencias para su reporte."
+            },
+            "ERROR": {
+                "RETRIEVING_COMPETENCIES": "No se pudo recuperar las competencias del reporte generado"
+            }
+        },
+        "selectAreaLeader":{
+            "TITLE":"Select department and leader",
+            "SUBTITLE":"De quien se realizará el reporte--",
+            "LABEL":{
+                "TITLE": "Department"
+            },
+            "CONTENT": {
+                "LABEL_DESCRIPTION": "Agregue un areá de trabajo utilizando el boton de arriba."
+            }
+        },
+        "selectHrFeedback":{
+            "TITLE":"Insert HHRR feedback",
+            "SUBTITLE":"Como resultante del proceso--",
+            "CONTENT": {
+                "LABEL_DESCRIPTION": "Aqui podras agregar tu feedback como resultante del proceso.",
+                "LABEL_PLACEHOLDER": "Describe yourself here..."
+            }
+        },
+        "ERROR_RETRIEVING_REPORT": "Error al recuperar datos del reportes generado",
+        "WARNING_WHEN_GENERATING_REPORT_WITHOUT_INDIVIDUALS": "No se han seleccionado individuos para generar el reporte",
+        "MODAL": {
+            "NEW_REPORT_CONFIRMATION": {
+                "TITLE": "Nuevo reporte",
+                "DESCRIPTION": "Se modifico el individuo. ¿Desea crear un nuevo reporte?"
+            },
+            "UPDATED_REPORT": {
+                "TITLE": "Se actualizo el reporte",
+                "DESCRIPTION": "¿Desea ver el nuevo reporte actualizado?"
+            },
+            "UPDATED_TEMPLATE": {
+                "TITLE": "Plantilla actualizada"
+            },
+            "CREATED_TEMPLATE": {
+                "TITLE": "Plantilla creada"
+            },
+            "NEW_TEMPLATE": {
+                "TITLE": "Nuevo Plantilla",
+                "DESCRIPTION": "¿Desea Crear una nueva plantilla?"
+            },
+            "REPORT_CREATION": {
+                "TITLE": "Creacion de reportes",
+                "DESCRIPTION": "Generando reportes...Message"
+            }
+        }
+    },
+    "TO_DELETE_EMOTIONAL_INTELLIGENCE": "Inteligencia emocional",
+    "TOOLTIPS":{
+        "SEARCH":"Search",
+        "COPY_LINK":"copy link",
+        "SEND_REPORT":"Send report",
+        "FILTER":"Filter",
+        "DELETE":"Delete",
+        "RENAME":"Rename",
+        "DUPLICATE":"Duplicate",
+        "CONFIG_REPORT":"Configurate Report",
+        "USE_TEMPLATE" : "Use template",
+        "LABEL_SEARCH_FILTER": "Filtro de búsqueda",
+        "LABEL_GENERATE_AND_SAVE_REPORT": "Generar y guardar reporte",
+        "LABEL_SAVE_TO_MY_REPORTS": "Guardar en Mis Reportes"
+    },
+    "MODAL":{
+        "ACTION":{
+            "ACCEPT":"Aceptar",
+            "LOADING": "loading",
+            "CANCEL": "Cancelar"
+        }
+    },
+    "NO_PAGE":{
+        "LABEL_TITLE": "Parece que estas perdido",
+        "LABEL_DESCRIPTION": "la página que estas buscando no está disponible!",
+        "LABEL_GO_HOME": "Volver al inicio"
+    },
+    "NOT_ALLOWED":{
+        "LABEL_TITLE": "No tienes permisos para ver este reporte",
+        "LABEL_DESCRIPTION": "Por favor, comuniquese con soporte si cree que esto es un error.",
+        "LABEL_GO_HOME": "Volver al inicio"
+    },
+    "MULTIPLE_REPORT": {
+        "LABEL": {
+            "ERROR": "Ha sucedido un error",
+            "SUCCESS": "Generacion de reporte exitoso"
+        },
+        "ACTIONS": {
+            "SEE_REPORT": "Ver reporte"
+        },
+        "TOOLTIP":{
+            "COPY_LINK": "Copiar Link -t"
         }
     }
 }

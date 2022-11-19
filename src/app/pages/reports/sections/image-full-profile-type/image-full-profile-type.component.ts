@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ProfileTypes } from 'src/app/core/configs/profile/profile-types.enum';
 import {
   BehavioralDescriptors,
   CoverIndividual,
@@ -10,6 +11,10 @@ import {
   styleUrls: ['./image-full-profile-type.component.scss'],
 })
 export class ImageFullProfileTypeComponent implements OnInit {
+  //Bindings
+  ProfileTypes = ProfileTypes;
+
+  //Inputs
   @Input() coverIndividual: CoverIndividual;
 
   @Input() behavioralDescriptors: BehavioralDescriptors;

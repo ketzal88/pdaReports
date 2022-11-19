@@ -1,7 +1,8 @@
 <div class="chart-container" #chartContainer>
-    <div class="chart-inside flex justify-center items-center font-bold text-2xl">
-        <div>
-            Desarrollador Sr.
-        </div>
+  <div class="chart-inside flex justify-center items-center font-bold text-2xl">
+    <!-- TODO-WORKER: Revisar centrado -->
+    <div>
+      {{ getDottedFirstCharacters(jobTitle, 13) }}
     </div>
+  </div>
 </div>

@@ -3,18 +3,23 @@
   <mat-form-field
     class="fld"
     appearance="outline"
-    style="margin: 15px; width: 60%">
+    [ngStyle]="{ width: width }"
+    style="font-size: 11px">
     <input
       matInput
       name="searchText"
       type="text"
       class="inp"
-      height="25%"
       appearance="outline"
       aria-describedby="search-text"
       [(ngModel)]="text"
       (input)="keyPressed()"
       autofocus />
-    <mat-icon matPrefix>{{ materialIcon }}</mat-icon>
+    <mat-icon
+      matPrefix
+      [matTooltip]="searchTooltip"
+      matTooltipPosition="below"
+      >{{ materialIcon }}</mat-icon
+    >
   </mat-form-field>
 </form>

@@ -7,14 +7,19 @@ import {
   GeneratedReport,
   ReportGeneratedJob,
   ReportGeneratedCompetency,
+  GeneratedReportByIdResponse,
 } from './interfaces/generatedReportsResponse.interface';
-import { catchError, map, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { addPaginationParameters } from '../paginatedRequest.interface';
 import {
   ReportGeneratedCompetencyRequest,
   ReportGeneratedJobRequest,
   ReportGeneratedRequest,
 } from './interfaces/reportGeneratedRequest.interface';
+import {
+  DuplicateReportGeneratedRequest,
+  DuplicateReportGeneratedResponse,
+} from './interfaces/duplicateReportGenerated.interface';
 
 @Injectable()
 export class GeneratedReportsService {
@@ -53,11 +58,10 @@ export class GeneratedReportsService {
       );
     }
 
-    if (request.reportTypeId !== undefined && request.reportTypeId !== null) {
-      queryParameters = queryParameters.set(
-        'ReportTypeId',
-        <string>request.reportTypeId
-      );
+    if (request.reportTypeIds && request.reportTypeIds.length > 0) {
+      request.reportTypeIds.forEach(reportTypeId => {
+        queryParameters = queryParameters.append('ReportTypeIds', reportTypeId);
+      });
     }
 
     if (request.baseId !== undefined && request.baseId !== null) {
@@ -98,6 +102,13 @@ export class GeneratedReportsService {
       queryParameters = queryParameters.set('Filter', <string>request.filter);
     }
 
+    if (request.isTemplate !== undefined && request.isTemplate !== null) {
+      queryParameters = queryParameters.set(
+        'IsTemplate',
+        <boolean>request.isTemplate
+      );
+    }
+
     queryParameters = addPaginationParameters(queryParameters, request);
 
     return this.httpClient.get<GeneratedReportsResponse>(
@@ -131,11 +142,11 @@ export class GeneratedReportsService {
   getGeneratedReportByShortId(
     shortId: string,
     includeRelations: boolean = true
-  ): Observable<GeneratedReport> {
+  ): Observable<GeneratedReportByIdResponse> {
     let queryParameters = new HttpParams();
     queryParameters = queryParameters.set('includeRelations', includeRelations);
 
-    return this.httpClient.get<GeneratedReport>(
+    return this.httpClient.get<GeneratedReportByIdResponse>(
       `${environment.apiReports}/ReportGenerated/${shortId}`,
       {
         params: queryParameters,
@@ -150,6 +161,33 @@ export class GeneratedReportsService {
     );
   }
 
+  duplicateReport(
+    request: DuplicateReportGeneratedRequest
+  ): Observable<DuplicateReportGeneratedResponse[]> {
+    return this.httpClient.post<DuplicateReportGeneratedResponse[]>(
+      `${environment.apiReports}/ReportGenerated/DuplicateReportGenerated`,
+      request
+    );
+  }
+
+  updateReport(
+    request: ReportGeneratedRequest,
+    reportGeneratedId: string
+  ): Observable<string> {
+    return this.httpClient.put<string>(
+      `${environment.apiReports}/ReportGenerated/${reportGeneratedId}`,
+      request
+    );
+  }
+
+  deleteReport(reportGeneratedId: string): Observable<any> {
+    return this.httpClient.request<any>(
+      'DELETE',
+      `${environment.apiReports}/ReportGenerated/${reportGeneratedId}`,
+      { observe: 'response' }
+    );
+  }
+
   generateCompetencyByReport(
     reportGeneratedId: string,
     request: ReportGeneratedCompetencyRequest[]
@@ -160,6 +198,17 @@ export class GeneratedReportsService {
     );
   }
 
+  deleteCompetenciesByReport(
+    reportGeneratedId: string,
+    competenciesIds: string[]
+  ): Observable<string> {
+    return this.httpClient.request<string>(
+      'DELETE',
+      `${environment.apiReports}/ReportGenerated/${reportGeneratedId}/Competency`,
+      { responseType: 'text' as 'json', body: competenciesIds }
+    );
+  }
+
   generateJobByReport(
     reportGeneratedId: string,
     request: ReportGeneratedJobRequest[]
@@ -167,6 +216,59 @@ export class GeneratedReportsService {
     return this.httpClient.post<string>(
       `${environment.apiReports}/ReportGenerated/${reportGeneratedId}/Job`,
       request
+    );
+  }
+
+  deleteJobByReport(
+    reportGeneratedId: string,
+    reportGeneratedJobId: string
+  ): Observable<string> {
+    return this.httpClient.request<string>(
+      'DELETE',
+      `${environment.apiReports}/ReportGenerated/${reportGeneratedId}/Job/${reportGeneratedJobId}`,
+      { responseType: 'text' as 'json' }
+    );
+  }
+
+  generateAreaIndividualByReport(
+    reportGeneratedId: string,
+    individualIds: string[]
+  ): Observable<string> {
+    return this.httpClient.post<string>(
+      `${environment.apiReports}/ReportGenerated/${reportGeneratedId}/AreaIndividual`,
+      individualIds
+    );
+  }
+
+  deleteIndividualsAreaByReport(
+    reportGeneratedId: string,
+    individuals: string[]
+  ): Observable<string> {
+    return this.httpClient.request<string>(
+      'DELETE',
+      `${environment.apiReports}/ReportGenerated/${reportGeneratedId}/AreaIndividual`,
+      { responseType: 'text' as 'json', body: individuals }
+    );
+  }
+
+  generateGroupingIndividualByReport(
+    reportGeneratedId: string,
+    individualIds: string[]
+  ): Observable<string> {
+    return this.httpClient.post<string>(
+      `${environment.apiReports}/ReportGenerated/${reportGeneratedId}/GroupingIndividual`,
+      individualIds
+    );
+  }
+
+  deleteIndividualsGroupingByReport(
+    reportGeneratedId: string,
+    individuals: string[]
+  ): Observable<string> {
+    return this.httpClient.request<string>(
+      'DELETE',
+      `${environment.apiReports}/ReportGenerated/${reportGeneratedId}/GroupingIndividual`,
+      { responseType: 'text' as 'json', body: individuals }
     );
   }
 }

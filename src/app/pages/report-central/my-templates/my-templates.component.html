@@ -1,0 +1,57 @@
+<div class="container" style="margin: 25px 0px">
+  <p>
+    {{ 'MY_TEMPLATES.INTRODUCTION' | translate }}
+  </p>
+</div>
+
+<div
+  class="container"
+  style="margin: 25px 0px; display: flex; flex-direction: row-reverse">
+  <button mat-raised-button color="primary" (click)="showDefaultReportsPopUp()">
+    {{ 'MY_TEMPLATES.LABEL.BTN_NEW_TEMPLATE' | translate }}
+  </button>
+</div>
+
+<app-client-filter
+  [selectedClientId]="selectedClientId"
+  [selectedSubbaseId]="selectedSubbaseId"
+  (selectedClientEvent)="onBaseChange($event)"
+  (selectedSubbaseEvent)="onSubbaseChange($event)"
+  (selectedAreaEvent)="onAreaChange($event)"
+  [showAreaSelect]="true"></app-client-filter>
+
+<app-table-my-templates
+  #myTemplatesTable
+  [dataSource]="dataSource"
+  [columns]="columns"
+  [totalSize]="totalSize"
+  [typeFilterList]="typeFilterList"
+  [hasSelectActions]="true"
+  (paginateChange)="onPaginateChange($event)"
+  (selectedChange)="onSelectedChange($event)"
+  (filterInput)="onFilterInput($event)"
+  (filters)="onFilters($event)"
+  (editReportSettingEvent)="onEditReportSetting($event)"
+  (duplicateReportEvent)="onDuplicateReportTemplate($event)"
+  (renameReportEvent)="onRenameReportTemplate($event)"
+  (deleteReportEvent)="deleteTemplate($event)">
+</app-table-my-templates>
+
+<ng-container>
+  <div *ngIf="!data && !generatedReportsLoader.isLoading() && madeRequest">
+    <mat-card>
+      <mat-card-content style="text-align: center; margin: 20px">
+        <ng-container *ngIf="filterText.length > 0">
+          <h3>
+            {{ 'NOT_FOUND_FILTER_TEXT' | translate }} <i>{{ filterText }}</i>
+          </h3>
+        </ng-container>
+        <ng-container *ngIf="filterText.length < 1">
+          <h3>
+            {{ 'MY_TEMPLATES.NOT_FOUND_ANY_TEMPLATE_TEXT' | translate }}
+          </h3>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-container>

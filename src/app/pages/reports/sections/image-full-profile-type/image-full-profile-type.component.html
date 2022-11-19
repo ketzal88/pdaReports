@@ -1,20 +1,55 @@
+<!-- <div class="perfil-type row">
+  <div class="column">
+    <h1>{{ coverIndividual.firstName }} {{ coverIndividual.lastName }}</h1>
+    <div class="label-image-title">
+      {{ 'TYPE_PROFILE' | translate }}
+    </div>
+    <div class="content-image-title">
+      <h1 style="margin-bottom: 0px">
+        {{ coverIndividual.profile }}
+      </h1>
+    </div>
+  </div>
+  <div class="column">
+    <div class="image-profile">
+      <ng-container [ngSwitch]="coverIndividual.profileNumber">
+        <ng-container *ngSwitchCase="ProfileTypes.DYNAMIC">
+          <ng-container *ngTemplateOutlet="dynamic"> </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="ProfileTypes.INFLUENTIAL">
+          <ng-container *ngTemplateOutlet="influential"> </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <ng-container *ngTemplateOutlet="logical"> </ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<ng-template #dynamic>
+  <app-dynamic></app-dynamic>
+</ng-template>
+<ng-template #influential>
+  <app-influential></app-influential>
+</ng-template>
+<ng-template #logical>
+  <app-logical></app-logical>
+</ng-template> -->
 <div class="perfil-type row">
-    <div class="column">
-        <!-- Nombre usuario perfil -->
-        <h1>{{ coverIndividual.firstName }} {{ coverIndividual.lastName }}</h1>
-        <div class="label-image-title">
-            {{ 'TYPE_PROFILE' | translate }}
-        </div>
-        <div class="content-image-title">
-            <h1 style="margin-bottom: 0px">
-                {{ coverIndividual.profile }}
-            </h1>
-        </div>
+  <div class="column">
+    <h1>{{ coverIndividual.firstName }} {{ coverIndividual.lastName }}</h1>
+    <div class="label-image-title">
+      {{ 'TYPE_PROFILE' | translate }}
     </div>
-    <div class="column">
-        <div class="image-profile">
-            <!-- TODO: Reemplazar con icono svg dado por disenio -->
-            <app-happy></app-happy>
-        </div>
+    <div class="content-image-title">
+      <h1 style="margin-bottom: 0px">
+        {{ coverIndividual.profile }}
+      </h1>
     </div>
+  </div>
+  <div class="column">
+    <div class="image-profile">
+      <app-happy></app-happy>
+    </div>
+  </div>
 </div>

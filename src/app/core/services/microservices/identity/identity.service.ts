@@ -5,6 +5,7 @@ import { environment } from '../../../../../environments/environment';
 import {
   LoginRequest,
   LoginResponse,
+  RecoveryPasswordRequest,
 } from './interfaces/dto/identity-dto.interface';
 import { AuthenticationService } from '../../../authentication/authentication.service';
 import { UsersAccount } from './identity.interface';
@@ -37,6 +38,20 @@ export class IdentityService {
           return of(false);
         })
       );
+  }
+
+  forgotPassword(username: string): Observable<boolean> {
+    return this.httpClient.post<any>(
+      `${this.basePath}/Users/ForgotPassword?username=${username}`,
+      null
+    );
+  }
+
+  recoveryPassword(request: RecoveryPasswordRequest): Observable<boolean> {
+    return this.httpClient.post<any>(
+      `${this.basePath}/Users/RecoveryPassword`,
+      request
+    );
   }
 
   validateToken(jwt: string): Observable<boolean> {

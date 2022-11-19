@@ -10,3 +10,8 @@ export interface LoginResponse {
   userDetails: UserDetails;
   expirationMinutes: string;
 }
+
+export interface RecoveryPasswordRequest {
+  token: string;
+  password: string;
+}

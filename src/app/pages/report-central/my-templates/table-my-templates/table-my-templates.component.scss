@@ -1,0 +1,58 @@
+//Custom material
+.mat-list-base {
+    padding-top: 0px;
+}
+
+.mat-header-cell {
+    color: #6D7783;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+table {
+    width: 100%;
+}
+
+.table-actionbar {
+    padding: 2px;
+    display: flex;
+    position: relative;
+}
+
+.table-actionbar .search-box {
+    flex: 1;
+}
+
+.table-actionbar .action-box {
+    text-align: right;
+    padding-top: 25px;
+}
+
+.table-actionbar .action-box button {
+    margin-right: 10px;
+
+}
+
+.mat-column-select
+{
+    flex: 0 0 55px;
+}
+
+.mat-column-actions 
+{
+    flex: 310px 0 0;
+}
+
+.content-filter {
+    margin-bottom: 10px;
+    position: absolute;
+    right: 40px;
+    background: #e2e2e2;
+    z-index: 1;
+}
+
+.btn-actions-report{
+    cursor: pointer;
+    border: none;
+}

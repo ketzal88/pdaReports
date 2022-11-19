@@ -21,6 +21,7 @@ export class CompetencyService {
   }
 
   getCompetencies(
+    competenciesIds?: string[],
     name?: string,
     competencyCategoryId?: string,
     pageNumber?: number,
@@ -41,6 +42,14 @@ export class CompetencyService {
         'CompetencyCategoryId',
         <any>competencyCategoryId
       );
+    }
+    if (competenciesIds && competenciesIds.length > 0) {
+      competenciesIds.forEach(competencyId => {
+        queryParameters = queryParameters.append(
+          'CompetenciesIds',
+          competencyId
+        );
+      });
     }
 
     return this.httpClient.get<GetCompetencyResponse>(

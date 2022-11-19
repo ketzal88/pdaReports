@@ -5,4 +5,8 @@ export const SELECT_HR_FEEDBACK_STEP: ItemStepConfiguration = {
     title: 'Incorpore un feedback',
     subtitle: 'Como resultante del proceso',
   },
+  step: {
+    isComplete: false,
+    isEnabled: true,
+  },
 };

@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import 'anychart';
 import { disabledCredits } from '../../../utils/chart.util';
 
 @Component({

@@ -1,20 +1,73 @@
 <div class="card-steps-container">
   <ng-container *ngFor="let step of steps | async; let i = index">
     <mat-card
-      class="example-card"
+      class="step-card"
       [ngClass]="{
-        'step-complete': step.isComplete,
-        'step-incomplete': !step.isComplete,
-        'step-current': (currentStep | async)?.stepIndex === step.stepIndex
+        'step-card--complete': step.isComplete && step.stepIndex !== 0,
+        'step-card--incomplete': !step.isComplete,
+        'step-card--current':
+          (currentStep | async)?.stepIndex === step.stepIndex
       }">
-      <mat-card-title>
-        <h2 class="title">
-          {{ configurationSteps[i]?.label.title }}
-        </h2>
-      </mat-card-title>
-      <mat-card-subtitle class="subtitle">{{
-        configurationSteps[i]?.label.subtitle
-      }}</mat-card-subtitle>
+      <div
+        class="step-card__number"
+        [ngClass]="{
+          'step-card__number--complete': step.isComplete,
+          'step-card__number--incomplete':
+            !step.isComplete &&
+            (currentStep | async)?.stepIndex !== step.stepIndex,
+          'step-card__number--current':
+            (currentStep | async)?.stepIndex === step.stepIndex
+        }">
+        <h5>
+          {{ i + 1 }}
+        </h5>
+      </div>
+      <div class="step-card__content">
+        <div>
+          <mat-card-title>
+            <h2
+              class="step-card__title"
+              [ngClass]="{
+                'step-card__title--complete': step.isComplete,
+                'step-card__title--incomplete': !step.isComplete,
+                'step-card__title--current':
+                  (currentStep | async)?.stepIndex === step.stepIndex
+              }">
+              {{
+                stepConfiguration.steps[i]?.name
+                  | stepCardTranslation
+                    : [stepConfiguration.translationPrefix, 'TITLE']
+                  | translate
+              }}
+            </h2>
+          </mat-card-title>
+          <mat-card-subtitle
+            class="step-card__subtitle"
+            [ngClass]="{
+              'step-card__subtitle--complete': step.isComplete,
+              'step-card__title--incomplete': !step.isComplete
+            }">
+            {{
+              stepConfiguration.steps[i]?.name
+                | stepCardTranslation
+                  : [stepConfiguration.translationPrefix, 'SUBTITLE']
+                | translate
+            }}
+          </mat-card-subtitle>
+        </div>
+        <div class="step-card__content__icon">
+          <app-icon-arrow
+            [color]="
+              step.isComplete && (currentStep | async)?.stepIndex === 0
+                ? '#377BE2'
+                : step.isComplete
+                ? '#6D7783'
+                : (currentStep | async)?.stepIndex === step.stepIndex
+                ? '#377BE2'
+                : '#B9B9B9'
+            "></app-icon-arrow>
+        </div>
+      </div>
     </mat-card>
   </ng-container>
 </div>

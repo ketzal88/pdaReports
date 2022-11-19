@@ -1,6 +1,6 @@
 <div class="table-actionbar">
   <div class="search-box">
-    <div class="form-group">
+    <div class="form-group" style="margin-top: 10px; margin-bottom: 10px">
       <app-input
         (Enter)="onFilterInput($event)"
         (Debounce)="onFilterInput($event)"
@@ -16,7 +16,7 @@
             [selectable]="'true'"
             [removable]="'true'"
             (removed)="removeChip(chipItem, idx)">
-            {{ chipItem.name | translate }}
+            {{ chipItem.key | reportType: typeFilterList }}
             <mat-icon matChipRemove *ngIf="'true'">cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
@@ -30,106 +30,191 @@
       (click)="sendReportMultiple()">
       <app-share-report></app-share-report>
     </button>
-    <button
-      (click)="showFilterView()"
-      mat-icon-button
-      aria-label="Example icon button with a vertical three dot icon">
-      <img src="/assets/icons/filter.svg" alt="" />
+    <button class="btn-share-report" (click)="showFilterView()">
+      <app-icon-filter></app-icon-filter>
     </button>
-    <ng-container *ngIf="showFilter">
-      <div class="content-filter">
-        <div
-          *ngFor="let typeFilterItem of typeFilterList"
-          style="margin-bottom: 10px">
-          <mat-label class="left"
-            ><h2 style="margin-bottom: 0px">
-              {{ typeFilterItem.name }}
+  </div>
+  <ng-container *ngIf="showFilter">
+    <div class="content-filter">
+      <div class="content-filter__tag d-flex">
+        <div>
+          <app-icon-filter></app-icon-filter>
+        </div>
+        <div class="content-filter__tag__label">
+          <mat-label
+            ><h2>
+              {{ 'MY_REPORTS.FILTER_TAG' | translate }}
             </h2></mat-label
           >
-          <mat-selection-list>
-            <mat-list-option
-              *ngFor="let item of typeFilterItem.data"
-              [value]="item"
-              [selected]="isChecked(item)"
-              (click)="selectItem(typeFilterItem.key, item)">
-              {{ item.name | translate }}
-            </mat-list-option>
-          </mat-selection-list>
         </div>
-        <button mat-stroked-button color="primary" (click)="reset()">
-          Reset
+      </div>
+      <div class="content-filter__tag__type-report">
+        <mat-label class="left"
+          ><h2 style="">
+            {{ 'MY_REPORTS.REPORT_TYPE_FILTER' | translate }}
+          </h2></mat-label
+        >
+      </div>
+      <div *ngFor="let typeFilterItem of typeFilterList">
+        <ng-container *ngIf="typeFilterItem.key !== 'SALES'">
+          <div
+            *ngFor="let item of typeFilterItem.data"
+            style="margin-bottom: 15px">
+            <button
+              class="content-filter__item"
+              [ngClass]="{ 'content-filter__item--active': isChecked(item) }"
+              [value]="item"
+              (click)="selectItem(typeFilterItem.key, item)">
+              <div>{{ typeFilterItem.name }} / {{ item.name | translate }}</div>
+              <div *ngIf="isChecked(item)">
+                <app-icon-close [color]="'#007EFD'"></app-icon-close>
+              </div>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+      <div class="content-filter__actions">
+        <button
+          class="content-filter__actions__reset"
+          mat-stroked-button
+          color="primary"
+          (click)="reset()">
+          {{ 'MY_REPORTS.FILTER_ACTIONS.RESET' | translate }}
         </button>
-        <button mat-raised-button color="primary" (click)="onFilter()">
-          Filtrar
+        <button
+          class="content-filter__actions__filter"
+          mat-raised-button
+          color="primary"
+          (click)="onFilter()">
+          {{ 'MY_REPORTS.FILTER_ACTIONS.FILTER' | translate }}
         </button>
       </div>
-    </ng-container>
-  </div>
+    </div>
+  </ng-container>
 </div>
-<mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-  <!-- checkbox header -->
-  <ng-container matColumnDef="select">
-    <mat-header-cell *matHeaderCellDef>
-      <mat-checkbox
-        color="primary"
-        (change)="$event ? masterToggle() : null"
-        [checked]="selection.hasValue() && isAllSelected()"
-        [disabled]="this.dataSource?.data?.length === 0">
-      </mat-checkbox>
-    </mat-header-cell>
-    <mat-cell *cdkCellDef="let row; let idx = index">
-      <mat-checkbox
-        color="primary"
-        #matCheckBox
-        (click)="$event.stopPropagation()"
-        (change)="$event ? selection.toggle(row) : null"
-        [checked]="selection.isSelected(row)">
-      </mat-checkbox>
-    </mat-cell>
-  </ng-container>
-  <!-- table dynamic columns -->
-  <ng-container
-    *ngFor="let column of columns"
-    [matColumnDef]="column.columnDef">
-    <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{
-      column.header | translate
-    }}</mat-header-cell>
-    <mat-cell
-      *cdkCellDef="let row"
-      [ngStyle]="{
-        color:
-          row[column.columnDef] | statusColorType: [column.columnDef, this.row]
-      }">
-      {{
-        row[column.columnDef]
-          | validateColumnType: column.columnType
-          | translate
-      }}
-    </mat-cell>
-  </ng-container>
 
-  <!-- table action column -->
-  <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-    <mat-cell *matCellDef="let element; let idx = index">
-      <!-- TODO: Se comenta linea de codio en caso que luego se requiere tenerlo desactivado hasta seleccionar
+<ng-container *ngIf="dataSource.data.length > 0">
+  <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- checkbox header -->
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          color="primary"
+          (change)="$event ? masterToggle() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [disabled]="this.dataSource?.data?.length === 0">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *cdkCellDef="let row; let idx = index">
+        <mat-checkbox
+          color="primary"
+          #matCheckBox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <!-- table dynamic columns -->
+    <ng-container
+      *ngFor="let column of columns"
+      [matColumnDef]="column.columnDef">
+      <mat-header-cell *cdkHeaderCellDef>{{
+        column.header | translate
+      }}</mat-header-cell>
+
+      <ng-container [ngSwitch]="column.columnType">
+        <ng-container *ngSwitchCase="'reportLink'">
+          <mat-cell *cdkCellDef="let row">
+            <a href="{{ row[column.columnDef] | reportLink }}" Target="_blank">
+              <app-icon-redirect></app-icon-redirect>
+            </a>
+            <button
+              mat-icon-button
+              (click)="copyLinkToClipboard(row[column.columnDef])"
+              [matTooltip]="copyLinkTooltip"
+              matTooltipPosition="below">
+              <app-icon-copy-clipboard></app-icon-copy-clipboard>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <ng-container *ngSwitchCase="'reportType'">
+          <mat-cell *cdkCellDef="let row">
+            {{ row[column.columnDef] | reportType: typeFilterList }}
+          </mat-cell>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <mat-cell
+            *cdkCellDef="let row"
+            [ngStyle]="{
+              color:
+                row[column.columnDef]
+                | statusColorType: [column.columnDef, this.row]
+            }">
+            <span class="ellipsis">
+              {{
+                row[column.columnDef]
+                  | validateColumnType: column.columnType
+                  | translate
+              }}</span
+            >
+          </mat-cell>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <!-- table action column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>{{
+        'MY_REPORTS.TABLE.COLUMN.ACTIONS' | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element; let idx = index">
+        <!-- TODO: Se comenta linea de codio en caso que luego se requiere tenerlo desactivado hasta seleccionar
         [disabled]="!selection.isSelected(element)"
         [ngStyle]="!selection.isSelected(element) && { cursor: 'default' }"
       -->
-      <button class="btn-share-report" (click)="sendReportIndividual(element)">
-        <app-share-report></app-share-report>
-      </button>
-    </mat-cell>
-  </ng-container>
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-</mat-table>
-<!-- table pagination -->
-<mat-paginator
-  *ngIf="dataSource"
-  [pageSizeOptions]="pageSizeOptions"
-  [length]="totalSize"
-  [pageSize]="pageSize"
-  (page)="onPaginateChange($event)"
-  showFirstLastButtons
-  aria-label="Select page"></mat-paginator>
+
+        <div class="d-flex" style="width: 100%; justify-content: space-evenly">
+          <button
+            matTooltip="Configurar Reporte"
+            class="btn-actions-report"
+            (click)="editReportSettings(element)"
+            [matTooltip]="configReportTooltip"
+            matTooltipPosition="below">
+            <app-icon-configuration-report></app-icon-configuration-report>
+          </button>
+          <button
+            class="btn-actions-report"
+            (click)="sendReportIndividual(element)"
+            [matTooltip]="sendReportTooltip"
+            matTooltipPosition="below">
+            <app-share-report></app-share-report>
+          </button>
+
+          <button
+            class="btn-actions-report"
+            (click)="deleteTemplate(element)"
+            [matTooltip]="deleteReportTooltip"
+            matTooltipPosition="below">
+            <app-icon-trash-can></app-icon-trash-can>
+          </button>
+        </div>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [ngClass]="
+        selection.isSelected(row) ? 'matTableHighlight' : ''
+      "></mat-row>
+  </mat-table>
+  <!-- table pagination -->
+  <mat-paginator
+    *ngIf="dataSource"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalSize"
+    [pageSize]="pageSize"
+    (page)="onPaginateChange($event)"
+    showFirstLastButtons
+    aria-label="Select page"></mat-paginator>
+</ng-container>

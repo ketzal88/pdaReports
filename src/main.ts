@@ -3,9 +3,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import 'anychart';
-
-anychart.licenseKey(environment.anyChart.licenseKey);
 
 if (environment.production) {
   enableProdMode();

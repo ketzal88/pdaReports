@@ -153,7 +153,7 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
     const imageFile = this.selectedFile;
     if (this.validImageTypes.indexOf(imageFile.file.type) === -1) {
       this.translate
-        .get('UPLOADER.INVALID_FORMAT_TYPE')
+        .get('UPLOADER.INVALID_FORMAT_TYPE_MESSAGE')
         .pipe(take(1))
         .subscribe((result: string) => {
           this.showErrorDialog(
@@ -164,7 +164,7 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
     }
     if (imageFile.file.size > this.maxMbSize * 1000000) {
       this.translate
-        .get('UPLOADER.INVALID_MAX_SIZE')
+        .get('UPLOADER.INVALID_MAX_SIZE_MESSAGE')
         .pipe(take(1))
         .subscribe((result: string) => {
           this.showErrorDialog(
@@ -196,7 +196,7 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
         ) {
           //console.log(width + ' ' + height);
           this.translate
-            .get('UPLOADER.INVALID_IMAGE_MIN_RESOLUTION')
+            .get('UPLOADER.INVALID_IMAGE_MIN_RESOLUTION_MESSAGE')
             .pipe(take(1))
             .subscribe((result: string) => {
               this.showErrorDialog(
@@ -215,7 +215,7 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
             this.imageSizingParameters.minHeight / height
           ) {
             this.translate
-              .get('UPLOADER.INVALID_IMAGE_FORMAT')
+              .get('UPLOADER.INVALID_IMAGE_FORMAT_MESSAGE')
               .pipe(take(1))
               .subscribe((result: string) => {
                 this.showErrorDialog(result);

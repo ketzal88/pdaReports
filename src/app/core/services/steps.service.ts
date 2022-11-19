@@ -1,69 +1,92 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { StepModel } from '../models/step.model';
+import { LocalStepModel } from '../../pages/report-central/configuration/interfaces/local-step-model.interface';
 
 @Injectable()
 export class StepsService {
-  private steps$: BehaviorSubject<StepModel[]> = new BehaviorSubject<
-    StepModel[]
+  private steps$: BehaviorSubject<LocalStepModel[]> = new BehaviorSubject<
+    LocalStepModel[]
   >([]);
-  private currentStep$: BehaviorSubject<StepModel | null> =
-    new BehaviorSubject<StepModel | null>(null);
+  private currentStep$: BehaviorSubject<LocalStepModel | null> =
+    new BehaviorSubject<LocalStepModel | null>(null);
 
   constructor() {}
 
-  initSteps(steps: StepModel[]): void {
-    this.steps$ = new BehaviorSubject<StepModel[]>(steps);
+  initSteps(steps: LocalStepModel[]): void {
+    this.steps$ = new BehaviorSubject<LocalStepModel[]>(steps);
     this.currentStep$.next(this.steps$.value[0]);
   }
 
-  setSteps(steps: StepModel[]): void {
+  setSteps(steps: LocalStepModel[]): void {
     this.steps$.next(steps);
   }
 
-  setCurrentStep(step: StepModel): void {
+  setCurrentStep(step: LocalStepModel): void {
     this.currentStep$.next(step);
   }
 
-  getCurrentStep(): Observable<StepModel | null> {
+  getCurrentStep(): Observable<LocalStepModel> {
     return this.currentStep$.asObservable();
   }
 
-  getSteps(): Observable<StepModel[]> {
+  getSteps(): Observable<LocalStepModel[]> {
     return this.steps$.asObservable();
   }
 
   moveToNextStep(): void {
-    const index = this.currentStep$.value?.stepIndex;
+    this.currentStep$.next(
+      this.steps$.value[
+        this.getNextEnabledIndex(this.currentStep$.value?.stepIndex)
+      ]
+    );
+  }
 
-    if (index && index < this.steps$.value.length) {
-      this.currentStep$.next(this.steps$.value[index]);
+  private getNextEnabledIndex(currentIndex: number): number {
+    const thisIndex = currentIndex + 1;
+    const nextItem = this.steps$.value[thisIndex];
+    if (nextItem) {
+      if (nextItem.isEnabled) {
+        return thisIndex;
+      }
+      return this.getNextEnabledIndex(thisIndex);
     }
+    return currentIndex;
+  }
+
+  private getPrevEnabledIndex(currentIndex: number): number {
+    const thisIndex = currentIndex - 1;
+    let prevItem = this.steps$.value[thisIndex];
+    if (prevItem) {
+      if (prevItem.isEnabled) {
+        prevItem.isComplete = false;
+        return thisIndex;
+      }
+      return this.getPrevEnabledIndex(thisIndex);
+    }
+    return currentIndex;
   }
 
   moveToPrevStep(): void {
-    let index = this.currentStep$.value?.stepIndex;
-
-    if (index && index - 1 < this.steps$.value.length) {
-      index = index - 1;
-      //TODO: Revisar si se requiere marcar como paso incompleto
-      this.steps$.value[index].isComplete = false;
-      this.currentStep$.next(this.steps$.value[index - 1]);
-    }
+    this.currentStep$.next(
+      this.steps$.value[
+        this.getPrevEnabledIndex(this.currentStep$.value?.stepIndex)
+      ]
+    );
   }
 
   isLastStep(): boolean {
-    return this.currentStep$.value?.stepIndex === this.steps$.value.length;
+    return this.currentStep$.value?.stepIndex === this.steps$.value.length - 1;
   }
 
   isLastStepAndComplete(): boolean {
     return (
-      this.currentStep$.value?.stepIndex === this.steps$.value.length &&
+      this.currentStep$.value?.stepIndex === this.steps$.value.length - 1 &&
       this.currentStep$.value?.isComplete
     );
   }
 
   isFirstStep(): boolean {
-    return this.currentStep$.value?.stepIndex === 1;
+    return this.currentStep$.value?.stepIndex === 0;
   }
 }

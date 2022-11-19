@@ -5,4 +5,8 @@ export const SELECT_JOBS_STEP: ItemStepConfiguration = {
     title: 'Selecciona el puesto',
     subtitle: 'sobre quién se realizara el reporte',
   },
+  step: {
+    isComplete: false,
+    isEnabled: true,
+  },
 };

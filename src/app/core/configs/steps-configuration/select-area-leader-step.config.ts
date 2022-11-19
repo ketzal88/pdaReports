@@ -5,4 +5,8 @@ export const SELECT_AREA_LEADER_STEP: ItemStepConfiguration = {
     title: 'Asignar lider y departamento',
     subtitle: 'De quien se realizará el reporte',
   },
+  step: {
+    isComplete: false,
+    isEnabled: true,
+  },
 };

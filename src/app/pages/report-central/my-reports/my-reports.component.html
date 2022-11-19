@@ -1,19 +1,18 @@
-<app-client-filter
-  [selectedClientId]="selectedClientId"
-  [selectedSubbaseId]="selectedSubbaseId"
-  (selectedClientEvent)="onBaseChange($event)"
-  (selectedSubbaseEvent)="onSubbaseChange($event)"></app-client-filter>
-<div *ngIf="!data && !generatedReportsLoader.isLoading()">
-  <mat-card>
-    <mat-card-content style="text-align: center; margin: 20px">
-      <h3>
-        No se encontro resultado para: <i>{{ filterText }}</i>
-      </h3></mat-card-content
-    >
-  </mat-card>
-</div>
+<div class="my-reports">
+  <div class="my-reports__description">
+    <p>
+      {{ 'MY_REPORTS.INTRODUCTION' | translate }}
+    </p>
+  </div>
 
-<div *ngIf="selectedClientId">
+  <app-client-filter
+    [selectedClientId]="selectedClientId"
+    [selectedSubbaseId]="selectedSubbaseId"
+    (selectedClientEvent)="onBaseChange($event)"
+    (selectedSubbaseEvent)="onSubbaseChange($event)"
+    (selectedAreaEvent)="onAreaChange($event)"
+    [showAreaSelect]="true"></app-client-filter>
+
   <app-table-my-reports
     #myReportsTable
     [dataSource]="dataSource"
@@ -25,6 +24,27 @@
     (selectedChange)="onSelectedChange($event)"
     (filterInput)="onFilterInput($event)"
     (filters)="onFilters($event)"
-    (sendReportEvent)="onSendReport()">
+    (sendReportEvent)="onSendReport()"
+    (editReportSettingEvent)="onEditReportSetting($event)"
+    (deleteReportEvent)="deleteReport($event)">
   </app-table-my-reports>
+
+  <ng-container>
+    <div *ngIf="!data && !generatedReportsLoader.isLoading() && madeRequest">
+      <mat-card>
+        <mat-card-content style="text-align: center; margin: 20px">
+          <ng-container *ngIf="filterText.length > 0">
+            <h3>
+              {{ 'NOT_FOUND_FILTER_TEXT' | translate }} <i>{{ filterText }}</i>
+            </h3>
+          </ng-container>
+          <ng-container *ngIf="filterText.length < 1">
+            <h3>
+              {{ 'MY_REPORTS.NOT_FOUND_ANY_REPORT_TEXT' | translate }}
+            </h3>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-container>
 </div>

@@ -9,7 +9,7 @@
       >
     </div>
     <ng-container *ngIf="chipItems.length > 0">
-      <div style="margin-bottom: 15px">
+      <div style="margin-top: 11px; margin-bottom: 0px">
         <mat-chip-list #chipList>
           <mat-chip
             *ngFor="let chipItem of chipItems; let idx = index"
@@ -25,48 +25,91 @@
   </div>
   <div class="action-box">
     <button
-      (click)="showFilterView()"
-      mat-icon-button
-      aria-label="Example icon button with a vertical three dot icon">
-      <img src="/assets/icons/filter.svg" alt="" />
+      #tooltip="matTooltip"
+      matTooltip="{{ 'TOOLTIPS.LABEL_SEARCH_FILTER' | translate }}"
+      matTooltipPosition="above"
+      aria-tooltip="Filter"
+      class="btn-share-report"
+      (click)="showFilterView()">
+      <app-icon-filter></app-icon-filter>
     </button>
-    <ng-container *ngIf="showFilter">
-      <div class="content-filter">
-        <div
-          *ngFor="let typeFilterItem of typeFilterList"
-          style="margin-bottom: 10px">
+  </div>
+  <ng-container *ngIf="showFilter">
+    <div class="content-filter">
+      <div class="content-filter__tag d-flex">
+        <div>
+          <app-icon-filter></app-icon-filter>
+        </div>
+        <div class="content-filter__tag__label">
+          <mat-label
+            ><h2>
+              {{ 'MY_REPORTS.FILTER_TAG' | translate }}
+            </h2></mat-label
+          >
+        </div>
+      </div>
+      <ng-container *ngFor="let typeFilterItem of typeFilterList">
+        <div class="content-filter__tag__type-report">
           <mat-label class="left"
-            ><h2 style="margin-bottom: 0px">
+            ><h2>
               {{ typeFilterItem.name }}
             </h2></mat-label
           >
-          <mat-selection-list>
-            <mat-list-option
-              *ngFor="let item of typeFilterItem.data"
-              [value]="item"
-              [selected]="isFilterChipChecked(item)"
-              (click)="selectItem(typeFilterItem.key, item)">
-              {{ item.name | translate }}
-            </mat-list-option>
-          </mat-selection-list>
         </div>
-        <button mat-stroked-button color="primary" (click)="reset()">
-          Reset
+        <div>
+          <ng-container *ngIf="typeFilterItem.key !== 'SALES'">
+            <div
+              *ngFor="let item of typeFilterItem.data"
+              style="margin-bottom: 15px">
+              <button
+                class="content-filter__item"
+                [ngClass]="{ 'content-filter__item--active': isChecked(item) }"
+                [value]="item"
+                (click)="selectItem(typeFilterItem.key, item)">
+                <div>
+                  {{ item.name | translate }}
+                </div>
+                <div *ngIf="isChecked(item)">
+                  <app-icon-close [color]="'#007EFD'"></app-icon-close>
+                </div>
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+
+      <div class="content-filter__actions">
+        <button
+          class="content-filter__actions__reset"
+          mat-stroked-button
+          color="primary"
+          (click)="reset()">
+          {{ 'MY_REPORTS.FILTER_ACTIONS.RESET' | translate }}
         </button>
-        <button mat-raised-button color="primary" (click)="onFilter()">
-          Filtrar
+        <button
+          class="content-filter__actions__filter"
+          mat-raised-button
+          color="primary"
+          (click)="onFilter()">
+          {{ 'MY_REPORTS.FILTER_ACTIONS.FILTER' | translate }}
         </button>
       </div>
-    </ng-container>
-  </div>
+    </div>
+  </ng-container>
 </div>
-<mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+<mat-table #table [dataSource]="dataSource" class="mat-elevation-z0">
   <!-- checkbox header -->
   <ng-container matColumnDef="select">
     <mat-header-cell *matHeaderCellDef>
-      <!-- TODO: Borrar codigo comentado de checkbox cuando no se requiere aplicar
-        alguna funcionalidad -->
-      <!-- <mat-checkbox color="primary" #matCheckBoxw> </mat-checkbox> -->
+      <mat-checkbox
+        *ngIf="multipleSelection"
+        color="primary"
+        (click)="$event.stopPropagation()"
+        (change)="$event ? toggleAllCheckbox($event.checked) : null"
+        [checked]="isAllSelected()"
+        [disabled]="this.dataSource?.data?.length === 0">
+      </mat-checkbox>
     </mat-header-cell>
     <mat-cell *cdkCellDef="let row; let idx = index">
       <mat-checkbox
@@ -84,7 +127,7 @@
   <ng-container
     *ngFor="let column of columns"
     [matColumnDef]="column.columnDef">
-    <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{
+    <mat-header-cell *cdkHeaderCellDef>{{
       column.header | translate
     }}</mat-header-cell>
     <mat-cell
@@ -117,12 +160,15 @@
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  <mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    [ngClass]="checkStatus(row) ? 'example-expanded-row' : ''"></mat-row>
 </mat-table>
 <!-- table pagination -->
 <mat-paginator
   *ngIf="dataSource"
   [pageSizeOptions]="pageSizeOptions"
+  [pageIndex]="pageIndex"
   [length]="totalSize"
   [pageSize]="pageSize"
   (page)="onPaginateChange($event)"

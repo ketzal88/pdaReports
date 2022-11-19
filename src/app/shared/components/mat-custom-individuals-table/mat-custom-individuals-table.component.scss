@@ -1,5 +1,62 @@
-
 //Custom material
+:host ::ng-deep {
+
+    mat-row,
+    mat-header-row {
+        border-style: none;
+        min-height: 40px;
+    }
+
+    .mat-cell {
+        color: #727276;
+        font-size: 12px;
+    }
+
+    .mat-checkbox-frame {
+        background: #FFFFFF;
+        border: 1px solid #BCBCBC;
+        border-radius: 4px;
+    }
+
+    .mat-checkbox-checked .mat-checkbox-background {
+        border: 1px solid #BCBCBC;
+        background-color: #007EFD;
+        border-radius: 4px;
+    }
+
+    .mat-chip.mat-standard-chip {
+        background: #E7F1FE;
+        border: 1px solid #007EFD;
+        border-radius: 20px;
+        color: #007EFD;
+        font-weight: 400;
+        font-size: 9px;
+    }
+
+    .mat-chip.mat-standard-chip::after {
+        background: none;
+    }
+
+    .mat-standard-chip .mat-chip-remove.mat-icon {
+        color: #007EFD;
+    }
+
+    mat-cell:last-of-type {
+        padding-right: 0px;
+        justify-content: center;
+    }
+
+    mat-header-cell:last-of-type {
+        justify-content: center;
+        padding-right: 0px;
+    }
+}
+
+.example-expanded-row {
+    background: #E7F1FE;
+    border-radius: 4px
+}
+
 .mat-list-base {
     padding-top: 0px;
 }
@@ -10,10 +67,19 @@
     font-size: 14px;
 }
 
-.mat-cell.locked{
-    color: #004291;
-    font-weight: 900;
+
+
+.mat-column-creationDate {
+    flex: 0 0 80px;
 }
+
+
+.mat-column-shortId {
+    flex: 0 0 80px;
+}
+
+
+
 
 table {
     width: 100%;
@@ -22,6 +88,7 @@ table {
 .table-actionbar {
     padding: 2px;
     display: flex;
+    position: relative;
 }
 
 .table-actionbar .search-box {
@@ -29,19 +96,129 @@ table {
 }
 
 .table-actionbar .action-box {
-    text-align: right;
-    padding-top: 25px;
+    // text-align: right;
+    padding-top: 8px;
 }
 
 .table-actionbar .action-box button {
     margin-right: 10px;
+    background: #F8F9FC;
+    border: 1px solid #DBDBDB;
+    border-radius: 6px;
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+}
 
+.mat-column-select {
+    flex: 0 0 55px;
+}
+
+.mat-column-actions {
+    flex: 90px 0 0;
 }
 
 .content-filter {
     margin-bottom: 10px;
     position: absolute;
-    right: 40px;
-    background: white;
+    right: 0px;
+    background: #ffffff;
     z-index: 1;
+    border-radius: 6px 6px 0px 0px;
+    width: 220px;
+    border: 1px solid #DBDBDB;
+}
+
+.btn-actions-report {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.content-filter__tag {
+    background: #F8F9FC;
+    align-items: center;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+    height: 32px;
+    border-radius: 6px 6px 0px 0px;
+
+}
+
+.content-filter__tag__label {
+    margin-left: 20px;
+}
+
+.content-filter__tag__label h2 {
+    color: #6D7783;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0px
+}
+
+.content-filter__tag__type-report {
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.content-filter__tag__type-report h2 {
+    margin-bottom: 0px;
+    color: #6d7783;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.content-filter__item {
+    height: 30px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background: #ebeff4;
+    border-radius: 20px;
+    border: none;
+    font-size: 12px;
+    font-weight: 400;
+    color: #6d7783;
+    margin-left: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.content-filter__item--active {
+    color: #007EFD;
+    background: #E7F1FE;
+    border: 1px solid #007EFD;
+    gap: 10px;
+}
+
+.content-filter__actions {
+    margin-top: 30px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 12px;
+    margin-left: 12px;
+}
+
+.content-filter__actions__reset {
+    width: 92px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #007efd;
+}
+
+.content-filter__actions__filter {
+    width: 92px;
+    height: 30px;
+    line-height: 30px;
+    background: #007efd;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
 }

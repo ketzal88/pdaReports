@@ -1,25 +1,33 @@
 <header class="header">
   <h2 class="u-name">
-    PDA <b>{{ 'TITLE_PDA_CONFIGURATION' | translate }}</b>
+    {{ 'HEADER.TITLE_PDA' | translate }}
+    <b>{{ 'HEADER.TITLE_PDA_CONFIGURATION' | translate }}</b>
   </h2>
-  <p>{{ 'VERSION' | translate }}: v{{ version }}</p>
 
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'CHANGE_LANGUAGE' | translate }}</mat-label>
-    <mat-select
-      [(ngModel)]="selectedValue"
-      (selectionChange)="changeLanguage($event)"
-      name="language">
-      <mat-option *ngFor="let language of foods" [value]="language.value">
-        {{ language.language | translate }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <button mat-button [matMenuTriggerFor]="menu">
-    <i class="fa fa-user" aria-hidden="true"> </i>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="logout()">Logout</button>
-  </mat-menu>
+  <div class="d-flex" style="height: 100%">
+    <!-- <div class="d-flex user">
+      <app-icon-notification></app-icon-notification>
+    </div> -->
+    <div class="d-flex language">
+      <mat-form-field>
+        <mat-label>{{ 'CHANGE_LANGUAGE' | translate }}</mat-label>
+        <mat-select
+          [(ngModel)]="selectedValue"
+          (selectionChange)="changeLanguage($event)"
+          name="language">
+          <mat-option *ngFor="let language of foods" [value]="language.value">
+            {{ language.language | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="d-flex user">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <app-icon-user></app-icon-user>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </div>
+  </div>
 </header>

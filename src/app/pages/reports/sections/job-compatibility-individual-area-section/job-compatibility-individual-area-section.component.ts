@@ -21,9 +21,9 @@ export class JobCompatibilityIndividualAreaSectionComponent implements OnInit {
   @Input() jobCompatibilityDetailed: JobCompatibilityDetailed;
   @Input() multipleJobCompatibility: MultipleJobCompatibility[];
   @Input() jobCategory: JobCategory;
+  @Input() selectedIndividualId!: string;
 
   constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

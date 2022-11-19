@@ -1,18 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { StepsService } from '../../../core/services/steps.service';
-import { StepModel } from '../../../core/models/step.model';
-import {
-  concat,
-  Observable,
-  Subscription,
-  catchError,
-  take,
-  combineLatest,
-  of,
-  timer,
-  map,
-} from 'rxjs';
+import { Observable, Subscription, catchError, combineLatest, of } from 'rxjs';
 import { ReportConfigurationSteps } from '../../../core/configs/report-configuration-steps.config';
 import { ConfigurationSteps } from '../../../core/models/configuration-steps.model';
 import { SelectedReport } from '../../../core/models/reportType.model';
@@ -20,14 +9,11 @@ import { StoreService } from '../../../core/services/store.service';
 import { StoreKeys } from '../../../core/consts/store-keys.enum';
 import { unsubscribe } from 'src/app/core/utils/subscription.util';
 import { MyReport } from './interfaces/myReport.interface';
-import { Competency } from 'src/app/core/services/microservices/competency/competency.interface';
 import {
   Job,
   JobCategory,
 } from 'src/app/core/services/microservices/job/job.interface';
-import { VwGetAllIndividualWithBehaviouralProfile } from 'src/app/core/services/microservices/individual/individual.interface';
 import { ReportStyles } from './interfaces/reportStyles.interface';
-import { configurationSteps } from '../../../core/configs/steps-configuration/steps-configuration.config';
 import { TypeFilter } from '../../../shared/components/mat-custom-individuals-table/models/type-filter.interface';
 import { GeneratedReportsService } from '../../../core/services/microservices/reports/generated-reports.service';
 import {
@@ -40,13 +26,33 @@ import { decodeToken } from '../../../core/utils/token.util';
 import { Loader } from '../../../core/services/loader/loader';
 import { ReportResponseType } from '../../../core/consts/report-response-type.enum';
 import { ModalService } from '../../../core/services/modal.service';
-import { ResponseDialogComponent } from '../../../shared/components/modal/response-dialog/response-dialog.component';
-import { TranslateService } from '@ngx-translate/core';
 import { GuidService } from '../../../core/services/guid.service';
+import { getDifferenceBetweenArray } from '../../../shared/utils/arrays.util';
 import {
-  StepConfiguration,
+  ConfirmDialogComponent,
+  ConfirmDialogModel,
+} from '../../../shared/components/individuals/modal/confirm-dialog/confirm-dialog.component';
+import {
+  GeneratedReport,
+  GeneratedReportByIdResponse,
+} from '../../../core/services/microservices/reports/interfaces/generatedReportsResponse.interface';
+import {
   ItemStepConfiguration,
+  StepConfiguration,
 } from '../../../core/configs/steps-configuration/interfaces/steps-configuration.interface';
+import { TemplateConfiguration } from './interfaces/template-configuration.interface';
+import {
+  DuplicateReportGeneratedRequest,
+  DuplicateReportGeneratedResponse,
+} from '../../../core/services/microservices/reports/interfaces/duplicateReportGenerated.interface';
+import { InputDialogComponent } from '../my-templates/modal/input-dialog/input-dialog.component';
+import { MultipleReportResponseDialogComponent } from 'src/app/pages/report-central/configuration/modal/multiple-report-dialog/multiple-report-response-dialog.component';
+import { LocalStepModel } from './interfaces/local-step-model.interface';
+import { ConfigurationService } from './configuration.service';
+import { IndividualFilterService } from 'src/app/core/services/individual/individual-filter.service';
+import { configurationSteps } from '../../../core/configs/steps-configuration/steps-configuration.config';
+import { STORAGE_CONFIGURATION } from '../../../core/configs/store/store-data-clean.config';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-configuration',
@@ -63,34 +69,48 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   jobCategory: JobCategory;
   selectedStepConfiguration: StepConfiguration;
   saveMultipleIndividualsIds: boolean = false;
+  generatedReportByIdResponse: GeneratedReportByIdResponse;
 
-  currentStep!: StepModel | null;
+  currentStep!: LocalStepModel;
   currentStepSub!: Subscription;
 
   myReportSaved: MyReport;
 
-  selectedClientId: string;
-  selectedSubbaseId: string;
+  selectedClientId: string = null;
+  selectedSubbaseId: string = null;
 
   typeFilterList: TypeFilter[];
+  filterSubscription: Subscription;
 
   //Variables
   tokenData: any;
   messageError: string;
-  //private counter: Observable<number>;
-  //private count: number = 6;
+  myGeneratedReport: GeneratedReport;
+
+  //Templates
+  generatedReportByIdResponseTemplate: GeneratedReportByIdResponse;
+  templateConfiguration?: TemplateConfiguration;
 
   //Loaders
   generateReportLoader: Loader;
+  generateUpdateReportLoader: Loader;
   generateCompetencyByReportLoader: Loader;
   generateJobByReportLoader: Loader;
+  generateGroupingIndividualByReportLoader: Loader;
+  generateAreaIndividualByReportLoader: Loader;
+  getGeneratedReportByShortIdLoader: Loader;
+  configurationReportLoader: Loader;
 
   //Subscriptions
   generateReportSub: Subscription;
-  generateCompetencyByReportSub: Subscription;
+  generateUpdateReportSub: Subscription;
   generateJobByReportSub: Subscription;
+  generateGroupingIndividualByReportSub: Subscription;
+  generateAreaIndividualByReportSub: Subscription;
   generateSetObsSub: Subscription;
   timerSub: Subscription;
+  getGeneratedReportByShortIdSub: Subscription;
+  configurationReportServiceSub: Subscription;
 
   constructor(
     private stepsService: StepsService,
@@ -99,23 +119,25 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     private generatedReporsService: GeneratedReportsService,
     private cookieStorageService: CookieStorageService,
     private modalService: ModalService,
-    private translateService: TranslateService,
-    private guidService: GuidService
+    private guidService: GuidService,
+    private configurationService: ConfigurationService,
+    private individualFilterService: IndividualFilterService,
+    private translateService: TranslateService
   ) {
-    let reportType = this.storeService.getData(StoreKeys.TYPE_REPORT);
-    if (!reportType) {
-      this.router.navigate(['/app']);
-    } else {
-      //Obtengo tipo de reporte seleccionado
-      this.selectedReport = JSON.parse(reportType);
+    //Recupero el reporte seleccionado
+    this.selectedReport = this.storeService.getData(StoreKeys.TYPE_REPORT)
+      ? JSON.parse(this.storeService.getData(StoreKeys.TYPE_REPORT))
+      : null;
+    if (this.selectedReport) {
+      this.initLoaders();
+      this.loadStorageValues();
       this.loadStepConfiguration();
-      this.stepsService.initSteps(this.getStepsConfiguration());
-      this.myReportSaved = new MyReport();
+    } else {
+      this.router.navigate(['/app']);
     }
   }
 
   ngOnInit(): void {
-    this.initLoaders();
     const cookieJWT = this.cookieStorageService.getCookie('JWTToken');
     this.tokenData = decodeToken(cookieJWT);
     this.isReportGenerate = false;
@@ -124,43 +146,151 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     unsubscribe(this.currentStepSub);
-    this.cleanConfigStorage();
+    unsubscribe(this.generateReportSub);
+    unsubscribe(this.generateUpdateReportSub);
+    unsubscribe(this.getGeneratedReportByShortIdSub);
+    unsubscribe(this.generateSetObsSub);
+    unsubscribe(this.filterSubscription);
+    this.deleteConfigurationStorage();
+  }
+
+  subscribeFilterChange(): void {
+    this.filterSubscription =
+      this.individualFilterService.typeFilterListEvent.subscribe(
+        (resp: any) => {
+          this.typeFilterList = resp;
+        }
+      );
+  }
+
+  deleteConfigurationStorage(): void {
+    this.storeService.clearValueByList(STORAGE_CONFIGURATION);
   }
 
   initLoaders(): void {
     this.generateReportLoader = new Loader();
+    this.generateUpdateReportLoader = new Loader();
     this.generateCompetencyByReportLoader = new Loader();
     this.generateJobByReportLoader = new Loader();
+    this.generateGroupingIndividualByReportLoader = new Loader();
+    this.generateAreaIndividualByReportLoader = new Loader();
+    this.getGeneratedReportByShortIdLoader = new Loader();
+    this.configurationReportLoader = new Loader();
+  }
+
+  loadStepConfiguration(): void {
+    this.myReportSaved = new MyReport();
+    //Obtengo la configuracion por el tipo de reporte
+    this.selectedStepConfiguration = {
+      ...configurationSteps.find(
+        (data: StepConfiguration) =>
+          data.groupReport === this.selectedReport?.reportGroup.internalName &&
+          data.reportType === this.selectedReport?.reportType.internalName
+      ),
+    };
+
+    //Si es un nuevo template, deshabilito la seleccion de persona
+    this.selectedStepConfiguration.steps = this.templateConfiguration
+      ? this.selectedStepConfiguration.steps.map(
+          (data: ItemStepConfiguration) => {
+            if (data.name === 'selectIndividuals') {
+              data.step.isEnabled =
+                !this.templateConfiguration.templateCreation;
+            }
+            return data;
+          }
+        )
+      : this.selectedStepConfiguration.steps;
+    //Inicializo los pasos de configuracion
+    const stepConfiguration =
+      this.configurationService.getConfigurationStepMapping(
+        this.selectedStepConfiguration
+      );
+    this.stepsService.initSteps(stepConfiguration);
+    if (this.templateConfiguration) {
+      this.loadTemplateConfiguration();
+      //Si ya existe el template, salto al paso de seleccion de persona
+      if (!this.templateConfiguration.templateCreation) {
+        const stepIndividual = stepConfiguration.find(
+          x => x.stepName === 'selectIndividuals'
+        );
+        if (stepIndividual) {
+          this.stepsService.setCurrentStep(stepIndividual);
+        }
+      }
+    } else if (this.myGeneratedReport) {
+      //Info para editar reporte
+      this.loadGeneratedReportByShortId(this.myGeneratedReport.shortId);
+    }
+
+    this.subscribeFilterChange();
+    if (!this.typeFilterList && this.selectedClientId) {
+      this.individualFilterService.loadGenderFilter(this.selectedClientId);
+    }
+  }
+
+  loadStorageValues(): void {
+    this.myGeneratedReport = this.storeService.getData(
+      StoreKeys.MY_GENERATED_REPORT
+    );
+    this.templateConfiguration = this.storeService.getData(
+      StoreKeys.REPORT_TEMPLATE_CONFIGURATION
+    );
+  }
+
+  loadTemplateConfiguration(): void {
+    if (
+      this.templateConfiguration.isTemplate &&
+      !this.templateConfiguration.templateCreation
+    ) {
+      if (this.myGeneratedReport) {
+        this.changeClient(this.myGeneratedReport.baseId);
+        this.changeSubbase(this.myGeneratedReport.subBaseId);
+      }
+
+      this.updateGeneratedReportByIdResponseTemplate(
+        this.templateConfiguration.templateCreationId
+      );
+    }
+  }
+
+  loadGeneratedReportByShortId(id: string): void {
+    this.getGeneratedReportByShortIdSub = this.getGeneratedReportByShortIdLoader
+      .load(this.generatedReporsService.getGeneratedReportByShortId(id))
+      .subscribe({
+        next: (res: GeneratedReportByIdResponse) => {
+          this.generatedReportByIdResponse = res;
+        },
+        error: err => {
+          console.log(
+            this.translateService.instant(
+              'REPORT_CONFIGURATION.ERROR_RETRIEVING_REPORT'
+            ),
+            err
+          );
+        },
+      });
   }
 
   loadCurrentStep(): void {
     this.currentStepSub = this.stepsService
       .getCurrentStep()
-      .subscribe((step: StepModel) => {
+      .subscribe((step: LocalStepModel) => {
         this.currentStep = step;
       });
   }
 
-  cleanConfigStorage(): void {
-    this.storeService.clearValue(StoreKeys.SELECTED_INDIVIDUALS);
-    this.storeService.clearValue(StoreKeys.SELECTED_JOB);
-    this.storeService.clearValue(StoreKeys.SELECTED_JOB_CATEGORY);
-    this.storeService.clearValue(StoreKeys.SELECTED_INDIVIDUALS_BY_GROUP);
-  }
-
-  loadStepConfiguration(): void {
-    //Obtengo la configuracion por el tipo de reporte
-    console.log(this.selectedReport);
-    this.selectedStepConfiguration = configurationSteps.find(
-      (data: StepConfiguration) =>
-        data.groupReport === this.selectedReport?.reportGroup.internalName &&
-        data.reportType === this.selectedReport?.reportType.internalName
-    );
-  }
-
   onNextStep(): void {
-    console.log(this.myReportSaved);
-    if (!this.stepsService.isLastStep()) {
+    //Si el paso de seleccion de persona esta completo, activo las acciones de generacion de reporte y template
+    if (
+      this.currentStep.isComplete &&
+      this.currentStep.stepName === 'selectIndividuals'
+    ) {
+      this.isReportGenerate = true;
+      if (!this.stepsService.isLastStep()) {
+        this.stepsService.moveToNextStep();
+      }
+    } else if (!this.stepsService.isLastStep()) {
       this.stepsService.moveToNextStep();
     } else {
       this.isReportGenerate = true;
@@ -174,40 +304,234 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   }
 
   generateReport(): void {
-    this.storeService.setData(
-      StoreKeys.REPORT,
-      JSON.stringify(this.myReportSaved)
-    );
-    this.storeService.setData(StoreKeys.JOBS_BY_CATEGORY, this.jobsByCategory);
-    this.storeService.setData(StoreKeys.JOB_CATEGORY, this.jobCategory);
+    if (
+      !this.myReportSaved.individualIds ||
+      this.myReportSaved.individualIds.length < 1
+    ) {
+      this.setWarning(
+        [
+          this.translateService.instant(
+            'REPORT_CONFIGURATION.WARNING_WHEN_GENERATING_REPORT_WITHOUT_INDIVIDUALS'
+          ),
+        ],
+        ReportResponseType.WARNING,
+        'response-warning'
+      );
+      return;
+    }
+    //REVISAR QUE PASA CUANDO DESDE PERSONAS SEELLCCIONO MULTIPLES Y GENERA UN SOLO REPORTE.
+    if (
+      this.generatedReportByIdResponseTemplate &&
+      this.templateConfiguration?.isTemplate
+    ) {
+      const obs: Array<Observable<any>> =
+        this.loadUpdateRestEntitiesObsRequest(true);
+      if (
+        this.configurationService.reportGeneratedAreEquals(
+          true,
+          this.generatedReportByIdResponseTemplate,
+          this.generatedReportByIdResponse,
+          this.myReportSaved
+        ) &&
+        (obs.length < 1 || this.myReportSaved.individualIds.length > 1)
+      ) {
+        //SON IGUALES
+        this.duplicateReport(
+          this.generatedReportByIdResponseTemplate.reportGeneratedId,
+          this.myReportSaved.individualIds
+        );
+      } else {
+        //Si hay diferencias.... Tengo que crear uno nuevo, y luego duplicar.
+        this.generateNewGeneratedReport(false);
+      }
+    } else if (this.generatedReportByIdResponse) {
+      if (
+        this.myReportSaved.individualIds[0] ===
+        this.generatedReportByIdResponse.individualId
+      ) {
+        //Comparo previamente el objeto del reporte con el nuevo que se va a actualizar
+        if (
+          this.configurationService.reportGeneratedAreEquals(
+            false,
+            this.generatedReportByIdResponseTemplate,
+            this.generatedReportByIdResponse,
+            this.myReportSaved
+          )
+        ) {
+          console.log('paso6');
+          this.generateUpdateRestEntities(false);
+        } else {
+          console.log('paso7');
+          //Actualizo reporte
+          this.updateReportGenerated(false);
+        }
+      } else {
+        console.log('paso8');
+        //Si selecciono otro individuo, genero un nuevo reporte. Informo que estara creando un nuevo reporte
+        this.openModalConfirmationNewIndividualReport();
+      }
+    } else {
+      console.log('paso9');
+      this.generateNewGeneratedReport(false);
+    }
+  }
 
-    let reportGeneratedRequest: ReportGeneratedRequest = {
-      // reportGeneratedId: this.guidService.generate(),
-      creationDate: new Date(),
-      modificationDate: new Date(),
-      userId: this.tokenData.UserId,
-      baseId: this.selectedClientId,
-      subBaseId: this.selectedSubbaseId,
-      reportId: this.selectedReport.reportId,
-      // isPublic: false,
-      expirationDate: new Date(),
-      individualId: this.myReportSaved.individualIds[0],
-      areaId: this.myReportSaved.areaId,
-      groupId: this.myReportSaved.groupId,
-      reportStyleId: null,
-      leaderIndividualId: this.myReportSaved.leaderIndividualId,
-      feedbackText: this.myReportSaved.hrFeedback
-        ? this.myReportSaved.hrFeedback
-        : null,
+  openModalConfirmationNewIndividualReport(): void {
+    const dialogData: ConfirmDialogModel = {
+      title: this.translateService.instant(
+        'REPORT_CONFIGURATION.MODAL.NEW_REPORT_CONFIRMATION.TITLE'
+      ),
+      message: this.translateService.instant(
+        'REPORT_CONFIGURATION.MODAL.NEW_REPORT_CONFIRMATION.DESCRIPTION'
+      ),
     };
+    this.modalService.openPopUp(ConfirmDialogComponent, {
+      width: '600px',
+      closeOnNavigation: true,
+      data: dialogData,
+    });
+    this.modalService.confirmedPopUp().subscribe((data: any) => {
+      if (data) {
+        this.generateNewGeneratedReport(false);
+      }
+    });
+  }
+
+  openModalResponse(): void {
+    const dialogData: ConfirmDialogModel = {
+      title: this.translateService.instant(
+        'REPORT_CONFIGURATION.MODAL.UPDATED_REPORT.TITLE'
+      ),
+      message: this.translateService.instant(
+        'REPORT_CONFIGURATION.MODAL.UPDATED_REPORT.DESCRIPTION'
+      ),
+    };
+    this.modalService.openPopUp(ConfirmDialogComponent, {
+      width: '600px',
+      closeOnNavigation: true,
+      data: dialogData,
+    });
+    this.modalService.confirmedPopUp().subscribe((data: any) => {
+      if (data) {
+        this.router.navigate([
+          `/app/reports/${this.generatedReportByIdResponse.reportGeneratedId}`,
+        ]);
+      } else {
+        this.router.navigate([`/app`]);
+      }
+    });
+  }
+
+  updateReportGenerated(isTemplate: boolean, templateName?: string): void {
+    const reportGeneratedRequest = this.getGeneratedReportUpdateRequest(
+      isTemplate,
+      templateName
+    );
+
+    const updateId = isTemplate
+      ? this.generatedReportByIdResponseTemplate.reportGeneratedId
+      : this.generatedReportByIdResponse.reportGeneratedId;
+
+    this.generateUpdateReportSub = this.generateUpdateReportLoader
+      .load(
+        this.generatedReporsService.updateReport(
+          reportGeneratedRequest,
+          updateId
+        )
+      )
+      .subscribe({
+        next: () => {
+          this.generateUpdateRestEntities(isTemplate);
+        },
+        error: () => {
+          this.setError(
+            [
+              `CONFIGURATION.${ReportResponseType.ERROR}.${ReportResponseType.ERROR_UPDATE_REPORT}`,
+            ],
+            ReportResponseType.ERROR
+          );
+        },
+        complete: () => {},
+      });
+  }
+
+  generateUpdateRestEntities(isTemplate: boolean): void {
+    let obs: Array<Observable<any>> =
+      this.loadUpdateRestEntitiesObsRequest(isTemplate);
+
+    if (obs.length > 0) {
+      this.generateSetObsSub = combineLatest(...obs)
+        .pipe()
+        .subscribe({
+          next: (response: (any | any)[]) => {
+            if (
+              response.some(value =>
+                [
+                  ReportResponseType.ERROR_UPDATE_JOB_REPORT,
+                  ReportResponseType.ERROR_UPDATE_COMPETENCY_REPORT,
+                  ReportResponseType.ERROR_UPDATE_AREA_INDIVIDUAL_REPORT,
+                  ReportResponseType.ERROR_UPDATE_GROUPING_INDIVIDUAL_REPORT,
+                ].includes(value)
+              )
+            ) {
+              this.loadErrors(response);
+            } else {
+              if (!isTemplate) {
+                this.openModalResponse();
+              } else {
+                this.updateGeneratedReportByIdResponseTemplate(
+                  this.generatedReportByIdResponseTemplate.reportGeneratedId
+                );
+                this.setWarning(
+                  [
+                    this.translateService.instant(
+                      'REPORT_CONFIGURATION.MODAL.UPDATED_TEMPLATE.TITLE'
+                    ),
+                  ],
+                  ReportResponseType.SUCCESS,
+                  'response-success'
+                );
+              }
+            }
+          },
+          error: () => {},
+          complete: () => {},
+        });
+    } else {
+      if (isTemplate) {
+        this.updateGeneratedReportByIdResponseTemplate(
+          this.generatedReportByIdResponseTemplate.reportGeneratedId
+        );
+        this.setWarning(
+          [
+            this.translateService.instant(
+              'REPORT_CONFIGURATION.MODAL.UPDATED_TEMPLATE.TITLE'
+            ),
+          ],
+          ReportResponseType.SUCCESS,
+          'response-success'
+        );
+      }
+    }
+  }
+
+  generateNewGeneratedReport(isTemplate: boolean, templateName?: string): void {
+    const reportGeneratedRequest = this.getGeneratedReportRequest(
+      isTemplate,
+      templateName
+    );
 
     this.generateReportSub = this.generateReportLoader
       .load(this.generatedReporsService.generateReport(reportGeneratedRequest))
       .subscribe({
         next: reportGeneratedId => {
-          this.generateRestEntities(reportGeneratedId);
+          this.generateRestEntities(reportGeneratedId, isTemplate);
+          if (isTemplate && !this.generatedReportByIdResponseTemplate) {
+            //Si es un template lo que cree, guardo su info
+            this.updateGeneratedReportByIdResponseTemplate(reportGeneratedId); //Aca no se si lo necesito.. esto es mas que nada para entidades relacionadas
+          }
         },
-        error: err => {
+        error: () => {
           this.setError(
             [
               `CONFIGURATION.${ReportResponseType.ERROR}.${ReportResponseType.ERROR_REPORT}`,
@@ -218,34 +542,97 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
       });
   }
 
-  setError(message: string[], type: string): void {
-    this.modalService.openPopUp(
-      ResponseDialogComponent,
-      this.getParams(message, type, 'response-error')
-    );
+  generateRestEntities(reportGeneratedId: string, isTemplate: boolean): void {
+    let obs: Array<Observable<any>> =
+      this.loadCreateObsRequest(reportGeneratedId);
 
-    let timer = setInterval(() => {
-      clearInterval(timer);
-      timer = null;
-      this.resetConfiguration();
-      this.modalService.dialogRef.close(true);
-    }, 3000);
-
-    this.modalService.confirmedPopUp().subscribe((response: any) => {
-      if (timer) {
-        clearInterval(timer);
-        this.resetConfiguration();
+    if (obs.length > 0) {
+      this.generateSetObsSub = combineLatest(...obs)
+        .pipe()
+        .subscribe({
+          next: (response: (any | any)[]) => {
+            if (
+              response.some(value =>
+                [
+                  ReportResponseType.ERROR_JOB_REPORT,
+                  ReportResponseType.ERROR_COMPETENCY_REPORT,
+                  ReportResponseType.ERROR_AREA_INDIVIDUAL_REPORT,
+                  ReportResponseType.ERROR_GROUPING_INDIVIDUAL_REPORT,
+                ].includes(value)
+              )
+            ) {
+              this.loadErrors(response);
+            } else {
+              if (!isTemplate && this.myReportSaved.individualIds.length > 1) {
+                this.duplicateReport(
+                  reportGeneratedId,
+                  this.myReportSaved.individualIds.slice(1) //Quito al primero
+                );
+                //Ahora aca tengo que duplicar los reportes y mostrar un popUp con los resultados.
+              } else if (!isTemplate) {
+                //Si no es template redirecciono al reporte.
+                this.router.navigate([`/app/reports/${reportGeneratedId}`]);
+              } else {
+                this.updateGeneratedReportByIdResponseTemplate(
+                  reportGeneratedId
+                );
+                this.setWarning(
+                  [
+                    this.translateService.instant(
+                      'REPORT_CONFIGURATION.MODAL.CREATED_TEMPLATE.TITLE'
+                    ),
+                  ],
+                  ReportResponseType.SUCCESS,
+                  'response-success'
+                );
+              }
+            }
+          },
+          error: () => {},
+          complete: () => {},
+        });
+    } else {
+      if (isTemplate) {
+        this.updateGeneratedReportByIdResponseTemplate(
+          reportGeneratedId //this.templateConfiguration?.templateCreationId
+        );
+        this.setWarning(
+          [
+            this.translateService.instant(
+              'REPORT_CONFIGURATION.MODAL.CREATED_TEMPLATE.TITLE'
+            ),
+          ],
+          ReportResponseType.SUCCESS,
+          'response-success'
+        );
+      } else {
+        this.router.navigate([`/app/reports/${reportGeneratedId}`]);
       }
-    });
+    }
+  }
+
+  setError(message: string[], type: string): void {
+    this.configurationService.setError(message, type);
+    this.configurationService
+      .getResetConfigurationErrorEvent()
+      .subscribe(data => {
+        this.resetConfiguration();
+      });
   }
 
   resetConfiguration(): void {
-    let stepsConfiguration = this.getStepsConfiguration();
-    this.stepsService.setSteps(this.getStepsConfiguration());
+    let stepsConfiguration =
+      this.configurationService.getConfigurationStepMapping(
+        this.selectedStepConfiguration
+      );
+    this.stepsService.setSteps(
+      this.configurationService.getConfigurationStepMapping(
+        this.selectedStepConfiguration
+      )
+    );
     this.stepsService.setCurrentStep(stepsConfiguration[0]);
     this.myReportSaved = new MyReport();
     this.isReportGenerate = false;
-    this.cleanConfigStorage();
   }
 
   getParams(message: string[], type: string, panelClass: string): any {
@@ -260,36 +647,284 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     return params;
   }
 
-  generateRestEntities(reportGeneratedId: string): void {
+  //#region  Obtengo Diferencias entre objetos y me devuelve los observables a ejecutar para actualizar
+
+  loadUpdateRestEntitiesObsRequest(
+    isTemplate: boolean
+  ): Array<Observable<any>> {
     let obs: Array<Observable<any>> = [];
+
+    const compareLocal = this.myReportSaved;
+    const compareSaved =
+      isTemplate && this.generatedReportByIdResponseTemplate
+        ? this.generatedReportByIdResponseTemplate
+        : this.generatedReportByIdResponse;
+
+    //Actualizo las competencias
+    let competenciesObs: Array<Observable<any>> =
+      this.loadUpdateCompetenciesObsRequest(compareLocal, compareSaved);
+    if (competenciesObs.length > 0) {
+      //TODO: Descomentar en cuanto disponible el endpoint delete para eliminar individuos
+      obs.push(...competenciesObs);
+    }
+
+    //Actualizo el puesto
+    let jobObs: Array<Observable<any>> = this.loadUpdateJobObsRequest(
+      compareLocal,
+      compareSaved
+    );
+    if (jobObs.length > 0) {
+      obs.push(...jobObs);
+    }
+
+    //Actualizo los individuos del area
+    let individualsByAreaObs: Array<Observable<any>> =
+      this.loadUpdateIndividualsByAreaObsRequest(compareLocal, compareSaved);
+    if (individualsByAreaObs.length > 0) {
+      obs.push(...individualsByAreaObs);
+    }
+    // //Actualizo los individuos del grupo
+    let individualsByGroupObs: Array<Observable<any>> =
+      this.loadUpdateIndividualsByGroupObsRequest(compareLocal, compareSaved);
+    if (individualsByGroupObs.length > 0) {
+      obs.push(...individualsByGroupObs);
+    }
+
+    return obs;
+  }
+
+  loadUpdateCompetenciesObsRequest(
+    compareLocal: MyReport,
+    compareSaved: GeneratedReportByIdResponse
+  ): Array<Observable<any>> {
+    let newIndividuals = [];
+
+    const savedReportCompetencies =
+      compareLocal.competenciesIds !== undefined &&
+      compareLocal.competenciesIds.length > 0
+        ? compareLocal.competenciesIds
+        : [];
+
+    //Busco los nuevos individuos a agregar
+    newIndividuals = getDifferenceBetweenArray(
+      savedReportCompetencies,
+      compareSaved.reportGeneratedCompetencies.map(data => data.competencyId)
+    );
+
+    //Busco los individuos que no estaran en las competencias para eliminar
+    let oldIndividuals = [];
+    oldIndividuals = getDifferenceBetweenArray(
+      compareSaved.reportGeneratedCompetencies.map(data => data.competencyId),
+      savedReportCompetencies
+    );
+
+    let obs: Array<Observable<any>> = [];
+    if (newIndividuals.length > 0) {
+      obs.push(
+        this.generateCompetencyByReport(
+          compareSaved.reportGeneratedId,
+          newIndividuals
+        )
+      );
+    }
+    if (oldIndividuals.length > 0) {
+      let deleteGroupIndividualList =
+        compareSaved.reportGeneratedCompetencies.filter(data =>
+          oldIndividuals.includes(data.competencyId)
+        );
+
+      obs.push(
+        this.deleteCompetenciesByReport(
+          compareSaved.reportGeneratedId,
+          deleteGroupIndividualList.map(
+            data => data.reportGeneratedCompetencyId
+          )
+        )
+      );
+    }
+    return obs;
+  }
+
+  loadUpdateJobObsRequest(
+    compareLocal: MyReport,
+    compareSaved: GeneratedReportByIdResponse
+  ): Array<Observable<any>> {
+    let obs: Array<Observable<any>> = [];
+
+    if (compareLocal.jobId !== compareSaved.reportGeneratedJobs[0]?.jobId) {
+      obs.push(
+        this.generateJobByReport(
+          compareSaved.reportGeneratedId,
+          compareLocal.jobId
+        )
+      );
+      obs.push(
+        this.deleteJobByReport(
+          compareSaved.reportGeneratedId,
+          compareSaved.reportGeneratedJobs[0]?.reportGeneratedJobId
+        )
+      );
+    }
+    return obs;
+  }
+
+  loadUpdateIndividualsByAreaObsRequest(
+    compareLocal: MyReport,
+    compareSaved: GeneratedReportByIdResponse
+  ): Array<Observable<any>> {
+    let newIndividuals = [];
+
+    const savedReportIndividuals =
+      compareLocal.areaIndividuals !== undefined &&
+      compareLocal.areaIndividuals.length > 0
+        ? compareLocal.areaIndividuals
+        : [];
+
+    //Busco los nuevos individuos a agregar
+    newIndividuals = getDifferenceBetweenArray(
+      savedReportIndividuals,
+      compareSaved.reportGeneratedAreaIndividuals.map(data => data.individualId)
+    );
+
+    //Busco los individuos que no estaran en el area para eliminar
+    let oldIndividuals = [];
+    oldIndividuals = getDifferenceBetweenArray(
+      compareSaved.reportGeneratedAreaIndividuals.map(
+        data => data.individualId
+      ),
+      savedReportIndividuals
+    );
+
+    let obs: Array<Observable<any>> = [];
+    if (newIndividuals.length > 0) {
+      obs.push(
+        this.generateAreaIndividualByReport(
+          compareSaved.reportGeneratedId,
+          newIndividuals
+        )
+      );
+    }
+    if (oldIndividuals.length > 0) {
+      let deleteIndividualsByArea =
+        compareSaved.reportGeneratedAreaIndividuals.filter(data =>
+          oldIndividuals.includes(data.individualId)
+        );
+
+      obs.push(
+        this.deleteIndividualsAreaByReport(
+          compareSaved.reportGeneratedId,
+          deleteIndividualsByArea.map(data => data.individualId)
+        )
+      );
+    }
+    return obs;
+  }
+
+  loadUpdateIndividualsByGroupObsRequest(
+    compareLocal: MyReport,
+    compareSaved: GeneratedReportByIdResponse
+  ): Array<Observable<any>> {
+    let newIndividuals = [];
+
+    const savedReportIndividuals =
+      compareLocal.groupIndividuals !== undefined &&
+      compareLocal.groupIndividuals.length > 0
+        ? compareLocal.groupIndividuals
+        : [];
+
+    //Busco los nuevos individuos a agregar
+    newIndividuals = getDifferenceBetweenArray(
+      savedReportIndividuals,
+      compareSaved.reportGeneratedGroupingIndividuals.map(
+        data => data.individualId
+      )
+    );
+
+    //Busco los individuos que no estaran en el area para eliminar
+    let oldIndividuals = [];
+    oldIndividuals = getDifferenceBetweenArray(
+      compareSaved.reportGeneratedGroupingIndividuals.map(
+        data => data.individualId
+      ),
+      savedReportIndividuals
+    );
+
+    let obs: Array<Observable<any>> = [];
+    if (newIndividuals.length > 0) {
+      obs.push(
+        this.generateGroupingIndividualByReport(
+          compareSaved.reportGeneratedId,
+          newIndividuals
+        )
+      );
+    }
+    if (oldIndividuals.length > 0) {
+      let deleteIndividualsByGroup =
+        compareSaved.reportGeneratedGroupingIndividuals.filter(data =>
+          oldIndividuals.includes(data.individualId)
+        );
+
+      obs.push(
+        this.deleteIndividualsGroupByReport(
+          compareSaved.reportGeneratedId,
+          deleteIndividualsByGroup.map(data => data.individualId)
+        )
+      );
+    }
+    return obs;
+  }
+  //#endregion
+
+  loadCreateObsRequest(reportGeneratedId: string): Array<Observable<any>> {
+    let obs: Array<Observable<any>> = [];
+
+    //Agrego nuevas competencias al reporte
     if (
       this.myReportSaved.competenciesIds &&
       this.myReportSaved.competenciesIds.length > 0
     ) {
-      obs.push(this.generateCompetencyByReport(reportGeneratedId));
+      obs.push(
+        this.generateCompetencyByReport(
+          reportGeneratedId,
+          this.myReportSaved.competenciesIds
+        )
+      );
     }
+
+    //Agrego nuevo puesto al reporte
     if (this.myReportSaved.jobId) {
-      obs.push(this.generateJobByReport(reportGeneratedId));
+      obs.push(
+        this.generateJobByReport(reportGeneratedId, this.myReportSaved.jobId)
+      );
     }
-    if (obs.length > 0) {
-      this.generateSetObsSub = combineLatest(...obs)
-        .pipe()
-        .subscribe({
-          next: (response: (any | any)[]) => {
-            if (
-              response.some(value =>
-                ['ERROR_JOB_REPORT', 'ERROR_COMPETENCY_REPORT'].includes(value)
-              )
-            ) {
-              this.loadErrors(response);
-            } else {
-              this.router.navigate(['/app/reports']);
-            }
-          },
-          error: (err: Error) => {},
-          complete: () => {},
-        });
+
+    //Agrego los individuos del area
+    if (
+      this.myReportSaved.areaIndividuals &&
+      this.myReportSaved.areaIndividuals.length > 0
+    ) {
+      obs.push(
+        this.generateAreaIndividualByReport(
+          reportGeneratedId,
+          this.myReportSaved.areaIndividuals
+        )
+      );
     }
+
+    //Agrego los individuos al grupo
+    if (
+      this.myReportSaved.groupIndividuals &&
+      this.myReportSaved.groupIndividuals.length > 0
+    ) {
+      obs.push(
+        this.generateGroupingIndividualByReport(
+          reportGeneratedId,
+          this.myReportSaved.groupIndividuals
+        )
+      );
+    }
+
+    return obs;
   }
 
   loadErrors(response: string[]): void {
@@ -297,8 +932,10 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
 
     for (let i = 0; i < response.length; i++) {
       if (
-        response[i] === 'ERROR_JOB_REPORT' ||
-        response[i] === 'ERROR_COMPETENCY_REPORT'
+        response[i] === ReportResponseType.ERROR_JOB_REPORT ||
+        response[i] === ReportResponseType.ERROR_COMPETENCY_REPORT ||
+        response[i] === ReportResponseType.ERROR_AREA_INDIVIDUAL_REPORT ||
+        response[i] === ReportResponseType.ERROR_GROUPING_INDIVIDUAL_REPORT
       ) {
         resultError.push(`CONFIGURATION.ERROR.${response[i]}`);
       }
@@ -311,32 +948,26 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   }
 
   setWarning(resultError: string[], type: string, panelClass: string): void {
-    this.modalService.openPopUp(
-      ResponseDialogComponent,
-      this.getParams(resultError, type, panelClass)
-    );
-
-    let timer = setInterval(() => {
-      clearInterval(timer);
-      timer = null;
-      this.modalService.dialogRef.close(true);
-      this.router.navigate(['/app/reports']);
-    }, 3000);
-
-    this.modalService.confirmedPopUp().subscribe((response: any) => {
-      if (timer) {
-        clearInterval(timer);
-        this.router.navigate(['/app/reports']);
-      }
-    });
+    this.configurationService.setWarning(resultError, type, panelClass);
+    this.configurationService
+      .getResetConfigurationWarningEvent()
+      .subscribe(data => {
+        if (type === ReportResponseType.ERROR) {
+          this.router.navigate(['/app/reports']);
+        }
+      });
   }
 
-  generateCompetencyByReport(reportGeneratedId: string): Observable<string> {
+  //#region Ejecucion de metodos CRUD GeneratedReports, ret: Observable<string>
+  generateCompetencyByReport(
+    reportGeneratedId: string,
+    competenciesIds: string[]
+  ): Observable<string> {
     let request: ReportGeneratedCompetencyRequest[] = [];
 
-    for (let i = 0; i < this.myReportSaved.competenciesIds.length; i++) {
+    for (let i = 0; i < competenciesIds.length; i++) {
       let reportGeneratedCompetency: ReportGeneratedCompetencyRequest = {
-        competencyId: this.myReportSaved.competenciesIds[i],
+        competencyId: competenciesIds[i],
         reportGeneratedCompetencyId: this.guidService.generate(),
       };
       request.push(reportGeneratedCompetency);
@@ -352,14 +983,17 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
       .pipe(
         catchError(error => {
           console.log('error: ', error);
-          return of('ERROR_COMPETENCY_REPORT');
+          return of(ReportResponseType.ERROR_COMPETENCY_REPORT);
         })
       );
   }
 
-  generateJobByReport(reportGeneratedId: string): Observable<string> {
+  generateJobByReport(
+    reportGeneratedId: string,
+    jobId: string
+  ): Observable<string> {
     let request: ReportGeneratedJobRequest = {};
-    request.jobId = this.myReportSaved.jobId;
+    request.jobId = jobId;
     request.reportGeneratedJobId = this.guidService.generate();
 
     return this.generateJobByReportLoader
@@ -371,47 +1005,147 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
       .pipe(
         catchError(error => {
           console.log('error: ', error);
-          return of('ERROR_JOB_REPORT');
+          return of(ReportResponseType.ERROR_JOB_REPORT);
         })
       );
   }
 
-  getStepsConfiguration(): StepModel[] {
-    const steps: StepModel[] = this.selectedStepConfiguration?.steps.reduce(
-      (
-        accumulator: StepModel[],
-        currentValue: ItemStepConfiguration,
-        idx: number
-      ) => {
-        accumulator.push({
-          stepIndex: idx + 1,
-          isComplete:
-            idx + 1 === 1 && currentValue.name === 'selectStyle' ? true : false,
-        });
-        return accumulator;
-      },
-      []
-    );
-    return steps;
+  generateGroupingIndividualByReport(
+    reportGeneratedId: string,
+    individuals: string[]
+  ): Observable<string> {
+    return this.generateCompetencyByReportLoader
+      .load(
+        this.generatedReporsService.generateGroupingIndividualByReport(
+          reportGeneratedId,
+          individuals
+        )
+      )
+      .pipe(
+        catchError(error => {
+          console.log('error: ', error);
+          return of(ReportResponseType.ERROR_GROUPING_INDIVIDUAL_REPORT);
+        })
+      );
   }
 
+  generateAreaIndividualByReport(
+    reportGeneratedId: string,
+    individuals: string[]
+  ): Observable<string> {
+    return this.generateCompetencyByReportLoader
+      .load(
+        this.generatedReporsService.generateAreaIndividualByReport(
+          reportGeneratedId,
+          individuals
+        )
+      )
+      .pipe(
+        catchError(error => {
+          console.log('error: ', error);
+          return of(ReportResponseType.ERROR_AREA_INDIVIDUAL_REPORT);
+        })
+      );
+  }
+
+  deleteCompetenciesByReport(
+    reportGeneratedId: string,
+    competenciesToDelete: string[]
+  ): Observable<string> {
+    return this.generateCompetencyByReportLoader
+      .load(
+        this.generatedReporsService.deleteCompetenciesByReport(
+          reportGeneratedId,
+          competenciesToDelete
+        )
+      )
+      .pipe(
+        catchError(error => {
+          console.log('error: ', error);
+          return of(ReportResponseType.ERROR_UPDATE_COMPETENCY_REPORT);
+        })
+      );
+  }
+
+  deleteJobByReport(
+    reportGeneratedId: string,
+    reportGeneratedJobId: string
+  ): Observable<string> {
+    return this.generateCompetencyByReportLoader
+      .load(
+        this.generatedReporsService.deleteJobByReport(
+          reportGeneratedId,
+          reportGeneratedJobId
+        )
+      )
+      .pipe(
+        catchError(error => {
+          console.log('error: ', error);
+          return of(ReportResponseType.ERROR_UPDATE_JOB_REPORT);
+        })
+      );
+  }
+
+  deleteIndividualsAreaByReport(
+    reportGeneratedId: string,
+    individualsToDelete: string[]
+  ): Observable<string> {
+    return this.generateCompetencyByReportLoader
+      .load(
+        this.generatedReporsService.deleteIndividualsAreaByReport(
+          reportGeneratedId,
+          individualsToDelete
+        )
+      )
+      .pipe(
+        catchError(error => {
+          console.log('error: ', error);
+          return of(ReportResponseType.ERROR_UPDATE_AREA_INDIVIDUAL_REPORT);
+        })
+      );
+  }
+
+  deleteIndividualsGroupByReport(
+    reportGeneratedId: string,
+    individualsToDelete: string[]
+  ): Observable<string> {
+    return this.generateCompetencyByReportLoader
+      .load(
+        this.generatedReporsService.deleteIndividualsGroupingByReport(
+          reportGeneratedId,
+          individualsToDelete
+        )
+      )
+      .pipe(
+        catchError(error => {
+          console.log('error: ', error);
+          return of(ReportResponseType.ERROR_UPDATE_GROUPING_INDIVIDUAL_REPORT);
+        })
+      );
+  }
+  //#endregion
+
   //Methods for saving report selected data, form child components
+  //#region savingReportData in this.myReportSaved
   saveReportStyle(event: ReportStyles): void {
     this.myReportSaved.style = event.key;
   }
 
   saveHrFeedbackText(event: string): void {
-    this.myReportSaved.hrFeedback = event;
+    this.myReportSaved.feedbackText = event;
   }
 
-  saveReportIndividual(
-    event: VwGetAllIndividualWithBehaviouralProfile[]
-  ): void {
-    this.myReportSaved.individualIds = event.map(vwIndividual => {
-      return vwIndividual.individualId;
-    });
-    this.myReportSaved.baseId = event[0]?.baseId;
-    this.myReportSaved.subBaseId = event[0]?.subbaseId;
+  saveReportIndividual(selectedIndividuals: string[]): void {
+    if (selectedIndividuals.length > 0) {
+      this.myReportSaved.individualIds = selectedIndividuals;
+      this.myReportSaved.baseId = this.selectedClientId;
+      this.myReportSaved.subBaseId = this.selectedSubbaseId;
+      this.isReportGenerate = true;
+    } else {
+      this.isReportGenerate = this.templateConfiguration?.templateCreation
+        ? true
+        : false;
+    }
   }
 
   saveReportJob(event: Job): void {
@@ -427,8 +1161,8 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     this.jobCategory = event;
   }
 
-  saveReportCompetencies(event: Competency[]): void {
-    this.myReportSaved.competenciesIds = event.map(competency => competency.id);
+  saveReportCompetencies(event: string[]): void {
+    this.myReportSaved.competenciesIds = event;
   }
 
   saveReportGroup(group: string): void {
@@ -450,15 +1184,13 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   saveInvidualAreaLeader(leader: string): void {
     this.myReportSaved.leaderIndividualId = leader;
   }
+  //#endregion
 
   changeClient(client: string): void {
-    console.log('changeClient', client);
     this.selectedClientId = client;
   }
 
   changeSubbase(subbase: string): void {
-    console.log('changeSubbase', subbase);
-
     this.selectedSubbaseId = subbase;
   }
 
@@ -467,7 +1199,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   }
 
   get showLabelStep(): string {
-    return !this.isLastStep ? 'Continuar' : 'Finalizar';
+    return this.translateService.instant('CONFIGURATION.NEXT');
   }
 
   get isLastStep(): boolean {
@@ -476,5 +1208,168 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
 
   get isLastStepAndComplete(): boolean {
     return this.stepsService.isLastStepAndComplete();
+  }
+
+  get labelTemplate(): string {
+    return !this.templateConfiguration.templateCreation
+      ? 'Crear Template'
+      : 'Actualizar Template';
+  }
+
+  get generatedReport(): GeneratedReportByIdResponse {
+    return this.templateConfiguration?.isTemplate
+      ? this.generatedReportByIdResponseTemplate
+      : this.generatedReportByIdResponse;
+  }
+
+  saveTemplateButton(): void {
+    if (!this.generatedReportByIdResponseTemplate) {
+      this.openModalNewTemplate();
+    } else {
+      this.saveTemplate();
+    }
+  }
+
+  openModalNewTemplate(): void {
+    const dialogData: ConfirmDialogModel = {
+      title: this.translateService.instant(
+        'REPORT_CONFIGURATION.MODAL.NEW_TEMPLATE.TITLE'
+      ),
+      message: this.translateService.instant(
+        'REPORT_CONFIGURATION.MODAL.NEW_TEMPLATE.DESCRIPTION'
+      ),
+    };
+    this.modalService.openPopUp(InputDialogComponent, {
+      width: '600px',
+      closeOnNavigation: true,
+      data: dialogData,
+    });
+    this.modalService
+      .confirmedPopUp()
+      .subscribe((templateName: string | null) => {
+        if (templateName) {
+          this.generateNewGeneratedReport(true, templateName);
+        }
+      });
+  }
+
+  saveTemplate(): void {
+    //Editando un template
+    if (
+      this.configurationService.reportGeneratedAreEquals(
+        true,
+        this.generatedReportByIdResponseTemplate,
+        this.generatedReportByIdResponse,
+        this.myReportSaved
+      )
+    ) {
+      this.generateUpdateRestEntities(true);
+    } else {
+      //Actualizo GeneratedReport Tambien
+      this.updateReportGenerated(true);
+    }
+  }
+
+  duplicateReport(generatedReportId: string, individualIds: string[]): void {
+    const request: DuplicateReportGeneratedRequest = {
+      userId: this.tokenData.UserId,
+      generatedReportId: generatedReportId, //this.templateConfiguration.templateCreationId,
+      newIndividualIds: individualIds,
+      includeReportOwnerIndividual: true,
+      subbaseId: this.selectedSubbaseId,
+    };
+
+    this.generatedReporsService
+      .duplicateReport(request)
+      .subscribe((resp: DuplicateReportGeneratedResponse[]) => {
+        const dialogData: any = {
+          title: this.translateService.instant(
+            'REPORT_CONFIGURATION.MODAL.REPORT_CREATION.TITLE'
+          ),
+          message: this.translateService.instant(
+            'REPORT_CONFIGURATION.MODAL.REPORT_CREATION.DESCRIPTION'
+          ),
+          multipleReportGeneratedResponse: resp,
+        };
+
+        this.modalService.openPopUp(MultipleReportResponseDialogComponent, {
+          width: '50%',
+
+          closeOnNavigation: true,
+          data: dialogData,
+        });
+        this.modalService.confirmedPopUp().subscribe(() => {});
+      });
+  }
+
+  updateGeneratedReportByIdResponseTemplate(id: string): void {
+    this.getGeneratedReportByShortIdSub = this.getGeneratedReportByShortIdLoader
+      .load(this.generatedReporsService.getGeneratedReportByShortId(id))
+      .subscribe({
+        next: (res: GeneratedReportByIdResponse) => {
+          this.generatedReportByIdResponseTemplate = res;
+        },
+        error: err => {
+          console.log(
+            `${this.translateService.instant(
+              'REPORT_CONFIGURATION.ERROR_RETRIEVING_REPORT'
+            )}: `,
+            err
+          );
+        },
+      });
+  }
+
+  getGeneratedReportRequest(
+    isTemplate: boolean,
+    templateName?: string
+  ): ReportGeneratedRequest {
+    return {
+      creationDate: new Date(),
+      userId: this.tokenData.UserId,
+      baseId: this.selectedClientId,
+      subBaseId: this.selectedSubbaseId,
+      reportId: this.selectedReport.reportId,
+      individualId: isTemplate ? null : this.myReportSaved.individualIds[0],
+      areaId: this.myReportSaved.areaId,
+      groupId: this.myReportSaved.groupId,
+      reportStyleId: null,
+      leaderIndividualId: this.myReportSaved.leaderIndividualId,
+      feedbackText: this.myReportSaved.feedbackText,
+      name: templateName,
+      isTemplate: isTemplate,
+    };
+  }
+
+  getGeneratedReportUpdateRequest(
+    isTemplate: boolean,
+    templateName?: string
+  ): ReportGeneratedRequest {
+    const baseInfo = isTemplate
+      ? this.generatedReportByIdResponseTemplate
+        ? this.generatedReportByIdResponseTemplate
+        : this.generatedReportByIdResponse
+      : this.generatedReportByIdResponse;
+    return {
+      reportGeneratedId: baseInfo.reportGeneratedId,
+      userId: this.tokenData.UserId,
+      reportId: this.selectedReport.reportId,
+      isPublic: false,
+      baseId: baseInfo.baseId ? baseInfo.baseId : this.selectedClientId,
+      subBaseId: baseInfo.subBaseId
+        ? baseInfo.subBaseId
+        : this.selectedSubbaseId,
+      individualId: isTemplate ? null : this.myReportSaved.individualIds[0],
+      areaId: this.myReportSaved.areaId,
+      groupId: this.myReportSaved.groupId,
+      reportStyleId: null,
+      leaderIndividualId: this.myReportSaved.leaderIndividualId,
+      feedbackText: this.myReportSaved.feedbackText,
+      pdaAssessmentOutcomeId: isTemplate
+        ? null
+        : this.generatedReport.pdaAssessmentOutcomeId,
+      isTemplate: isTemplate,
+      name: templateName ? templateName : baseInfo.name,
+    };
   }
 }

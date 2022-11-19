@@ -1,5 +1,3 @@
-import { ReportStyles } from './reportStyles.interface';
-
 export class MyReport {
   id: string;
   shortId: string;
@@ -9,7 +7,10 @@ export class MyReport {
   baseId: string;
   subBaseId?: string;
   individualIds: string[];
-  hrFeedback?: string;
+  feedbackText?: string;
+
+  isTemplate?: boolean;
+  name?: string;
 
   jobId?: string;
   jobCategoryId: string;

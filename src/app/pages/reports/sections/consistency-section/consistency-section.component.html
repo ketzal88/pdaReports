@@ -1,8 +1,14 @@
 <!-- Consistency -->
 <div class="tipo-deperfil">
-    <h4 class="h4">{{ consistencyIndicator.title }}</h4>
-    <p class="body-1">
-        {{ consistencyIndicator.description }}
-    </p>
-    <chart-consistencia [value]="consistencyIndicator.consistencyValue"></chart-consistencia>
+  <h4 class="h4">
+    <!-- TOOLTIP:
+      {{ 'REPORTS.SECTIONS.CONSISTENCY_SECTION.TOOLTIP.INDICATOR_DESCRIPTION' | translate }}
+    -->
+    {{ 'REPORTS.SECTIONS.CONSISTENCY_SECTION.TITLE' | translate }}
+  </h4>
+  <p class="body-1">
+    {{ getDottedFirstCharacters(consistencyIndicator.description, 120) }}
+  </p>
+  <app-chart-consistencia
+    [value]="consistencyIndicator.consistencyValue"></app-chart-consistencia>
 </div>

@@ -13,15 +13,12 @@ export class BehavioralTrendsComponent implements OnInit {
   //Inputs
   @Input() behavioralTrends: BehavioralTrend;
   //Bindings
-  panelOpenState = false;
-  behavioralTrendsDetailSelected?: BehavioralTrendsDetail;
   idxSelected: number;
   listViewTrends: number[];
 
   constructor() {}
 
   ngOnInit(): void {
-    this.behavioralTrendsDetailSelected = null;
     this.listViewTrends = [];
   }
 

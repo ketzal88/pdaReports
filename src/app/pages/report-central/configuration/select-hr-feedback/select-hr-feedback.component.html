@@ -1,13 +1,24 @@
-<div style="display: flex; text-align: center">
+<div class="d-flex">
   <div>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur nisi ipsa
-    debitis perferendis fugiat sunt, at possimus magni cum odit consectetur ab
-    ratione quae quisquam aliquid aut nam blanditiis tempore!
-    <mat-form-field [style.fontSize]="18" appearance="fill" style="width: 90%">
-      <mat-label>Hr Feedback</mat-label>
+    <h4 class="select-hr-feedback__title">
+      {{
+        'REPORT_CONFIGURATION.selectHrFeedback.CONTENT.LABEL_DESCRIPTION'
+          | translate
+      }}
+    </h4>
+    <mat-form-field
+      [style.fontSize]="18"
+      appearance="standard"
+      style="width: 90%">
+      <!-- <mat-label>Hr Feedback</mat-label> -->
       <textarea
+        class="select-hr-feedback__input"
         #hrFeedbackTextArea
         matInput
+        placeholder="{{
+          'REPORT_CONFIGURATION.selectHrFeedback.CONTENT.LABEL_PLACEHOLDER'
+            | translate
+        }}"
         cdkTextareaAutosize
         cdkAutosizeMinRows="10"
         cdkAutosizeMaxRows="100"

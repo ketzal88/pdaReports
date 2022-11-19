@@ -21,6 +21,11 @@
     padding: 5px 0px;
 }
 
+.list-icon>svg {
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
 .icon {
     width: 36px;
     height: 36px;
@@ -30,6 +35,9 @@
 .item {
     font-size: 22px;
     font-family: Poppins;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .h2 {
@@ -41,7 +49,10 @@
     padding-top: 50px;
 }
 
-@media (max-width: 744px) {
+@media (max-width: 1200px) {
+    .profile {
+        padding-top: 20px;
+    }
     .h2 {
         font-weight: 700;
         font-size: 32px;
@@ -49,10 +60,7 @@
     }
 }
 
-@media (max-width: 375px) {
-    .profile {
-        padding-top: 20px;
-    }
+@media (max-width: 440px) {
     .h2 {
         font-weight: 700;
         font-size: 32px;

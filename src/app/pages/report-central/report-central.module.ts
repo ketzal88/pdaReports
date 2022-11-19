@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IconsModule } from '../../shared/components/icons/icons.module';
 import { DefaultsModule } from './defaults/defaults.module';
 import { MyReportsModule } from './my-reports/my-reports.module';
+import { MyTemplatesModule } from './my-templates/my-templates.module';
 
 @NgModule({
   declarations: [ReportCentralComponent],
@@ -20,6 +21,7 @@ import { MyReportsModule } from './my-reports/my-reports.module';
     IconsModule,
     DefaultsModule,
     MyReportsModule,
+    MyTemplatesModule,
   ],
   exports: [ReportCentralComponent],
 })

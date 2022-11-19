@@ -5,4 +5,8 @@ export const SELECT_INDIVIDUALS_STEP: ItemStepConfiguration = {
     title: 'Selecciona a la persona',
     subtitle: 'Sobre quien se realizará el reporte',
   },
+  step: {
+    isComplete: false,
+    isEnabled: true,
+  },
 };

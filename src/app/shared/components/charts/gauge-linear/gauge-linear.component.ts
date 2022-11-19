@@ -7,7 +7,6 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import 'anychart';
 import { disabledCredits } from '../../../utils/chart.util';
 
 @Component({
@@ -49,7 +48,7 @@ export class GaugeLinearComponent implements OnInit, OnChanges, AfterViewInit {
     // set the data for the gauge
     this.gauge.data(data);
     this.gauge.interactivity(false);
-    this.gauge.background("#00000000")
+    this.gauge.background('#00000000');
 
     // set the layout
     this.gauge.layout(this.layout);
@@ -63,11 +62,11 @@ export class GaugeLinearComponent implements OnInit, OnChanges, AfterViewInit {
       .fontFamily('Poppins')
       .fontColor('#1F140F')
       .fontSize(18)
-      .fontWeight(50)
+      .fontWeight(500)
       .text(this.text)
       .rotation(270);
 
-      this.gauge
+    this.gauge
       .label(1)
       .position('center-top')
       .anchor('center-top')
@@ -77,9 +76,9 @@ export class GaugeLinearComponent implements OnInit, OnChanges, AfterViewInit {
       .fontColor('#1F140F')
       .fontSize(24)
       .fontWeight(700)
-      .text("+");
+      .text('+');
 
-      this.gauge
+    this.gauge
       .label(3)
       .position('center-bottom')
       .anchor('center-bottom')
@@ -88,7 +87,7 @@ export class GaugeLinearComponent implements OnInit, OnChanges, AfterViewInit {
       .fontColor('#1F140F')
       .fontSize(24)
       .fontWeight(700)
-      .text("-");
+      .text('-');
 
     // this.gauge
     //   .label(1)
@@ -143,60 +142,57 @@ export class GaugeLinearComponent implements OnInit, OnChanges, AfterViewInit {
     // add a marker pointer
     let marker = this.gauge.marker(0);
 
-     // add a marker pointer
-     marker = this.gauge.marker(0);
+    // add a marker pointer
+    marker = this.gauge.marker(0);
 
-     // set the marker type and color
-     marker.type('circle');
-     marker.color(this.color);
-     marker.stroke('black', 0);
-     marker.width('7.5%');
-     marker.data([20]);
-     // set the zIndex of the marker
-     marker.zIndex(10);
-     marker.offset('0%');
- 
-     
-     // add a marker pointer
-     marker = this.gauge.marker(0);
- 
-     // set the marker type and color
-     marker.type('circle');
-     marker.color(this.color);
-     marker.stroke('black', 0);
-     marker.width('7.5%');
-     marker.data([80]);
-     // set the zIndex of the marker
-     marker.zIndex(10);
-     marker.offset('0%');
- 
-     
-     // add a marker pointer
-     marker = this.gauge.marker(0);
- 
-     // set the marker type and color
-     marker.type('circle');
-     marker.color(this.color);
-     marker.stroke('black', 0);
-     marker.width('7.5%');
-     marker.data([0]);
-     // set the zIndex of the marker
-     marker.zIndex(-10);
-     marker.offset('0%');
-     
-     // add a marker pointer
-     marker = this.gauge.marker(0);
- 
-     // set the marker type and color
-     marker.type('circle');
-     marker.color(this.color);
-     marker.width('7.5%');
-     marker.stroke('black', 0);
-     marker.data([100]);
-     // set the zIndex of the marker
-     marker.zIndex(-10);
-     marker.offset('0%');
-     
+    // set the marker type and color
+    marker.type('circle');
+    marker.color(this.color);
+    marker.stroke('black', 0);
+    marker.width('7.5%');
+    marker.data([20]);
+    // set the zIndex of the marker
+    marker.zIndex(10);
+    marker.offset('0%');
+
+    // add a marker pointer
+    marker = this.gauge.marker(0);
+
+    // set the marker type and color
+    marker.type('circle');
+    marker.color(this.color);
+    marker.stroke('black', 0);
+    marker.width('7.5%');
+    marker.data([80]);
+    // set the zIndex of the marker
+    marker.zIndex(10);
+    marker.offset('0%');
+
+    // add a marker pointer
+    marker = this.gauge.marker(0);
+
+    // set the marker type and color
+    marker.type('circle');
+    marker.color(this.color);
+    marker.stroke('black', 0);
+    marker.width('7.5%');
+    marker.data([0]);
+    // set the zIndex of the marker
+    marker.zIndex(-10);
+    marker.offset('0%');
+
+    // add a marker pointer
+    marker = this.gauge.marker(0);
+
+    // set the marker type and color
+    marker.type('circle');
+    marker.color(this.color);
+    marker.width('7.5%');
+    marker.stroke('black', 0);
+    marker.data([100]);
+    // set the zIndex of the marker
+    marker.zIndex(-10);
+    marker.offset('0%');
 
     // configure the scale
     let scale = this.gauge.scale();

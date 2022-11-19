@@ -3,33 +3,60 @@ import { PaginatedResponse } from '../../paginatedResponse.interface';
 export interface GeneratedReport {
   reportGeneratedId?: string;
   shortId?: string;
-  reportTypeId?: string;
-
+  reportId?: string;
   firstName?: string;
   lastName?: string;
   email?: string;
+  reportTypeId?: string;
   urlReport?: string;
-  creationDate?: string;
-  modificationDate?: string;
+  creationDate?: Date;
+  modificationDate?: Date;
   userId?: string;
   baseId?: string;
   subBaseId?: string;
-  reportId?: string;
   isPublic?: boolean;
-  expirationDate?: string;
+  expirationDate?: Date;
   individualId?: string;
   areaId?: string;
   groupId?: string;
   reportStyleId?: string;
   leaderIndividualId?: string;
   feedbackText?: string;
+  pdaAssessmentOutcomeId?: string;
+  name?: string;
+  isTemplate?: boolean;
 
-  //Optional:
-  reportGeneratedJobs: ReportGeneratedJob[];
-  reportGeneratedCompetencies: ReportGeneratedCompetency[];
+  // //Optional:
+  // reportGeneratedJobs?: ReportGeneratedJob[];
+  // reportGeneratedCompetencies?: ReportGeneratedCompetency[];
 
-  reportGeneratedAreaIndividuals: ReportGeneratedAreaIndividual[];
-  reportGeneratedGroupingIndividuals: ReportGeneratedGroupingIndividual[];
+  // reportGeneratedAreaIndividuals?: ReportGeneratedAreaIndividual[];
+  // reportGeneratedGroupingIndividuals?: ReportGeneratedGroupingIndividual[];
+}
+
+export interface GeneratedReportByIdResponse {
+  reportGeneratedAreaIndividuals?: ReportGeneratedAreaIndividual[];
+  reportGeneratedGroupingIndividuals?: ReportGeneratedGroupingIndividual[];
+  reportGeneratedCompetencies?: ReportGeneratedCompetency[];
+  reportGeneratedJobs?: ReportGeneratedJob[];
+  reportGeneratedId: string;
+  creationDate: Date;
+  modificationDate: Date;
+  userId: string;
+  baseId: string;
+  subBaseId: string;
+  reportId: string;
+  isPublic: boolean;
+  expirationDate: Date;
+  individualId?: string;
+  areaId?: string;
+  groupId?: string;
+  reportStyleId?: string;
+  leaderIndividualId?: string;
+  feedbackText?: string;
+  pdaAssessmentOutcomeId?: string;
+  isTemplate: boolean;
+  name?: string;
 }
 
 export interface GeneratedReportsResponse
@@ -50,10 +77,10 @@ export interface ReportGeneratedCompetency {
 export interface ReportGeneratedAreaIndividual {
   reportGeneratedAreaIndividualId?: string;
   reportGeneratedId?: string;
-  areaIndividualId?: string;
+  individualId?: string;
 }
 export interface ReportGeneratedGroupingIndividual {
   reportGeneratedAreaIndividualId?: string;
   reportGeneratedId?: string;
-  groupingIndividualId?: string;
+  individualId?: string;
 }

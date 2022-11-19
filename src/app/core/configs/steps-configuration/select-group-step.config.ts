@@ -5,4 +5,8 @@ export const SELECT_GROUP_STEP: ItemStepConfiguration = {
     title: 'Conformar grupo de candidatos',
     subtitle: 'contra quién se realizara el reporte',
   },
+  step: {
+    isComplete: false,
+    isEnabled: true,
+  },
 };

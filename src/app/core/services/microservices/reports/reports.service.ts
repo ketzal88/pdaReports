@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, map, Observable, take, pipe, concat, of } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { PDAIndividualSectionsResponse } from './interfaces/pdaIndividualSectionsResponse.interface';
 import { PDAGroupSectionsResponse } from './interfaces/pdaGroupSectionsResponse.interface';
 import { PDAIndividualSectionsRequest } from './interfaces/pdaIndividualSectionsRequest.interface';
@@ -11,6 +11,7 @@ import { ReportsResponse } from './interfaces/reportsResponse.interface';
 import { ReportsLocal } from 'src/app/pages/report-central/interfaces/reports-local.interface';
 import { switchMap } from 'rxjs/operators';
 import { environment } from '../../../../../environments/environment';
+import { PdaPdfReportGenerationRequest } from './interfaces/pdaPdfReportGenerationRequest.interface';
 
 @Injectable()
 export class ReportsService {
@@ -43,6 +44,17 @@ export class ReportsService {
     return this.httpClient.post<PDAGroupSectionsResponse>(
       `${environment.apiReports}/ReportGeneration/PDAGroupSections`,
       request
+    );
+  }
+
+  //TODO: Request tipado.
+  getReportPdfUrl(request: PdaPdfReportGenerationRequest): Observable<string> {
+    return this.httpClient.post<string>(
+      `${environment.apiReports}/ReportGeneration/PDAReportPDF`,
+      request,
+      {
+        responseType: 'text' as 'json',
+      }
     );
   }
 
@@ -94,7 +106,7 @@ export class ReportsService {
               .map(data => {
                 return {
                   id: data.id,
-                  internalName: data.internallName,
+                  internalName: data.internalName,
                   name: data.name,
                 };
               })[0];
@@ -118,11 +130,19 @@ export class ReportsService {
       );
   }
 
-  getReportsLocal(reportId: string): Observable<ReportsLocal[]> {
-    return this.getReportById(reportId).pipe(
-      switchMap((response: ReportsResponse) => {
-        return this.setReportsTypeForReportLocal(response);
-      })
-    );
+  getReportsLocal(reportId?: string): Observable<ReportsLocal[]> {
+    if (reportId) {
+      return this.getReportById(reportId).pipe(
+        switchMap((response: ReportsResponse) => {
+          return this.setReportsTypeForReportLocal(response);
+        })
+      );
+    } else {
+      return this.getReports().pipe(
+        switchMap((response: ReportsResponse) => {
+          return this.setReportsTypeForReportLocal(response);
+        })
+      );
+    }
   }
 }

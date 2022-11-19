@@ -8,7 +8,7 @@ export const HIRING_SURVEY_TYPE: ConfigurationTypesReports = {
       sections: [
         {
           column: 1,
-          items: ['profileItem', 'consistencySection', 'competenciesSection'],
+          items: ['profileItem', 'consistencySection'],
         },
         {
           column: 2,
@@ -21,6 +21,15 @@ export const HIRING_SURVEY_TYPE: ConfigurationTypesReports = {
       sections: [
         {
           column: 1,
+          items: ['competenciesSection'],
+        },
+      ],
+    },
+    {
+      block: 3,
+      sections: [
+        {
+          column: 1,
           items: ['jobCompatibilityIndividualAreaSection'],
         },
         {
@@ -30,7 +39,7 @@ export const HIRING_SURVEY_TYPE: ConfigurationTypesReports = {
       ],
     },
     {
-      block: 3,
+      block: 4,
       sections: [
         {
           column: 1,
@@ -43,7 +52,7 @@ export const HIRING_SURVEY_TYPE: ConfigurationTypesReports = {
       ],
     },
     {
-      block: 4,
+      block: 5,
       sections: [
         {
           column: 1,
@@ -52,7 +61,7 @@ export const HIRING_SURVEY_TYPE: ConfigurationTypesReports = {
       ],
     },
     {
-      block: 5,
+      block: 6,
       sections: [
         {
           column: 1,
@@ -68,7 +77,7 @@ export const HIRING_SURVEY_TYPE: ConfigurationTypesReports = {
       ],
     },
     {
-      block: 6,
+      block: 7,
       sections: [
         {
           column: 1,
@@ -77,6 +86,15 @@ export const HIRING_SURVEY_TYPE: ConfigurationTypesReports = {
         {
           column: 2,
           items: ['strengthsOverusedSection', 'howToLeadIndividual'],
+        },
+      ],
+    },
+    {
+      block: 8,
+      sections: [
+        {
+          column: 1,
+          items: ['certifications'],
         },
       ],
     },

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
+import { getDottedFirstCharacters } from 'src/app/core/utils/strings.util';
 import { ConsistencyIndicator } from '../../../../core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
 
 @Component({
@@ -17,9 +18,9 @@ export class ConsistencySectionComponent implements OnInit {
   value = 57;
   bufferValue = 75;
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
+  getDottedFirstCharacters = getDottedFirstCharacters;
 }

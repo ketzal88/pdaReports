@@ -1,18 +1,10 @@
 <p class="subtitle left">
-  Conoce cómo es tu perfil frente<br />
-  a las <b>Competencias del Futuro</b>
+  {{ profileAgainstTheSkillsOfTheFuture.title }}
 </p>
 <div class="descriptivo">
   <p class="descripcion left">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quasi culpa
-    suscipit tenetur assumenda laborum nobis sint labore aspernatur.
-    Exercitationem accusamus, mollitia maiores iure recusandae nobis sunt
-    dolores deleniti reprehenderit! Maiores quisquam sequi qui quam incidunt,
-    veritatis saepe repellendus suscipit nemo ut eum, nobis doloribus optio!
-    Culpa exercitationem magnam quam?
+    {{ profileAgainstTheSkillsOfTheFuture.description }}
   </p>
-  <a class="button-text">Haz click aquí</a>
-  <img
-    src="/assets/img/sections/know-your-profile-compared-skills-future.png"
-    alt="" />
+  <a class="button-text" (click)="showMore()">Haz click aquí</a>
+  <img [src]="imagetype" alt="" />
 </div>

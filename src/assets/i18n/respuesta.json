@@ -20,8 +20,7 @@
         "consistencyValue": 0,
         "consistencyValueGraphicPercentage": 100
     },
-    "pdaCharts": [
-        {
+    "pdaCharts": [{
             "title": "Eje del Riesgo",
             "description": "Es una persona generalmente amable y cercana. Prefiere no asumir demasiados riesgos. Le motivan principalmente los ambientes y situaciones libres de tensiones y confrontaciones. En algunas situaciones concretas puede mostrarse de manera competitiva. ",
             "image": null,
@@ -196,8 +195,7 @@
         "introduction": "Esta sección permitirá tener  una  clara  perspectiva  de  los  cambios  que  se  están  dando  en  el  estilo de comportamiento de esta persona. Describe qué  aspectos  de  su  estilo  natural  están  siendo modificados en su esfuerzo por adaptarse a su percepción sobre los requerimientos de su situación actual.",
         "description": "",
         "footer": "Este reporte está relacionado únicamente con características del comportamiento. El éxito en cualquier rol, puesto o situación específica dependerá de múltiples factores, como sus habilidades, experiencia y  circunstancias personales, además de que se le brinden las circunstancias ideales de desarrollo como la integración, motivación, coaching, etc.",
-        "currentSituationDetails": [
-            {
+        "currentSituationDetails": [{
                 "title": "Toma de Decisiones",
                 "description": "Este análisis indica que en su estilo natural  tomas decisiones de manera más cautelosa. Se esmera en tomar las decisiones correctas analizando la información disponible, consultando y valiéndose de más y mejor información. En su intención de tomar las decisiones correctas prefiere no avanzar a menos que tenga toda la información disponible. Percibe que su situación actual no le exige mayores cambios a su estilo de “Toma de Decisiones”. "
             },
@@ -215,8 +213,8 @@
         "naturalChartImage": null,
         "roleChartImage": null,
         "title": "Gráfico Perfil Conductual",
-        "naturalPBehaviorTitle": "NATURAL",
-        "roleBehaviorTitle": "ADAPTADO",
+        "naturalPBehaviorTitle": "Natural",
+        "roleBehaviorTitle": "Adaptado",
         "naturalDecisionMakingChartImage": null,
         "roleDecisionMakingChartImage": null,
         "naturalProfileIntensityChartImage": null,
@@ -304,8 +302,7 @@
         "radarTitle": "Gráfico Radar PDA",
         "radarChartIndividualLegend": "Test151d#1firstname Test1510#1lastname",
         "radarChartJobLegend": "PROACTIVO: Competitivo - Proactivo",
-        "content": [
-            {
+        "content": [{
                 "id": 1,
                 "title": "Proactivo",
                 "jobValue": -1,
@@ -366,8 +363,7 @@
     "wheelChart": {
         "title": "Gráfico Rueda PDA",
         "graphImage": null,
-        "content": [
-            {
+        "content": [{
                 "id": 1,
                 "title": "Proactivo",
                 "jobValue": -1,
@@ -430,8 +426,7 @@
         "image": null,
         "withoutLegendsImage": null,
         "introduction": "BehavioralRadarChart Texto de Introduccion...",
-        "behavioralAxiCompetencies": [
-            {
+        "behavioralAxiCompetencies": [{
                 "axi": 0,
                 "competencyId": "10d60136-dfdb-4011-bef7-b458ff654788",
                 "competencyName": "Expeditividad",
@@ -567,8 +562,7 @@
         "leftSideDescriptionWord": "Mayor\nesfuerzo",
         "rightSideDescriptionWord": "Menor\nesfuerzo",
         "footer": "Es muy importante identificar y conocer el Perfil Natural de comportamiento de las personas ya que es sumamente útil para poder predecir que tanto \"esfuerzo\" le pueden requerir y exigir estas competencias, es decir si la persona las podrá desplegar naturalmente, espontáneamente y \"sin esfuerzo\" o si requerirá para desplegar estas competencias un \"mayor esfuerzo\", por no ser ésta una competencia \"natural\" de esta persona. Por ejemplo: A una persona de \"naturaleza impaciente e inquieta\" le va a requerir un esfuerzo mayor la competencia \"Capacidad de Análisis\", mientras que la competencia \"Sentido de Urgencia\" va a ser una habilidad natural para él, por lo cual le requerirá \"menor esfuerzo\".",
-        "behavioralTrendsDetails": [
-            {
+        "behavioralTrendsDetails": [{
                 "name": "Asesoramiento, soporte y atención a clientes",
                 "description": "Esta competencia mide las habilidades de la persona en lo referente a la  \"Atención al Cliente\" y su Capacidad de prestar servicios a través de un estilo amable, atento y consistente",
                 "image": null,
@@ -640,8 +634,7 @@
         "leftSideDescriptionWord": "Mayor\nesfuerzo",
         "rightSideDescriptionWord": "Menor\nesfuerzo",
         "footer": "Es muy importante identificar y conocer el Perfil Natural de comportamiento de las personas ya que es sumamente útil para poder predecir que tanto \"esfuerzo\" le pueden requerir y exigir estas competencias, es decir si la persona las podrá desplegar naturalmente, espontáneamente y \"sin esfuerzo\" o si requerirá para desplegar estas competencias un \"mayor esfuerzo\", por no ser ésta una competencia \"natural\" de esta persona. Por ejemplo: A una persona de \"naturaleza impaciente e inquieta\" le va a requerir un esfuerzo mayor la competencia \"Capacidad de Análisis\", mientras que la competencia \"Sentido de Urgencia\" va a ser una habilidad natural para él, por lo cual le requerirá \"menor esfuerzo\".",
-        "competencyCompatibilityDetail": [
-            {
+        "competencyCompatibilityDetail": [{
                 "competency": "Autoconfianza",
                 "individual": null,
                 "compatibilityPercentage": 38,
@@ -726,8 +719,7 @@
             "jobDescription": "",
             "compatibility": 17,
             "compatibilityDescription": "Cuando el indicador se encuentra en este rango la Correlación es “Pobre” y prácticamente no hay posibilidades de que la persona pueda responder de forma exitosa a los requerimientos comportamentales de la posición. Tal vez pueda tolerar esta situación y adaptarse, pero difícilmente pueda estar motivado. En caso de que la persona este actualmente trabajando en la empresa es importante analizar en mayor profundidad este aspecto con la persona o bien con su supervisor con el propósito de solucionar eventuales problemas relacionados con el puesto y posibles “costos emocionales”.",
-            "jobCompatibilityDetailedAxis": [
-                {
+            "jobCompatibilityDetailedAxis": [{
                     "axis": "R",
                     "jobValue": 100,
                     "individualValue": 26,

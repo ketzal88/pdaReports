@@ -30,11 +30,11 @@ export class BehavioralProfileDescriptionSectionComponent implements OnInit {
     ret.description = this.behavioralProfileDescription.description;
     ret.hasBackdrop = true;
     ret.disableClose = false;
-    ret.closeOnNavigation = false;
+    ret.closeOnNavigation = true;
     ret.closableOnlyWithButton = false;
     ret.backdropClass = '';
     this.displayMessageService.openShowMoreModal(ret);
-    this.displayMessageService.confirmedPopUp().subscribe(confirmed => {
+    this.displayMessageService.confirmedShowMoreModal().subscribe(confirmed => {
       console.log('confirmed: ', confirmed);
       if (confirmed) {
         //TODO: Realiza alguna accion al cierre del modal

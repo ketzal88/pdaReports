@@ -71,14 +71,23 @@ export const DEVELOPMENT_REPORT_TYPE: ConfigurationTypesReports = {
           column: 1,
           items: ['competenciesSection'],
         },
-        {
-          column: 2,
-          items: ['emotionalInteligenceSection', 'communicationStyle'],
-        },
       ],
     },
     {
       block: 7,
+      sections: [
+        {
+          column: 1,
+          items: ['emotionalInteligenceSection'],
+        },
+        {
+          column: 2,
+          items: ['communicationStyle'],
+        },
+      ],
+    },
+    {
+      block: 8,
       sections: [
         {
           column: 1,
@@ -87,6 +96,24 @@ export const DEVELOPMENT_REPORT_TYPE: ConfigurationTypesReports = {
         {
           column: 2,
           items: ['strengthsOverusedSection'],
+        },
+      ],
+    },
+    {
+      block: 9,
+      sections: [
+        {
+          column: 1,
+          items: ['certifications'],
+        },
+      ],
+    },
+    {
+      block: 10,
+      sections: [
+        {
+          column: 1,
+          items: ['canYouSendTheCandidateAPersonalizedReport'],
         },
       ],
     },

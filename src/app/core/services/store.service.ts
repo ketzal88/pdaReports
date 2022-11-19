@@ -23,4 +23,10 @@ export class StoreService {
   clearAll(): void {
     this.data.clear();
   }
+
+  clearValueByList(dataList: string[]): void {
+    for (let i = 0; i < dataList.length; i++) {
+      this.clearValue(dataList[i]);
+    }
+  }
 }

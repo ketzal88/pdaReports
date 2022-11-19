@@ -1,24 +1,50 @@
 <div class="behavioral-description-card">
-    <div class="title-with-icon">
-        <svg width="45" height="46" viewBox="0 0 45 46" fill="none" xmlns="http://www.w3.org/2000/svg" class="title-icon">
-            <circle cx="12.5" cy="33" r="12.5" transform="rotate(-180 12.5 33)" fill="#5DB8FB" />
-            <circle cx="28" cy="24.5" r="17" transform="rotate(-180 28 24.5)" fill="#0094FF" />
-            <circle cx="18" cy="9.5" r="9" transform="rotate(-180 18 9.5)" fill="#B0DBFB" />
-        </svg>
-        <h4 class="h4">{{ title }}
-        </h4>
-    </div>
-    <div class="card-text">
-        <p class="body-2 description-text">
-            {{ description }}
-        </p>
-        <a class="button-text" (click)="showMore.emit()">Ver más
-            <svg class="chevron" width="7" height="12" viewBox="0 0 7 12" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M0 1.00201C0 0.1111 1.07714 -0.335067 1.70711 0.294898L6.29289 4.88068C6.68342 5.27121 6.68342 5.90437 6.29289 6.2949L1.70711 10.8807C1.07714 11.5106 0 11.0645 0 10.1736V1.00201Z"
-                    fill="#0075FF" />
-            </svg>
-        </a>
-    </div>
+  <div class="title-with-icon">
+    <svg
+      width="45"
+      height="46"
+      viewBox="0 0 45 46"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="title-icon">
+      <circle
+        cx="12.5"
+        cy="33"
+        r="12.5"
+        transform="rotate(-180 12.5 33)"
+        fill="#5DB8FB" />
+      <circle
+        cx="28"
+        cy="24.5"
+        r="17"
+        transform="rotate(-180 28 24.5)"
+        fill="#0094FF" />
+      <circle
+        cx="18"
+        cy="9.5"
+        r="9"
+        transform="rotate(-180 18 9.5)"
+        fill="#B0DBFB" />
+    </svg>
+    <h4 class="h4" #titleElement>{{ title }}</h4>
+  </div>
+  <div class="card-text">
+    <p class="body-2 description-text">
+      {{ description }}
+    </p>
+    <a class="button-text" (click)="showMore.emit()">
+      {{ 'REPORTS.ACTIONS.SEE_MORE' | translate }}
+      <svg
+        class="chevron"
+        width="7"
+        height="12"
+        viewBox="0 0 7 12"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M0 1.00201C0 0.1111 1.07714 -0.335067 1.70711 0.294898L6.29289 4.88068C6.68342 5.27121 6.68342 5.90437 6.29289 6.2949L1.70711 10.8807C1.07714 11.5106 0 11.0645 0 10.1736V1.00201Z"
+          fill="#0075FF" />
+      </svg>
+    </a>
+  </div>
 </div>

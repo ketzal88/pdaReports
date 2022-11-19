@@ -1,0 +1,133 @@
+.reports {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+
+.section-conductual {
+    padding-bottom: 60px;
+}
+
+.grey-background {
+    background: #EFEFEF;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 80px 0px;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.block-row {
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 164px;
+}
+
+.recomendation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: flex-start;
+    height: 100%;
+    padding: 60px 0px;
+}
+
+.recomendation>.h4 {
+    padding-right: 20px;
+}
+
+.do-it {
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.button-text.send-report-button {
+    padding: 5px 32px;
+    background-color: #F99E10;
+    color: white;
+    border-color: #F99E10;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+}
+
+@media (max-width: 1440px) {
+    .section-conductual {
+        padding-bottom: 20px;
+    }
+    .block-section {
+        flex-direction: column;
+        width: auto;
+        gap: 0px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .section-conductual {
+        padding-bottom: 20px;
+    }
+    .block-section {
+        flex-direction: column;
+        width: auto;
+        gap: 0px;
+    }
+    .block-row {
+        flex-direction: column;
+        width: auto;
+        gap: 0px;
+        align-items: center;
+    }
+    .recomendation {
+        text-align: center;
+        padding: 30px;
+        align-items: center;
+    }
+    .do-it {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 32px;
+    }
+}
+
+@media (max-width: 440px) {
+    .block-section {
+        width: 100%;
+    }
+    .grey-background {
+        margin-bottom: 30px;
+    }
+    .block-row {
+        width: 100%;
+    }
+    .section-internal {
+        padding: 5px 30px;
+    }
+    .recomendation .h4 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32px;
+        text-align: center;
+    }
+    .recomendation {
+        padding-top: 60px;
+        padding-bottom: 30px;
+    }
+    .do-it {
+        margin-top: 20px;
+    }
+}

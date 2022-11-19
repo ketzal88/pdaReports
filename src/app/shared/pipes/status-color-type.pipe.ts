@@ -17,6 +17,8 @@ export class StatusColorTypePipe implements PipeTransform {
         case Consistency.Invalid:
           return 'red';
         case Consistency.NotAvalaible:
+          return 'red';
+        default:
           return 'black';
       }
     }

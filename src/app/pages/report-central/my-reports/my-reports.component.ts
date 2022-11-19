@@ -1,15 +1,13 @@
 import {
+  AfterViewInit,
   Component,
-  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
-  Output,
   ViewChild,
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { VwGetAllIndividualWithBehaviouralProfile } from '../../../core/services/microservices/individual/individual.interface';
 import { UserDetails } from '../../../core/services/microservices/identity/identity.interface';
 import { StateLanguage } from '../../../core/consts/state-language.enum';
 import { Subscription } from 'rxjs';
@@ -18,8 +16,6 @@ import { LanguageService } from '../../../core/services/language.service';
 import { StoreService } from '../../../core/services/store.service';
 import { ModalService } from '../../../core/services/modal.service';
 import { SendReportComponent } from './send-report/send-report.component';
-import { PopUpMessage } from '../../../shared/components/display-message/displayMessage.interface';
-import { DisplayMessageService } from '../../../core/services/displayMessage.service';
 import { TypeFilterItem } from '../../../shared/components/mat-custom-individuals-table/models/type-filter-item.interface';
 import { TypeFilter } from '../../../shared/components/mat-custom-individuals-table/models/type-filter.interface';
 import { TableColumn } from '../../../shared/components/mat-custom-individuals-table/models/tableColumn.interface';
@@ -32,43 +28,49 @@ import {
   GeneratedReportsResponse,
   GeneratedReport,
 } from '../../../core/services/microservices/reports/interfaces/generatedReportsResponse.interface';
-
-enum ReportType {
-  HIRING_REPORT_FILTER = 'MY_REPORTS.HIRING_REPORT_FILTER',
-  DEVELOP_REPORT_FILTER = 'MY_REPORTS.DEVELOP_REPORT_FILTER',
-  HIRING_REVIEW_FILTER = 'MY_REPORTS.HIRING_REVIEW_FILTER',
-  HIRING_SURVEY_FILTER = 'MY_REPORTS.HIRING_SURVEY_FILTER',
-}
+import {
+  ReportsGroup,
+  SelectedReport,
+} from '../../../core/models/reportType.model';
+import { TranslateService } from '@ngx-translate/core';
+import { SendReportOptions } from './interfaces/send-report-options.interface';
+import { ResponseDialogComponent } from '../../../shared/components/modal/response-dialog/response-dialog.component';
+import { ReportResponseType } from '../../../core/consts/report-response-type.enum';
+import { SendReportResponse } from './interfaces/send-report-response.interface';
+import { Router } from '@angular/router';
+import { SendReportService } from './send-report/send-report.service';
+import {
+  ConfirmDialogComponent,
+  ConfirmDialogModel,
+} from '../../../shared/components/individuals/modal/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-my-reports',
   templateUrl: './my-reports.component.html',
   styleUrls: ['./my-reports.component.scss'],
 })
-export class MyReportsComponent implements OnInit, OnDestroy {
+export class MyReportsComponent implements OnInit, AfterViewInit, OnDestroy {
+  //Bindings
+
+  //Variables
+  stateLanguage: string;
+  reportList: GeneratedReport[];
+
   //Inputs
   @Input() step!: StepModel;
+  @Input() typesReportsGroup: ReportsGroup[] = null;
 
-  //Outputs
-  @Output() selectedItem =
-    new EventEmitter<VwGetAllIndividualWithBehaviouralProfile>();
-
-  columns: TableColumn[] = [
-    { columnDef: 'individualId', header: 'IndividualId', columnType: 'string' },
-    { columnDef: 'firstName', header: 'FirstName', columnType: 'string' },
-    { columnDef: 'lastName', header: 'LastName', columnType: 'string' },
-    { columnDef: 'email', header: 'Email', columnType: 'string' },
-    { columnDef: 'reportId', header: 'Report', columnType: 'string' },
-    { columnDef: 'type', header: 'Type', columnType: 'string' },
-    { columnDef: 'shortId', header: 'shortId', columnType: 'string' },
-    { columnDef: 'creationDate', header: 'Date', columnType: 'date' },
-  ];
+  columns: TableColumn[];
 
   availableClients: TypeFilterItem[];
   selectedClientId: string;
+  madeRequest: boolean = false;
 
   availableSubbases: TypeFilterItem[];
   selectedSubbaseId?: string = undefined;
+
+  availableAreas: TypeFilterItem[];
+  selectedAreaId?: string = null;
 
   typeFilterList: TypeFilter[];
   typeFilterItemsSelected: TypeFilter[] = [];
@@ -90,6 +92,7 @@ export class MyReportsComponent implements OnInit, OnDestroy {
   individualDataSub!: Subscription;
   languageServiceSub!: Subscription;
   generatedReportsSub: Subscription;
+  reportsSub: Subscription;
 
   //Loader
   generatedReportsLoader: Loader;
@@ -106,27 +109,65 @@ export class MyReportsComponent implements OnInit, OnDestroy {
     private languageService: LanguageService,
     private storeService: StoreService,
     private modalService: ModalService,
-    private displayMessageService: DisplayMessageService,
-    private generatedReportsService: GeneratedReportsService
+    private generatedReportsService: GeneratedReportsService,
+    private translateService: TranslateService,
+    private router: Router,
+    private sendReportService: SendReportService
   ) {}
   ngOnInit(): void {
+    this.initColumns();
     this.initClientFilters();
 
     this.pageNumber = 1;
     this.totalSize = 0;
     this.generatedReportsLoader = new Loader();
 
-    this.typeFilterList = []; //TODO: Pasar a un metodo utils
-    const reportTypeFilters: TypeFilterItem[] = Object.keys(ReportType)
-      .filter(k => typeof ReportType[k] === 'string')
-      .map(filter => ({ key: filter, name: ReportType[filter] }));
-    this.typeFilterList.push({
-      key: 'MY_REPORTS.REPORT_TYPE_FILTER',
-      name: 'Tipo de reporte',
-      data: reportTypeFilters,
-    });
+    this.typeFilterList = [];
 
-    this.loadGeneratedReports();
+    this.listenLanguageChangeEvent();
+  }
+
+  ngAfterViewInit(): void {
+    this.loadReportingFilterMapping();
+  }
+
+  initColumns(): void {
+    this.columns = [
+      {
+        columnDef: 'firstName',
+        header: this.translateService.instant(
+          'MY_REPORTS.TABLE.COLUMN.FIRSTNAME'
+        ),
+        columnType: 'string',
+      },
+      {
+        columnDef: 'lastName',
+        header: this.translateService.instant(
+          'MY_REPORTS.TABLE.COLUMN.LASTNAME'
+        ),
+        columnType: 'string',
+      },
+      {
+        columnDef: 'email',
+        header: this.translateService.instant('MY_REPORTS.TABLE.COLUMN.EMAIL'),
+        columnType: 'string',
+      },
+      {
+        columnDef: 'reportTypeId',
+        header: this.translateService.instant('MY_REPORTS.TABLE.COLUMN.REPORT'),
+        columnType: 'reportType',
+      },
+      {
+        columnDef: 'creationDate',
+        header: this.translateService.instant('MY_REPORTS.TABLE.COLUMN.DATE'),
+        columnType: 'date',
+      },
+      {
+        columnDef: 'shortId',
+        header: this.translateService.instant('MY_REPORTS.TABLE.COLUMN.LINK'),
+        columnType: 'reportLink',
+      },
+    ];
   }
 
   initClientFilters(): void {
@@ -144,10 +185,6 @@ export class MyReportsComponent implements OnInit, OnDestroy {
     if (savedSelectedSubBaseId) {
       this.selectedSubbaseId = savedSelectedSubBaseId;
     }
-
-    //console.log('onBaseChange-event', event);
-    console.log('this.selectedClientId', this.selectedClientId);
-    console.log('this.selectedSubbaseId', this.selectedSubbaseId);
   }
 
   ngOnDestroy(): void {
@@ -159,12 +196,12 @@ export class MyReportsComponent implements OnInit, OnDestroy {
     let request: GeneratedReportsRequest = {
       reportGeneratedId: null,
       reportId: null,
-      reportTypeId: null,
+      reportTypeIds: this.getFilters(),
       baseId: this.selectedClientId,
       subbaseId:
         this.selectedSubbaseId?.length > 5 ? this.selectedSubbaseId : undefined,
       individualId: null,
-      areaId: null,
+      areaId: this.selectedAreaId,
       firstName: null,
       lastName: null,
       email: null,
@@ -172,20 +209,25 @@ export class MyReportsComponent implements OnInit, OnDestroy {
         this.filterText.trim().length >= 0 ? this.filterText.trim() : null,
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
+      isTemplate: false,
     };
 
+    this.madeRequest = true;
     this.generatedReportsSub = this.generatedReportsLoader
       .load(this.generatedReportsService.loadGeneratedReports(request))
       .subscribe({
         next: (res: GeneratedReportsResponse) => {
           if (res.data) {
             this.dataSource = new MatTableDataSource<GeneratedReport>(res.data);
-            this.data = res.data;
             this.totalSize = res.totalRecords;
           } else {
             this.dataSource = new MatTableDataSource<GeneratedReport>([]);
+            this.totalSize = 0;
           }
-          this.languageService.setChangeStateLanguage(StateLanguage.CHANGED);
+          this.data = res.data;
+          this.stateLanguage === StateLanguage.CHANGING
+            ? this.languageService.setChangeStateLanguage(StateLanguage.CHANGED)
+            : null;
         },
         error: err => {
           this.dataSource = new MatTableDataSource<GeneratedReport>([]);
@@ -194,8 +236,21 @@ export class MyReportsComponent implements OnInit, OnDestroy {
       });
   }
 
+  getFilters(): string[] {
+    let filters: string[] = [];
+    for (let i = 0; i < this.typeFilterItemsSelected.length; i++) {
+      for (let j = 0; j < this.typeFilterItemsSelected[i].data.length; j++) {
+        filters.push(this.typeFilterItemsSelected[i].data[j].key);
+      }
+    }
+
+    return filters;
+  }
+
   loadUserDetails(): void {
-    this.userDetails = JSON.parse(this.storeService.getData('userDetails'));
+    this.userDetails = JSON.parse(
+      this.storeService.getData(StoreKeys.USER_DETAILS)
+    );
   }
 
   loadAvailableClients(): void {
@@ -214,8 +269,8 @@ export class MyReportsComponent implements OnInit, OnDestroy {
     this.languageServiceSub = this.languageService
       .getCurrentStateLanguage()
       .subscribe(stateLanguage => {
+        this.stateLanguage = stateLanguage;
         if (stateLanguage === StateLanguage.CHANGING) {
-          this.pageNumber = 1;
           this.loadGeneratedReports();
         }
       });
@@ -232,8 +287,8 @@ export class MyReportsComponent implements OnInit, OnDestroy {
     this.loadGeneratedReports();
   }
 
-  onSelectedChange(selected: any): void {
-    this.storeService.setData('reportList', selected);
+  onSelectedChange(selected: GeneratedReport[]): void {
+    this.reportList = selected;
   }
 
   onFilters(event: TypeFilter[]): void {
@@ -244,6 +299,11 @@ export class MyReportsComponent implements OnInit, OnDestroy {
 
   onSubbaseChange(selectedSubbaseId: string): void {
     this.selectedSubbaseId = selectedSubbaseId;
+    this.loadGeneratedReports();
+  }
+
+  onAreaChange(selectedAreaId: string): void {
+    this.selectedAreaId = selectedAreaId;
     this.loadGeneratedReports();
   }
 
@@ -267,32 +327,122 @@ export class MyReportsComponent implements OnInit, OnDestroy {
   }
 
   onSendReport(): void {
-    const params = {
-      width: '1000px',
-      data: null,
+    this.sendReportService.onSendReport(
+      this.selectedClientId,
+      this.selectedSubbaseId,
+      this.reportList
+    );
+  }
+
+  loadReportingFilterMapping(): void {
+    for (let i = 0; i < this.typesReportsGroup.length; i++) {
+      if (this.typesReportsGroup[i].internalName !== 'SALES') {
+        let typeFilterGroup = {
+          key: this.typesReportsGroup[i].reportGroupId,
+          name: this.typesReportsGroup[i].name,
+          data: [],
+        };
+        let reportTypeFilter = this.typesReportsGroup[i].reportTypes.map(
+          (data, index) => {
+            return {
+              key: data.id,
+              name: data.name,
+            };
+          }
+        );
+
+        typeFilterGroup.data = [...reportTypeFilter];
+        this.typeFilterList.push(typeFilterGroup);
+      }
+    }
+  }
+
+  onEditReportSetting(report: GeneratedReport): void {
+    let selectedReport = this.getSelectedReport(report);
+
+    this.storeService.setData(StoreKeys.MY_GENERATED_REPORT, report);
+    this.storeService.setData(
+      StoreKeys.TYPE_REPORT,
+      JSON.stringify(selectedReport)
+    );
+    this.router.navigate(['/app/configuration']);
+  }
+
+  deleteReport(report: GeneratedReport): void {
+    const dialogData: ConfirmDialogModel = {
+      title: 'Eliminar reporte',
+      message: '¿Esta seguro de eliminar el reporte?',
     };
-    this.modalService.openPopUp(SendReportComponent, params);
-    this.modalService.confirmedPopUp().subscribe(data => {
+    this.modalService.openPopUp(ConfirmDialogComponent, {
+      width: '600px',
+      closeOnNavigation: true,
+      data: dialogData,
+    });
+    this.modalService.confirmedPopUp().subscribe((data: any) => {
       if (data) {
-        this.loadModalConfirmation();
+        this.generatedReportsService
+          .deleteReport(report.reportGeneratedId)
+          .subscribe((resp: any) => {
+            if (resp.ok) {
+              this.setSuccess(
+                ['Reporte eliminado'],
+                ReportResponseType.SUCCESS,
+                'response-success'
+              );
+            } else {
+              this.setError(
+                [`No se pudo eliminar el reporte`],
+                ReportResponseType.ERROR
+              );
+            }
+          });
       }
     });
   }
 
-  loadModalConfirmation(): void {
-    let ret = new PopUpMessage('Envio de reporte');
-    ret.description = 'Se envio correctamente.';
-    ret.hasBackdrop = true;
-    ret.disableClose = false;
-    ret.closeOnNavigation = false;
-    ret.closableOnlyWithButton = false;
-    ret.backdropClass = '';
-    this.displayMessageService.openPopUp(ret);
-    this.displayMessageService.confirmedPopUp().subscribe(confirmed => {
-      console.log('confirmed: ', confirmed);
-      if (confirmed) {
-        //TODO: Realiza alguna accion al cierre del modal
-      }
+  setSuccess(resultError: string[], type: string, panelClass: string): void {
+    this.modalService.openPopUp(
+      ResponseDialogComponent,
+      this.modalService.getParams(resultError, type, panelClass)
+    );
+
+    this.modalService.confirmedPopUp().subscribe(() => {
+      this.loadGeneratedReports();
     });
+  }
+
+  setError(message: string[], type: string): void {
+    this.modalService.openPopUp(
+      ResponseDialogComponent,
+      this.modalService.getParams(message, type, 'response-error')
+    );
+
+    this.modalService.confirmedPopUp().subscribe(() => {});
+  }
+
+  getSelectedReport(report: GeneratedReport): SelectedReport {
+    let reportGroupFound: ReportsGroup = this.typesReportsGroup.filter(
+      data =>
+        data.reportTypes.filter(
+          reportType => reportType.id === report.reportTypeId
+        )[0]
+    )[0];
+
+    reportGroupFound.reportTypes = reportGroupFound.reportTypes.filter(
+      c => c.id === report.reportTypeId
+    );
+
+    let selectedReport: SelectedReport = {
+      reportGroup: {
+        id: reportGroupFound.reportGroupId,
+        internalName: reportGroupFound.internalName,
+        name: reportGroupFound.name,
+        order: reportGroupFound.order,
+      },
+      reportType: reportGroupFound.reportTypes[0],
+      reportId: report.reportId,
+    };
+
+    return selectedReport;
   }
 }

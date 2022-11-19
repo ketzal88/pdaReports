@@ -1,0 +1,45 @@
+.empty-state {
+    padding: 20px 0;
+    border: solid 1px #9999990a;
+    border-radius: 15px;
+    box-shadow: 2px 2px 20px 1px rgb(0 0 0 / 10%);
+    background-color: #ffffff;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 60px 0px;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.h4 {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.empty-state__detalles {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0px;
+}
+
+.empty-state__detalles__text {
+    padding: 22px 22px;
+}
+
+.empty-state__detalles__text p {
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 24px;
+    color: #5E5E5E;
+}
+
+@media (max-width: 440px) {
+    .detalles {
+        flex-direction: column;
+    }
+}

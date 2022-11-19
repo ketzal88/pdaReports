@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import 'anychart';
 import { disabledCredits } from '../../../utils/chart.util';
 
 @Component({

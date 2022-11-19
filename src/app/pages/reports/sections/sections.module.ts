@@ -45,17 +45,31 @@ import { ProcessFeedbackComponent } from './process-feedback/process-feedback.co
 import { KnowMoreBehavioralProfileComponent } from './know-more-behavioral-profile/know-more-behavioral-profile.component';
 import { ExploreYourCVWithTheseTipsComponent } from './explore-your-cvwith-these-tips/explore-your-cvwith-these-tips.component';
 import { VideoSectionComponent } from './video-section/video-section.component';
-import { BalanceEdadGeneroComponent } from './charts/balance-edad-genero/balance-edad-genero.component';
-import { CompatibilidadGrupoCandidatosComponent } from './charts/compatibilidad-grupo-candidatos/compatibilidad-grupo-candidatos.component';
+import { PipesModule } from '../../../shared/pipes/pipes.module';
+import { NoSectionDataPipe } from '../../../shared/pipes/no-section-data.pipe';
+import { SeeMoreModule } from '../../../shared/components/modal/see-more/see-more.module';
+import { ProfilesModule } from '../../../shared/components/icons/profiles/profiles.module';
+import { CertificationsComponent } from './certifications/certifications.component';
+import { BigCardSliderComponent } from './big-card-slider/big-card-slider.component';
+import { CanYouSendTheCandidateAPersonalizedReportComponent } from './can-you-send-the-candidate-apersonalized-report/can-you-send-the-candidate-apersonalized-report.component';
+import { ShareYourProfileInTheRRSSComponent } from './share-your-profile-in-the-rrss/share-your-profile-in-the-rrss.component';
 import { CompatibilidadPuestoComponent } from './charts/compatibilidad-puesto/compatibilidad-puesto.component';
+import { BehavioralDescriptionCardComponent } from './behavioral-description-card/behavioral-description-card.component';
+import { GraficoComportamentalComponent } from './charts/grafico-comportamental/grafico-comportamental.component';
+import { BalanceEdadGeneroComponent } from './charts/balance-edad-genero/balance-edad-genero.component';
+import { SmallBarWithNotchComponent } from './charts/small-bar-with-notch/small-bar-with-notch.component';
+import { TendenciaComportamentalComponent } from './charts/tendencia-comportamental/tendencia-comportamental.component';
+
+import { CompatibilidadGrupoCandidatosComponent } from './charts/compatibilidad-grupo-candidatos/compatibilidad-grupo-candidatos.component';
 import { CompatibilidadPuestosCandidatoComponent } from './charts/compatibilidad-puestos-candidato/compatibilidad-puestos-candidato.component';
 import { CompetenciasComponent } from './charts/competencias/competencias.component';
 import { ConsistenciaComponent } from './charts/consistencia/consistencia.component';
-import { GraficoComportamentalComponent } from './charts/grafico-comportamental/grafico-comportamental.component';
 import { RepnaComponent } from './charts/repna/repna.component';
-import { SmallBarWithNotchComponent } from './charts/small-bar-with-notch/small-bar-with-notch.component';
-import { TendenciaComportamentalComponent } from './charts/tendencia-comportamental/tendencia-comportamental.component';
-import { BehavioralDescriptionCardComponent } from './behavioral-description-card/behavioral-description-card.component';
+import { JobCompatibilityByCandidateComponent } from './job-compatibility-by-candidate/job-compatibility-by-candidate.component';
+import { EmptyStateModule } from '../../../shared/components/empty-state/empty-state.module';
+import { TendenciaComportamentalLabeledComponent } from './charts/tendencia-comportamental-labeled/tendencia-comportamental-labeled.component';
+import { DescriptionClickHereCardComponent } from './description-click-here-card/description-click-here-card.component';
+
 @NgModule({
   declarations: [
     CoverIndividualSectionComponent,
@@ -69,7 +83,6 @@ import { BehavioralDescriptionCardComponent } from './behavioral-description-car
     SelfDescriptionComponent,
     EmotionalInteligenceSectionComponent,
     BehavioralProfileDescriptionSectionComponent,
-    BehavioralDescriptionCardComponent,
     PotentialDeploymentComponent,
     CommunicationStyleComponent,
     HowToLeadIndividualComponent,
@@ -95,16 +108,24 @@ import { BehavioralDescriptionCardComponent } from './behavioral-description-car
     KnowMoreBehavioralProfileComponent,
     ExploreYourCVWithTheseTipsComponent,
     VideoSectionComponent,
-    CompatibilidadGrupoCandidatosComponent,
-    GraficoComportamentalComponent,
+    CertificationsComponent,
+    CanYouSendTheCandidateAPersonalizedReportComponent,
+    ShareYourProfileInTheRRSSComponent,
     CompatibilidadPuestoComponent,
-    RepnaComponent,
-    SmallBarWithNotchComponent,
-    CompetenciasComponent,
+    BehavioralDescriptionCardComponent,
+    DescriptionClickHereCardComponent,
+    BigCardSliderComponent,
+    GraficoComportamentalComponent,
     BalanceEdadGeneroComponent,
+    SmallBarWithNotchComponent,
     TendenciaComportamentalComponent,
+    TendenciaComportamentalLabeledComponent,
+    CompatibilidadGrupoCandidatosComponent,
     CompatibilidadPuestosCandidatoComponent,
+    CompetenciasComponent,
     ConsistenciaComponent,
+    RepnaComponent,
+    JobCompatibilityByCandidateComponent,
   ],
   imports: [
     CommonModule,
@@ -115,6 +136,10 @@ import { BehavioralDescriptionCardComponent } from './behavioral-description-car
     CarouselModule,
     TranslateModule,
     IconsModule,
+    PipesModule,
+    SeeMoreModule,
+    ProfilesModule,
+    EmptyStateModule,
   ],
   exports: [
     CoverIndividualSectionComponent,
@@ -128,7 +153,6 @@ import { BehavioralDescriptionCardComponent } from './behavioral-description-car
     SelfDescriptionComponent,
     EmotionalInteligenceSectionComponent,
     BehavioralProfileDescriptionSectionComponent,
-    BehavioralDescriptionCardComponent,
     PotentialDeploymentComponent,
     CommunicationStyleComponent,
     HowToLeadIndividualComponent,
@@ -153,19 +177,30 @@ import { BehavioralDescriptionCardComponent } from './behavioral-description-car
     ProcessFeedbackComponent,
     KnowMoreBehavioralProfileComponent,
     ExploreYourCVWithTheseTipsComponent,
-    VideoSectionComponent,    
-    CompatibilidadGrupoCandidatosComponent,
-    GraficoComportamentalComponent,
+    VideoSectionComponent,
+    CertificationsComponent,
+    CanYouSendTheCandidateAPersonalizedReportComponent,
+    ShareYourProfileInTheRRSSComponent,
     CompatibilidadPuestoComponent,
-    RepnaComponent,
-    SmallBarWithNotchComponent,
-    CompetenciasComponent,
+    BehavioralDescriptionCardComponent,
+    DescriptionClickHereCardComponent,
+    BigCardSliderComponent,
+    GraficoComportamentalComponent,
     BalanceEdadGeneroComponent,
+    SmallBarWithNotchComponent,
     TendenciaComportamentalComponent,
+    TendenciaComportamentalLabeledComponent,
+    CompatibilidadGrupoCandidatosComponent,
     CompatibilidadPuestosCandidatoComponent,
+    CompetenciasComponent,
     ConsistenciaComponent,
+    RepnaComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [BehavioralGraphService, JobCompatibilitySectionService],
+  providers: [
+    BehavioralGraphService,
+    JobCompatibilitySectionService,
+    NoSectionDataPipe,
+  ],
 })
 export class SectionsModule {}

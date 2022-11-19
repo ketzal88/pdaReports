@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DisplayMessageService } from '../../../../core/services/displayMessage.service';
-import { getDottedLastCharacters } from '../../../../core/utils/strings.util';
+import { NoSectionDataPipe } from '../../../../shared/pipes/no-section-data.pipe';
+import {
+  getDottedFirstCharacters,
+  getDottedLastCharacters,
+} from '../../../../core/utils/strings.util';
 import {
   PopUpMessage,
   DislayType,
@@ -19,10 +23,15 @@ export class HowToLeadIndividualComponent implements OnInit {
   //Bindinds
   description: string;
 
-  constructor(private displayMessageService: DisplayMessageService) {}
+  constructor(
+    private displayMessageService: DisplayMessageService,
+    private noSectionDataPipe: NoSectionDataPipe
+  ) {}
 
   ngOnInit(): void {
-    this.description = getDottedLastCharacters(this.leadershipDescriptions[0]);
+    this.description = this.noSectionDataPipe.transform(
+      getDottedFirstCharacters(this.leadershipDescriptions[0])
+    );
   }
 
   showMore(): void {
@@ -30,12 +39,11 @@ export class HowToLeadIndividualComponent implements OnInit {
     ret.description = this.leadershipDescriptions;
     ret.hasBackdrop = true;
     ret.disableClose = false;
-    ret.closeOnNavigation = false;
+    ret.closeOnNavigation = true;
     ret.closableOnlyWithButton = false;
     ret.backdropClass = '';
     this.displayMessageService.openShowMoreModal(ret);
-    this.displayMessageService.confirmedPopUp().subscribe(confirmed => {
-      console.log('confirmed: ', confirmed);
+    this.displayMessageService.confirmedShowMoreModal().subscribe(confirmed => {
       if (confirmed) {
         //TODO: Realiza alguna accion al cierre del modal
       }

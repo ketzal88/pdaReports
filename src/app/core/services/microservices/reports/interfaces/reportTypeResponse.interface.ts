@@ -1,6 +1,6 @@
 export interface ReportType {
   id: string;
-  internallName: string;
+  internalName: string;
   name: string;
   reportGroupId: string;
   reportGroup: ReportGroup;

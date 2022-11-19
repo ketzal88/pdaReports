@@ -7,12 +7,23 @@ import { LoginComponent } from './unauthorized/login/login.component';
 import { AuthEnableAnonymousGuard } from './core/guards/auth-enable-anonymous';
 import { ReportsModule } from './pages/reports/reports.module';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { NotAllowedComponent } from './unauthorized/not-allowed/not-allowed.component';
+import { PasswordRecoveryComponent } from './unauthorized/login/password-recovery/password-recovery.component';
+import { CandidateReviewComponent } from './pages/reports/candidate-review/candidate-review.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/app', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'passwordRecovery',
+    component: PasswordRecoveryComponent,
+  },
+  {
+    path: 'app/reports/candidate-review',
+    component: CandidateReviewComponent,
   },
   {
     path: 'app/reports/:id',
@@ -30,6 +41,10 @@ const routes: Routes = [
   {
     path: 'nopage',
     component: NopageComponent,
+  },
+  {
+    path: 'notAllowed',
+    component: NotAllowedComponent,
   },
   {
     path: '**',

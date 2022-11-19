@@ -8,7 +8,7 @@ export const DEVELOPMENT_SURVEY_TYPE: ConfigurationTypesReports = {
       sections: [
         {
           column: 1,
-          items: ['profileItem', 'consistencySection', 'competenciesSection'],
+          items: ['profileItem', 'consistencySection'],
         },
         {
           column: 2,
@@ -21,12 +21,21 @@ export const DEVELOPMENT_SURVEY_TYPE: ConfigurationTypesReports = {
       sections: [
         {
           column: 1,
-          items: ['behavioralProfileChartSection'],
+          items: ['competenciesSection'],
         },
       ],
     },
     {
       block: 3,
+      sections: [
+        {
+          column: 1,
+          items: ['behavioralProfileChartSection'],
+        },
+      ],
+    },
+    {
+      block: 4,
       sections: [
         {
           column: 1,
@@ -39,7 +48,7 @@ export const DEVELOPMENT_SURVEY_TYPE: ConfigurationTypesReports = {
       ],
     },
     {
-      block: 4,
+      block: 5,
       sections: [
         {
           column: 1,
@@ -52,7 +61,7 @@ export const DEVELOPMENT_SURVEY_TYPE: ConfigurationTypesReports = {
       ],
     },
     {
-      block: 5,
+      block: 6,
       sections: [
         {
           column: 1,
@@ -61,6 +70,24 @@ export const DEVELOPMENT_SURVEY_TYPE: ConfigurationTypesReports = {
         {
           column: 2,
           items: ['strengthsOverusedSection', 'potentialDeployment'],
+        },
+      ],
+    },
+    {
+      block: 7,
+      sections: [
+        {
+          column: 1,
+          items: ['certifications'],
+        },
+      ],
+    },
+    {
+      block: 8,
+      sections: [
+        {
+          column: 1,
+          items: ['canYouSendTheCandidateAPersonalizedReport'],
         },
       ],
     },

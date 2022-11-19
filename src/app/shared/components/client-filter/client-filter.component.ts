@@ -3,8 +3,16 @@ import { UserDetails } from '../../../core/services/microservices/identity/ident
 import { StoreService } from 'src/app/core/services/store.service';
 import { ClientService } from '../../../core/services/microservices/client/client.service';
 import { take } from 'rxjs';
-import { GetSubBasesResponse } from '../../../core/services/microservices/client/client.interface';
+import {
+  GetSubBasesResponse,
+  SubBase,
+} from '../../../core/services/microservices/client/client.interface';
 import { StoreKeys } from '../../../core/consts/store-keys.enum';
+import { AreaService } from 'src/app/core/services/microservices/individual/area.service';
+import {
+  AreaRequest,
+  AreaResponse,
+} from 'src/app/core/services/microservices/individual/area.interface';
 
 @Component({
   selector: 'app-client-filter',
@@ -13,7 +21,8 @@ import { StoreKeys } from '../../../core/consts/store-keys.enum';
 })
 export class ClientFilterComponent implements OnInit {
   availableClients: any[];
-  availableSubbases: any[];
+  availableSubbases: SubBase[];
+  availableAreas: AreaResponse[];
 
   //Variables
   userDetails: UserDetails;
@@ -21,6 +30,11 @@ export class ClientFilterComponent implements OnInit {
   //Inputs
   @Input() selectedClientId: string;
   @Input() selectedSubbaseId: string;
+
+  @Input() showAreaSelect: boolean = false;
+  @Input() selectedAreaId: string = null;
+  @Input() disable: boolean = false;
+
   //Outputs
   @Output() selectedClientEvent: EventEmitter<string> =
     new EventEmitter<string>();
@@ -28,9 +42,13 @@ export class ClientFilterComponent implements OnInit {
   @Output() selectedSubbaseEvent: EventEmitter<string> =
     new EventEmitter<string>();
 
+  @Output() selectedAreaEvent: EventEmitter<string> =
+    new EventEmitter<string>();
+
   constructor(
     private storeService: StoreService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private areaService: AreaService
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +65,9 @@ export class ClientFilterComponent implements OnInit {
   }
 
   loadUserDetails(): void {
-    this.userDetails = JSON.parse(this.storeService.getData('userDetails'));
+    this.userDetails = JSON.parse(
+      this.storeService.getData(StoreKeys.USER_DETAILS)
+    );
   }
 
   loadClient(): void {
@@ -68,13 +88,15 @@ export class ClientFilterComponent implements OnInit {
       .subscribe((res: GetSubBasesResponse) => {
         if (res.data) {
           this.availableSubbases = res.data;
-
+          this.getAreas();
           let existsInSelectedClient = res.data.filter(
             x => x.id === this.selectedSubbaseId
           );
           if (existsInSelectedClient.length === 0) {
             this.selectedSubbaseId = res.data[0].id;
             this.saveSubBaseChage();
+          } else {
+            this.selectedSubbaseEvent.emit(this.selectedSubbaseId);
           }
         } else {
           this.selectedSubbaseId = null;
@@ -87,6 +109,7 @@ export class ClientFilterComponent implements OnInit {
       return;
     }
     this.saveSubBaseChage();
+    this.getAreas();
   }
 
   onBaseChange(event: any): void {
@@ -95,6 +118,13 @@ export class ClientFilterComponent implements OnInit {
     }
     this.saveBaseChange();
     this.loadSubbase();
+  }
+
+  onAreaChange(event: any): void {
+    if (event) {
+      this.selectedAreaId = event;
+    }
+    this.selectedAreaEvent.emit(event);
   }
 
   saveSubBaseChage(): void {
@@ -111,5 +141,40 @@ export class ClientFilterComponent implements OnInit {
       this.selectedClientId
     );
     this.selectedClientEvent.emit(this.selectedClientId);
+  }
+
+  //AREA
+  getAreas(): void {
+    this.areaService
+      .getAreas(this.getAreaRequest())
+      .pipe(take(1))
+      .subscribe((data: AreaResponse[]) => {
+        this.availableAreas = data;
+
+        this.availableAreas.unshift({
+          areaId: null,
+          name: 'Todas',
+          baseId: null,
+          subBaseId: null,
+          creationDate: null,
+          deletionDate: null,
+        });
+        /*
+        this.onAreaChange(
+          this.availableAreas && this.availableAreas.length > 0
+            ? this.availableAreas[0].areaId
+            : null
+        );
+        */
+      });
+  }
+
+  getAreaRequest(): AreaRequest {
+    return {
+      areaId: null,
+      name: null,
+      baseId: this.selectedClientId,
+      subBaseId: this.selectedSubbaseId,
+    };
   }
 }

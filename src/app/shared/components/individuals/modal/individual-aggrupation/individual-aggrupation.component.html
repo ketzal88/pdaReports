@@ -66,10 +66,12 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="lockedSelectId">
+<ng-container>
   <app-individuals-selection
     [lockedSelectId]="lockedSelectId"
     [selectedClientId]="selectedClientId"
+    [selectedSubbaseId]="selectedSubbaseId"
+    [preselectedIds]="preselectedIds"
     [multipleSelection]="true"
     [selectedGroupingId]="selectedGroupingId"
     [selectedAreaId]="selectedAreaId"

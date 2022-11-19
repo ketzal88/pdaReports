@@ -1,0 +1,54 @@
+<app-card>
+  <card-content>
+    <div class="center">
+      <app-icon-error
+        *ngIf="data?.type === reportResponseType.ERROR"></app-icon-error>
+      <app-icon-success
+        *ngIf="data?.type === reportResponseType.SUCCESS"></app-icon-success>
+      <app-icon-warning
+        *ngIf="data?.type === reportResponseType.WARNING"></app-icon-warning>
+    </div>
+
+    <!-- Agregar campos traducidos
+    <div
+      class="center"
+      *ngIf="
+        data?.type === reportResponseType.ERROR ||
+        data?.type === reportResponseType.SUCCESS
+      ">
+      {{ data.message[0] | translate }}
+    </div>
+    <div class="center" *ngIf="data?.type === reportResponseType.WARNING">
+      <div *ngFor="let message of data.message">
+        {{ message | translate }}
+      </div>
+    </div>
+-->
+    <div *ngIf="reportPDFLoader.isLoading()">
+      <span class="center">{{ 'MODAL.ACTION.LOADING' | translate }}</span>
+      <div class="img-loading-overlay">
+        <div class="img-spinning-circle"></div>
+      </div>
+    </div>
+
+    <div class="center" *ngIf="data?.type === reportResponseType.SUCCESS">
+      <a target="_blank" [href]="url">{{ url }}</a>
+    </div>
+  </card-content>
+  <card-actions>
+    <div class="center">
+      <button
+        class="btn-response"
+        [ngClass]="
+          data?.type === reportResponseType.ERROR
+            ? 'btn-error'
+            : data?.type === reportResponseType.WARNING
+            ? 'btn-warning'
+            : 'btn-success'
+        "
+        (click)="confirm()">
+        {{ 'MODAL.ACTION.ACCEPT' | translate }}
+      </button>
+    </div>
+  </card-actions>
+</app-card>

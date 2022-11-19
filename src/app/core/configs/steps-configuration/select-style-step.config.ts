@@ -5,4 +5,8 @@ export const SELECT_STYLE_STEP: ItemStepConfiguration = {
     title: 'Selecciona el estilo',
     subtitle: 'del reporte a realizar',
   },
+  step: {
+    isComplete: true,
+    isEnabled: true,
+  },
 };

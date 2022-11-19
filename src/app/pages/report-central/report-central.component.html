@@ -1,23 +1,41 @@
 <!-- Section reports central-->
 <div class="report-central-container">
-  <h2>{{ 'REPORTING_CENTER.TITLE' | translate }}</h2>
+  <h2 class="report-central-container__title">
+    {{ 'REPORTING_CENTER.TITLE' | translate }}
+  </h2>
   <div class="analytical-graph">
-    <h2>Grafica analitica</h2>
+    <h2 style="position: absolute">
+      {{ 'REPORTING_CENTER.TITLE_ANALYTICS' | translate }}
+    </h2>
+
+    <img
+      class="analytical-graph"
+      src="/assets/img/report-central/Banner_Competencies.svg" />
   </div>
 
-  <div class="container-tab-group">
+  <div class="container-tab-group" *ngIf="typesReportsGroup">
     <mat-tab-group
       [(selectedIndex)]="selectedTabIndex"
       (selectedTabChange)="onTabChanged($event)">
       <mat-tab label="{{ 'REPORTING_CENTER.DEFAULTS.TITLE' | translate }}">
         <ng-container *ngIf="selectedTabIndex === 0">
-          <app-defaults></app-defaults>
+          <app-defaults
+            [typesReportsGroup]="typesReportsGroup"
+            [reportsLocal]="reportsLocal"></app-defaults>
         </ng-container>
       </mat-tab>
       <!--TODO: Sin funcionalidad-->
       <mat-tab label="{{ 'REPORTING_CENTER.MY_REPORTS.TITLE' | translate }}">
         <ng-container *ngIf="selectedTabIndex === 1">
-          <app-my-reports></app-my-reports>
+          <app-my-reports
+            [typesReportsGroup]="typesReportsGroup"></app-my-reports>
+        </ng-container>
+      </mat-tab>
+
+      <mat-tab label="{{ 'REPORTING_CENTER.MY_TEMPLATES.TITLE' | translate }}">
+        <ng-container *ngIf="selectedTabIndex === 2">
+          <app-my-templates
+            [typesReportsGroup]="typesReportsGroup"></app-my-templates>
         </ng-container>
       </mat-tab>
     </mat-tab-group>

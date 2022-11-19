@@ -1,0 +1,80 @@
+.title-icon {
+    vertical-align: middle;
+    flex-shrink: 0;
+    align-self: center;
+    flex-grow: 0;
+}
+
+.description-text {
+    margin: 24px 0px;
+    text-align: justify;
+}
+
+.card-text {
+    margin-bottom: 140px;
+}
+
+.button-text {
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 24px;
+    padding: 2px 20px;
+}
+
+.button-text .chevron {
+    margin-left: 15px;
+}
+
+.behavioral-description-card {
+    height: 350px;
+    margin-bottom: 96px;
+}
+
+.behavioral-description-card .ng-star-inserted {
+    height: 350px;
+    margin-bottom: 96px;
+    background-color: red;
+}
+
+.title-with-icon {
+    display: flex;
+    gap: 16px;
+}
+
+.h4 {
+    flex-grow: 1;
+    align-self: center;
+}
+
+@media(max-width: 1200px) {
+    .behavioral-description-card {
+        margin-bottom: 30px;
+        height: auto;
+    }
+}
+
+@media(max-width: 440px) {
+    .h4 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32px;
+    }
+    .description-text {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .button-text {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .behavioral-description-card {
+        margin: 0px 10px;
+        height: auto;
+    }
+    .card-text {
+        margin-bottom: 100px;
+    }
+}
+

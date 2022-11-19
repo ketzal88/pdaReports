@@ -1,41 +1,57 @@
-<h4 class="h4 subtitle center">Compatibilidad de Puestos</h4>
-<h4 class="h4 subtitle center blue">por grupo de Candidato</h4>
-<p class="body-1 center my-32">
-    En este gráfico se muestra la correlación del perfil de la persona con los demás perfiles evaluados.
-</p>
-<div class="section-graph-card">
+<ng-container *ngIf="jobCompatibilityFromGroup; else emptyState">
+  <h4 class="h4 subtitle center">
+    {{
+      'REPORTS.SECTIONS.JOB_COMPATIBILITY_MULTIPLE_COLUMNS_SECTION.PARTIAL_FIRST_TITLE'
+        | translate
+    }}
+  </h4>
+  <h4 class="h4 subtitle center blue">
+    {{
+      'REPORTS.SECTIONS.JOB_COMPATIBILITY_MULTIPLE_COLUMNS_SECTION.PARTIAL_SECOND_TITLE'
+        | translate
+    }}
+  </h4>
+  <p class="body-2 center my-32">
+    {{
+      'REPORTS.SECTIONS.JOB_COMPATIBILITY_MULTIPLE_COLUMNS_SECTION.DESCRIPTION'
+        | translate
+    }}
+  </p>
+  <div class="section-graph-card">
     <div class="puestos-compatibles">
-        <select class="selector small-shadow" name="select">
-      <option value="desarrollador" selected>
-        {{ jobCompatibility.jobCompatibilityDetailed?.jobTitle }}
-      </option>
-      <option value="programador">Programador</option>
-      <option value="project-manager">Project Manager</option>
-      <option value="soporte-tecnico">Soporte Técnico</option>
-      <option value="project-manager">Project Manager</option>
-    </select>
+      <div class="title-selector">
+        <p>
+          {{ jobCompatibilityFromGroup[0]?.jobTitle }}
+        </p>
+      </div>
     </div>
     <div class="polar-grafic">
-        <!-- <app-column-polar [data]="jobCompatibility?.multipleJobCompatibility"></app-column-polar> -->
-        <chart-compatibilidad-grupo-candidatos [data]="jobCompatibility?.multipleJobCompatibility"></chart-compatibilidad-grupo-candidatos>
+      <app-chart-compatibilidad-grupo-candidatos
+        [data]="jobCompatibilityFromGroup"
+        [selectedIndividualId]="
+          selectedIndividualId
+        "></app-chart-compatibilidad-grupo-candidatos>
     </div>
-</div>
+  </div>
+  <!-- <app-column-polar [data]="jobCompatibility?.multipleJobCompatibility"></app-column-polar> -->
+</ng-container>
 
-<!-- <app-card>
-  <card-content>
-    <div style="padding-left: 120px; padding-right: 120px; margin-top: 35px">
-      <h2>Compatibilidad de Puestos</h2>
-      <h2>Por grupo</h2>
-
-      <p>
-        En este gráfico se muestra la correlación del perfil de la persona con
-        los demás perfiles evaluados.
-      </p>
-    </div>
-
-    <div class="chart-container">
-      <app-column-polar [data]="jobCompatibility?.multipleJobCompatibility">
-      </app-column-polar>
-    </div>
-  </card-content>
-</app-card> -->
+<ng-template #emptyState>
+  <div class="balance">
+    <h4 class="h4 subtitle center">
+      {{
+        'REPORTS.SECTIONS.JOB_COMPATIBILITY_MULTIPLE_COLUMNS_SECTION.PARTIAL_FIRST_TITLE'
+          | translate
+      }}
+    </h4>
+    <h4 class="h4 subtitle center blue">
+      {{
+        'REPORTS.SECTIONS.JOB_COMPATIBILITY_MULTIPLE_COLUMNS_SECTION.PARTIAL_SECOND_TITLE'
+          | translate
+      }}
+    </h4>
+    <app-empty-state
+      description="{{ 'REPORTS.MISCELLANY' | translate }}
+    "></app-empty-state>
+  </div>
+</ng-template>

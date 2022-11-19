@@ -15,19 +15,24 @@
     color: #6D7783;
 }
 
-@media (max-width: 744px) {
+.selector .small-shadow {
+    z-index: 250;
+}
+
+@media (max-width: 1200px) {
     .h4.subtitle,
-    .body-1 {
+    .body-2 {
         color: white;
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 440px) {
     .h4.subtitle {
         font-size: 24px;
         line-height: 32px;
     }
-    .body-1 {
+    .body-2 {
+        margin-top: 45px;
         font-size: 14px;
         line-height: 20px;
     }

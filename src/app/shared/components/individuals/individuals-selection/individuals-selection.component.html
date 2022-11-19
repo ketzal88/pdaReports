@@ -1,18 +1,17 @@
-<div class="mat-elevation-z8">
+<div class="">
   <div *ngIf="nothingFound">
     <mat-card>
       <mat-card-content style="text-align: center; margin: 20px">
         <h3>
-          No se encontro resultado para: <i>{{ filterText }}</i>
-        </h3></mat-card-content
-      >
+          {{ 'NOT_FOUND_FILTER_TEXT' | translate }} <i>{{ filterText }}</i>
+        </h3>
+      </mat-card-content>
     </mat-card>
   </div>
 
   <div *ngIf="data">
     <app-mat-custom-individuals-table
       #individualTable
-      *ngIf="data"
       [pageSize]="pageSize"
       [selectedIds]="selectedIndividualIds"
       [lockedSelectId]="lockedSelectId"
@@ -20,6 +19,7 @@
       [maxMultipleSelection]="maxMultipleSelection"
       [dataSource]="dataSource"
       [hasSelectLeader]="hasSelectLeader"
+      [leaderId]="selectedLeaderId"
       [hasSelect]="hasSelect"
       [preselectedIds]="preselectedIds"
       [columns]="columns"

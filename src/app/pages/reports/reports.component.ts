@@ -4,6 +4,7 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
+  AfterViewInit,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
@@ -15,10 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ReportsEventService } from './reports-event.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { unsubscribe } from '../../core/utils/subscription.util';
-import { StoreService } from '../../core/services/store.service';
-import { StoreKeys } from '../../core/consts/store-keys.enum';
 import { ReportEvent } from '../../core/consts/report-event.enum';
-import { ReportTypeStatus } from '../../core/consts/report-type-status.enum';
 import {
   MultipleJobCompatibility,
   PDAIndividualSectionsResponse,
@@ -27,7 +25,6 @@ import { PDAGroupSectionsResponse } from '../../core/services/microservices/repo
 import { ReportsService } from '../../core/services/microservices/reports/reports.service';
 import { PDAIndividualSectionsRequest } from '../../core/services/microservices/reports/interfaces/pdaIndividualSectionsRequest.interface';
 import { PDAGroupSectionsRequest } from '../../core/services/microservices/reports/interfaces/pdaGroupSectionsRequest.interface';
-import { MyReport } from '../report-central/configuration/interfaces/myReport.interface';
 import { AuthenticationService } from '../../core/authentication/authentication.service';
 import {
   GetJobsResponse,
@@ -42,16 +39,33 @@ import { Loader } from 'src/app/core/services/loader/loader';
 import { GeneratedReport } from 'src/app/core/services/microservices/reports/interfaces/generatedReportsResponse.interface';
 import { GeneratedReportsService } from 'src/app/core/services/microservices/reports/generated-reports.service';
 import { ReportsLocal } from '../report-central/interfaces/reports-local.interface';
-import { catchError, take } from 'rxjs';
-import { ReportGeneratedCompetency } from '../../core/services/microservices/reports/interfaces/generatedReportsResponse.interface';
 import { JobService } from '../../core/services/microservices/job/job.service';
+import { ReportResponseType } from 'src/app/core/consts/report-response-type.enum';
+import { ResponseDialogComponent } from 'src/app/shared/components/modal/response-dialog/response-dialog.component';
+import { ModalService } from '../../core/services/modal.service';
+import { TypesInternalReports } from '../../core/consts/types-internal-reports.enum';
+import { GeneratedReportByIdResponse } from '../../core/services/microservices/reports/interfaces/generatedReportsResponse.interface';
+import { PdfGenerationComponent } from 'src/app/shared/components/modal/pdf-generation/pdf-generation.component';
+import { SendReportService } from '../report-central/my-reports/send-report/send-report.service';
+import { ClientService } from '../../core/services/microservices/client/client.service';
+import { ClientResponse } from '../../core/services/microservices/client/client.interface';
+
+import { environment } from 'src/environments/environment';
+import 'anychart';
+import { LoadingService } from '../../core/services/loading.service';
+import { TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MenuComponent } from 'src/app/shared/components/display-message/menu/menu.component';
+import { StyleService } from '../../core/services/style/style.service';
+
+anychart.licenseKey(environment.anyChart.licenseKey);
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
 })
-export class ReportsComponent implements OnInit, OnDestroy {
+export class ReportsComponent implements OnInit, OnDestroy, AfterViewInit {
   dataIndividualSectionsResponse!: PDAIndividualSectionsResponse;
   dataGroupSectionsResponse!: PDAGroupSectionsResponse;
 
@@ -60,10 +74,13 @@ export class ReportsComponent implements OnInit, OnDestroy {
   backgroundUserImage = null;
   logoImage = null;
   selectedReport: ReportsLocal = null;
-  reportTypeStatus = ReportTypeStatus;
   selectReportType: ConfigurationTypesReports;
   selectOnlyProfile: ConfigurationTypesReports;
   reportId: string;
+  individualId: string;
+  leaderIndividualId: string;
+  TypesInternalReports = TypesInternalReports;
+  orientationClass: string = null;
 
   //ViewChilds
   @ViewChild('checkStrengthsOverusedSection')
@@ -73,8 +90,15 @@ export class ReportsComponent implements OnInit, OnDestroy {
   firstTime: boolean = false;
   jobsByCategory: Job[];
   multipleJobCompatibility: MultipleJobCompatibility[];
-  jobsList: string[];
+  jobsIdList: string[];
   jobCategory: JobCategory;
+  shortId: string;
+  listReportsForEmails: GeneratedReport[];
+  generatedReportByIdResponse: GeneratedReportByIdResponse;
+
+  //Report Variables
+  reportGeneratedId: string;
+  reportJobId: string;
 
   //Subscriptions
   reportsSub!: Subscription;
@@ -83,17 +107,18 @@ export class ReportsComponent implements OnInit, OnDestroy {
   generatedReportsSub: Subscription;
   reportsLocalSub: Subscription;
   jobCategoriesSub: Subscription;
+  clientSub: Subscription;
 
   //Loader
   generatedReportsLoader: Loader;
   multipleJobCompatibilityLoader: Loader;
   jobsByCategoryLoader: Loader;
   individualsSectionsLoader: Loader;
+  groupSectionsLoader: Loader;
   categoryByJobLoader: Loader;
   reportsLocalLoader: Loader;
   jobCategoriesLoader: Loader;
-
-  requestReportData!: MyReport;
+  logoLoader: Loader;
 
   //progress bar
   color: ThemePalette = 'primary';
@@ -107,29 +132,27 @@ export class ReportsComponent implements OnInit, OnDestroy {
     private cssColorService: CssColorService,
     private route: ActivatedRoute,
     private router: Router,
-    private storeService: StoreService,
     private authenticationService: AuthenticationService,
     private generatedReportsService: GeneratedReportsService,
-    private jobService: JobService
-  ) {}
+    private jobService: JobService,
+    private modalService: ModalService,
+    private sendReportService: SendReportService,
+    private clientService: ClientService,
+    private loadingService: LoadingService,
+    private translateService: TranslateService,
+    private matDialog: MatDialog,
+    private styleService: StyleService
+  ) {
+    this.loadingService.setMessage(
+      this.translateService.instant('REPORTS.LOADING_REPORT')
+    );
+  }
 
   ngOnInit(): void {
+    this.listReportsForEmails = [];
     this.initLoader();
-
-    //TODO: Recibo el id del reporte generado
-    let idReportGenerated = this.route.snapshot.paramMap.get('id');
-
-    //TODO: Descomentar hasta tener resto de la maqueta de reportes
-    let reportData = this.storeService.getData(StoreKeys.REPORT);
-    if (reportData) {
-      this.requestReportData = JSON.parse(reportData);
-      this.loadReport();
-    } else {
-      this.getGeneratedReportById(idReportGenerated);
-    }
-
-    //TODO: Tratar dato de servicio cuando se retome la funcionalidad de grupos
-    // this.loadGroupSections();
+    this.shortId = this.route.snapshot.paramMap.get('id');
+    this.getGeneratedReportById(this.shortId);
   }
 
   ngOnDestroy(): void {
@@ -139,6 +162,12 @@ export class ReportsComponent implements OnInit, OnDestroy {
     unsubscribe(this.generatedReportsSub);
     unsubscribe(this.reportsLocalSub);
     unsubscribe(this.jobCategoriesSub);
+    unsubscribe(this.clientSub);
+  }
+
+  ngAfterViewInit(): void {
+    //TODO: Revisar el error por consola Refused to apply style from
+    this.styleService.loadStyle('assets/styles/night.css');
   }
 
   initLoader(): void {
@@ -149,35 +178,54 @@ export class ReportsComponent implements OnInit, OnDestroy {
     this.categoryByJobLoader = new Loader();
     this.reportsLocalLoader = new Loader();
     this.jobCategoriesLoader = new Loader();
+    this.groupSectionsLoader = new Loader();
+    this.logoLoader = new Loader();
   }
 
   loadReport(): void {
-    this.loadReportType();
-    this.loadStyleReport();
+    this.loadReportTemplate();
+    //this.loadStyleReport();
     this.cssColorService.loadColors();
     setTimeout(() => {
       this.reportsEventService.setCurrentReport(ReportEvent.IS_REPORT);
     }, 0);
-    this.loadInvidualSections();
   }
 
   getGeneratedReportById(id: string): void {
     this.generatedReportsSub = this.generatedReportsLoader
       .load(this.generatedReportsService.getGeneratedReportByShortId(id))
       .subscribe({
-        next: (res: GeneratedReport) => {
+        next: (res: GeneratedReportByIdResponse) => {
+          this.generatedReportByIdResponse = res;
           if (res) {
-            //ESTO VA A CAMBIAR; YA QUE PARA GENERAR REPORTE LUEGO SOLO ENVIAREMOS EL REPORTGENERATEDID.
-            // NO NECESITARIAMOS TRAERNOS TODA ESTA INFO PARA EL REQUEST.
-            this.requestReportData = this.getDataMapping(res);
+            this.getLogoClient();
+            let newDataReport: GeneratedReport = {
+              shortId: this.shortId,
+              baseId: res.baseId,
+              subBaseId: res.subBaseId,
+            };
+            this.listReportsForEmails.push(newDataReport);
+
             this.reportId = res.reportId;
+            this.reportGeneratedId = res.reportGeneratedId;
+            this.individualId = res.individualId;
+            this.leaderIndividualId = res.leaderIndividualId;
+            if (res.reportGeneratedJobs && res.reportGeneratedJobs.length > 0) {
+              this.reportJobId = res.reportGeneratedJobs[0].jobId;
+            }
+
+            //Voy cargando la info de las secciones al mismo tiempo que cargo el reporte seleccionado.
+            this.loadInvidualSections();
+
+            if (this.leaderIndividualId) {
+              this.loadGroupSections();
+            }
 
             this.reportsLocalSub = this.reportsLocalLoader
               .load(this.reportsService.getReportsLocal(res.reportId))
               .subscribe({
                 next: (resp: ReportsLocal[]) => {
                   this.selectedReport = resp[0];
-                  console.log('selectedReport: ', this.selectedReport);
                   this.loadReport();
                 },
                 error: err => {
@@ -193,54 +241,12 @@ export class ReportsComponent implements OnInit, OnDestroy {
       });
   }
 
-  getDataMapping(data: GeneratedReport): MyReport {
-    let myReport: MyReport = new MyReport();
-
-    myReport.id = data.reportGeneratedId;
-
-    myReport.shortId = data.shortId;
-    myReport.style = data.reportStyleId;
-    // myReport.culture
-    myReport.baseId = data.baseId;
-    myReport.subBaseId = data.subBaseId;
-    myReport.individualIds = [data.individualId];
-    myReport.hrFeedback = data.feedbackText;
-    if (data.reportGeneratedJobs && data.reportGeneratedJobs.length > 0) {
-      myReport.jobId = data.reportGeneratedJobs[0].jobId;
-    }
-    // myReport.jobCategoryId
-    if (
-      data.reportGeneratedCompetencies &&
-      data.reportGeneratedCompetencies.length > 0
-    ) {
-      myReport.competenciesIds = data.reportGeneratedCompetencies.map(
-        x => x.competencyId
-      );
-    }
-
-    myReport.groupId = data.groupId;
-    // myReport.groupIndividuals
-    myReport.areaId = data.areaId;
-    // myReport.areaIndividuals
-    myReport.leaderIndividualId = data.leaderIndividualId;
-    return myReport;
-  }
-
   redirectToNoPage(): void {
-    console.error('El reporte no existe o no tienes permisos.');
-    // return this.router.navigate(['/nopage']);
-    this.router.navigate(['/nopage']);
+    this.router.navigate(['/notAllowed']);
   }
 
-  loadReportType(): void {
-    if (!this.selectedReport) {
-      this.selectedReport = JSON.parse(
-        this.storeService.getData(StoreKeys.TYPE_REPORT) || null
-      );
-    }
-
+  loadReportTemplate(): void {
     this.loadBackgroundImage();
-    this.loadLogo();
 
     //Filtro las que no son del bloque 1
     this.selectReportType = {
@@ -274,8 +280,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
   loadBackgroundImage(): void {
     //TODO: Luego actualizar codigo cuando tengamos las imagenes en png o svg
     if (this.selectedReport) {
-      this.backgroundUserImage =
-        'background-' + this.getBackgroundName();
+      this.backgroundUserImage = 'background-' + this.getBackgroundName();
     }
   }
 
@@ -294,72 +299,46 @@ export class ReportsComponent implements OnInit, OnDestroy {
     return backgroundName;
   }
 
-  loadLogo(): void {
-    //TODO:Cambiar logica porque es solo para visualizar logo
-    if (
-      this.selectedReport.reportGroup.name === 'hiring' &&
-      this.selectedReport.reportType.name === 'survey'
-    ) {
-      this.logoImage = '/assets/img/logo.png';
-    } else if (
-      this.selectedReport.reportGroup.name === 'hiring' &&
-      this.selectedReport.reportType.name === 'report'
-    ) {
-      this.logoImage = '/assets/img/logo-zurich.png';
-    } else {
-      this.logoImage = '/assets/img/logo-metlife.png';
-    }
-  }
-
-  loadStyleReport(): void {}
+  //loadStyleReport(): void {}
 
   loadInvidualSections(): void {
     let baseRequest = this.getBodyRequest(
-      this.requestReportData?.jobId ? [this.requestReportData?.jobId] : null,
-      this.getAllSectionsReports()
+      this.reportGeneratedId,
+      null,
+      null //this.getIndividualsSections()
     );
 
     this.reportsSub = this.individualsSectionsLoader
       .load(this.reportsService.loadIndividualReport(baseRequest))
-      .subscribe((res: PDAIndividualSectionsResponse) => {
-        this.dataIndividualSectionsResponse = res;
-        this.setJobList();
+      .subscribe({
+        next: (res: PDAIndividualSectionsResponse) => {
+          this.dataIndividualSectionsResponse = res;
+          this.setJobList();
+        },
+        error: () => {
+          return this.handleErrorOrUnauthorized();
+        },
       });
   }
 
-  setJobList(): void {
-    if (this.requestReportData.jobId) {
-      this.getCategoryByJob();
-    }
+  getIndividualsSections(): string[] {
+    return ['LogosAndCertifications'];
   }
 
-  getJobsMapping(): string[] {
-    return this.jobsByCategory?.reduce(
-      (newValue: string[], currentValue: Job) => {
-        newValue.push(currentValue.jobId);
-        return newValue;
-      },
-      []
-    );
+  setJobList(): void {
+    if (this.reportJobId) {
+      this.getCategoryByJob();
+    }
   }
 
   getCategoryByJob(): void {
     //TODO: Solicitar unico endpoint para obtener info de la categoria
     const subsJobs = this.categoryByJobLoader
       .load(
-        this.jobService.getJobs(
-          this.requestReportData.jobId,
-          null,
-          null,
-          null,
-          null,
-          1,
-          70
-        )
+        this.jobService.getJobs(this.reportJobId, null, null, null, null, 1, 2)
       )
       .subscribe({
         next: (response: GetJobsResponse) => {
-          console.log('job: ', response.data);
           let category = response.data[0].jobCategoryId;
           this.jobCategoriesSub = this.jobCategoriesLoader
             .load(this.jobService.getJobCategories())
@@ -389,10 +368,9 @@ export class ReportsComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: (response: GetJobsResponse) => {
-          console.log('jobs: ', response.data);
           this.jobsByCategory = response.data;
-          this.jobsList = this.getJobsMapping();
-          this.loadMultipleJobCompatibility(this.jobsList);
+          this.jobsIdList = response.data.map(x => x.jobId);
+          this.loadMultipleJobCompatibility(this.jobsIdList);
         },
         error: err => {},
         complete: () => {
@@ -401,12 +379,10 @@ export class ReportsComponent implements OnInit, OnDestroy {
       });
   }
 
-  setJobCategory(): void {
-    this.jobCategory = this.storeService.getData(StoreKeys.JOB_CATEGORY);
-  }
-
   loadMultipleJobCompatibility(jobsId: string[]): void {
-    let baseRequest = this.getBodyRequest(jobsId, ['JobCompatibility']);
+    let baseRequest = this.getBodyRequest(this.reportGeneratedId, jobsId, [
+      'JobCompatibility',
+    ]);
     this.multipleJobCompatibilitySub = this.multipleJobCompatibilityLoader
       .load(this.reportsService.loadIndividualReport(baseRequest))
       .subscribe((res: PDAIndividualSectionsResponse) => {
@@ -415,27 +391,13 @@ export class ReportsComponent implements OnInit, OnDestroy {
       });
   }
 
-  loadGroupSections(): void {
-    let baseRequest = this.getBodyGroupRequest();
-    baseRequest.competencyParameters.competenciesId =
-      this.requestReportData.competenciesIds;
-    baseRequest.jobParameters.jobsId = [this.requestReportData.jobId];
-
-    this.reportsGroupSub = this.reportsService
-      .loadGroupReport(this.getBodyGroupRequest())
-      .subscribe((res: PDAGroupSectionsResponse) => {});
-  }
-
   getBodyRequest(
+    reportGeneratedId: string,
     jobIds: string[],
     listSectionsPDA: string[]
   ): PDAIndividualSectionsRequest {
     let pdaIndividualSectionsRequest: PDAIndividualSectionsRequest = {};
-    pdaIndividualSectionsRequest.reportId = this.selectedReport.reportId;
-    pdaIndividualSectionsRequest.baseId = this.requestReportData.baseId;
-    pdaIndividualSectionsRequest.subbaseId = this.requestReportData.subBaseId;
-    pdaIndividualSectionsRequest.individualId =
-      this.requestReportData.individualIds[0];
+    pdaIndividualSectionsRequest.reportGeneratedId = reportGeneratedId;
     pdaIndividualSectionsRequest.sectionsReportPDA = listSectionsPDA;
 
     if (jobIds?.length > 0) {
@@ -446,58 +408,42 @@ export class ReportsComponent implements OnInit, OnDestroy {
         includeCorrelationCompetency: true,
       };
     }
-    if (this.requestReportData.competenciesIds?.length > 0) {
-      pdaIndividualSectionsRequest.competencyParameters = {
-        competenciesId: this.requestReportData.competenciesIds,
-        natural: true,
-      };
-    }
 
     pdaIndividualSectionsRequest.includeGraphics = false;
-
-    console.log('pdaIndividualSectionsRequest', pdaIndividualSectionsRequest);
     return pdaIndividualSectionsRequest;
+  }
+
+  loadGroupSections(): void {
+    this.reportsGroupSub = this.groupSectionsLoader
+      .load(this.reportsService.loadGroupReport(this.getBodyGroupRequest()))
+      .subscribe((res: PDAGroupSectionsResponse) => {
+        this.dataGroupSectionsResponse = res;
+      });
   }
 
   getBodyGroupRequest(): PDAGroupSectionsRequest {
     return {
-      reportId: '81D4C573-1AB5-4022-AE32-2333EBC8B1DE',
-      baseId: this.requestReportData.baseId,
-      subbaseId: this.requestReportData.subBaseId,
-      leaderIndividualId: this.requestReportData.individualIds[0],
-      individualsIds: this.requestReportData.individualIds,
+      reportId: this.reportId,
+      reportGeneratedId: this.reportGeneratedId,
+      leaderIndividualId: this.leaderIndividualId,
+      individualsIds: [this.individualId],
       sectionsReportGroup: [
         'BehavioralRadarChart',
-        'EffectiveLeadership',
-        'KeyAspects',
-        'KeysToMotivate',
-        'ManagementStyle',
-        'PredominantAxes',
-        'ProfileModification',
-        'ScatteringPercentages',
+        // 'EffectiveLeadership',
+        // 'KeyAspects',
+        // 'KeysToMotivate',
+        // 'ManagementStyle',
+        // 'PredominantAxes',
+        // 'ProfileModification',
+        // 'ScatteringPercentages',
         'REPNSTrends',
-        'BehavioralProfileChartAverage',
+        // 'BehavioralProfileChartAverage',
         'BehavioralRadarChartGroupAverage',
-        'EnergyBalance',
-        'CompetencyCompatibility',
+        // 'EnergyBalance',
+        // 'CompetencyCompatibility',
         'JobCompatibility',
+        'jobFromGroupCompatibility',
       ],
-      jobParameters: {
-        jobsId: [
-          'F78ADDAB-D83A-471B-8E15-A07A9B09C62C',
-          'E8907F50-2532-4222-A25A-4DA0734F2CE9',
-          '03CA3E8C-0762-476C-9DC0-335AA3A5E5CD',
-        ],
-        natural: true,
-      },
-      competencyParameters: {
-        competenciesId: [
-          '9F1EB0E0-E34C-438A-9AF9-6A23D8337104',
-          'F22293CE-E8C3-468E-8EF2-F8DA7AF12E49',
-          '92B0AEAD-1DBC-4D2F-9155-FE0CA644D1B8',
-        ],
-        natural: true,
-      },
       includeGraphics: false,
     };
   }
@@ -513,40 +459,76 @@ export class ReportsComponent implements OnInit, OnDestroy {
     this.router.navigate(['/app']);
   }
 
+  downloadPDF(): void {
+    this.modalService.openPopUp(PdfGenerationComponent, {
+      width: '50%',
+      data: {
+        reportGeneratedId: this.reportGeneratedId,
+      },
+      panelClass: 'response-warning',
+    });
+  }
+
   logout(): void {
     this.reportsEventService.setCurrentReport(ReportEvent.NOT_REPORT);
     this.authenticationService.logOut();
     this.router.navigate(['/login']);
   }
 
-  getAllSectionsReports(): string[] {
-    return [
-      'Introduction',
-      'ConsistencyIndicator',
-      'PDAChart',
-      'BehavioralDescriptors',
-      'BehavioralProfileDescription',
-      'ManagementStyle',
-      'SalesStyle',
-      'EffectiveLeadership',
-      'StrengthsOverused',
-      'CurrentSituation',
-      'BehavioralProfileChart',
-      'SelfDescription',
-      'RadarChart',
-      'WheelChart',
-      'BehavioralRadarChart',
-      'BehavioralTrend',
-      'JobCompatibility',
-      'CompetencyCompatibility',
-      'EmotionalIntelligence',
-      'DevelopmentTips',
-      'BehavioralProfileNaturalBrief',
-      'BehavioralProfileImage',
-      'DevelopmentPlan',
-      'HRFeedback',
-      'AudiovisualContent',
-      'coverIndividual',
+  handleErrorOrUnauthorized(): void {
+    const type = ReportResponseType.ERROR;
+    const message = [
+      `CONFIGURATION.${type}.${ReportResponseType.ERROR_REPORT}`,
     ];
+
+    this.modalService.openPopUp(ResponseDialogComponent, {
+      width: '414px',
+      data: {
+        type,
+        message,
+      },
+      panelClass: 'response-warning',
+    });
+
+    this.modalService.confirmedPopUp().subscribe((response: any) => {
+      this.router.navigate(['notAllowed']);
+    });
+  }
+
+  onSendReport(): void {
+    this.sendReportService.onSendReport(
+      this.listReportsForEmails[0].baseId,
+      this.listReportsForEmails[0].subBaseId,
+      this.listReportsForEmails
+    );
+  }
+
+  getLogoClient(): void {
+    this.clientSub = this.logoLoader
+      .load(
+        this.clientService.getClient(this.generatedReportByIdResponse?.baseId)
+      )
+      .subscribe({
+        next: (data: ClientResponse) => {
+          if (data && data?.logoReportPath) {
+            //Guardar logo que viene del servicio
+            this.logoImage = data.logoReportPath;
+            let img = new Image();
+            img.src = data.logoReportPath;
+
+            if (img.naturalWidth > img.naturalHeight) {
+              this.orientationClass = 'landscape';
+            } else if (img.naturalWidth < img.naturalHeight) {
+              this.orientationClass = 'portrait';
+            }
+          }
+        },
+        error: err => {
+          console.log('error: ', err);
+        },
+      });
+  }
+  openMenu(): void {
+    this.matDialog.open(MenuComponent);
   }
 }

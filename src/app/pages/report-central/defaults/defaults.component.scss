@@ -1,7 +1,60 @@
-.content-block{
-    display: block;
+:host ::ng-deep {
+    .mat-card:not([class*=mat-elevation-z]) {
+        box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.18);
+    }
+
+    .mat-list-base .mat-list-option{
+        margin-top: 20px;
+        height: 30px;
+    }
 }
 
-.content-none{
-    display: none;
+.defaults {
+    display: flex;
+    justify-content: space-around;
+    min-height: 240px;
+    padding-top: 20px;
+}
+
+.defaults__card {
+    cursor: pointer;
+    text-align: center;
+    width: 205px;
+    overflow: hidden;
+    // padding: 15px;
+    padding: 0px;
+
+    max-height: 180px;
+
+}
+
+.defaults__card:hover {
+    max-height: 400px;
+}
+
+.defaults__card__content{
+    height: 180px;
+}
+
+.defaults__card__content:hover, .defaults__card__content:focus{
+    background: #E7F1FE;
+    border-radius: 10px;
+}
+
+.defaults__card__title{
+    font-size: 18px;
+    font-weight: 600;
+    color: #007EFD;
+}
+
+.defaults__card--report{
+    color: #508BE6;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.defaults__card--report:hover {
+    border-left: 4px solid #377BE2;
+    border-radius: 6px 0px 0px 6px;
+    background: #E7F1FE;
 }

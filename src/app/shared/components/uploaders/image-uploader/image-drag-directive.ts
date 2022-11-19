@@ -11,22 +11,22 @@ import { ImageFileHandle } from './image-uploader.interface';
 })
 export class ImageDragDirective {
   @Output() files: EventEmitter<ImageFileHandle[]> = new EventEmitter();
-  @HostBinding('style.background') background = '#eee';
+  // @HostBinding('style.background') background = '#eee';
   constructor() {}
   @HostListener('dragover', ['$event']) onDragOver(evt: DragEvent) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.background = '#999';
+    // this.background = '#999';
   }
   @HostListener('dragleave', ['$event']) onDragLeave(evt: DragEvent) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.background = '#eee';
+    // this.background = '#eee';
   }
   @HostListener('drop', ['$event']) onDrop(evt: DragEvent) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.background = '#eee';
+    // this.background = '#eee';
     let files: ImageFileHandle[] = [];
     for (let i = 0; i < evt.dataTransfer.files.length; i++) {
       const file = evt.dataTransfer.files[i];

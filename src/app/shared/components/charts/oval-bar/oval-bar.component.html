@@ -1,0 +1,7 @@
+<div
+  class="gender-bar"
+  [ngClass]="{ tooltip: hasTooltip }"
+  [ngStyle]="{ background: background }"
+  style="height: 100%; margin-right: 3px">
+  <span *ngIf="hasTooltip" class="tooltiptext">{{ tooltip }}</span>
+</div>

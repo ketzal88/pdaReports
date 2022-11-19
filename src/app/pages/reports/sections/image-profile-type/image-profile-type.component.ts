@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ProfileTypes } from '../../../../core/configs/profile/profile-types.enum';
 import {
   BehavioralDescriptors,
   CoverIndividual,
@@ -10,6 +11,9 @@ import {
   styleUrls: ['./image-profile-type.component.scss'],
 })
 export class ImageProfileTypeComponent implements OnInit {
+  //Bindinds
+  ProfileTypes = ProfileTypes;
+
   private bottom: number;
 
   @Input() coverIndividual: CoverIndividual;

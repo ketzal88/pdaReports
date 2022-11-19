@@ -14,6 +14,9 @@ export interface ReportGeneratedRequest {
   reportStyleId?: string;
   leaderIndividualId?: string;
   feedbackText?: string;
+  pdaAssessmentOutcomeId?: string;
+  name?: string;
+  isTemplate?: boolean;
 }
 
 export interface ReportGeneratedCompetencyRequest {
@@ -25,3 +28,15 @@ export interface ReportGeneratedJobRequest {
   reportGeneratedJobId?: string;
   jobId?: string;
 }
+
+/*
+export interface ReportGeneratedAreaIndividualRequest {
+  reportGeneratedAreaIndividualId?: string;
+  areaIndividualId?: string;
+}
+
+export interface ReportGeneratedGroupingIndividualRequest {
+  reportGeneratedGroupingIndividualId?: string;
+  groupingIndividualId?: string;
+}
+*/

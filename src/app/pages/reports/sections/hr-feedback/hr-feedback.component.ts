@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HRFeedback } from 'src/app/core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
 import { getDottedFirstCharacters } from 'src/app/core/utils/strings.util';
 import { DisplayMessageService } from '../../../../core/services/displayMessage.service';
+import { NoSectionDataPipe } from '../../../../shared/pipes/no-section-data.pipe';
 import {
   PopUpMessage,
   DislayType,
@@ -13,7 +14,10 @@ import {
   styleUrls: ['./hr-feedback.component.scss'],
 })
 export class HRFeedbackComponent implements OnInit {
-  constructor(private displayMessageService: DisplayMessageService) {}
+  constructor(
+    private displayMessageService: DisplayMessageService,
+    private noSectionDataPipe: NoSectionDataPipe
+  ) {}
   @Input() hrFeedback: HRFeedback;
   introduction: string;
 
@@ -22,7 +26,9 @@ export class HRFeedbackComponent implements OnInit {
   }
 
   loadDescription(): void {
-    this.introduction = getDottedFirstCharacters(this.hrFeedback.introduction);
+    this.introduction = this.noSectionDataPipe.transform(
+      getDottedFirstCharacters(this.hrFeedback.introduction)
+    );
   }
 
   showMore(): void {
@@ -33,7 +39,7 @@ export class HRFeedbackComponent implements OnInit {
     ret.description = this.hrFeedback.firstContent;
 
     this.displayMessageService.openShowMoreModal(ret);
-    this.displayMessageService.confirmedPopUp().subscribe(confirmed => {
+    this.displayMessageService.confirmedShowMoreModal().subscribe(confirmed => {
       if (confirmed) {
         //TODO: Realiza alguna accion al cierre del modal
       }

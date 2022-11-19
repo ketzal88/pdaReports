@@ -10,3 +10,10 @@
     margin-top: 104px;
     margin-bottom: 38px;
 }
+
+@media (max-width: 1200px) {
+    .card-behavioral-description {
+        margin-top: 0px;
+        margin-bottom: 38px;
+    }
+}

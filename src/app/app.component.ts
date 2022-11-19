@@ -17,6 +17,7 @@ import { StoreKeys } from './core/consts/store-keys.enum';
 import { StoreService } from './core/services/store.service';
 import { CookieStorageService } from './core/services/cookie-storage.service';
 import { environment } from '../environments/environment';
+import 'tippy.js/dist/tippy.css';
 
 @Component({
   selector: 'app-root',

@@ -1,43 +1,104 @@
-<h4 class="h4 subtitle center">{{behavioralRadarChart.title}}</h4>
-<p class="body-1 center my-32">
-    {{ behavioralRadarChart.introduction }}</p>
-<div class="section-grafic-comportamental">
-    <div class="tipos-grafico-comportamental" *ngIf="
+<ng-container
+  *ngIf="
+    behavioralRadarChart &&
+      behavioralRadarChart?.behavioralAxiCompetencies &&
+      jobCompatibility &&
       jobCompatibility?.jobCompatibilityDetailed
         ?.correlationJobBehavioralCompetencies &&
       jobCompatibility?.jobCompatibilityDetailed
-        ?.correlationJobBehavioralCompetencies.length > 0
-    ">
-        <div class="role-tab">
-            <button mat-flat-button disabled class="h6 role-tab-button border-pink active">Persona</button>
-            <button mat-flat-button class="h6 role-tab-button border-blue" (click)="puesto = !puesto" [ngClass]="{'active': puesto}">Puesto</button>
-            <button mat-flat-button class="h6 role-tab-button border-red" (click)="lider = !lider" [ngClass]="{'active': lider}">Líder</button>
-            <button mat-flat-button class="h6 role-tab-button border-green" (click)="equipo = !equipo" [ngClass]="{'active': equipo}">Equipo</button>
-        </div>
-        <div class="puestos-compatibles">
-            <select class="selector" name="select" [ngModel]="jobSelected" (ngModelChange)="onChangeJob($event)">
-              <option *ngFor="let job of jobs" [ngValue]="job">
-                {{ formatText(job.name) }}
-              </option>
-            </select>
-        </div>
+        ?.correlationJobBehavioralCompetencies.length > 0;
+    else emptyState
+  ">
+  <h4 class="h4 subtitle center">{{ behavioralRadarChart.title }}</h4>
+  <p class="body-2 center my-32">
+    {{ behavioralRadarChart.introduction }}
+  </p>
+  <div class="section-grafic-comportamental">
+    <div class="tipos-grafico-comportamental">
+      <div class="role-tab">
+        <button
+          mat-flat-button
+          disabled
+          class="h6 role-tab-button border-pink active">
+          {{ 'REPORTS.SECTIONS.BEHAVIORAL_GRAPH.TITLE.PERSON' | translate }}
+        </button>
+        <button
+          mat-flat-button
+          class="h6 role-tab-button border-blue"
+          (click)="puesto = !puesto"
+          [ngClass]="{ active: puesto }">
+          {{ 'REPORTS.SECTIONS.BEHAVIORAL_GRAPH.TITLE.JOB' | translate }}
+        </button>
+        <button
+          mat-flat-button
+          class="h6 role-tab-button border-red"
+          (click)="lider = !lider"
+          [ngClass]="{ active: lider }">
+          {{ 'REPORTS.SECTIONS.BEHAVIORAL_GRAPH.TITLE.LEADER' | translate }}
+        </button>
+        <button
+          mat-flat-button
+          class="h6 role-tab-button border-green"
+          (click)="equipo = !equipo"
+          [ngClass]="{ active: equipo }">
+          {{ 'REPORTS.SECTIONS.BEHAVIORAL_GRAPH.TITLE.TEAM' | translate }}
+        </button>
+      </div>
+      <div class="puestos-compatibles">
+        <select
+          class="selector"
+          name="select"
+          [ngModel]="jobSelected"
+          (ngModelChange)="onChangeJob($event)">
+          <option *ngFor="let job of jobs" [ngValue]="job">
+            {{ formatText(job.name) }}
+          </option>
+        </select>
+      </div>
     </div>
 
     <div class="grafic-comportamental">
-        <!-- <app-stacked-polygon-polar *ngIf="
-        behavioralRadarChart?.behavioralAxiCompetencies ||
-        (jobCompatibility?.jobCompatibilityDetailed
-          ?.correlationJobBehavioralCompetencies &&
-          naturalSelected !== undefined)
-      " [behavioralRadarChart]="behavioralRadarChart.behavioralAxiCompetencies" [correlationJobBehavioralCompetencies]="
-        jobCompatibility?.jobCompatibilityDetailed
-          ?.correlationJobBehavioralCompetencies
-      " [naturalSelected]="naturalSelected"></app-stacked-polygon-polar> -->
-        <chart-grafico-comportamental [showPuesto]="puesto" [showLider]="lider" [showEquipo]="equipo" [behavioralRadarChart]="behavioralRadarChart.behavioralAxiCompetencies" [correlationJobBehavioralCompetencies]="jobCompatibility?.jobCompatibilityDetailed?.correlationJobBehavioralCompetencies"
-            [naturalSelected]="naturalSelected"></chart-grafico-comportamental>
+      <app-chart-grafico-comportamental
+        [showPuesto]="puesto"
+        [showLider]="lider"
+        [showEquipo]="equipo"
+        [behavioralRadarChart]="behavioralRadarChart?.behavioralAxiCompetencies"
+        [correlationJobBehavioralCompetencies]="
+          jobCompatibility?.jobCompatibilityDetailed
+            ?.correlationJobBehavioralCompetencies
+        "
+        [behavioralRadarChartCompetenciesCompatibility]="
+          behavioralRadarChartCompetenciesCompatibilityByLeader
+        "
+        [behavioralRadarChartGroupAverageByTeam]="
+          behavioralRadarChartGroupAverageByTeam
+        "
+        [naturalSelected]="naturalSelected"></app-chart-grafico-comportamental>
     </div>
     <div class="buttons">
-        <a class="button naturalButton body-1" [class.active]="naturalSelected" (click)="selectType(true)">Natural</a>
-        <a class="button naturalButton body-1" [class.active]="!naturalSelected" (click)="selectType(false)">Adaptado</a>
+      <a
+        class="button naturalButton body-1"
+        [class.active]="naturalSelected"
+        (click)="selectType(true)"
+        >{{
+          'REPORTS.SECTIONS.BEHAVIORAL_GRAPH.ACTIONS.NATURAL' | translate
+        }}</a
+      >
+      <a
+        class="button naturalButton body-1"
+        [class.active]="!naturalSelected"
+        (click)="selectType(false)"
+        >{{
+          'REPORTS.SECTIONS.BEHAVIORAL_GRAPH.ACTIONS.ADAPTED' | translate
+        }}</a
+      >
     </div>
-</div>
+  </div>
+</ng-container>
+
+<ng-template #emptyState>
+  <app-empty-state
+    title="{{ 'REPORTS.SECTIONS.BEHAVIORAL_GRAPH.TITLE_CHART' | translate }}"
+    description="{{ 'REPORTS.MISCELLANY' | translate }}">
+  </app-empty-state>
+</ng-template>

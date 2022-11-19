@@ -25,6 +25,6 @@ export interface AreaResponse {
 export interface AreaIndividual {
   areaIndividualId?: string;
   areaId?: string;
-  individual?: string;
+  individualId?: string;
   creationDate?: Date;
 }

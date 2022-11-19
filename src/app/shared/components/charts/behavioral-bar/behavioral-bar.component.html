@@ -1,0 +1,31 @@
+<div class="behavioral-bar">
+  <div class="d-flex behavioral-bar__percentage" *ngIf="active">
+    <div class="behavioral-bar__percentage__item">0%</div>
+    <div class="behavioral-bar__percentage__item">100%</div>
+  </div>
+  <div class="behavioral-bar__content">
+    <div
+      class="behavioral-bar__content__back"
+      [ngClass]="{
+        'behavioral-bar__content__back--unselected': !active
+      }"></div>
+    <ng-container *ngIf="active">
+      <ng-container *ngFor="let value of values">
+        <div
+          class="behavioral-bar__content__back behavioral-bar__content__back--abs">
+          <div
+            class="behavioral-bar__content__back__person"
+            [ngClass]="{
+              'behavioral-bar__content__back__person--active': value.selected
+            }"
+            [ngStyle]="{ 'margin-left': value.value + 'px' }"></div>
+          <div
+            class="behavioral-bar__content__back__name"
+            [ngStyle]="{ 'margin-left': value.value + 'px' }">
+            <span>{{ value.name }}</span>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

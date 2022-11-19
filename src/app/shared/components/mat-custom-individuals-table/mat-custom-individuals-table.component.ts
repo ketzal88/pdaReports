@@ -8,7 +8,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { SelectItem } from './models/select-item.interface';
 import { TableColumn } from './models/tableColumn.interface';
@@ -52,18 +51,20 @@ export class MatCustomIndividualsTableComponent
   //Viewchilds
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<any>;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  // @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   //Inputs
   @Input() columns: Array<TableColumn>;
   @Input() hasSelectLeader: boolean = false;
   @Input() hasSelect: boolean;
   @Input() totalSize: number = 0;
+  @Input() pageIndex: number = 0;
   @Input()
   dataSource: MatTableDataSource<VwGetAllIndividualWithBehaviouralProfile>;
   @Input() typeFilterList!: TypeFilter[];
   @Input() lockedSelectId?: string;
   @Input() selectedIds: string[] = [];
+  @Input() leaderId: string;
   @Input() multipleSelection: boolean = false;
   @Input() maxMultipleSelection: number = 100;
   @Input() preselectedIds: string[];
@@ -92,6 +93,7 @@ export class MatCustomIndividualsTableComponent
     }
 
     this.loadPreselectedIds();
+    this.loadLeaderId();
 
     // Se agrega de forma opcional la columna de checkbox
     if (this.hasSelect) {
@@ -112,12 +114,18 @@ export class MatCustomIndividualsTableComponent
   ngAfterViewInit(): void {
     // Paginacion
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    // this.dataSource.sort = this.sort;
   }
 
   loadPreselectedIds(): void {
     if (this.preselectedIds) {
       this.selectedIds = [...this.selectedIds, ...this.preselectedIds];
+    }
+  }
+
+  loadLeaderId(): void {
+    if (this.leaderId) {
+      this.selectedLeaderId = this.leaderId;
     }
   }
 
@@ -146,13 +154,13 @@ export class MatCustomIndividualsTableComponent
         return true;
       }
 
-      return this.isValidByState(row);
+      return this.isInvalidByState(row);
     } else {
-      return this.isValidByState(row);
+      return this.isInvalidByState(row);
     }
   }
 
-  isValidByState(row: any): boolean {
+  isInvalidByState(row: any): boolean {
     return (
       row.consistencyEnum === Consistency.Invalid ||
       row.consistencyEnum === Consistency.NotAvalaible
@@ -171,15 +179,7 @@ export class MatCustomIndividualsTableComponent
     idx: number,
     row: VwGetAllIndividualWithBehaviouralProfile
   ): void {
-    if (!this.multipleSelection) {
-      this.selectedIndividual =
-        this.selectedIndividual !== row.individualId ? row.individualId : null;
-      const individualIds = this.selectedIndividual
-        ? [this.selectedIndividual]
-        : [];
-      this.selectedIds = individualIds;
-      this.selectedIndividualsEvent.emit(individualIds);
-    } else {
+    if (this.multipleSelection) {
       const individualIndex = this.selectedIds.indexOf(row.individualId);
       if (individualIndex === -1 && itemCheck) {
         this.selectedIds.push(row.individualId);
@@ -191,6 +191,19 @@ export class MatCustomIndividualsTableComponent
         this.selectedLeaderIdEvent.emit(this.selectedLeaderId);
       }
       this.selectedIndividualsEvent.emit(this.selectedIds);
+    }
+
+    if (!this.multipleSelection) {
+      if (itemCheck) {
+        this.selectedIndividual = row.individualId;
+        const individualIds = [this.selectedIndividual];
+        this.selectedIds = individualIds;
+        this.selectedIndividualsEvent.emit(individualIds);
+      } else {
+        this.selectedIndividual = null;
+        this.selectedIds = [];
+        this.selectedIndividualsEvent.emit(this.selectedIds);
+      }
     }
   }
 
@@ -370,5 +383,60 @@ export class MatCustomIndividualsTableComponent
       this.selectedIds.indexOf(row.individualId) > -1 ||
       row.individualId === this.selectedIndividual
     );
+  }
+
+  isChecked(item: TypeFilterItem): boolean {
+    const exists = this.filtersChips.some(x => x.key === item.key);
+    return exists;
+  }
+  //////////////////////
+
+  isAllSelected(): boolean {
+    /*
+    const result = this.dataSource.data.every(individual => {
+      if (individual.consistencyEnum === Consistency.Consistent) {
+        return this.selectedIds.indexOf(individual.individualId) !== -1;
+      } else {
+        return true;
+      }
+    });
+*/
+    const validIndividuals: string[] =
+      this.getThisPageConsistentIndividualIds();
+
+    const result = validIndividuals.every(selected =>
+      this.selectedIds.includes(selected)
+    );
+
+    return result;
+  }
+
+  getThisPageConsistentIndividualIds(): string[] {
+    return this.dataSource.data
+      .filter(x => x.consistencyEnum === Consistency.Consistent)
+      .map(x => x.individualId);
+  }
+
+  toggleAllCheckbox(checked: boolean): void {
+    {
+      const validIndividuals: string[] =
+        this.getThisPageConsistentIndividualIds();
+
+      const isAllSelected = this.isAllSelected();
+
+      if (isAllSelected) {
+        validIndividuals.forEach(validIndividual => {
+          this.selectedIds.splice(this.selectedIds.indexOf(validIndividual), 1);
+        });
+      } else {
+        validIndividuals.forEach(individual => {
+          if (this.selectedIds.indexOf(individual) === -1) {
+            this.selectedIds.unshift(individual);
+          }
+        });
+      }
+
+      this.selectedIndividualsEvent.emit(this.selectedIds);
+    }
   }
 }

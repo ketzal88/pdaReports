@@ -8,11 +8,17 @@ export function getDottedLastCharacters(value: string, trimLength = 6): string {
 
 export function getDottedFirstCharacters(
   value: string,
-  trimLength = 100
+  trimLength = 393
 ): string {
-  if (value.length > trimLength) {
+  if (value && value.length > trimLength) {
     return value.substring(0, trimLength).concat(' ...');
   } else {
     return value;
   }
+}
+
+export function getIndividualShortName(name: string): string {
+  return name
+    .split(/\s/)
+    .reduce((shortName, word) => (shortName += word.slice(0, 1)), '');
 }

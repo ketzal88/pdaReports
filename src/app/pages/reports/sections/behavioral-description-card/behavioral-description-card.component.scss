@@ -7,6 +7,7 @@
 
 .description-text {
     margin: 24px 0px;
+    text-align: justify;
 }
 
 .card-text {
@@ -26,6 +27,12 @@
     margin-bottom: 96px;
 }
 
+.behavioral-description-card .ng-star-inserted {
+    height: 350px;
+    margin-bottom: 96px;
+    background-color: red;
+}
+
 .title-with-icon {
     display: flex;
     gap: 16px;
@@ -36,7 +43,14 @@
     align-self: center;
 }
 
-@media(max-width: 375px) {
+@media(max-width: 1200px) {
+    .behavioral-description-card {
+        margin-bottom: 30px;
+        height: auto;
+    }
+}
+
+@media(max-width: 440px) {
     .h4 {
         font-weight: 700;
         font-size: 24px;
@@ -52,4 +66,12 @@
         font-size: 14px;
         line-height: 20px;
     }
+    .behavioral-description-card {
+        margin: 0px 10px;
+        height: auto;
+    }
+    .card-text {
+        margin-bottom: 100px;
+    }
 }
+

@@ -10,6 +10,7 @@ import { InputModule } from '../input/input.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatCustomPaginatorIntlService } from './mat-custom-individuals-paginator-intl.service';
 import { PipesModule } from '../../pipes/pipes.module';
+import { IconsModule } from '../icons/icons.module';
 
 @NgModule({
   declarations: [MatCustomIndividualsTableComponent],
@@ -22,6 +23,7 @@ import { PipesModule } from '../../pipes/pipes.module';
     InputModule,
     TranslateModule,
     PipesModule,
+    IconsModule,
   ],
   exports: [MatCustomIndividualsTableComponent],
   providers: [

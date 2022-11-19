@@ -12,6 +12,8 @@ import { VennDiagramComponent } from './venn-diagram/venn-diagram.component';
 import { StackedPolygonPolarComponent } from './stacked-polygon-polar/stacked-polygon-polar.component';
 import { GaugeLinearComponent } from './gauge-linear/gauge-linear.component';
 import { TableComponent } from './table/table.component';
+import { OvalBarComponent } from './oval-bar/oval-bar.component';
+import { BehavioralBarComponent } from './behavioral-bar/behavioral-bar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { TableComponent } from './table/table.component';
     StackedPolygonPolarComponent,
     GaugeLinearComponent,
     TableComponent,
+    BehavioralBarComponent,
+    OvalBarComponent,
   ],
   imports: [CommonModule],
   exports: [
@@ -42,6 +46,8 @@ import { TableComponent } from './table/table.component';
     StackedPolygonPolarComponent,
     GaugeLinearComponent,
     TableComponent,
+    BehavioralBarComponent,
+    OvalBarComponent,
   ],
 })
 export class ChartsModule {}

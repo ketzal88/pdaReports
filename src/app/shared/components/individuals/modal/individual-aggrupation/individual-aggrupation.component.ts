@@ -26,6 +26,7 @@ export class IndividualAggrupationComponent implements OnInit, OnDestroy {
   btn: string;
   placeholder: string;
   selectedClientId: string;
+  selectedSubbaseId: string;
   selectedGroupingId: string;
   selectedAreaId: string;
   hasSelect: boolean;
@@ -33,8 +34,9 @@ export class IndividualAggrupationComponent implements OnInit, OnDestroy {
 
   //Variables
   private type: string;
-  private selectedIndividuals: VwGetAllIndividualWithBehaviouralProfile[];
+  private selectedIndividuals: string[];
   private aggrupationData: AggrupationData;
+  preselectedIds: string[];
 
   //Subscriptions
   labelSub: Subscription;
@@ -49,14 +51,17 @@ export class IndividualAggrupationComponent implements OnInit, OnDestroy {
     this.typeFilterList = this.data.typeFilterList;
     this.initFilter();
     this.selectedClientId = this.data.selectedClientId;
+    this.selectedSubbaseId = this.data.selectedSubbaseId;
   }
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
+    this.preselectedIds = this.data.preselectedIds;
     this.loadLockedSelect();
     this.initLabels();
     this.initSelect();
   }
+
   initFilter(): void {
     if (this.data.action === 'NEW') {
       this.selectedGroupingId = null;
@@ -174,11 +179,14 @@ export class IndividualAggrupationComponent implements OnInit, OnDestroy {
   }
 
   loadLockedSelect(): void {
-    let selectedIndividuals: VwGetAllIndividualWithBehaviouralProfile[] = [];
+    let selectedIndividuals: string[] = [];
     selectedIndividuals = this.storeService.getData(
       StoreKeys.SELECTED_INDIVIDUALS
     );
-    this.lockedSelectId = selectedIndividuals[0].individualId;
+
+    if (selectedIndividuals) {
+      this.lockedSelectId = selectedIndividuals[0];
+    }
   }
 
   triggerEvent(): void {
@@ -209,14 +217,12 @@ export class IndividualAggrupationComponent implements OnInit, OnDestroy {
     this.close(true);
   }
 
-  onSelectedIndividuals(
-    selectedIndividuals: VwGetAllIndividualWithBehaviouralProfile[]
-  ): void {
+  onSelectedIndividuals(selectedIndividuals: string[]): void {
     this.selectedIndividuals = selectedIndividuals;
   }
 
   getIndividualIds(): string[] {
-    return this.selectedIndividuals?.map(ind => ind.individualId);
+    return this.selectedIndividuals;
   }
 
   changeEdit(): void {

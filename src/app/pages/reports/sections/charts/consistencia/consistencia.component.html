@@ -1,7 +1,23 @@
-<div style="max-width: 500px; margin-top: 24px; margin-left: -7px; display: flex; ">
-    <chart-tendencia-comportamental [color]="value > 16 ? '#0075FF' : '#dddddd'"></chart-tendencia-comportamental>
-    <chart-tendencia-comportamental [color]="value > 33 ? '#0075FF' : '#dddddd'"></chart-tendencia-comportamental>
-    <chart-tendencia-comportamental [color]="value > 50 ? '#0075FF' : '#dddddd'"></chart-tendencia-comportamental>
-    <chart-tendencia-comportamental [color]="value > 66 ? '#0075FF' : '#dddddd'"></chart-tendencia-comportamental>
-    <chart-tendencia-comportamental [color]="value > 83 ? '#0075FF' : '#dddddd'"></chart-tendencia-comportamental>
+<div
+  style="max-width: 500px; margin-top: 24px; margin-left: -7px; display: flex">
+  <app-chart-tendencia-comportamental
+    [color]="
+      value >= 1 ? '#0075FF' : '#F2F3F3'
+    "></app-chart-tendencia-comportamental>
+  <app-chart-tendencia-comportamental
+    [color]="
+      value >= 2 ? '#0075FF' : '#F2F3F3'
+    "></app-chart-tendencia-comportamental>
+  <app-chart-tendencia-comportamental
+    [color]="
+      value >= 3 ? '#0075FF' : '#F2F3F3'
+    "></app-chart-tendencia-comportamental>
+  <app-chart-tendencia-comportamental
+    [color]="
+      value >= 4 ? '#0075FF' : '#F2F3F3'
+    "></app-chart-tendencia-comportamental>
+  <app-chart-tendencia-comportamental
+    [color]="
+      value === 5 ? '#0075FF' : '#F2F3F3'
+    "></app-chart-tendencia-comportamental>
 </div>

@@ -25,6 +25,7 @@ export class PagesComponent implements OnInit, OnDestroy {
   isReport$: Observable<ReportEvent>;
   stateReportEvent = ReportEvent;
   private reportsEventSub: Subscription;
+  version: string = environment.version;
 
   constructor(
     private router: Router,
@@ -49,7 +50,10 @@ export class PagesComponent implements OnInit, OnDestroy {
           userId: tokenData.UserId,
           userName: tokenData.fullName,
         };
-        this.storeService.setData('userDetails', JSON.stringify(userDetails));
+        this.storeService.setData(
+          StoreKeys.USER_DETAILS,
+          JSON.stringify(userDetails)
+        );
       });
 
     this.callEventReports();

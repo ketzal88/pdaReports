@@ -1,8 +1,92 @@
+//Css Angular material
+:host ::ng-deep {
+  .mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none
+  }
+
+  .mat-card-header-text {
+    margin: 0;
+  }
+}
+
+.select-style__card.mat-card {
+  width: 176px;
+  padding: 0px;
+}
+
+.select-style__content {}
+
+.select-style__content__item{
+  width: 176px;
+  height: 205px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.select-style__content__item--active{
+  border: 4px solid #007EFD;
+  border-radius: 6px;
+  cursor: default;
+
+}
+
+.select-style__content img {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+}
+
+//Custom
 .example-button-row {
-    display: table-cell;
-    width: 490px;
-  }
-  
-  .example-button-row .mat-button-base {
-    margin: 8px 8px 8px 0;
-  }
+  display: table-cell;
+  width: 490px;
+}
+
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.filter-base-title {
+  font-weight: 400;
+  font-size: 14px;
+  color: #727276;
+  margin-bottom: 5px;
+}
+
+.select-style {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.select-style__info {
+  font-weight: 400;
+  font-size: 14px;
+  color: #727276;
+
+}
+
+.select-style__title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #667080;
+  margin-bottom: 15px;
+}
+
+.select-style__card__header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between
+}
+
+.select-style__card__header h3 {
+  font-weight: 600;
+  font-size: 13px;
+  color: #667080;
+}
+
+.select-style__card__header h4 {
+  font-weight: 500;
+  font-size: 10px;
+  color: #007efd;
+  cursor: pointer;
+}

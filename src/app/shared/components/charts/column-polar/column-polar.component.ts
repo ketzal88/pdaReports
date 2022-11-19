@@ -5,11 +5,11 @@ import {
   ViewChild,
   Input,
 } from '@angular/core';
-import 'anychart';
-import { MultipleJobCompatibility } from 'src/app/core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
+import { JobCompatibilityFromGroup } from 'src/app/core/services/microservices/reports/interfaces/pdaGroupSectionsResponse.interface';
 
 import { disabledCredits } from '../../../utils/chart.util';
-import { columnPolarInterface } from '../../interfaces/column-polar-interface';
+import { columnPolarInterface } from '../interfaces/column-polar-interface';
+import { getIndividualShortName } from '../../../../core/utils/strings.util';
 
 @Component({
   selector: 'app-column-polar',
@@ -18,8 +18,9 @@ import { columnPolarInterface } from '../../interfaces/column-polar-interface';
 })
 export class ColumnPolarComponent implements OnInit, AfterViewInit {
   //Inputs
-  @Input() data!: MultipleJobCompatibility[] | undefined;
-  @Input() title: string = 'Sr. Developer';
+  @Input() data!: JobCompatibilityFromGroup[] | undefined;
+  @Input() selectedIndividualId: string;
+  @Input() jobTitle: string = '';
 
   chart!: anychart.charts.Polar;
 
@@ -29,43 +30,35 @@ export class ColumnPolarComponent implements OnInit, AfterViewInit {
   constructor() {}
 
   ngOnInit(): void {
-    //TODO: Quitar Mock
-    this.data = this.mockData();
-    const newdata: columnPolarInterface[] = this.data
-      .filter(x => x.jobTitle !== 'Average' && x.jobTitle !== 'Promedio')
-      .map(x => {
-        return {
-          x: x.individualName,
-          value: x.compatibilityPercentage * 100,
-        };
-      });
+    //this.data = this.mockData();  //MOCK
+    this.jobTitle = this.data[0].jobTitle;
+
+    let newdata: columnPolarInterface[] = this.data.map(x => {
+      return {
+        x: getIndividualShortName(x.individualName),
+        value: x.compatibilityPercentage * 100,
+        tooltip: x.individualName,
+        fieldId: x.individualId,
+      };
+    });
+
+    //Cambiar a true cuando me manden el individualId
+    if (this.selectedIndividualId) {
+      newdata.forEach(function (individualCompatibility, i) {
+        if (
+          individualCompatibility.fieldId &&
+          individualCompatibility.fieldId === this.selectedIndividualId
+        ) {
+          newdata.splice(i, 1);
+          newdata.unshift(individualCompatibility);
+        }
+      }, this.selectedIndividualId);
+    }
 
     // create polar chart
     this.chart = anychart.polar();
 
     let columnSeries = this.chart.column(newdata);
-
-    // let columnSeries = this.chart.column([
-    //   { x: 'AC', value: 40 },
-    //   { x: 'IS', value: 50 },
-    //   { x: 'JS', value: 65 },
-    //   { x: 'FM', value: 72 },
-    //   { x: 'JC', value: 32 },
-    //   { x: 'SH', value: 78 },
-    //   { x: 'MA', value: 65 },
-    //   { x: 'JBL', value: 25 },
-    //   { x: 'FD', value: 82 },
-    //   { x: 'JPR', value: 65 },
-    //   { x: 'SC', value: 91 },
-    //   { x: 'HJ', value: 23 },
-    //   { x: 'PLG', value: 88 },
-    //   { x: 'DC', value: 41 },
-    //   { x: 'FGG', value: 35 },
-    //   { x: 'PA', value: 69 },
-    //   { x: 'DK', value: 10 },
-    //   { x: 'JU', value: 27 },
-    //   { x: 'LO', value: 80 },
-    // ]);
 
     // set series name
     columnSeries.name('Compatibilidad');
@@ -91,21 +84,34 @@ export class ColumnPolarComponent implements OnInit, AfterViewInit {
     var label = this.chart.label();
     label
       .text(
-        '<span style="font-size:15px;font-weight:600;font-family:Poppins;color:#111;">Desarrollador Sr.</span>'
+        `<span style="font-size:15px;font-weight:600;font-family:Poppins;color:#111;">${this.jobTitle}</span>`
       )
       .useHtml(true)
+      .width('28%')
+      .height('20%')
       .offsetX('50%')
       .offsetY('50%')
       .hAlign('center')
       .vAlign('middle')
+      .textOverflow(' ')
       .anchor('center');
-    columnSeries.selected({ fill: '#007efd' }).select([2]);
+
+    if (this.selectedIndividualId) {
+      columnSeries.select(0);
+    }
+    columnSeries.selected({ fill: '#007efd' });
     columnSeries.fill('#EBEFF4');
     columnSeries.stroke('#EBEFF4');
 
     // set value prefix for tooltip
-    this.chart.tooltip().valuePrefix('%');
-    this.chart.innerRadius(75);
+    //this.chart.tooltip().valuePrefix('');
+    let tooltip = this.chart.tooltip();
+    tooltip.useHtml(true);
+    tooltip.separator(false);
+    tooltip.title().enabled(false);
+    tooltip.format('{%tooltip} <br/> <b>{%value}</b> ');
+
+    this.chart.innerRadius(85);
 
     // set x-scale
     this.chart.xScale('ordinal');
@@ -117,57 +123,66 @@ export class ColumnPolarComponent implements OnInit, AfterViewInit {
     disabledCredits(this.chart);
   }
 
-  private mockData(): MultipleJobCompatibility[] {
+  private mockData(): JobCompatibilityFromGroup[] {
     return [
       {
+        jobId: '01',
         jobTitle: 'Test',
         compatibilityPercentage: 0.71,
         image: null,
         individualName: 'Pedro',
       },
       {
+        jobId: '01',
         jobTitle: 'Test',
         compatibilityPercentage: 0.33,
         image: null,
         individualName: 'Jose',
       },
       {
+        jobId: '01',
         jobTitle: 'Test',
         compatibilityPercentage: 0.4,
         image: null,
         individualName: 'Maria',
       },
       {
+        jobId: '01',
         jobTitle: 'Test',
         compatibilityPercentage: 0.23,
         image: null,
         individualName: 'Carlos',
       },
       {
+        jobId: '01',
         jobTitle: 'Test',
         compatibilityPercentage: 0.74,
         image: null,
         individualName: 'Batman',
       },
       {
+        jobId: '01',
         jobTitle: 'Test',
         compatibilityPercentage: 0.54,
         image: null,
         individualName: 'Alberto',
       },
       {
+        jobId: '01',
         jobTitle: 'Test',
         compatibilityPercentage: 0.3,
         image: null,
         individualName: 'Damian',
       },
       {
+        jobId: '01',
         jobTitle: 'Test',
         compatibilityPercentage: 0.44,
         image: null,
         individualName: 'Maxi',
       },
       {
+        jobId: '01',
         jobTitle: 'Test',
         compatibilityPercentage: 0.97,
         image: null,

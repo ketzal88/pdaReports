@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { JobCompatibility } from 'src/app/core/services/microservices/reports/interfaces/pdaIndividualSectionsResponse.interface';
+import { JobCompatibilityFromGroup } from 'src/app/core/services/microservices/reports/interfaces/pdaGroupSectionsResponse.interface';
 
 @Component({
   selector: 'app-job-compatibility-multiple-columns-section',
@@ -7,10 +7,9 @@ import { JobCompatibility } from 'src/app/core/services/microservices/reports/in
   styleUrls: ['./job-compatibility-multiple-columns-section.component.scss'],
 })
 export class JobCompatibilityMultipleColumnsSectionComponent implements OnInit {
-  @Input() jobCompatibility!: JobCompatibility;
-
+  @Input() jobCompatibilityFromGroup!: JobCompatibilityFromGroup[];
+  @Input() selectedIndividualId!: string;
   constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

@@ -1,0 +1,280 @@
+@mixin hamburguer-size {
+  width: 64px;
+  height: 62px;
+}
+
+.report {
+  font-family: 'Poppins';
+  font-style: normal;
+}
+
+.header {
+  @extend .first-section-container;
+  @include hamburguer-size;
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 48px;
+}
+
+.pda-hamburguesa {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+}
+
+.background-1 {
+  position: relative;
+  background-color: transparent;
+  display: flow-root;
+}
+
+.background-1::before {
+  content: ''; /* empty but necessary */
+  position: absolute;
+  background-image: url('/assets/img/reports/background-candidate-review-1.svg');
+  overflow: visible;
+  display: block;
+  width: 100vw;
+  height: 10000000px;
+  object-fit: fill;
+  z-index: -100;
+  background-repeat: no-repeat;
+}
+
+.logo-header {
+  flex-grow: 0;
+  overflow: visible;
+}
+
+.header .logo-header > img {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.first-section {
+  color: white;
+  .subtitle {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .h2 {
+    margin-top: 82px;
+  }
+  .first-section-subtitle {
+    margin-top: 9px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .h1 {
+    margin-top: 8px;
+    line-height: 128px;
+  }
+  .description-text {
+    width: 588px;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 24px;
+    text-align: justify;
+    margin-top: 4px;
+  }
+  .start-buttons-container {
+    margin-top: 86px;
+    button {
+      background-color: white;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 28px;
+      text-align: center;
+      color: #0075ff;
+      border-radius: 25px;
+      padding: 14px 24px;
+      border: 0;
+    }
+    button:nth-child(2) {
+      margin-left: 25px;
+      padding: 13.25px 16px;
+      border-radius: 100%;
+    }
+  }
+  .candidate-img {
+    width: 100%;
+  }
+}
+
+.section-container {
+  display: flex;
+
+}
+
+.section-container > .section {
+  flex: 50%;
+}
+
+.first-section-container {
+  margin-left: 222px;
+  margin-right: 222px;
+}
+
+.section-container.first-section {
+  @extend .first-section-container;
+  margin-top: 44px;
+}
+
+.pda-logo {
+  height: 32px;
+}
+
+.big-section {
+  flex: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.section-container {
+  margin-left: 333px;
+  margin-right: 333px;
+  gap:94px
+}
+
+.title-section {
+  .h3 {
+    margin-bottom: 19px;
+  }
+}
+
+.third-section{
+  margin-top: 74px;
+}
+
+.fourth-section{
+margin-top: 140px;
+}
+
+
+.background-3 {
+  position: relative;
+  background-color: transparent;
+  display: flow-root;
+}
+
+.background-3::before {
+  @extend .fifth-section;
+  content: ''; /* empty but necessary */
+  position: absolute;
+  background-image: url('/assets/img/reports/background-candidate-review-2.svg');
+  background-position-x: right;
+  overflow: visible;
+  display: block;
+  width: 100vw;
+  height: 10000000px;
+  object-fit: fill;
+  z-index: -100;
+  background-repeat: no-repeat;
+}
+
+.fifth-section{
+  margin-top: 92px;
+}
+
+.grey-background {
+  background: #EFEFEF;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin: 80px 0px;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.recomendation {
+  margin-top: 114px;
+  margin-bottom: 114px;
+  >.h4 {
+    padding-right: 20px;
+  }
+  .body-1{
+    color: #000000;
+  }
+}
+.button-text.send-report-button {
+  padding: 5px 32px;
+  background-color: #F99E10;
+  color: white;
+  border-color: #F99E10;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  float: none;
+  margin-top: 24px;
+}
+
+.gap-0{
+  gap: 0;
+}
+
+
+.top-footer {
+  width: 100%;
+  background-image: url('/assets/img/footer.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 435px;
+  width: 100%;
+}
+
+.menu-footer {
+  padding: 20px 0;
+}
+
+.v-effect-link,
+.social-icons {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.v-effect-link li {
+  display: inline-block;
+  min-width: 5em;
+  margin: 0 0.5em;
+}
+
+.v-effect-link a {
+  text-decoration: none;
+  display: block;
+  font-family: Poppins;
+  position: relative;
+  color: black;
+  padding: .5em 0
+}
+
+.v-effect-link a:hover {
+  color: #007efd;
+}
+
+.v-effect-link a:hover:before {
+  left: 0;
+  width: 100%;
+}
+
+.v-effect-link a:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: .5px;
+  background-color: #007efd;
+  bottom: calc(-1px);
+  right: 0;
+  transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}

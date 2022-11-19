@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -17,6 +16,11 @@ import { Subscription } from 'rxjs';
 import { PopUpMessage } from 'src/app/shared/components/display-message/displayMessage.interface';
 import { DisplayMessageService } from '../../../../core/services/displayMessage.service';
 import { unsubscribe } from '../../../../core/utils/subscription.util';
+import { GeneratedReportByIdResponse } from '../../../../core/services/microservices/reports/interfaces/generatedReportsResponse.interface';
+import { StoreKeys } from '../../../../core/consts/store-keys.enum';
+import { StoreService } from '../../../../core/services/store.service';
+import { GetCompetencyResponse } from '../../../../core/services/microservices/competency/competency.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-select-competencies',
@@ -25,41 +29,89 @@ import { unsubscribe } from '../../../../core/utils/subscription.util';
 })
 export class SelectCompetenciesComponent implements OnInit, OnDestroy {
   //Bindings
-  competenciesSelected: Competency[];
+  selectedCompetencies: Competency[];
 
   availableCompetencies: Competency[];
   availableCompetenciesCategories: CompetencyCategory[];
 
   panelOpenState = false;
 
-  neededQuantityCompetencies: number = 10;
+  maxSelectableCompetencies: number = 20;
 
   //Inputs
   @Input() step!: StepModel;
   @Input() selectedClientId: string;
   @Input() selectedSubbaseId: string;
+  @Input() generatedReportByIdResponse: GeneratedReportByIdResponse;
 
   //Outputs
-  @Output() selectedItem = new EventEmitter<Competency[]>();
+  @Output() selectedItem = new EventEmitter<string[]>();
 
   //Subscriptors
   competencyCategorySub: Subscription;
   competenciesSub: Subscription;
+  competenciesByIdsSub: Subscription;
 
   constructor(
     private competencyService: CompetencyService,
-    private displayMessageService: DisplayMessageService
+    private displayMessageService: DisplayMessageService,
+    private storeService: StoreService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
     this.availableCompetencies = [];
-    this.competenciesSelected = [];
+    this.availableCompetenciesCategories = [];
+    this.selectedCompetencies = [];
+    let selectedCompetencies: Competency[] = this.storeService.getData(
+      StoreKeys.SELECTED_COMPETENCIES
+    );
+    if (selectedCompetencies && selectedCompetencies.length > 0) {
+      this.selectedCompetencies = selectedCompetencies;
+    } else {
+      if (
+        this.generatedReportByIdResponse &&
+        this.generatedReportByIdResponse.reportGeneratedCompetencies &&
+        this.generatedReportByIdResponse.reportGeneratedCompetencies.length > 0
+      ) {
+        //Aca consulto servicio para obtener informacion de las competencias desde el reporte generado
+        this.loadCompetenciesByGeneratedReport();
+      }
+    }
+
+    this.checkAndComplete();
     this.getCompetencyCategories();
   }
 
   ngOnDestroy(): void {
     unsubscribe(this.competencyCategorySub);
     unsubscribe(this.competenciesSub);
+    unsubscribe(this.competenciesByIdsSub);
+  }
+
+  loadCompetenciesByGeneratedReport(): void {
+    this.competenciesByIdsSub = this.competencyService
+      .getCompetencies(
+        this.generatedReportByIdResponse.reportGeneratedCompetencies.map(
+          data => data.competencyId
+        ),
+        null,
+        null
+      )
+      .subscribe({
+        next: (res: GetCompetencyResponse) => {
+          this.selectedCompetencies = res.data;
+          this.checkAndComplete();
+        },
+        error: err => {
+          console.log(
+            `${this.translateService.instant(
+              'REPORT_CONFIGURATION.selectCompetencies.ERROR.RETRIEVING_COMPETENCIES'
+            )}: `,
+            err
+          );
+        },
+      });
   }
 
   //Api Data
@@ -74,7 +126,7 @@ export class SelectCompetenciesComponent implements OnInit, OnDestroy {
 
   getCompetencies(competencyCategoryId: string): void {
     this.competenciesSub = this.competencyService
-      .getCompetencies(null, competencyCategoryId)
+      .getCompetencies(null, null, competencyCategoryId)
       .subscribe(r => {
         this.availableCompetencies = r.data;
         this.competenciesSub.unsubscribe();
@@ -89,38 +141,46 @@ export class SelectCompetenciesComponent implements OnInit, OnDestroy {
   }
 
   isChecked(competency: Competency): boolean {
-    const exists = this.competenciesSelected.some(x => x.id === competency.id);
+    const exists = this.selectedCompetencies.some(x => x.id === competency.id);
     return exists;
   }
 
   selectCompetency(competency: Competency): void {
-    const indexCompetency = this.competenciesSelected.findIndex(data => {
+    const indexCompetency = this.selectedCompetencies.findIndex(data => {
       return data.id === competency.id;
     });
 
     if (indexCompetency > -1) {
-      this.competenciesSelected.splice(indexCompetency, 1);
+      this.selectedCompetencies.splice(indexCompetency, 1);
     } else {
-      this.competenciesSelected.push(competency);
+      this.selectedCompetencies.push(competency);
     }
 
-    if (this.competenciesSelected.length === this.neededQuantityCompetencies) {
+    this.checkAndComplete();
+  }
+
+  checkAndComplete(): void {
+    if (this.selectedCompetencies.length < this.maxSelectableCompetencies) {
       this.step.isComplete = true;
-      this.selectedItem.emit(this.competenciesSelected);
+      this.storeService.setData(
+        StoreKeys.SELECTED_COMPETENCIES,
+        this.selectedCompetencies
+      );
+      this.selectedItem.emit(this.selectedCompetencies.map(data => data.id));
     } else {
       this.step.isComplete = false;
     }
   }
 
   //TEMPORAL
-  Select10() {
+  Select10(): void {
     this.competenciesSub = this.competencyService
       .getCompetencies()
       .subscribe(r => {
         this.availableCompetencies = r.data;
-        this.competenciesSelected = r.data.slice(10);
+        this.selectedCompetencies = r.data.slice(10);
         this.step.isComplete = true;
-        this.selectedItem.emit(this.competenciesSelected);
+        this.selectedItem.emit(this.selectedCompetencies.map(data => data.id));
         this.competenciesSub.unsubscribe();
       });
   }

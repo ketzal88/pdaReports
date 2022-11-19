@@ -96,12 +96,9 @@ export class GroupingService {
     );
   }
 
-  getGroupingIndividuals(groupingId: string): Observable<GroupingIndividual> {
-    if (groupingId === null || groupingId === undefined) {
-      throw new Error('Id is required');
-    }
-    return this.httpClient.request<GroupingIndividual>(
-      'get',
+  getGroupingIndividuals(groupingId: string): Observable<GroupingIndividual[]> {
+    return this.httpClient.request<GroupingIndividual[]>(
+      'GET',
       `${this.basePath}/Grouping/${groupingId}/Individual`
     );
   }
@@ -109,12 +106,8 @@ export class GroupingService {
   addGroupingIndividual(
     groupingId: string,
     individualIds: string[]
-  ): Observable<GroupingIndividual> {
-    if (groupingId === null || groupingId === undefined) {
-      throw new Error('Id is required');
-    }
-
-    return this.httpClient.request<GroupingIndividual>(
+  ): Observable<string> {
+    return this.httpClient.request<string>(
       'POST',
       `${this.basePath}/Grouping/${groupingId}/Individual`,
       {
@@ -126,15 +119,12 @@ export class GroupingService {
 
   deleteGroupingIndividual(
     groupingId: string,
-    gropingIndividualId: string
+    individualIds: string[]
   ): Observable<string> {
-    if (groupingId === null || groupingId === undefined) {
-      throw new Error('Id is required');
-    }
     return this.httpClient.request<string>(
       'DELETE',
-      `${this.basePath}/Grouping/${groupingId}/Individual/${gropingIndividualId}`,
-      { responseType: 'text' as 'json' }
+      `${this.basePath}/Grouping/${groupingId}/Individual`,
+      { responseType: 'text' as 'json', body: individualIds }
     );
   }
 }

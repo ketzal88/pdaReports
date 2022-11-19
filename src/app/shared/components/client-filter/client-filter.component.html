@@ -1,21 +1,40 @@
-<mat-form-field appearance="fill" style="margin-right: 35px">
-  <mat-label>{{ 'CLIENT_FILTER.BASE' | translate }}</mat-label>
-  <mat-select
-    [(value)]="selectedClientId"
-    (selectionChange)="onBaseChange($event.value)">
-    <mat-option *ngFor="let client of availableClients" [value]="client.key">
-      {{ client.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<div class="d-flex" style="gap: 20px; margin-right: 20px">
+  <mat-form-field>
+    <mat-label>{{ 'CLIENT_FILTER.BASE' | translate }}</mat-label>
+    <mat-select
+      [ngClass]="{ disabledDiv: disable }"
+      [(value)]="selectedClientId"
+      (selectionChange)="onBaseChange($event.value)"
+      [disabled]="disable">
+      <mat-option *ngFor="let client of availableClients" [value]="client.key">
+        {{ client.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<mat-form-field appearance="fill">
-  <mat-label>{{ 'CLIENT_FILTER.SUBBASE' | translate }}</mat-label>
-  <mat-select
-    [(value)]="selectedSubbaseId"
-    (selectionChange)="onSubbaseChange($event.value)">
-    <mat-option *ngFor="let subbase of availableSubbases" [value]="subbase.id">
-      {{ subbase.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'CLIENT_FILTER.SUBBASE' | translate }}</mat-label>
+    <mat-select
+      [ngClass]="{ disabledDiv: disable }"
+      [(value)]="selectedSubbaseId"
+      (selectionChange)="onSubbaseChange($event.value)"
+      [disabled]="disable">
+      <mat-option
+        *ngFor="let subbase of availableSubbases"
+        [value]="subbase.id">
+        {{ subbase.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="showAreaSelect">
+    <mat-label>{{ 'CLIENT_FILTER.AREA' | translate }}</mat-label>
+    <mat-select
+      [(value)]="selectedAreaId"
+      (selectionChange)="onAreaChange($event.value)">
+      <mat-option *ngFor="let area of availableAreas" [value]="area.areaId">
+        {{ area.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

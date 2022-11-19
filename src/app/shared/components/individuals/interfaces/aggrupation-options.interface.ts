@@ -7,4 +7,6 @@ export interface AggrupationOptions {
   action: string;
   typeFilterList: TypeFilter[];
   selectedClientId: string;
+  selectedSubbaseId: string;
+  preselectedIds: string[];
 }

@@ -1,11 +1,36 @@
-.example-card {
+:host ::ng-deep {
+}
+
+.mat-card-title, .mat-card-subtitle{
+    margin-bottom: 0px !important;
+}
+.step-card {
     max-width: 400px;
+}
+
+.step-card.mat-card {
+    padding: 0px;
+    width: 100%;
+    height: 107px;
+    align-items: center;
+    display: flex;
+}
+
+.step-card.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none
 }
 
 .card-steps-container {
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    /* margin: 20px; */
+    /* margin-right: 0px; */
+    margin-top: 0px;
+    margin-left: 25px;
+    margin-bottom: 0px;
+    border: 1px solid #E7E9EB;
+    border-radius: 6px 0px 0px 6px;
+    width: 348px;
 }
 
 .step-bubble {
@@ -30,10 +55,11 @@
     margin: 0px 10px;
 }
 
-.step-current{
-    background: #C6C6C6;
+.step-card--current {
+    background: #E7F1FE;
     color: #6D7783;
     border-left: 5px solid #377BE2;
+    border-radius: 6px 0px 0px 6px;
 }
 
 .step-complete {
@@ -42,17 +68,86 @@
     border-left: 5px solid #377BE2;
 }
 
-.step-incomplete {
+.step-card--incomplete {
     cursor: not-allowed;
     pointer-events: none;
 }
 
-/*Styles of mat card*/
-.mat-card:not([class*=mat-elevation-z]) {
-    box-shadow: none
+.step-card__title {
+    margin-bottom: 0px;
+    font-weight: 600;
+    font-size: 14px;
 }
 
-mat-card-title .title{
+.step-card__title--complete {
+    color: #6D7783
+}
+.step-card__title--incomplete {
+    color: #979797;
+}
+.step-card__title--current{
     color: #377BE2;
-    margin-bottom: 0px;
+}
+
+.step-card__subtitle {
+    font-weight: 400;
+    font-size: 14px;
+
+}
+
+.step-card__subtitle--complete {
+    color: #6D7783;
+}
+
+.step-card__subtitle--incomplete{
+    color: #B9B9B9;
+}
+
+.step-card__number {
+    width: 22px;
+    height: 18px;
+    margin-left: 18px;
+    margin-right: 22px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-card__number--complete {
+    background: #377BE2;
+}
+
+.step-card__number--current{
+    background: #377BE2;
+    margin-left: 13px;
+}
+
+.step-card__number--incomplete{
+    border: 1px solid #C6C6C6;
+
+}
+
+.step-card__number--complete h5, .step-card__number--current h5 {
+    color: #ffffff;
+}
+
+.step-card__number--incomplete h5{
+    color: #C6C6C6;
+}
+
+.step-card__number h5 {
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center;
+}
+
+.step-card__content{
+    display: flex;
+    justify-content: space-between; width: 100%;
+    align-items: center;
+}
+
+.step-card__content__icon{
+    padding-right: 20px;
 }
